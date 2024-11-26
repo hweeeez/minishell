@@ -14,8 +14,27 @@
 # define MINISHELL_H
 
 # ifndef PROMPT
-#  define PROMPT "minishell% "
+#  define PROMPT "weneedtherapy% "
 # endif
+
+enum	e_tokens
+{
+	EXE, //includes command and all options
+	FILE,
+	SINGLE_RD_IN,
+	DOUBLE_RD_IN,
+	SINGLE_RD_OUT,
+	HEREDOC, //double rd out
+	PIPE,
+	DOUBLE_QUOTE,
+	SINGLE_QUOTE,
+	DOLLAR_SIGN,
+}
+
+enum e_words
+{
+	//includes build ins, need to handle expanding dollar sign
+}
 
 # include <sys/types.h>
 # include <unistd.h>
