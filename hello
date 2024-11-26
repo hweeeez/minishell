@@ -1,0 +1,12 @@
+hui-lim@c2r5s2:~/Documents/minishell$ >hello
+hui-lim@c2r5s2:~/Documents/minishell$ ls
+a.out  hello  main.c  minishell.h  README.md
+hui-lim@c2r5s2:~/Documents/minishell$ rm hello
+hui-lim@c2r5s2:~/Documents/minishell$ >hello >hello >hello echo >hello a >hello b >hello c >hello d
+hui-lim@c2r5s2:~/Documents/minishell$ cat hello
+a b c d
+hui-lim@c2r5s2:~/Documents/minishell$ >hello2 echo a
+
+
+do not need to start with commands,
+redirect will redirect the latest file from left to right
