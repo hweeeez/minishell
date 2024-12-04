@@ -17,24 +17,28 @@
 #  define PROMPT "weneedtherapy% "
 # endif
 
-enum	e_tokens
+typedef struct s_tree
 {
-	EXE, //includes command and all options
-	FILE,
-	SINGLE_RD_IN,
-	DOUBLE_RD_IN,
-	SINGLE_RD_OUT,
-	HEREDOC, //double rd out
-	PIPE,
-	DOUBLE_QUOTE,
-	SINGLE_QUOTE,
-	DOLLAR_SIGN,
-}
+	s_pipe*		root;
+}				t_tree;
 
-enum e_words
+typedef struct s_pipe
 {
-	//includes build ins, need to handle expanding dollar sign
-}
+	t_pipe		pipe;
+	t_command*	commands;
+}				t_pipe;
+
+typedef struct s_command
+{
+	char**		args;
+	t_redir*	redirs;
+}				t_pipe;
+
+typedef struct s_redir
+{
+	char*	file;
+	int		type;
+}				t_redir;
 
 # include <sys/types.h>
 # include <unistd.h>

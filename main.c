@@ -12,8 +12,9 @@
 
 #include <stdio.h>
 #include "minishell.h"
+#include "tokenizer.h"
 
-	//cc -lreadline main.c
+	//cc -lreadline main.c libft.c llist_utils.c string_utils.c token_utils.c tokenizer.c
 void handle_signal(int sig)
 {
 	rl_replace_line("", 0);
@@ -27,7 +28,9 @@ int	main()
 	char	*s;
 	struct	sigaction sa;
 	struct	sigaction quit;
-
+	t_token *tokens;
+    t_token *current;
+    
 	quit.sa_handler = SIG_IGN;
 	sa.sa_handler = handle_signal;
 	sigemptyset(&sa.sa_mask);
@@ -41,6 +44,18 @@ int	main()
 		if (s != NULL)
 		{
 			add_history(s);
+			tokens = tokenize(s);
+			if (!tokens)
+			{
+				printf("Error: Failed to tokenize input\n");
+				return (1);
+			}
+			current = tokens;
+			while (current)
+			{
+				printf("%s:%u\n", current->value,current->type);
+				current = current->next;
+			}
 		}
 		if (s == NULL)
 		{	
