@@ -1,52 +1,40 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hui-lim <hui-lim@student.42singapore.      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 18:45:38 by hui-lim           #+#    #+#             */
-/*   Updated: 2024/11/23 18:47:54 by hui-lim          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include <stdio.h>
-#include "minishell.h"
+#include "tokenizer.h"
 
-	//cc -lreadline main.c
-void handle_signal(int sig)
+int main(int argc, char **argv)
 {
-	rl_replace_line("", 0);
-	write (1, "\n", 1);
-	rl_on_new_line();
-	rl_redisplay();
-}
+    t_token *tokens;
+    t_token *current;
 
-int	main()
-{
-	char	*s;
-	struct	sigaction sa;
-	struct	sigaction quit;
+    if (argc != 2)
+    {
+        printf("Usage: %s \"command string\"\n", argv[0]);
+        return (1);
+    }
 
-	quit.sa_handler = SIG_IGN;
-	sa.sa_handler = handle_signal;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGQUIT, &quit, NULL);
-	if (sigaction(SIGINT, &sa, NULL) == -1)
-		return (0);
-	while (1)
-	{
-		s = readline(PROMPT);
-		if (s != NULL)
-		{
-			add_history(s);
-		}
-		if (s == NULL)
-		{	
-			rl_clear_history();
-			exit(0);
-		}
-		free(s);
-	}
+    tokens = tokenize(argv[1]);
+    if (!tokens)
+    {
+        printf("Error: Failed to tokenize input\n");
+        return (1);
+    }
+
+    // Process tokens
+    current = tokens;
+    while (current)
+    {
+        printf("%s:%u\n", current->value,current->type);
+        current = current->next;
+    }
+
+    // Free tokens
+    while (tokens)
+    {
+        current = tokens;
+        tokens = tokens->next;
+        free(current->value);
+        free(current);
+    }
+
+    return (0);
 }
