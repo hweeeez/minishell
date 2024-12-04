@@ -54,6 +54,9 @@ int	main()
 			while (current)
 			{
 				printf("%s:%u\n", current->value,current->type);
+				int fd = access(current->value, R_OK & & X_OK);
+				if (fd > -1)
+					
 				current = current->next;
 			}
 		}
