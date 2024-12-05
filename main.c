@@ -14,7 +14,7 @@
 #include "minishell.h"
 #include "tokenizer.h"
 
-	//cc -lreadline main.c libft.c llist_utils.c string_utils.c token_utils.c tokenizer.c
+	//cc -lreadline main.c libft.c llist_utils.c string_utils.c token_utils.c tokenizer.c createtree.c
 void handle_signal(int sig)
 {
 	rl_replace_line("", 0);
@@ -30,7 +30,11 @@ int	main()
 	struct	sigaction quit;
 	t_token *tokens;
     t_token *current;
+    t_node	*tree;
+    t_node	*root;
     
+    tree = (t_node*)malloc(sizeof(t_node));
+    root = tree;
 	quit.sa_handler = SIG_IGN;
 	sa.sa_handler = handle_signal;
 	sigemptyset(&sa.sa_mask);
@@ -51,14 +55,12 @@ int	main()
 				return (1);
 			}
 			current = tokens;
-			while (current)
+			inittree(&tree, current);
+			/*while (current)
 			{
 				printf("%s:%u\n", current->value,current->type);
-				int fd = access(current->value, R_OK & & X_OK);
-				if (fd > -1)
-					
 				current = current->next;
-			}
+			}*/
 		}
 		if (s == NULL)
 		{	

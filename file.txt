@@ -21,25 +21,41 @@ typedef enum e_node_type
 {
     NODE_PIPE,
     NODE_COMMAND,
+    NODE_REDIR,
+    NODE_ARGS,
 } t_node_type;
 
-typedef struct s_redir
+typedef struct s_tree
 {
-    t_token_type    type;       // TOKEN_REDIR_IN, TOKEN_REDIR_OUT, etc.
-    char            *file;      // Filename or delimiter for heredoc
-    struct s_redir *next; // Multiple redirections possible
-}				t_redir;
+	t_node*		root;
+	t_pipe*		last_pipe;
+}				t_tree;
 
 typedef struct s_node
 {
-    t_node_type      type;
-    char            **args;         // Command and its args
-    int             argc;
-    t_redir   *redirections;  // List of redirections for this command
-    struct s_node *left;
-    struct s_node *right;
+	int			type;
+	t_pipe*		pipe;
+	t_command*	commands;
+	t_redir*	redir;
 }				t_node;
 
+typedef struct s_pipe
+{
+	s_node*		left;
+	s_node*		right;
+}				t_pipe;
+
+typedef struct s_command
+{
+	char**		args;
+	t_redir*	redirs;
+}				t_pipe;
+
+typedef struct s_redir
+{
+	char*		file;
+	int			type;
+}				t_redir;
 
 # include <sys/types.h>
 # include <unistd.h>
@@ -49,10 +65,10 @@ typedef struct s_node
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
-#include "tokenizer.h"
 
-void	inittree(t_tree** tree, t_token* tokens);
-void	parsetoken(t_token* token, t_tree** tree);
-void	addnode(t_tree** tree, t_node* new);
+void	inittree(t_tree* tree, t_token* tokens);
+void	parsetoken(t_token* token, t_tree* tree);
+void	addnode(t_tree* tree, t_node* new);
+t_list	*ft_lstlast(t_tree* tree);
 
 #endif
