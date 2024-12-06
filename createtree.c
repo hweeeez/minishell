@@ -3,7 +3,7 @@
 
 void	inittree(t_tree** tree, t_token* tokens)
 {
-	t_token *current;
+	t_token* current;
 
 	current = tokens;
 	while (current)
@@ -15,64 +15,81 @@ void	inittree(t_tree** tree, t_token* tokens)
 	}
 }
 
-void	parsetoken(t_token* token, t_tree** tree)
+void	parsetoken(t_token* token, t_tree** tree, char** envp)
 {
-	t_redir*	redir;
-	t_node*		newnode;
-	
-	newnode = (t_node *)malloc(sizeof(t_node));
+	t_redir* redir;
+	t_node* newnode;
+	char* commandpath;
+	char** args;
+	t_node* curr_command_node;
+
+	newnode = (t_node*)malloc(sizeof(t_node));
 	if (token->type == 2 || token->type == 3) // < or >
 	{
-		//create redir
+		//add redir to command node
 		redir = (t_redir*)malloc(sizeof(t_redir));
 		redir->type = (*token).type;
 		redir->file = (*token).next->value;
 		token = (*token).next->next;
-		if ((*tree)->left == NULL)
+		if (curr_command_node->redirections == NULL)
 		{
-			(*tree)->left = (t_node)malloc(sizeof(t_node));
-			(*tree)->left->type = 1; //command
-			if ((*tree)->left->redirs == NULL)
-				(*tree)->left->redirs = redir;
-			//else add to back
+			curr_command_node->redirections = redir;
 		}
+		else
+			curr_command_node->redirections->next = redir;
 	}
 	if (token->type == 1) // |
 	{
 		//create redir
-		newnode->pipe = (t_pipe *)malloc(sizeof(t_pipe));
+		newnode->pipe = (t_pipe*)malloc(sizeof(t_pipe));
 		token = (*token).next->next;
 	}
-	addnode(tree, newnode);
+	if (token->type == 1) // |
+	{
+		//add command node'
+		commandpath = ft_find_cmd_path(token->value, &args, envp);
+		if (commandpath != NULL)
+		{
+			curr_command_node = (t_node*)malloc(sizeof(t_node));
+			curr_command_node->type = 1;
+			addnode(tree, curr_command_node);
+		}
+	}
 }
 
-void	addnode(t_tree** tree, t_node* new)
+void	addnode(t_node** currentnode, t_node* newnode)
 {
-	t_tree	*temp;
-	t_tree	*last;
-
-	temp = *tree;
-	if (!(*tree))
-		return ;
+	if (!(*currentnode))
+		return;
+	if ((*currentnode)->left != NULL)
+	{
+		(*currentnode)->left = newnode;
+		(*currentnode) = (*currentnode)->left;
+	}
+	else if ((*currentnode)->right != NULL)
+	{
+		(*currentnode)->right = newnode;
+		(*currentnode) = (*currentnode)->right;
+	}
 	//else go up
 }
 
 void printTree(Node* root, int space) {
-    if (root == NULL)
-        return;
+	if (root == NULL)
+		return;
 
-    space += 10;
+	space += 10;
 
-    // First print the right child
-    printTree(root->right, space);
+	// First print the right child
+	printTree(root->right, space);
 
-    // Print the current node after space
-    printf("\n");
-    for (int i = 10; i < space; i++) {
-        printf(" ");
-    }
-    printf("%d\n", root->data);
+	// Print the current node after space
+	printf("\n");
+	for (int i = 10; i < space; i++) {
+		printf(" ");
+	}
+	printf("%d\n", root->data);
 
-    // Then print the left child
-    printTree(root->left, space);
+	// Then print the left child
+	printTree(root->left, space);
 }
