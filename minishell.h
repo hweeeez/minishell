@@ -19,25 +19,26 @@
 
 typedef enum e_node_type
 {
-    NODE_PIPE,
-    NODE_COMMAND,
+	NODE_PIPE,
+	NODE_COMMAND,
 } t_node_type;
 
 typedef struct s_redir
 {
-    t_token_type    type;       // TOKEN_REDIR_IN, TOKEN_REDIR_OUT, etc.
-    char            *file;      // Filename or delimiter for heredoc
-    struct s_redir *next; // Multiple redirections possible
+	t_token_type    type;       // TOKEN_REDIR_IN, TOKEN_REDIR_OUT, etc.
+	char* file;      // Filename or delimiter for heredoc
+	struct s_redir* next; // Multiple redirections possible
 }				t_redir;
 
 typedef struct s_node
 {
-    t_node_type      type;
-    char            **args;         // Command and its args
-    int             argc;
-    t_redir   *redirections;  // List of redirections for this command
-    struct s_node *left;
-    struct s_node *right;
+	t_node          prev;
+	t_node_type      type;
+	char** args;         // Command and its args
+	int             argc;
+	t_redir* redirections;  // List of redirections for this command
+	struct s_node* left;
+	struct s_node* right;
 }				t_node;
 
 

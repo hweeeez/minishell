@@ -18,12 +18,10 @@ void	inittree(t_tree** tree, t_token* tokens)
 void	parsetoken(t_token* token, t_tree** tree, char** envp)
 {
 	t_redir* redir;
-	t_node* newnode;
-	char* commandpath;
+	static t_node* newnode;
+	char* word;
 	char** args;
-	t_node* curr_command_node;
 
-	newnode = (t_node*)malloc(sizeof(t_node));
 	if (token->type == 2 || token->type == 3) // < or >
 	{
 		//add redir to command node
@@ -31,45 +29,57 @@ void	parsetoken(t_token* token, t_tree** tree, char** envp)
 		redir->type = (*token).type;
 		redir->file = (*token).next->value;
 		token = (*token).next->next;
-		if (curr_command_node->redirections == NULL)
+		if (newnode->redirections == NULL)
 		{
-			curr_command_node->redirections = redir;
+			newnode->redirections = redir;
 		}
 		else
-			curr_command_node->redirections->next = redir;
+			newnode->redirections->next = redir;
 	}
 	if (token->type == 1) // |
 	{
 		//create redir
-		newnode->pipe = (t_pipe*)malloc(sizeof(t_pipe));
+		newnode = (t_node*)malloc(sizeof(t_node));
+		newnode->type = 0;
 		token = (*token).next->next;
+		addnode(tree, newnode);
 	}
 	if (token->type == 1) // |
 	{
 		//add command node'
-		commandpath = ft_find_cmd_path(token->value, &args, envp);
-		if (commandpath != NULL)
+		word = ft_find_cmd_path(token->value, &args, envp);
+		if (word != NULL)
 		{
-			curr_command_node = (t_node*)malloc(sizeof(t_node));
-			curr_command_node->type = 1;
-			addnode(tree, curr_command_node);
+			word = (t_node*)malloc(sizeof(t_node));
+			word->type = 1;
+			addnode(tree, newnode);
 		}
 	}
 }
 
 void	addnode(t_node** currentnode, t_node* newnode)
 {
+	t_node prevnode;
+
+	prevnode = currentnode;
 	if (!(*currentnode))
 		return;
 	if ((*currentnode)->left != NULL)
 	{
 		(*currentnode)->left = newnode;
 		(*currentnode) = (*currentnode)->left;
+		(*currentnode)->prev = prevnode;
 	}
 	else if ((*currentnode)->right != NULL)
 	{
 		(*currentnode)->right = newnode;
 		(*currentnode) = (*currentnode)->right;
+		(*currentnode)->prev = prevnode;
+	}
+	else
+	{
+		(*currentnode) = (*currentnode)->prev;
+		addnode(currentnode, newnode);
 	}
 	//else go up
 }
