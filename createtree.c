@@ -20,7 +20,8 @@ void	parsetoken(t_token* token, t_tree** tree, char** envp)
 	t_redir* redir;
 	static t_node* newnode;
 	char* word;
-	char** args;
+	static char** args;
+	static int	noargs;
 
 	if (token->type == 2 || token->type == 3) // < or >
 	{
@@ -44,7 +45,7 @@ void	parsetoken(t_token* token, t_tree** tree, char** envp)
 		token = (*token).next->next;
 		addnode(tree, newnode);
 	}
-	if (token->type == 1) // |
+	if (token->type == 1) // word
 	{
 		//add command node'
 		word = ft_find_cmd_path(token->value, &args, envp);
@@ -53,8 +54,27 @@ void	parsetoken(t_token* token, t_tree** tree, char** envp)
 			word = (t_node*)malloc(sizeof(t_node));
 			word->type = 1;
 			addnode(tree, newnode);
+			nowords = 0;
+			args = NULL;
+		}
+		else
+		{
+			nowords++;
+			free(args);
+			args = (char**)malloc(sizeof(char*) * nowords);
+
 		}
 	}
+}
+
+void copyarray()
+{
+	//temp array
+	//duplicate into temp
+	//realloc array
+	//copy temp back into array
+	//add new element
+	//free temp
 }
 
 void	addnode(t_node** currentnode, t_node* newnode)
