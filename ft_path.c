@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_pipex.h"
+#include "minishell.h"
 
 static char* find_path_in_env(char** envp)
 {
@@ -81,7 +81,6 @@ static char* check_path_directories(char** paths, char* cmd)
 			return (cmd_path);
 		}
 	}
-	ft_fprintf(STDERR_FILENO, "%s: command not found\n", args[0]);
 	ft_free_split(&paths);
 	ft_free_split(&args);
 	return (NULL);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_pipex.h"
+#include "minishell.h"
 
 static char* try_full_path(char* cmd)
 {
@@ -58,6 +58,8 @@ char* ft_check_direct_path(char* cmd, char*** cmd_args)
 		perror((*cmd_args)[0]);
 	}
 	else
-		ft_printf("%s: not found\n", cmd);
+		printf("%s: not found\n", cmd);
 	return (NULL);
 }
+
+
