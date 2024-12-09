@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENIZER_H
-# define TOKENIZER_H
+#ifndef TOKEN_H
+# define TOKEN_H
 
 # include <stdlib.h>
 # include <unistd.h>

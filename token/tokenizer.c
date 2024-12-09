@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "token.h"
 
 static char *handle_quotes(t_tokenizer *tok)
 {

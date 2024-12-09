@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hui-lim <hui-lim@student.42singapore.      +#+  +:+       +#+        */
+/*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:53:38 by hui-lim           #+#    #+#             */
-/*   Updated: 2024/11/23 18:56:51 by hui-lim          ###   ########.fr       */
+/*   Updated: 2024/12/09 21:27:37 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 enum	e_tokens
 {
 	EXE, //includes command and all options
-	FILE,
+	FILENAME, //changed from FILE due to std lib defination
 	SINGLE_RD_IN,
 	DOUBLE_RD_IN,
 	SINGLE_RD_OUT,
@@ -29,12 +29,13 @@ enum	e_tokens
 	DOUBLE_QUOTE,
 	SINGLE_QUOTE,
 	DOLLAR_SIGN,
-}
+};
 
 enum e_words
 {
+	ETC,
 	//includes build ins, need to handle expanding dollar sign
-}
+};
 
 # include <sys/types.h>
 # include <unistd.h>

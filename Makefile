@@ -21,46 +21,22 @@ HEADERS = $(INC_DIR)/minishell.h \
           $(INC_DIR)/builtins.h \
           $(INC_DIR)/heredoc.h \
           $(INC_DIR)/signal.h \
-          $(INC_DIR)/errorcode.h
+          $(INC_DIR)/error.h
 
 # Directories
 OBJ_DIR = obj
-TOKEN_DIR = token
-PARSE_DIR = parse
-EXEC_DIR = exec
-PIPE_DIR = pipe
-REDIR_DIR = redirect
-BUILTIN_DIR = builtins
-HEREDOC_DIR = heredoc
-SIGNAL_DIR = signal
-ERROR_DIR = errorcode
+SRC_DIRS = token parse exec pipe redirect builtins heredoc signal error
 
-# Source files
-SRCS = main.c \
-       $(wildcard $(TOKEN_DIR)/*.c) \
-       $(wildcard $(PARSE_DIR)/*.c) \
-       $(wildcard $(EXEC_DIR)/*.c) \
-       $(wildcard $(PIPE_DIR)/*.c) \
-       $(wildcard $(REDIR_DIR)/*.c) \
-       $(wildcard $(BUILTIN_DIR)/*.c) \
-       $(wildcard $(HEREDOC_DIR)/*.c) \
-       $(wildcard $(SIGNAL_DIR)/*.c) \
-       $(wildcard $(ERROR_DIR)/*.c)
+# Source files (separate main.c)
+SRCS = $(wildcard $(SRC_DIRS:=/*.c))
+MAIN_SRC = main.c
 
-# Object files
+# Object files (separate main.o)
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+MAIN_OBJ = $(OBJ_DIR)/main.o
 
 # Create obj directories string for creation
-OBJ_DIRS = $(OBJ_DIR) \
-           $(OBJ_DIR)/$(TOKEN_DIR) \
-           $(OBJ_DIR)/$(PARSE_DIR) \
-           $(OBJ_DIR)/$(EXEC_DIR) \
-           $(OBJ_DIR)/$(PIPE_DIR) \
-           $(OBJ_DIR)/$(REDIR_DIR) \
-           $(OBJ_DIR)/$(BUILTIN_DIR) \
-           $(OBJ_DIR)/$(HEREDOC_DIR) \
-           $(OBJ_DIR)/$(SIGNAL_DIR) \
-           $(OBJ_DIR)/$(ERROR_DIR)
+OBJ_DIRS = $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SRC_DIRS))
 
 # Rules
 all: $(NAME)
@@ -73,14 +49,22 @@ $(OBJ_DIRS):
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
-# Compile object files - now with header dependencies
-$(OBJ_DIR)/%.o: %.c $(HEADERS)
+# Special rule for main.c
+$(MAIN_OBJ): $(MAIN_SRC)
+	mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+# Compile other object files
+# This line makes every .o file depend on ALL headers $(OBJ_DIR)/%.o: %.c  #$(HEADERS)
+$(OBJ_DIR)/%.o: %.c
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
+## HEADERS = $(INC_DIR)/minishell.h  #replace with this line when minshell.h is set up
+
 # Link program
-$(NAME): $(LIBFT) $(OBJ_DIRS) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(LIBFT) $(OBJ_DIRS) $(OBJS) $(MAIN_OBJ)
+	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) $(LIBFT) -o $(NAME)
 
 # Clean object files
 clean:

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hui-lim <hui-lim@student.42singapore.      +#+  +:+       +#+        */
+/*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:45:38 by hui-lim           #+#    #+#             */
-/*   Updated: 2024/11/23 18:47:54 by hui-lim          ###   ########.fr       */
+/*   Updated: 2024/12/09 21:28:37 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 	//cc -lreadline main.c
 void handle_signal(int sig)
 {
+	(void) sig; //can't have unused variable
 	rl_replace_line("", 0);
 	write (1, "\n", 1);
 	rl_on_new_line();
