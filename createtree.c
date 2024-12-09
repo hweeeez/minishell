@@ -41,7 +41,6 @@ void	parsetoken(t_token* token, t_node** tree, char** envp)
 		redir = (t_redir*)malloc(sizeof(t_redir));
 		redir->type = (*token).type;
 		redir->file = (*token).next->value;
-		token = (*token).next->next;
 		if (newnode->redirections == NULL)
 		{
 			newnode->redirections = redir;
@@ -49,11 +48,10 @@ void	parsetoken(t_token* token, t_node** tree, char** envp)
 		else
 			newnode->redirections->next = redir;
 	}
-	if (token->type == 1) // |
+	if (token->type == TOKEN_PIPE) // |
 	{
 		//create redir
 		newnode = createnode();
-		token = (*token).next->next;
 		addnode(tree, newnode);
 	}
 	if (token->type == 0) // word
@@ -119,6 +117,7 @@ void	addnode(t_node** currentnode, t_node* newnode)
 			if (newnode->type == 0){
 				(*currentnode)->right = newnode;
 				newnode->prev = (*currentnode);
+				(*currentnode) = newnode;
 			}
 			else
 			{
@@ -126,14 +125,14 @@ void	addnode(t_node** currentnode, t_node* newnode)
 				(*currentnode)->right->prev = (*currentnode);
 				(*currentnode)->right->left = newnode;
 				newnode->prev = (*currentnode)->right;
-				(*currentnode) = (*currentnode)->right->left;
+				(*currentnode) = (*currentnode)->right;
 			}
 		}
-		if (newnode->type == 0)
+		/*if (newnode->type == 0)
 		{
 			(*currentnode) = newnode;
 			(*currentnode)->prev = prevnode;
-		}
+		}*/
 	}
 	else
 	{
@@ -146,23 +145,43 @@ void	cleantree(t_node** node)
 {
 	t_node* prevnode;
 
+	if ((*node) == NULL)
+		return;
+   if ((*node)->right)
+        cleantree(&((*node)->right));
 	prevnode = (*node)->prev;
-	if ((*node) != NULL)
+	if ((*node)->type == 0 && (*node)->right == NULL)
 	{
-		if ((*node)->type == 0)
+		if ((*node)->prev != NULL)
 		{
-			if ((*node)->right == NULL)
-			{
-				(*node)->prev->right = (*node)->left;
-				free(*node);
-				(*node) = prevnode;
-				(*node)->right->prev = (*node);
-			}
-			else
-				(*node) = (*node)->right;
-			cleantree(node);
-		}
+			if ((*node)->prev->right == *node)
+		            (*node)->prev->right = (*node)->left;
+		    if ((*node)->left)
+		            (*node)->left->prev = (*node)->prev;
+			free(*node);
+		    *node = NULL;
+        }
+        /*
+        cat a|cat b|cat c
+                  0
+            1             0
+                       1       0 
+                             1  NULL
+                             
+                             
+        else if ((*node)->left)
+        {
+            t_node* leftChild = (*node)->left;
+            leftChild->prev = NULL;
+            *node = leftChild;
+        }
+        else
+        {
+        	free(*node);
+        	*node = NULL;
+        }*/
 	}
+
 }
 
 static int getTreeHeight(t_node* root) {

@@ -56,6 +56,7 @@ int	main(int argc, char** argv, char** envp)
 			}
 			current = tokens;
 			inittree(&tree, current, envp);
+			printTree(root);
 			cleantree(&root);
 			printTree(root);
 			/*while (current)
