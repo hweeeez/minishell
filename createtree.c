@@ -147,19 +147,23 @@ void	cleantree(t_node** node)
 
 	if ((*node) == NULL)
 		return;
-   if ((*node)->right)
-        cleantree(&((*node)->right));
+   //if ((*node)->right)
+    //    cleantree(&((*node)->right));
 	prevnode = (*node)->prev;
 	if ((*node)->type == 0 && (*node)->right == NULL)
 	{
 		if ((*node)->prev != NULL)
 		{
-			if ((*node)->prev->right == *node)
+		printf("dsd\n");
+			printTree(prevnode);
+			if (prevnode->right == *node)
 		            (*node)->prev->right = (*node)->left;
 		    if ((*node)->left)
 		            (*node)->left->prev = (*node)->prev;
 			free(*node);
 		    *node = NULL;
+		    printf("adsd\n");
+		    printTree(prevnode);
         }
         /*
         cat a|cat b|cat c

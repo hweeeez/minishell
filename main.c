@@ -13,7 +13,6 @@
 #include <stdio.h>
 #include "minishell.h"
 #include "tokenizer.h"
-
 	//cc -g -lreadline main.c libft.c llist_utils.c string_utils.c token_utils.c tokenizer.c createtree.c ft_handle_direct_path.c ft_path.c -lm
 void handle_signal(int sig)
 {
@@ -56,9 +55,10 @@ int	main(int argc, char** argv, char** envp)
 			}
 			current = tokens;
 			inittree(&tree, current, envp);
+			tree = root;
 			printTree(root);
-			cleantree(&root);
-			printTree(root);
+			cleantree(&(tree->right->right));
+		 	printTree(root);
 			/*while (current)
 			{
 				printf("%s:%u\n", current->value,current->type);
@@ -71,5 +71,5 @@ int	main(int argc, char** argv, char** envp)
 			exit(0);
 		}
 		free(s);
-	}
-}
+	}          
+}                

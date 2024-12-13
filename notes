@@ -56,3 +56,9 @@ typedef struct s_tree
 	t_node*		lastpipe;
 }				t_tree;
 
+node->left: 0xad7740
+node->prev->right: 0xad7700
+node->prev: 0xad7640
+node->prev->right (after assignment): (nil)
+node->prev: 0xad7700
+
