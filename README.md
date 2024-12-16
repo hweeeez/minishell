@@ -35,5 +35,5 @@ minishell
 └── Makefile
 ```
 - [x] Write Makefile
-- [ ] Update headers
+- [X] Update headers
 - [ ] Clean up code to fit new headers and Makefile

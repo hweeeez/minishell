@@ -6,11 +6,11 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:58:32 by myuen             #+#    #+#             */
-/*   Updated: 2024/12/04 20:10:33 by myuen            ###   ########.fr       */
+/*   Updated: 2024/12/16 20:42:29 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token.h"
+#include "minishell.h"
 
 static char *handle_quotes(t_tokenizer *tok)
 {
@@ -21,7 +21,7 @@ static char *handle_quotes(t_tokenizer *tok)
 
     start = tok->position;
     quote = tok->input[tok->position];
-    tok->position++; // Skip opening quote
+    tok->position++;
     // Look for closing quote
     while (tok->input[tok->position] && tok->input[tok->position] != quote)
         tok->position++;
@@ -93,13 +93,13 @@ static t_token *get_next_token(t_tokenizer *tok)
     if (tok->input[tok->position] == '\'' || tok->input[tok->position] == '\"')
         return new_token(handle_quotes(tok), TOKEN_WORD);
     // Handle special characters
-    if (is_special(tok->input[tok->position]))
+    if (ms_is_special(tok->input[tok->position]))
         return handle_special(tok);
     // Handle regular words
     start = tok->position;
     while (tok->input[tok->position] && 
-           !is_whitespace(tok->input[tok->position]) && 
-           !is_special(tok->input[tok->position]) &&
+           !ms_is_whitespace(tok->input[tok->position]) && 
+           !ms_is_special(tok->input[tok->position]) &&
            tok->input[tok->position] != '\'' && 
            tok->input[tok->position] != '\"')
         tok->position++;
@@ -111,7 +111,6 @@ static t_token *get_next_token(t_tokenizer *tok)
     return new_token(value, TOKEN_WORD);
 }
 
-/* Tokenize input string */
 t_token *tokenize(const char *input)
 {
     t_tokenizer tok;

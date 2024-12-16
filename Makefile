@@ -10,6 +10,7 @@ LIBFT = libft/libft.a
 LIBFT_DIR = libft
 INC_DIR = inc
 INC = -I$(INC_DIR) -I$(LIBFT_DIR)
+READLINE = -lreadline
 
 # Header files
 HEADERS = $(INC_DIR)/minishell.h \
@@ -21,11 +22,12 @@ HEADERS = $(INC_DIR)/minishell.h \
           $(INC_DIR)/builtins.h \
           $(INC_DIR)/heredoc.h \
           $(INC_DIR)/signal.h \
-          $(INC_DIR)/error.h
+          $(INC_DIR)/error.h \
+		  $(INC_DIR)/expansion.h
 
 # Directories
 OBJ_DIR = obj
-SRC_DIRS = token parse exec pipe redirect builtins heredoc signal error
+SRC_DIRS = token parse exec pipe redirect builtins heredoc signal error expansion
 
 # Source files (separate main.c)
 SRCS = $(wildcard $(SRC_DIRS:=/*.c))
@@ -64,7 +66,7 @@ $(OBJ_DIR)/%.o: %.c
 
 # Link program
 $(NAME): $(LIBFT) $(OBJ_DIRS) $(OBJS) $(MAIN_OBJ)
-	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) $(LIBFT) $(READLINE) -o $(NAME)
 
 # Clean object files
 clean:
