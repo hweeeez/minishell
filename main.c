@@ -31,9 +31,9 @@ int	main(int argc, char** argv, char** envp)
     t_token *current;
     t_node	*tree;
     t_node	*root;
+	t_node	*clean;
     
-    tree = createnode();
-    root = tree;
+	clean = NULL;   
 	quit.sa_handler = SIG_IGN;
 	sa.sa_handler = handle_signal;
 	sigemptyset(&sa.sa_mask);
@@ -54,10 +54,13 @@ int	main(int argc, char** argv, char** envp)
 				return (1);
 			}
 			current = tokens;
+			freetree(&root, &clean);
+			 tree = createnode();
+    		root = tree;
 			inittree(&tree, current, envp);
 			tree = root;
-			printTree(root);
-			cleantree(&(tree->right->right));
+			//printTree(root);
+			cleantree(&(tree), &clean);
 		 	printTree(root);
 			/*while (current)
 			{

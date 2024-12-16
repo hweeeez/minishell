@@ -1,5 +1,14 @@
 #include "minishell.h"
 
+static void	printarray(char **args){
+ int i = 0;
+
+ while (args[i] != NULL)
+ {
+	printf("%s\n", args[i]);
+	i++;
+ }
+}
 t_node*	createnode()
 {
 	t_node*	node;
@@ -12,6 +21,7 @@ t_node*	createnode()
     node->redirections = NULL;
     node->args = NULL;
     node->argc = 0;
+	node->next = NULL;
     return node;
 }
 
@@ -22,12 +32,12 @@ void	inittree(t_node** tree, t_token* tokens, char** envp)
 	current = tokens;
 	while (current)
 	{
-		parsetoken(current, tree, envp);
+		parsetoken(&current, tree, envp);
 		current = current->next;
 	}
 }
 
-void	parsetoken(t_token* token, t_node** tree, char** envp)
+void	parsetoken(t_token** token, t_node** tree, char** envp)
 {
 	t_redir* redir;
 	static t_node* newnode;
@@ -35,29 +45,31 @@ void	parsetoken(t_token* token, t_node** tree, char** envp)
 	static char** args;
 	static int	nowords;
 
-	if (token->type == 2 || token->type == 3) // < or >
+	if ((*token)->type == 2 || (*token)->type == 3) // < or >
 	{
 		//add redir to command node
 		redir = (t_redir*)malloc(sizeof(t_redir));
-		redir->type = (*token).type;
-		redir->file = (*token).next->value;
+		redir->type = (*token)->type;
+		redir->file = (*token)->next->value;
 		if (newnode->redirections == NULL)
 		{
 			newnode->redirections = redir;
 		}
 		else
 			newnode->redirections->next = redir;
+		(*token) = (*token)->next;
+		return;
 	}
-	if (token->type == TOKEN_PIPE) // |
+	if ((*token)->type == TOKEN_PIPE) // |
 	{
 		//create redir
 		newnode = createnode();
 		addnode(tree, newnode);
 	}
-	if (token->type == 0) // word
+	if ((*token)->type == 0) // word
 	{
 		//add command node
-		word = ft_find_cmd_path(token->value, &args, envp);
+		word = ft_find_cmd_path((*token)->value, &args, envp);
 		if (word != NULL)
 		{
 			newnode = createnode();
@@ -66,12 +78,12 @@ void	parsetoken(t_token* token, t_node** tree, char** envp)
 			args = NULL;
 			newnode->args = args;
 			nowords = 0;
-			copyarray(&args, nowords, token->value);
+			copyarray(&args, nowords, (*token)->value);
 			nowords++;
 		}
 		else
 		{
-			copyarray(&args, nowords, token->value);
+			copyarray(&args, nowords, (*token)->value);
 			nowords++;
 		}
 	}
@@ -97,6 +109,7 @@ void copyarray(char ***tocopy, int size, char* toadd)
 	temp[i + 1] = NULL;
 	*tocopy = temp;
 }
+
 
 void	addnode(t_node** currentnode, t_node* newnode)
 {
@@ -141,29 +154,50 @@ void	addnode(t_node** currentnode, t_node* newnode)
 	}
 }
 
-void	cleantree(t_node** node)
+void	cleantree(t_node** node, t_node** clean)
 {
 	t_node* prevnode;
+	t_node* leftnode;
 
 	if ((*node) == NULL)
 		return;
-   //if ((*node)->right)
-    //    cleantree(&((*node)->right));
+    if ((*node)->right)
+        cleantree(&((*node)->right), clean);
 	prevnode = (*node)->prev;
+	leftnode = (*node)->left;
+	
 	if ((*node)->type == 0 && (*node)->right == NULL)
 	{
 		if ((*node)->prev != NULL)
 		{
-		printf("dsd\n");
-			printTree(prevnode);
-			if (prevnode->right == *node)
-		            (*node)->prev->right = (*node)->left;
-		    if ((*node)->left)
-		            (*node)->left->prev = (*node)->prev;
 			free(*node);
-		    *node = NULL;
-		    printf("adsd\n");
-		    printTree(prevnode);
+			(*node) = NULL;
+			//printf("%p\n", leftnode);
+			//if (prevnode->right == *node)
+		    prevnode->right = leftnode;                   
+		    if (leftnode)
+		            leftnode->prev = prevnode;
+			printf("%p\n", prevnode->right);
+			//printf("%d\n", prevnode->right->type);
+
+			/*if ((*clean) == NULL)
+			{
+				(*clean) = (*node);
+				(*clean)->next = NULL;
+			}	
+			else
+			{
+				(*clean)->next = (*node);
+				(*clean) = (*clean)->next;
+				(*clean)->next = NULL;
+			}	*/	/*printf("dsd\n");
+		printf("perevnode right: %p\n", prevnode->right);
+		printf("prevnode: %p\n", prevnode);
+		printf("left node: %p type: %d\n", leftnode, leftnode->type);
+			printTree(prevnode);
+			printf("adsd\n");
+		printf("perevnode right: %p\n", prevnode->right);
+		printf("prevnode: %p\n", prevnode);*/
         }
         /*
         cat a|cat b|cat c

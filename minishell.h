@@ -69,10 +69,11 @@ typedef struct s_node
 	t_redir* redirections;  // List of redirections for this command
 	struct s_node* left;
 	struct s_node* right;
+	struct s_node* next;
 }				t_node;
 
 void	inittree(t_node** tree, t_token* tokens, char** envp);
-void	parsetoken(t_token* token, t_node** tree, char** envp);
+void	parsetoken(t_token** token, t_node** tree, char** envp);
 void	addnode(t_node** tree, t_node* new);
 char* ft_find_cmd_path(char* cmd, char*** cmd_args, char** envp);
 void copyarray(char ***tocopy, int size, char* toadd);
@@ -85,6 +86,7 @@ char	*ft_strchr(const char *s, int c);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 t_node*	createnode();
-void	cleantree(t_node** node);
+void	cleantree(t_node** node, t_node** clean);
 void printTree(t_node* root);
+void freetree(t_node** tree, t_node** clean);
 #endif
