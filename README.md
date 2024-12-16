@@ -19,8 +19,10 @@ minishell
 │   ├── redirect.h
 │   ├── builtins.h
 │   ├── heredoc.h
-│   ├── signal.h
+│   ├── sig_control.h
 │   └── error.h
+│   └── env.h
+│   └── expansion.h
 ├── libft/
 ├── token/
 ├── parse/
@@ -31,6 +33,8 @@ minishell
 ├── heredoc/
 ├── signal/
 ├── error/
+├── env/
+├── expansion/
 ├── main.c
 └── Makefile
 ```
