@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:58:32 by myuen             #+#    #+#             */
-/*   Updated: 2024/12/18 19:51:13 by myuen            ###   ########.fr       */
+/*   Updated: 2024/12/18 20:58:40 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_token *tokenize(const char *input)
     if (tok.error)
     {
         free_token_list(head);
-        printf("Possible unclosed quotes Error\n");
+        printf("Error - unclosed quotes\n");
         return NULL;
     }
     return head;

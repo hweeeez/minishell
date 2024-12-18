@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:58:32 by myuen             #+#    #+#             */
-/*   Updated: 2024/12/18 19:52:39 by myuen            ###   ########.fr       */
+/*   Updated: 2024/12/18 21:00:05 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef enum e_token_type
 	TOKEN_REDIR_OUT,
 	TOKEN_APPEND,
 	TOKEN_HEREDOC,
-	TOKEN_EOF
+	TOKEN_EOF,
+	TOKEN_ERROR,
 }	t_token_type;
 
 /************************************/
