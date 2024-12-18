@@ -38,6 +38,12 @@ minishell
 ├── main.c
 └── Makefile
 ```
+###Main branch:
 - [x] Write Makefile
-- [X] Update headers
-- [ ] Clean up code to fit new headers and Makefile
+- [x] Update headers
+- [x] Clean up code to fit new headers and Makefile
+- [x] clean memory leaks
+- [x] norm
+
+###Token:
+- [] norm

@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:53:38 by hui-lim           #+#    #+#             */
-/*   Updated: 2024/12/16 20:38:21 by myuen            ###   ########.fr       */
+/*   Updated: 2024/12/18 18:16:30 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@
 #  define PROMPT "weneedtherapy% "
 # endif
 
-/*These should be moved elsewhere*/
+/*These should be moved elsewhere?*/
 enum	e_cmd_type
 {
-	EXE, //includes command and all options
-	FILENAME, //changed from FILE due to std lib defination
+	EXE,
+	FILENAME,
 	SINGLE_RD_IN,
 	DOUBLE_RD_IN,
 	SINGLE_RD_OUT,
-	HEREDOC, //double rd out
+	HEREDOC,
 	PIPE,
 	DOUBLE_QUOTE,
 	SINGLE_QUOTE,
