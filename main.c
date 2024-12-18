@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:45:38 by hui-lim           #+#    #+#             */
-/*   Updated: 2024/12/18 20:07:06 by myuen            ###   ########.fr       */
+/*   Updated: 2024/12/18 21:58:27 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static int	handle_exit_command(char *input)
 {
 	if (*input && ft_strncmp(input, EXIT_CMD, sizeof(EXIT_CMD)) == 0)
 	{
+		ft_putstr_fd("exit\n", 2);
 		free(input);
 		rl_clear_history();
 		return (1);
