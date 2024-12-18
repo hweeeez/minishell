@@ -21,7 +21,6 @@ t_node*	createnode()
     node->redirections = NULL;
     node->args = NULL;
     node->argc = 0;
-	node->next = NULL;
     return node;
 }
 
@@ -40,7 +39,7 @@ void	inittree(t_node** tree, t_token* tokens, char** envp)
 void	parsetoken(t_token** token, t_node** tree, char** envp)
 {
 	t_redir* redir;
-	static t_node* newnode;
+	static t_node* newnode = NULL;
 	char* word;
 	static char** args;
 	static int	nowords;
@@ -48,6 +47,12 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 	if ((*token)->type == 2 || (*token)->type == 3) // < or >
 	{
 		//add redir to command node
+		if (newnode == NULL)
+		{
+			newnode = createnode();
+			newnode->type = 1;
+			addnode(tree, newnode);
+		}
 		redir = (t_redir*)malloc(sizeof(t_redir));
 		redir->type = (*token)->type;
 		redir->file = (*token)->next->value;
@@ -72,19 +77,23 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 		word = ft_find_cmd_path((*token)->value, &args, envp);
 		if (word != NULL)
 		{
-			newnode = createnode();
-			newnode->type = 1;
-			addnode(tree, newnode);
+			if (newnode == NULL || newnode->type == 0)
+			{
+				newnode = createnode();
+				newnode->type = 1;
+				addnode(tree, newnode);
+			}
 			args = NULL;
-			newnode->args = args;
 			nowords = 0;
 			copyarray(&args, nowords, (*token)->value);
+			newnode->args = args;
 			nowords++;
 		}
 		else
 		{
 			copyarray(&args, nowords, (*token)->value);
-			nowords++;
+			newnode->args = args;
+			nowords++;		
 		}
 	}
 }
@@ -100,12 +109,13 @@ void copyarray(char ***tocopy, int size, char* toadd)
 	{
 		while ((*tocopy)[i]!= NULL)
 		{
-			temp[i]= (*tocopy)[i];
+			temp[i]= ft_strdup((*tocopy)[i]);
+			free(*tocopy[i]);
 			i++;
 		}
 		free(*tocopy);
 	}
-	temp[i] = toadd;
+	temp[i] = ft_strdup(toadd);
 	temp[i + 1] = NULL;
 	*tocopy = temp;
 }
@@ -154,7 +164,7 @@ void	addnode(t_node** currentnode, t_node* newnode)
 	}
 }
 
-void	cleantree(t_node** node, t_node** clean)
+void	cleantree(t_node** node)
 {
 	t_node* prevnode;
 	t_node* leftnode;
@@ -162,7 +172,7 @@ void	cleantree(t_node** node, t_node** clean)
 	if ((*node) == NULL)
 		return;
     if ((*node)->right)
-        cleantree(&((*node)->right), clean);
+        cleantree(&((*node)->right));
 	prevnode = (*node)->prev;
 	leftnode = (*node)->left;
 	
@@ -177,7 +187,7 @@ void	cleantree(t_node** node, t_node** clean)
 		    prevnode->right = leftnode;                   
 		    if (leftnode)
 		            leftnode->prev = prevnode;
-			printf("%p\n", prevnode->right);
+			//printf("%p\n", prevnode->right);
 			//printf("%d\n", prevnode->right->type);
 
 			/*if ((*clean) == NULL)

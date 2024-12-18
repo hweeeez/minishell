@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void freetree(t_node** tree, t_node** clean)
+void freetree(t_node** tree)
 {
     t_node* current;
     t_node* next;
@@ -22,4 +22,10 @@ void freetree(t_node** tree, t_node** clean)
         free(current);
         current = next;
     }
+}
+
+void traversetree()
+{
+
+    
 }
