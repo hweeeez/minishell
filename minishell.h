@@ -44,6 +44,7 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <math.h>
+#include <string.h>
 #include "tokenizer.h"
 struct s_node;
 
@@ -88,5 +89,6 @@ t_node*	createnode();
 void	cleantree(t_node** node);
 void printTree(t_node* root);
 void freetree(t_node** tree);
-void    traverse_tree(t_node** root);
+void    traverse_tree(t_node** root, char** envp);
+void	get_pwd();
 #endif

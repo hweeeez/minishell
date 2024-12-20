@@ -22,6 +22,16 @@ void handle_signal(int sig)
 	rl_redisplay();
 }
 
+void	get_pwd()
+{
+	char*	dir;
+	size_t size;
+	char *buf;
+
+	dir = getcwd(buf, size);
+	printf("%s", dir);
+}
+
 int	main(int argc, char** argv, char** envp)
 {
 	char	*s;
@@ -57,7 +67,7 @@ int	main(int argc, char** argv, char** envp)
 			inittree(&tree, current, envp);
 			tree = root;
 			cleantree(&(tree));
-			traverse_tree(&root);
+			traverse_tree(&root, envp);
 		 	printTree(root);
 			/*while (current)
 			{

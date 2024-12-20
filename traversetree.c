@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void    traverse_tree(t_node** root)
+void    traverse_tree(t_node** root, char** envp)
 {
     if ((*root)->left)
     {
@@ -9,13 +9,9 @@ void    traverse_tree(t_node** root)
             printf("Redirection: %s\n", (*root)->left->redirections->file);
         if ((*root)->left->args){
             char **c = (*root)->left->args;
-            printf("args: ");
-            while (*c)
-            {
-                printf("%s ", (*c));
-                (c)++;
-            }
-            printf("\n");
+            if (access(c[1], F_OK) != -1)
+            	printf("File exists");
+            execve(c[0], c + 1, envp);
         }
     }
     if ((*root)->right)
@@ -24,7 +20,7 @@ void    traverse_tree(t_node** root)
         {
             printf("Executing right: PIPE\n ");
             (*root) = (*root)->right;
-            traverse_tree(root);
+            traverse_tree(root, envp);
         }
         else
         {
