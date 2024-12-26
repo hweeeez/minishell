@@ -91,4 +91,5 @@ void printTree(t_node* root);
 void freetree(t_node** tree);
 void    traverse_tree(t_node** root, char** envp);
 void	get_pwd();
+int execute(t_node *node, int input, int output, char** envp);
 #endif

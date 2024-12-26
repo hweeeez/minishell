@@ -44,6 +44,12 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 	static char** args;
 	static int	nowords;
 
+	if ((*tree)->left == NULL)
+	{
+		newnode = NULL;
+		nowords = 0;
+		args = NULL;
+	}
 	if ((*token)->type == 2 || (*token)->type == 3) // < or >
 	{
 		//add redir to command node

@@ -67,7 +67,9 @@ int	main(int argc, char** argv, char** envp)
 			inittree(&tree, current, envp);
 			tree = root;
 			cleantree(&(tree));
-			traverse_tree(&root, envp);
+			tree = root;
+			//traverse_tree(&root, envp);
+			execute(root, STDIN_FILENO, STDOUT_FILENO, envp);
 		 	printTree(root);
 			/*while (current)
 			{
