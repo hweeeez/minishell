@@ -36,6 +36,7 @@
 # define FATAL_ERR_SIG 128
 
 # include <sys/types.h>
+#include <sys/wait.h>
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
@@ -46,6 +47,7 @@
 # include <math.h>
 #include <string.h>
 #include "tokenizer.h"
+
 struct s_node;
 
 typedef enum e_node_type
@@ -92,4 +94,6 @@ void freetree(t_node** tree);
 void    traverse_tree(t_node** root, char** envp);
 void	get_pwd();
 int execute(t_node *node, int input, int output, char** envp);
+void executechild(t_node *node, int pipefd[2], int puts[2], char** envp);
+void	closeputs(int input, int output);
 #endif

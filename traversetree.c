@@ -1,7 +1,6 @@
 #include "minishell.h"
-#include <sys/types.h>
-#include <sys/wait.h>
-void    traverse_tree(t_node** root, char** envp)
+
+/*void    traverse_tree(t_node** root, char** envp)
 {
     if ((*root)->left)
     {
@@ -38,88 +37,74 @@ void    traverse_tree(t_node** root, char** envp)
             printf("\n");
         }
     }
-}
+}*/
 
-int execute(t_node *node, int input, int output, char** envp)
+int	execute(t_node *node, int input, int output, char **envp)
 {
 	pid_t	pid;
 	pid_t	child_pid;
-	int pipefd[2];
-	char **c;
-	
+	int		pipefd[2];
+	int		puts[2];
+
 	if (!node)
 		return (-1);
 	if (node->right != NULL)
 	{
-		if (pipe(pipefd) == -1) 
-		{
-            perror("pipe");
-            return (-1);
-        }
+		if (pipe(pipefd) == -1)
+			return (-1);
 	}
 	pid = fork();
+	puts[0] = input;
+	puts[1] = output;
 	if (pid == -1)
 		return (-1);
 	if (pid == 0)
-	{
-		if (input != STDIN_FILENO)
-		{
-			dup2(input, STDIN_FILENO);
-			close(input);
-		}
-		if (node->right != NULL)
-		{
-			close(pipefd[0]);
-			dup2(pipefd[1], STDOUT_FILENO);
-			close(pipefd[1]);
-		}
-		else if (output != STDOUT_FILENO)
-		{
-			dup2(output, STDOUT_FILENO);
-			close(output);
-		}
-		if (node->left != NULL)
-			c = node->left->args;
-		else
-			c = node->args;
-		execve(c[0], c, envp);
-	}
-	if (input != STDIN_FILENO) close(input);
-    if (output != STDOUT_FILENO) close(output);
+		executechild(node, pipefd, puts, envp);
+	closeputs(input, output);
 	if (node->right != NULL)
 	{
-	char buffer[1024];
-        ssize_t bytesRead;
-
-        // Read from STDIN (which is now connected to the pipe)
-        while ((bytesRead = read(STDIN_FILENO, buffer, sizeof(buffer))) > 0) {
-            write(STDOUT_FILENO, buffer, bytesRead);  // Print to stdout
-        }
-		//child_pid = execute(node->right, pipefd[0], STDOUT_FILENO, envp);
+		close(pipefd[1]);
+		child_pid = execute(node->right, pipefd[0], STDOUT_FILENO, envp);
 		waitpid(pid, NULL, 0);
-		//waitpid(child_pid, NULL, 0);
+		waitpid(child_pid, NULL, 0);
 	}
 	else
 		waitpid(pid, NULL, 0);
 	return (pid);
 }
 
-/*int execute(t_node *node, int input, int output, char** envp)
+void	closeputs(int input, int output)
 {
-	pid_t pid;
-	if ((pid = fork()) == -1) {
-        perror("fork");
-        exit(1);
-    }
-	char **c = node->left->args;
-    if (pid == 0) {  // Child process
-        execve(c[0], c, envp);
-        perror("execve");  // Only reaches here if exec fails
-        exit(1);
-    }
+	if (input != STDIN_FILENO)
+		close(input);
+    if (output != STDOUT_FILENO)
+		close(output);
+}
 
-    // Parent process
-    waitpid(pid, NULL, 0);  // Wait for child to finish
-    return 0;
-}*/
+void	executechild(t_node *node, int pipefd[2], int puts[2], char **envp)
+{
+	char	**c;
 
+	if (puts[0] != STDIN_FILENO)
+	{
+		dup2(puts[0], STDIN_FILENO);
+		close(puts[0]);
+	}
+	if (node->right != NULL)
+	{
+		close(pipefd[0]);
+		dup2(pipefd[1], STDOUT_FILENO);
+		close(pipefd[1]);
+	}
+	else if (puts[1] != STDOUT_FILENO)
+	{
+		dup2(puts[1], STDOUT_FILENO);
+		close(puts[1]);
+	}
+	if (node->left != NULL)
+		c = node->left->args;
+	else
+		c = node->args;
+	if (execve(c[0], c, envp) == -1)
+		printf("%s\n Error", c[0]);
+}

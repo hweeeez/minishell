@@ -70,7 +70,7 @@ int	main(int argc, char** argv, char** envp)
 			tree = root;
 			//traverse_tree(&root, envp);
 			execute(root, STDIN_FILENO, STDOUT_FILENO, envp);
-		 	printTree(root);
+		 	//printTree(root);
 			/*while (current)
 			{
 				printf("%s:%u\n", current->value,current->type);
