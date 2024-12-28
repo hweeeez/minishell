@@ -108,3 +108,35 @@ void	executechild(t_node *node, int pipefd[2], int puts[2], char **envp)
 	if (execve(c[0], c, envp) == -1)
 		printf("%s\n Error", c[0]);
 }
+
+public void checkif_builtin(char* cmd)
+		{
+			if (ft_strcmp(cmd, "echo") == 1)
+				return (printf("%s", "run echo"), 1);
+			if (ft_strcmp(cmd, "cd") == 1)
+				return (printf("%s", "run cd"), 1);
+			if (ft_strcmp(cmd, "pwd") == 1)
+				return (printf("%s", "run pwd");
+			if (ft_strcmp(cmd, "export") == 1)
+				return (printf("%s", "run export"), 1);
+			if (ft_strcmp(cmd, "unset") == 1)
+				return (printf("%s", "run unset"), 1);
+			if (ft_strcmp(cmd, "env") == 1)
+				return (printf("%s", "run env"), 1);
+			if (ft_strcmp(cmd, "exit") == 1)
+				return (printf("%s", "run exit"), 1);
+			return (0);
+		}
+
+		public int ft_strcmp(char* str1, char* str2)
+		{
+			int i;
+
+			i = 0;
+			while (str1[i] != '\0')
+			{
+				if (str1[i] != str2[i] || str2[i] == '\0')
+					return (-1);
+			}
+			return (1);
+		}
