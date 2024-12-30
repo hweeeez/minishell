@@ -62,3 +62,41 @@ node->prev: 0xad7640
 node->prev->right (after assignment): (nil)
 node->prev: 0xad7700
 
+/*void    traverse_tree(t_node** root, char** envp)
+{
+    if ((*root)->left)
+    {
+        printf("Executing left\n");
+        if ((*root)->left->redirections != NULL)
+            printf("Redirection: %s\n", (*root)->left->redirections->file);
+        if ((*root)->left->args){
+            char **c = (*root)->left->args;
+            if (access(c[1], F_OK) != -1)
+            	printf("File exists");
+            
+        }
+    }
+    if ((*root)->right)
+    {
+        if ((*root)->right->type == 0)
+        {
+            printf("Executing right: PIPE\n ");
+            (*root) = (*root)->right;
+            traverse_tree(root, envp);
+        }
+        else
+        {
+            printf("Executing right\n ");
+            if ((*root)->right->redirections != NULL)
+                printf("Redirection: %s\n", (*root)->right->redirections->file);
+            printf("args: ");
+            char **c = (*root)->right->args;
+            while (*c)
+            {
+                printf("%s ", (*c));
+                (c)++;
+            }
+            printf("\n");
+        }
+    }
+}*/

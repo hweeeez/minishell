@@ -18,7 +18,7 @@ t_node*	createnode()
     node->right = NULL;
     node->type = 0;
     node->prev = NULL;
-    node->redirections = NULL;
+    node->redirs = NULL;
     node->args = NULL;
     node->argc = 0;
     return node;
@@ -62,12 +62,17 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 		redir = (t_redir*)malloc(sizeof(t_redir));
 		redir->type = (*token)->type;
 		redir->file = (*token)->next->value;
-		if (newnode->redirections == NULL)
+		redir->next = NULL;
+		if (newnode->redirs == NULL)
 		{
-			newnode->redirections = redir;
+			newnode->redirs = redir;
+			newnode->rootredir = redir;
 		}
 		else
-			newnode->redirections->next = redir;
+		{	
+			newnode->redirs->next = redir;
+			newnode->redirs = newnode->redirs->next;
+		}
 		(*token) = (*token)->next;
 		return;
 	}
@@ -97,6 +102,12 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 		}
 		else
 		{
+			if (newnode == NULL)
+			{
+				newnode = createnode();
+				newnode->type = 1;
+				addnode(tree, newnode);
+			}
 			copyarray(&args, nowords, (*token)->value);
 			newnode->args = args;
 			nowords++;		

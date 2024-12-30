@@ -1,54 +1,39 @@
 #include "minishell.h"
 
-/*void    traverse_tree(t_node** root, char** envp)
+int	execute(t_node *node, char **envp)
 {
-    if ((*root)->left)
-    {
-        printf("Executing left\n");
-        if ((*root)->left->redirections != NULL)
-            printf("Redirection: %s\n", (*root)->left->redirections->file);
-        if ((*root)->left->args){
-            char **c = (*root)->left->args;
-            if (access(c[1], F_OK) != -1)
-            	printf("File exists");
-            
-        }
-    }
-    if ((*root)->right)
-    {
-        if ((*root)->right->type == 0)
-        {
-            printf("Executing right: PIPE\n ");
-            (*root) = (*root)->right;
-            traverse_tree(root, envp);
-        }
-        else
-        {
-            printf("Executing right\n ");
-            if ((*root)->right->redirections != NULL)
-                printf("Redirection: %s\n", (*root)->right->redirections->file);
-            printf("args: ");
-            char **c = (*root)->right->args;
-            while (*c)
-            {
-                printf("%s ", (*c));
-                (c)++;
-            }
-            printf("\n");
-        }
-    }
-}*/
+	char	**cmd;
+	int		input;
 
-int	execute(t_node *node, int input, int output, char **envp)
+	if (node->type == 0)
+	{
+		cmd = node->left->args;
+		if (checkif_builtin(cmd[0]) == 0)
+		{
+			if (node->left->rootredir != NULL && node->left->rootredir->type == TOKEN_REDIR_IN)
+			{
+				input = open(node->left->rootredir->file, O_RDONLY, 0644);
+				node->left->redirs = node->left->rootredir->next;
+			}
+			else
+			{
+				node->left->redirs = node->left->rootredir;
+				input = STDIN_FILENO;
+			}
+			exe_multi(node, input, STDOUT_FILENO, envp);
+		}
+	}
+	return (0);
+}
+
+int	exe_multi(t_node *node, int input, int output, char **envp)
 {
 	pid_t	pid;
 	pid_t	child_pid;
 	int		pipefd[2];
 	int		puts[2];
 
-	if (!node)
-		return (-1);
-	if (node->right != NULL)
+	if (node->right != NULL || node->left->redirs != NULL)
 	{
 		if (pipe(pipefd) == -1)
 			return (-1);
@@ -64,7 +49,7 @@ int	execute(t_node *node, int input, int output, char **envp)
 	if (node->right != NULL)
 	{
 		close(pipefd[1]);
-		child_pid = execute(node->right, pipefd[0], STDOUT_FILENO, envp);
+		child_pid = exe_multi(node->right, pipefd[0], STDOUT_FILENO, envp);
 		waitpid(pid, NULL, 0);
 		waitpid(child_pid, NULL, 0);
 	}
@@ -96,47 +81,66 @@ void	executechild(t_node *node, int pipefd[2], int puts[2], char **envp)
 		dup2(pipefd[1], STDOUT_FILENO);
 		close(pipefd[1]);
 	}
-	else if (puts[1] != STDOUT_FILENO)
+	else if (node->left->redirs != NULL && node->left->redirs->type == TOKEN_REDIR_OUT)
 	{
-		dup2(puts[1], STDOUT_FILENO);
-		close(puts[1]);
-	}
-	if (node->left != NULL)
+		int	filefd = get_redir(node->left->redirs);
+		dup2(filefd, STDOUT_FILENO);
+		close(filefd);
 		c = node->left->args;
-	else
-		c = node->args;
+	}
 	if (execve(c[0], c, envp) == -1)
 		printf("%s\n Error", c[0]);
 }
+//cat notes.txt > a.txt > b.txt > c.txt
+int	get_redir(t_redir *redir)
+{
+	int	filefd;
 
-public void checkif_builtin(char* cmd)
+	filefd = -1;
+	if (redir != NULL && redir->type == TOKEN_REDIR_OUT)
+	{
+		filefd = open(redir->file, O_WRONLY | O_CREAT, 0644);
+		if (redir->next == NULL)
 		{
-			if (ft_strcmp(cmd, "echo") == 1)
-				return (printf("%s", "run echo"), 1);
-			if (ft_strcmp(cmd, "cd") == 1)
-				return (printf("%s", "run cd"), 1);
-			if (ft_strcmp(cmd, "pwd") == 1)
-				return (printf("%s", "run pwd");
-			if (ft_strcmp(cmd, "export") == 1)
-				return (printf("%s", "run export"), 1);
-			if (ft_strcmp(cmd, "unset") == 1)
-				return (printf("%s", "run unset"), 1);
-			if (ft_strcmp(cmd, "env") == 1)
-				return (printf("%s", "run env"), 1);
-			if (ft_strcmp(cmd, "exit") == 1)
-				return (printf("%s", "run exit"), 1);
-			return (0);
+			return (filefd);
 		}
-
-		public int ft_strcmp(char* str1, char* str2)
+		else
 		{
-			int i;
-
-			i = 0;
-			while (str1[i] != '\0')
-			{
-				if (str1[i] != str2[i] || str2[i] == '\0')
-					return (-1);
-			}
-			return (1);
+			return (get_redir(redir->next));
 		}
+	}
+	return (filefd);
+}
+
+int checkif_builtin(char* cmd)
+{
+	if (ft_strcmp(cmd, "echo") == 1)
+		return (printf("%s\n", "run echo"), 1);
+	if (ft_strcmp(cmd, "cd") == 1)
+		return (printf("%s\n", "run cd"), 1);
+	if (ft_strcmp(cmd, "pwd") == 1)
+		return (get_pwd(), 1);
+	if (ft_strcmp(cmd, "export") == 1)
+		return (printf("%s\n", "run export"), 1);
+	if (ft_strcmp(cmd, "unset") == 1)
+		return (printf("%s\n", "run unset"), 1);
+	if (ft_strcmp(cmd, "env") == 1)
+		return (printf("%s\n", "run env"), 1);
+	if (ft_strcmp(cmd, "exit") == 1)
+		return (printf("%s\n", "run exit"), 1);
+	return (0);
+}
+
+int ft_strcmp(char* str1, char* str2)
+{
+	int i;
+
+	i = 0;
+	while (str1[i] != '\0')
+	{
+		if (str1[i] != str2[i] || str2[i] == '\0')
+			return (-1);
+		i++;
+	}
+	return (1);
+}

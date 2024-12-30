@@ -40,6 +40,8 @@
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
+# include <stdio.h>
+#include <fcntl.h>
 # include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -69,7 +71,8 @@ typedef struct s_node
 	t_node_type      type;
 	char** args;         // Command and its args
 	int             argc;
-	t_redir* redirections;  // List of redirections for this command
+	t_redir* redirs;  // List of redirections for this command
+	t_redir* rootredir;
 	struct s_node* left;
 	struct s_node* right;
 }				t_node;
@@ -93,7 +96,13 @@ void printTree(t_node* root);
 void freetree(t_node** tree);
 void    traverse_tree(t_node** root, char** envp);
 void	get_pwd();
-int execute(t_node *node, int input, int output, char** envp);
+int	execute(t_node *node, char **envp);
+int	exe_single(t_node *node, char **envp);
+int	exe_multi(t_node *node, int input, int output, char **envp);
 void executechild(t_node *node, int pipefd[2], int puts[2], char** envp);
 void	closeputs(int input, int output);
+int checkif_builtin(char* cmd);
+int ft_strcmp(char* str1, char* str2);
+int	get_redir(t_redir *redir);
+
 #endif

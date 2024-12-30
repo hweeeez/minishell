@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include "minishell.h"
 #include "tokenizer.h"
-	//cc -g -lreadline main.c libft.c llist_utils.c string_utils.c token_utils.c tokenizer.c createtree.c ft_handle_direct_path.c ft_path.c treehelper.c traversetree.c -lm
+	//cc -g -lreadline main.c libft.c llist_utils.c string_utils.c token_utils.c tokenizer.c createtree.c ft_handle_direct_path.c ft_path.c treehelper.c traversetree.c singlecommand.c -lm
 void handle_signal(int sig)
 {
 	rl_replace_line("", 0);
@@ -66,10 +66,10 @@ int	main(int argc, char** argv, char** envp)
     		root = tree;
 			inittree(&tree, current, envp);
 			tree = root;
-			cleantree(&(tree));
-			tree = root;
+			//cleantree(&(tree));
+			//tree = root;
 			//traverse_tree(&root, envp);
-			execute(root, STDIN_FILENO, STDOUT_FILENO, envp);
+			execute(root, envp);
 		 	//printTree(root);
 			/*while (current)
 			{
