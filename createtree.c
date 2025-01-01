@@ -51,7 +51,6 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 		nowords = 0;
 		args = NULL;
 	}
-	//make rootredir static redir variable
 	if ((*token)->type == TOKEN_REDIR_IN || (*token)->type == TOKEN_REDIR_OUT || (*token)->type == TOKEN_APPEND) // < or > or >>
 	{
 		//add redir to command node
@@ -95,9 +94,11 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 				newnode = createnode();
 				newnode->type = 1;
 				addnode(tree, newnode);
+				args = NULL;
+				nowords = 0;										
 			}
-			args = NULL;
-			nowords = 0;
+			else
+				word = (*token)->value;
 			copyarray(&args, nowords, word);
 			newnode->args = args;
 			nowords++;
@@ -129,7 +130,7 @@ void copyarray(char ***tocopy, int size, char* toadd)
 		while ((*tocopy)[i]!= NULL)
 		{
 			temp[i]= ft_strdup((*tocopy)[i]);
-			free(*tocopy[i]);
+			free((*tocopy)[i]);
 			i++;
 		}
 		free(*tocopy);
@@ -160,14 +161,6 @@ void	addnode(t_node** currentnode, t_node* newnode)
 				(*currentnode)->right = newnode;
 				newnode->prev = (*currentnode);
 				(*currentnode) = newnode;
-			}
-			else
-			{
-				(*currentnode)->right = createnode();
-				(*currentnode)->right->prev = (*currentnode);
-				(*currentnode)->right->left = newnode;
-				newnode->prev = (*currentnode)->right;
-				(*currentnode) = (*currentnode)->right;
 			}
 		}
 	}
