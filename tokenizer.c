@@ -32,13 +32,13 @@ static char *handle_quotes(t_tokenizer *tok)
     }
     else
     {
-        len = tok->position - start + 1;  // Include closing quote
+        len = tok->position - start - 1;  // Include closing quote
         tok->position++;  // Skip closing quote
     }
     value = (char *)malloc(len + 1);
     if (!value)
         return NULL;
-    ft_strlcpy(value, tok->input + start, len + 1);
+    ft_strlcpy(value, tok->input + start + 1, len + 1);
     return value;
 }
 

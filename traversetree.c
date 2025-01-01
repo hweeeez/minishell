@@ -12,6 +12,7 @@ int	execute(t_node *node, char **envp)
 		{
 			if (node->left->rootredir != NULL && node->left->rootredir->type == TOKEN_REDIR_IN)
 			{
+				//need to account for multiple redir in
 				input = open(node->left->rootredir->file, O_RDONLY, 0644);
 				node->left->redirs = node->left->rootredir->next;
 			}
@@ -20,13 +21,13 @@ int	execute(t_node *node, char **envp)
 				node->left->redirs = node->left->rootredir;
 				input = STDIN_FILENO;
 			}
-			exe_multi(node, input, STDOUT_FILENO, envp);
+			exe_commands(node, input, STDOUT_FILENO, envp);
 		}
 	}
 	return (0);
 }
 
-int	exe_multi(t_node *node, int input, int output, char **envp)
+int	exe_commands(t_node *node, int input, int output, char **envp)
 {
 	pid_t	pid;
 	pid_t	child_pid;
@@ -49,7 +50,7 @@ int	exe_multi(t_node *node, int input, int output, char **envp)
 	if (node->right != NULL)
 	{
 		close(pipefd[1]);
-		child_pid = exe_multi(node->right, pipefd[0], STDOUT_FILENO, envp);
+		child_pid = exe_commands(node->right, pipefd[0], STDOUT_FILENO, envp);
 		waitpid(pid, NULL, 0);
 		waitpid(child_pid, NULL, 0);
 	}
@@ -81,13 +82,13 @@ void	executechild(t_node *node, int pipefd[2], int puts[2], char **envp)
 		dup2(pipefd[1], STDOUT_FILENO);
 		close(pipefd[1]);
 	}
-	else if (node->left->redirs != NULL && node->left->redirs->type == TOKEN_REDIR_OUT)
+	else if (node->left->redirs != NULL)
 	{
 		int	filefd = get_redir(node->left->redirs);
 		dup2(filefd, STDOUT_FILENO);
 		close(filefd);
-		c = node->left->args;
 	}
+	c = node->left->args;
 	if (execve(c[0], c, envp) == -1)
 		printf("%s\n Error", c[0]);
 }
@@ -97,17 +98,16 @@ int	get_redir(t_redir *redir)
 	int	filefd;
 
 	filefd = -1;
-	if (redir != NULL && redir->type == TOKEN_REDIR_OUT)
+	if (redir != NULL)
 	{
-		filefd = open(redir->file, O_WRONLY | O_CREAT, 0644);
+		if (redir->type == TOKEN_REDIR_OUT)
+			filefd = open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		else if (redir->type == TOKEN_APPEND)
+			filefd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (redir->next == NULL)
-		{
 			return (filefd);
-		}
 		else
-		{
 			return (get_redir(redir->next));
-		}
 	}
 	return (filefd);
 }
@@ -115,7 +115,7 @@ int	get_redir(t_redir *redir)
 int checkif_builtin(char* cmd)
 {
 	if (ft_strcmp(cmd, "echo") == 1)
-		return (printf("%s\n", "run echo"), 1);
+		return ((printf("%s\n", "run echo")), 1);
 	if (ft_strcmp(cmd, "cd") == 1)
 		return (printf("%s\n", "run cd"), 1);
 	if (ft_strcmp(cmd, "pwd") == 1)
@@ -129,18 +129,4 @@ int checkif_builtin(char* cmd)
 	if (ft_strcmp(cmd, "exit") == 1)
 		return (printf("%s\n", "run exit"), 1);
 	return (0);
-}
-
-int ft_strcmp(char* str1, char* str2)
-{
-	int i;
-
-	i = 0;
-	while (str1[i] != '\0')
-	{
-		if (str1[i] != str2[i] || str2[i] == '\0')
-			return (-1);
-		i++;
-	}
-	return (1);
 }

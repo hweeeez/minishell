@@ -9,6 +9,7 @@ static void	printarray(char **args){
 	i++;
  }
 }
+
 t_node*	createnode()
 {
 	t_node*	node;
@@ -16,7 +17,7 @@ t_node*	createnode()
 	node = (t_node*)malloc(sizeof(t_node));
     node->left = NULL;
     node->right = NULL;
-    node->type = 0;
+    node->type = TOKEN_WORD;
     node->prev = NULL;
     node->redirs = NULL;
     node->args = NULL;
@@ -50,7 +51,8 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 		nowords = 0;
 		args = NULL;
 	}
-	if ((*token)->type == 2 || (*token)->type == 3) // < or >
+	//make rootredir static redir variable
+	if ((*token)->type == TOKEN_REDIR_IN || (*token)->type == TOKEN_REDIR_OUT || (*token)->type == TOKEN_APPEND) // < or > or >>
 	{
 		//add redir to command node
 		if (newnode == NULL)
@@ -78,7 +80,7 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 	}
 	if ((*token)->type == TOKEN_PIPE) // |
 	{
-		//create redir
+		//make newnode null first then makenewnode
 		newnode = createnode();
 		addnode(tree, newnode);
 	}
@@ -168,11 +170,6 @@ void	addnode(t_node** currentnode, t_node* newnode)
 				(*currentnode) = (*currentnode)->right;
 			}
 		}
-		/*if (newnode->type == 0)
-		{
-			(*currentnode) = newnode;
-			(*currentnode)->prev = prevnode;
-		}*/
 	}
 	else
 	{
@@ -199,52 +196,10 @@ void	cleantree(t_node** node)
 		{
 			free(*node);
 			(*node) = NULL;
-			//printf("%p\n", leftnode);
-			//if (prevnode->right == *node)
 		    prevnode->right = leftnode;                   
 		    if (leftnode)
 		            leftnode->prev = prevnode;
-			//printf("%p\n", prevnode->right);
-			//printf("%d\n", prevnode->right->type);
-
-			/*if ((*clean) == NULL)
-			{
-				(*clean) = (*node);
-				(*clean)->next = NULL;
-			}	
-			else
-			{
-				(*clean)->next = (*node);
-				(*clean) = (*clean)->next;
-				(*clean)->next = NULL;
-			}	*/	/*printf("dsd\n");
-		printf("perevnode right: %p\n", prevnode->right);
-		printf("prevnode: %p\n", prevnode);
-		printf("left node: %p type: %d\n", leftnode, leftnode->type);
-			printTree(prevnode);
-			printf("adsd\n");
-		printf("perevnode right: %p\n", prevnode->right);
-		printf("prevnode: %p\n", prevnode);*/
-        }
-        /*
-        cat a|cat b|cat c
-                  0
-            1             0
-                       1       0 
-                             1  NULL
-                             
-                             
-        else if ((*node)->left)
-        {
-            t_node* leftChild = (*node)->left;
-            leftChild->prev = NULL;
-            *node = leftChild;
-        }
-        else
-        {
-        	free(*node);
-        	*node = NULL;
-        }*/
+		}
 	}
 
 }
@@ -330,42 +285,3 @@ void printTree(t_node* root) {
         level++;
     }
 }
-
-/*void cleantree(t_node** node)
-{
-    if (*node == NULL) {
-        return; // Base case: nothing to clean if the node is NULL
-    }
-
-    t_node* prevnode = (*node)->prev;
-
-    if ((*node)->type == 0) {  // Check if node type is 0 (or any specific type condition)
-        if ((*node)->right == NULL) {
-            // If the node has no right child, we link the parent to the left child
-            if ((*node)->prev != NULL) {
-                (*node)->prev->right = (*node)->left;
-            }
-
-            // If the left child exists, set its prev pointer to the parent
-            if ((*node)->left != NULL) {
-                (*node)->left->prev = (*node)->prev;
-            }
-
-            // Free the current node
-            free(*node);
-            
-            // Move to the previous node
-            *node = prevnode;
-
-            // If the previous node's right child is not NULL, update its prev pointer
-            if (*node != NULL && (*node)->right != NULL) {
-                (*node)->right->prev = *node;
-            }
-        } else {
-            // If the node has a right child, move to the right child
-            *node = (*node)->right;
-            cleantree(node); // Recursively clean the right subtree
-        }
-    }
-}
-*/
