@@ -97,7 +97,7 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 				args = NULL;
 				nowords = 0;										
 			}
-			else
+			else if (args != NULL)
 				word = (*token)->value;
 			copyarray(&args, nowords, word);
 			newnode->args = args;

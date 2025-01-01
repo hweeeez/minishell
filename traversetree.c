@@ -89,8 +89,9 @@ void	executechild(t_node *node, int pipefd[2], int puts[2], char **envp)
 		close(filefd);
 	}
 	c = node->left->args;
+	int i = 0;
 	if (execve(c[0], c, envp) == -1)
-		printf("%s\n Error", c[0]);
+		printf("Error%s\n", c[0]);
 }
 //cat notes.txt > a.txt > b.txt > c.txt
 int	get_redir(t_redir *redir)
