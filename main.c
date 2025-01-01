@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include "minishell.h"
 #include "tokenizer.h"
-	//cc -g -lreadline main.c libft.c llist_utils.c string_utils.c token_utils.c tokenizer.c createtree.c ft_handle_direct_path.c ft_path.c treehelper.c traversetree.c singlecommand.c -lm
+	//cc -g -lreadline main.c libft.c llist_utils.c string_utils.c token_utils.c tokenizer.c createtree.c ft_handle_direct_path.c ft_path.c treehelper.c traversetree.c -lm
 void handle_signal(int sig)
 {
 	rl_replace_line("", 0);

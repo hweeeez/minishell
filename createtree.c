@@ -17,7 +17,7 @@ t_node*	createnode()
 	node = (t_node*)malloc(sizeof(t_node));
     node->left = NULL;
     node->right = NULL;
-    node->type = TOKEN_WORD;
+    node->type = NODE_PIPE;
     node->prev = NULL;
     node->redirs = NULL;
     node->args = NULL;

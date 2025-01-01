@@ -98,7 +98,7 @@ void    traverse_tree(t_node** root, char** envp);
 void	get_pwd();
 int	execute(t_node *node, char **envp);
 int	exe_single(t_node *node, char **envp);
-int	exe_multi(t_node *node, int input, int output, char **envp);
+int	exe_commands(t_node *node, int input, int output, char **envp);
 void executechild(t_node *node, int pipefd[2], int puts[2], char** envp);
 void	closeputs(int input, int output);
 int checkif_builtin(char* cmd);
