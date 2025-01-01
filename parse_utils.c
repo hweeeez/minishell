@@ -30,3 +30,10 @@ void makeredir(t_node **newnode, t_node* tree, t_token **token)
     }
     (*token) = (*token)->next;
 }
+
+void    addarg(char ***args, int *nowords, char *add, t_node **node)
+{
+    copyarray(&args, nowords, add);
+    (*node)->args = args;
+    nowords++;
+}
