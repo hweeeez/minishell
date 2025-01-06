@@ -51,7 +51,7 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 		nowords = 0;
 		args = NULL;
 	}
-	if ((*token)->type == TOKEN_REDIR_IN || (*token)->type == TOKEN_REDIR_OUT || (*token)->type == TOKEN_APPEND) // < or > or >>
+	if ((*token)->type == TOKEN_REDIR_IN || (*token)->type == TOKEN_REDIR_OUT || (*token)->type == TOKEN_APPEND || (*token)->type == TOKEN_HEREDOC) // < or > or >>
 	{
 		//add redir to command node
 		if (newnode == NULL)

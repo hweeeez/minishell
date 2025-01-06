@@ -10,11 +10,16 @@ int	execute(t_node *node, char **envp)
 		cmd = node->left->args;
 		if (checkif_builtin(cmd[0]) == 0)
 		{
-			if (node->left->rootredir != NULL && node->left->rootredir->type == TOKEN_REDIR_IN)
+			if (node->left->rootredir != NULL)
 			{
 				//need to account for multiple redir in
-				input = open(node->left->rootredir->file, O_RDONLY, 0644);
-				node->left->redirs = node->left->rootredir->next;
+				if (node->left->rootredir->type == TOKEN_REDIR_IN)
+				{
+					input = get_redir(node->left->rootredir);
+					node->left->redirs = node->left->rootredir->next;
+				}
+				else if (node->left->rootredir->type == TOKEN_HEREDOC)
+					return (2);
 			}
 			else
 			{
@@ -89,7 +94,6 @@ void	executechild(t_node *node, int pipefd[2], int puts[2], char **envp)
 		close(filefd);
 	}
 	c = node->left->args;
-	int i = 0;
 	if (execve(c[0], c, envp) == -1)
 		printf("Error%s\n", c[0]);
 }
@@ -105,6 +109,8 @@ int	get_redir(t_redir *redir)
 			filefd = open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		else if (redir->type == TOKEN_APPEND)
 			filefd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		else if (redir->type == TOKEN_REDIR_IN)
+			filefd = open(redir->file, O_RDONLY, 0644);
 		if (redir->next == NULL)
 			return (filefd);
 		else

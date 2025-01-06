@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "minishell.h": "c",
-        "tokenizer.h": "c"
+        "tokenizer.h": "c",
+        "stdio.h": "c"
     }
 }

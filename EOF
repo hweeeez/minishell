@@ -1,0 +1,11 @@
+cat << EOF
+> adasd
+> dfgdfg
+> nghng
+> EOF
+adasd
+dfgdfg
+nghng
+
+read stdin to temp file
+APPEND WR CREAT

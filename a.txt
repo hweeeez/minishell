@@ -1,0 +1,21 @@
+int	execute(t_node *node, char **envp)
+	int		input;
+int	exe_commands(t_node *node, int input, int output, char **envp)
+	int		pipefd[2];
+	int		puts[2];
+void	closeputs(int input, int output)
+void	executechild(t_node *node, int pipefd[2], int puts[2], char **envp)
+		int	filefd = get_redir(node->left->redirs);
+	int i = 0;
+		printf("Error%s\n", c[0]);
+int	get_redir(t_redir *redir)
+	int	filefd;
+int checkif_builtin(char* cmd)
+		return ((printf("%s\n", "run echo")), 1);
+		return (printf("%s\n", "run cd"), 1);
+		return (printf("%s\n", "run export"), 1);
+		return (printf("%s\n", "run unset"), 1);
+		return (printf("%s\n", "run env"), 1);
+		return (printf("%s\n", "run exit"), 1);
+int	ft_strcmp(char *str1, char *str2)
+	int	i;

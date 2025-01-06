@@ -104,5 +104,6 @@ void	closeputs(int input, int output);
 int checkif_builtin(char* cmd);
 int ft_strcmp(char* str1, char* str2);
 int	get_redir(t_redir *redir);
+int ft_heredoc(t_node *node, char **envp);
 
 #endif
