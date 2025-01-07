@@ -46,4 +46,4 @@ minishell
 - [x] norm
 
 ###Token:
-- [] norm
+- [x] norm

@@ -6,31 +6,33 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:58:32 by myuen             #+#    #+#             */
-/*   Updated: 2024/12/18 19:48:30 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/07 19:42:41 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void init_tokenizer(t_tokenizer *tok, const char *input)
+void	init_tokenizer(t_tokenizer *tok, const char *input)
 {
-    tok->input = input;
-    tok->position = 0;
-    tok->quote = 0;
-    tok->error = 0;
-}
-int ms_is_whitespace(char c)
-{
-    return (c == ' ' || c == '\t' || c == '\n');
+	tok->input = input;
+	tok->position = 0;
+	tok->quote = 0;
+	tok->error = 0;
 }
 
-int ms_is_special(char c)
+int	ms_is_whitespace(char c)
 {
-    return (c == '|' || c == '<' || c == '>');
+	return (c == ' ' || c == '\t' || c == '\n');
 }
 
-void skip_whitespace(t_tokenizer *tok)
+int	ms_is_special(char c)
 {
-    while (tok->input[tok->position] && ms_is_whitespace(tok->input[tok->position]))
-        tok->position++;
+	return (c == '|' || c == '<' || c == '>');
+}
+
+void	skip_whitespace(t_tokenizer *tok)
+{
+	while (tok->input[tok->position] && \
+				ms_is_whitespace(tok->input[tok->position]))
+		tok->position++;
 }

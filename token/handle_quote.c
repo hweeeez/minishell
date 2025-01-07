@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:53:25 by myuen             #+#    #+#             */
-/*   Updated: 2024/12/18 20:33:18 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/07 20:01:05 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ static char	*allocate_quote(t_tokenizer *tok, size_t start, size_t len)
 {
 	char	*value;
 
-	value = (char *)malloc(len + 1);
+	value = (char *)malloc(len + 1 - 2);
 	if (!value)
 		return (NULL);
-	ft_strlcpy(value, tok->input + start, len + 1);
+	ft_strlcpy(value, tok->input + start + 1, len - 1);
 	return (value);
 }
 
