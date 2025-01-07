@@ -79,7 +79,6 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 	}
 	if ((*token)->type == TOKEN_PIPE) // |
 	{
-		//make newnode null first then makenewnode
 		newnode = createnode();
 		addnode(tree, newnode);
 	}

@@ -7,6 +7,8 @@ hui-lim@c2r5s2:~/Documents/minishell$ cat hello
 a b c d
 hui-lim@c2r5s2:~/Documents/minishell$ >hello2 echo a
 
+if CTRL C when child is active - parent executes sigint handler, then waitpid finishes, then child returns to parent
+so parent should ignore the sigint, and child should exit
 
 do not need to start with commands,
 redirect will redirect the latest file from left to right

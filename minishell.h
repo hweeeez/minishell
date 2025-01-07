@@ -34,6 +34,7 @@
 # define EXIT_NOT_FOUND 127
 
 # define FATAL_ERR_SIG 128
+# define HEREDOC_FILE "hd.txt"
 
 # include <sys/types.h>
 #include <sys/wait.h>

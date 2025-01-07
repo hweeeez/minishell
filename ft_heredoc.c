@@ -1,19 +1,10 @@
 #include "minishell.h"
 
-//read line first, if line contains token heredoc
+int received_sigint = 0;
 
-static pid_t    exe_hd(t_node *node, int filefd, char **envp)
+void    exit_hd(int sig)
 {
-    int pid;
-    pid = fork();
-    if (pid == 0)
-    {
-        dup2(filefd, STDIN_FILENO);
-        close(filefd);
-        if (execve(node->args[0], node->args, envp) == -1)
-            printf("Error\n");
-    }
-    return (pid);
+    received_sigint = 1;
 }
 
 int ft_heredoc(t_node *node, char **envp)
@@ -21,15 +12,21 @@ int ft_heredoc(t_node *node, char **envp)
     pid_t   childpid;
     char    *s;
     int     filefd;
+    t_redir  *redirs;
+	struct	sigaction quit;
+	struct	sigaction sig_int;
 
-    //need to figure out how to use exe_command to accomodate for redirs also
-    filefd = open("hd.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    // if SIGINT exit without executing, if EOF, print eof error msg then execute
+    sig_int.sa_handler = exit_hd;
+    sigaction(SIGINT, &sig_int, NULL);
+    redirs = node->left->rootredir;
+    filefd = open(HEREDOC_FILE, O_WRONLY | O_CREAT | O_TRUNC, 0644);
     while (1)
     {
         s = readline("> ");
         if (s != NULL)
         {
-            if (ft_strcmp(s, node->redirs->file) == 1)
+            if (ft_strcmp(s, redirs->file) == 1 || received_sigint == 1)
             {
                 free(s);
                 close(filefd);
@@ -40,13 +37,11 @@ int ft_heredoc(t_node *node, char **envp)
         }
         free(s);
     }   
-    filefd = open("hd.txt", O_RDONLY, 0644);
-    childpid = exe_hd(node, filefd, envp);
-    node->redirs = node->redirs->next;
-    //cannot pass in this node, must be root node
-    //exe_commands(node, filefd, STDOUT_FILENO, envp);
+    filefd = open(HEREDOC_FILE, O_RDONLY, 0644);
+    redirs = redirs->next;
+    exe_commands(node, filefd, STDOUT_FILENO, envp);
     waitpid(childpid, NULL, 0);
     close (filefd);
-    unlink("hd.txt");
+    unlink(HEREDOC_FILE);
     return (1);
 }

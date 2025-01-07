@@ -71,7 +71,7 @@ int	main(int argc, char** argv, char** envp)
 			//traverse_tree(&root, envp);
 			if (execute(root, envp) == 2)
 			{
-				ft_heredoc(root->left, envp);
+				ft_heredoc(root, envp);
 			}
 		 	//printTree(root);
 		}

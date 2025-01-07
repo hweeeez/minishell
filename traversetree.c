@@ -32,15 +32,29 @@ int	execute(t_node *node, char **envp)
 	return (0);
 }
 
+static void quitchild(int sig)
+{
+	exit(0);
+}
+
 int	exe_commands(t_node *node, int input, int output, char **envp)
 {
 	pid_t	pid;
 	pid_t	child_pid;
 	int		pipefd[2];
 	int		puts[2];
+	int		status;
+	struct	sigaction ign;
+	struct	sigaction quit;
+	struct	sigaction sig_int;
+	static int		flag = 0;
 
+	ign.sa_handler = SIG_IGN;
+	sig_int.sa_handler = quitchild;
+	child_pid = 0;
 	if (node->right != NULL || node->left->redirs != NULL)
 	{
+		flag = 0;
 		if (pipe(pipefd) == -1)
 			return (-1);
 	}
@@ -50,17 +64,38 @@ int	exe_commands(t_node *node, int input, int output, char **envp)
 	if (pid == -1)
 		return (-1);
 	if (pid == 0)
+	{
+		sigaction(SIGQUIT, &quit, NULL);
+		sigaction(SIGINT, &sig_int, NULL);
 		executechild(node, pipefd, puts, envp);
+	}
+	else if (pid > 0)
+	{
+		sigaction(SIGINT, &ign, NULL);
+	}
 	closeputs(input, output);
 	if (node->right != NULL)
 	{
 		close(pipefd[1]);
 		child_pid = exe_commands(node->right, pipefd[0], STDOUT_FILENO, envp);
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &status, 0);
 		waitpid(child_pid, NULL, 0);
 	}
 	else
-		waitpid(pid, NULL, 0);
+	{
+		waitpid(pid, &status, 0);
+	}
+	//set a flag to check whether message has been printed
+	if (WIFSIGNALED(status))
+	{
+		if (flag == 0)
+		{
+			flag = 1;
+			if (WCOREDUMP(status))
+				write(1, "Quit (core dumped)", 18);
+			write (1, "\n", 1);
+		}
+	}
 	return (pid);
 }
 
