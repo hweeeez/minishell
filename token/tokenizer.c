@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:58:32 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/07 20:04:43 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/08 18:22:22 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static t_token	*handle_word_token(t_tokenizer *tok)
 	while (tok->input[tok->position] && \
 		!ms_is_whitespace(tok->input[tok->position]) && \
 		!ms_is_special(tok->input[tok->position]) && \
-		tok->input[tok->position] != '\'' && \
-		tok->input[tok->position] != '\"')
+		tok->input[tok->position] != '\'' && tok->input[tok->position] != '\"')
 		tok->position++;
 	len = tok->position - start;
 	value = (char *)malloc(len + 1);
@@ -81,7 +80,7 @@ t_token	*tokenize(const char *input)
 	{
 		free_token_list(head);
 		if (tok.error)
-			printf("Error - unclosed quotes\n> pretend there is shebang\n");
+			printf("Syntax Error - unclosed quotes\n");
 		return (NULL);
 	}
 	return (head);
