@@ -1,3 +1,2 @@
-dgdg hjg
-ggdfgd afkanfonsofnod ghfoiho
-this is a scam
+// cc -g -lreadline main.c libft.c llist_utils.c string_utils.c token_utils.c tokenizer.c createtree.c ft_handle_direct_path.c ft_path.c treehelper.c traversetree.c ft_heredoc.c -lm
+				if (ft_heredoc(root, envp) > 0)

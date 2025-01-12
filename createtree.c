@@ -19,6 +19,7 @@ t_node*	createnode()
     node->right = NULL;
     node->type = NODE_PIPE;
     node->prev = NULL;
+	node->rootredir = NULL;
     node->redirs = NULL;
     node->args = NULL;
     node->argc = 0;
@@ -99,6 +100,7 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 			else if (args != NULL)
 				word = (*token)->value;
 			copyarray(&args, nowords, word);
+			free(word);
 			newnode->args = args;
 			nowords++;
 		}

@@ -13,18 +13,18 @@
 #include <stdio.h>
 #include "minishell.h"
 #include "tokenizer.h"
-	//cc -g -lreadline main.c libft.c llist_utils.c string_utils.c token_utils.c tokenizer.c createtree.c ft_handle_direct_path.c ft_path.c treehelper.c traversetree.c ft_heredoc.c -lm
+// cc -g -lreadline main.c libft.c llist_utils.c string_utils.c token_utils.c tokenizer.c createtree.c ft_handle_direct_path.c ft_path.c treehelper.c traversetree.c ft_heredoc.c -lm
 void handle_signal(int sig)
 {
 	rl_replace_line("", 0);
-	write (1, "\n", 1);
+	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_redisplay();
 }
 
-void	get_pwd()
+void get_pwd()
 {
-	char*	dir;
+	char *dir;
 	size_t size;
 	char *buf;
 
@@ -32,16 +32,16 @@ void	get_pwd()
 	printf("%s", dir);
 }
 
-int	main(int argc, char** argv, char** envp)
+int main(int argc, char **argv, char **envp)
 {
-	char	*s;
-	struct	sigaction sa;
-	struct	sigaction quit;
+	char *s;
+	struct sigaction sa;
+	struct sigaction quit;
 	t_token *tokens;
-    t_token *current;
-    t_node	*tree;
-    t_node	*root;
-    
+	t_token *current;
+	t_node *tree;
+	t_node *root;
+
 	quit.sa_handler = SIG_IGN;
 	sa.sa_handler = handle_signal;
 	sigemptyset(&sa.sa_mask);
@@ -63,23 +63,26 @@ int	main(int argc, char** argv, char** envp)
 			}
 			current = tokens;
 			tree = createnode();
-    		root = tree;
+			root = tree;
 			inittree(&tree, current, envp);
 			tree = root;
-			//cleantree(&(tree));
-			//tree = root;
-			//traverse_tree(&root, envp);
+			// cleantree(&(tree));
 			if (execute(root, envp) == 2)
 			{
-				ft_heredoc(root, envp);
+				if (ft_heredoc(root, envp) > 0)
+				{
+					sigaction(SIGINT, &sa, NULL);
+					rl_event_hook = NULL;
+				}
 			}
-		 	//printTree(root);
+			freetree(&tree);
+			// printTree(root);
 		}
 		if (s == NULL)
-		{	
+		{
 			rl_clear_history();
 			exit(0);
 		}
 		free(s);
-	}          
-}                
+	}
+}
