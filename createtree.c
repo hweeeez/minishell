@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   createtree.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hui-lim <hui-lim@student.42singapore.      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/14 21:11:13 by hui-lim           #+#    #+#             */
+/*   Updated: 2025/01/14 21:11:16 by hui-lim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static void	printarray(char **args){
+/*static void	printarray(char **args)
+{
  int i = 0;
 
  while (args[i] != NULL)
@@ -9,24 +22,24 @@ static void	printarray(char **args){
 	i++;
  }
 }
-
-t_node*	createnode()
+*/
+t_node*	createnode(void)
 {
-	t_node*	node;
-	
+	t_node	*node;
+
 	node = (t_node*)malloc(sizeof(t_node));
-    node->left = NULL;
-    node->right = NULL;
-    node->type = NODE_PIPE;
-    node->prev = NULL;
+	node->left = NULL;
+	node->right = NULL;
+	node->type = NODE_PIPE;
+	node->prev = NULL;
 	node->rootredir = NULL;
-    node->redirs = NULL;
-    node->args = NULL;
-    node->argc = 0;
-    return node;
+	node->redirs = NULL;
+	node->args = NULL;
+	node->argc = 0;
+	return (node);
 }
 
-void	inittree(t_node** tree, t_token* tokens, char** envp)
+void	inittree(t_node **tree, t_token *tokens, char **envp)
 {
 	t_token* current;
 
@@ -38,13 +51,13 @@ void	inittree(t_node** tree, t_token* tokens, char** envp)
 	}
 }
 
-void	parsetoken(t_token** token, t_node** tree, char** envp)
+void	parsetoken(t_token **token, t_node **tree, char **envp)
 {
-	t_redir* redir;
-	static t_node* newnode = NULL;
-	char* word;
-	static char** args;
-	static int	nowords;
+	t_redir			*redir;
+	static t_node	*newnode = NULL;
+	char			*word;
+	static char		**args;
+	static int		nowords;
 
 	if ((*tree)->left == NULL)
 	{
@@ -52,9 +65,8 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 		nowords = 0;
 		args = NULL;
 	}
-	if ((*token)->type == TOKEN_REDIR_IN || (*token)->type == TOKEN_REDIR_OUT || (*token)->type == TOKEN_APPEND || (*token)->type == TOKEN_HEREDOC) // < or > or >>
+	if ((*token)->type == TOKEN_REDIR_IN || (*token)->type == TOKEN_REDIR_OUT || (*token)->type == TOKEN_APPEND || (*token)->type == TOKEN_HEREDOC)
 	{
-		//add redir to command node
 		if (newnode == NULL)
 		{
 			newnode = createnode();
@@ -78,14 +90,13 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 		(*token) = (*token)->next;
 		return;
 	}
-	if ((*token)->type == TOKEN_PIPE) // |
+	if ((*token)->type == TOKEN_PIPE)
 	{
 		newnode = createnode();
 		addnode(tree, newnode);
 	}
-	if ((*token)->type == 0) // word
+	if ((*token)->type == TOKEN_WORD)
 	{
-		//add command node
 		word = ft_find_cmd_path((*token)->value, &args, envp);
 		if (word != NULL)
 		{
@@ -119,10 +130,10 @@ void	parsetoken(t_token** token, t_node** tree, char** envp)
 	}
 }
 
-void copyarray(char ***tocopy, int size, char* toadd)
+void copyarray(char ***tocopy, int size, char *toadd)
 {
-	char**	temp;
-	int	i;
+	char	**temp;
+	int		i;
 	
 	i = 0;
 	temp = (char**)malloc(sizeof(char*) * (size + 2));
@@ -142,7 +153,7 @@ void copyarray(char ***tocopy, int size, char* toadd)
 }
 
 
-void	addnode(t_node** currentnode, t_node* newnode)
+void	addnode(t_node **currentnode, t_node *newnode)
 {
 	t_node* prevnode;
 
@@ -190,14 +201,13 @@ void	cleantree(t_node** node)
 		{
 			free(*node);
 			(*node) = NULL;
-		    prevnode->right = leftnode;                   
-		    if (leftnode)
-		            leftnode->prev = prevnode;
+			prevnode->right = leftnode;
+			if (leftnode)
+				leftnode->prev = prevnode;
 		}
 	}
-
 }
-
+/*
 static int getTreeHeight(t_node* root) {
     if (root == NULL)
         return 0;
@@ -279,3 +289,4 @@ void printTree(t_node* root) {
         level++;
     }
 }
+*/

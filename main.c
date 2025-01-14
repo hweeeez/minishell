@@ -66,7 +66,6 @@ int main(int argc, char **argv, char **envp)
 			root = tree;
 			inittree(&tree, current, envp);
 			tree = root;
-			// cleantree(&(tree));
 			if (execute(root, envp) == 2)
 			{
 				if (ft_heredoc(root, envp) > 0)

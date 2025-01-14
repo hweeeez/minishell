@@ -1,40 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   traversetree.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hui-lim <hui-lim@student.42singapore.      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/14 21:11:22 by hui-lim           #+#    #+#             */
+/*   Updated: 2025/01/14 21:11:24 by hui-lim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	execute(t_node *node, char **envp)
 {
-	char	**cmd;
 	int		input;
+	t_node	*left;
 
+	left = node->left;
+	input = STDIN_FILENO;
 	if (node->type == 0)
 	{
-		cmd = node->left->args;
-		if (checkif_builtin(cmd[0]) == 0)
+		if (checkif_builtin(left->args[0]) == 0)
 		{
-			if (node->left->rootredir != NULL)
+			if (left->rootredir != NULL)
 			{
-				//need to account for multiple redir in
-				if (node->left->rootredir->type == TOKEN_REDIR_IN)
+				if (left->rootredir->type == TOKEN_REDIR_IN)
 				{
-					input = get_redir(node->left->rootredir);
-					node->left->redirs = node->left->rootredir->next;
+					input = get_redir(left->rootredir);
+					left->redirs = left->rootredir->next;
 				}
 				else if (node->left->rootredir->type == TOKEN_HEREDOC)
 					return (2);
 			}
 			else
-			{
-				node->left->redirs = node->left->rootredir;
-				input = STDIN_FILENO;
-			}
+				left->redirs = node->left->rootredir;
 			exe_commands(node, input, STDOUT_FILENO, envp);
 		}
 	}
 	return (0);
-}
-
-static void quitchild(int sig)
-{
-	exit(0);
 }
 
 int	exe_commands(t_node *node, int input, int output, char **envp)
@@ -44,17 +48,13 @@ int	exe_commands(t_node *node, int input, int output, char **envp)
 	int		pipefd[2];
 	int		puts[2];
 	int		status;
-	struct	sigaction ign;
-	struct	sigaction quit;
-	struct	sigaction sig_int;
+	t_sigs	*sigs;
 	static int		flag = 0;
 
-	ign.sa_handler = SIG_IGN;
-	sig_int.sa_handler = quitchild;
+	init_exesigs(&sigs);
 	child_pid = 0;
 	if (node->right != NULL || node->left->redirs != NULL)
 	{
-		flag = 0;
 		if (pipe(pipefd) == -1)
 			return (-1);
 	}
@@ -65,14 +65,11 @@ int	exe_commands(t_node *node, int input, int output, char **envp)
 		return (-1);
 	if (pid == 0)
 	{
-		sigaction(SIGQUIT, &quit, NULL);
-		sigaction(SIGINT, &sig_int, NULL);
+		do_sigaction(SIGQUIT, SIGINT, sigs);
 		executechild(node, pipefd, puts, envp);
 	}
 	else if (pid > 0)
-	{
-		sigaction(SIGINT, &ign, NULL);
-	}
+		sigaction(SIGINT, &(sigs->ignore), NULL);
 	closeputs(input, output);
 	if (node->right != NULL)
 	{
@@ -82,20 +79,8 @@ int	exe_commands(t_node *node, int input, int output, char **envp)
 		waitpid(child_pid, NULL, 0);
 	}
 	else
-	{
 		waitpid(pid, &status, 0);
-	}
-	//set a flag to check whether message has been printed
-	if (WIFSIGNALED(status))
-	{
-		if (flag == 0)
-		{
-			flag = 1;
-			if (WCOREDUMP(status))
-				write(1, "Quit (core dumped)", 18);
-			write (1, "\n", 1);
-		}
-	}
+	ft_coredump_msg(status, &flag);
 	return (pid);
 }
 
@@ -130,28 +115,10 @@ void	executechild(t_node *node, int pipefd[2], int puts[2], char **envp)
 	}
 	c = node->left->args;
 	if (execve(c[0], c, envp) == -1)
-		printf("Error%s\n", c[0]);
-}
-//cat notes.txt > a.txt > b.txt > c.txt
-int	get_redir(t_redir *redir)
-{
-	int	filefd;
-
-	filefd = -1;
-	if (redir != NULL)
-	{
-		if (redir->type == TOKEN_REDIR_OUT)
-			filefd = open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if (redir->type == TOKEN_APPEND)
-			filefd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		else if (redir->type == TOKEN_REDIR_IN)
-			filefd = open(redir->file, O_RDONLY, 0644);
-		if (redir->next == NULL)
-			return (filefd);
-		else
-			return (get_redir(redir->next));
+	{	
+		printf("Command not found!\n");
+		exit(0);
 	}
-	return (filefd);
 }
 
 int checkif_builtin(char* cmd)
