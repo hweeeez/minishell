@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:53:38 by hui-lim           #+#    #+#             */
-/*   Updated: 2025/01/08 19:50:40 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/16 19:29:28 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,6 @@
 # ifndef PROMPT
 #  define PROMPT "weneedtherapy% "
 # endif
-
-typedef struct s_shell
-{
-	char	**env;
-	int		exit_status;
-	int		interactive;
-}	t_shell;
 
 /*These should be moved elsewhere?*/
 enum	e_cmd_type

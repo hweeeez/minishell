@@ -23,11 +23,12 @@ HEADERS = $(INC_DIR)/minishell.h \
           $(INC_DIR)/heredoc.h \
           $(INC_DIR)/signal.h \
           $(INC_DIR)/error.h \
-		  $(INC_DIR)/expansion.h
+		  $(INC_DIR)/expansion.h \
+		  $(INC_DIR)/env.h
 
 # Directories
 OBJ_DIR = obj
-SRC_DIRS = token parse exec pipe redirect builtins heredoc signal error expansion
+SRC_DIRS = token parse exec pipe redirect builtins heredoc signal error expansion env
 
 # Source files (separate main.c)
 SRCS = $(wildcard $(SRC_DIRS:=/*.c))

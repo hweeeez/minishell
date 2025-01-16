@@ -46,4 +46,15 @@ minishell
 - [x] norm
 
 ###Token:
+- [] add expansion
 - [x] norm
+
+###Env:
+- [x] dup env
+- [x] norm
+
+###Expansion
+- []read from env
+- []expand word
+- []expand quote
+- []norm

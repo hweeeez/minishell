@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   ft_chartostr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 19:26:42 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/16 19:29:51 by myuen            ###   ########.fr       */
+/*   Created: 2025/01/16 20:36:06 by myuen             #+#    #+#             */
+/*   Updated: 2025/01/16 21:11:08 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#include "libft.h"
 
-typedef struct s_shell
+char	*ft_chartostr(char c)
 {
-	char	**env;
-	int		exit_status;
-	int		interactive;
-}	t_shell;
+	char	*str;
 
-t_shell	*init_shell(char **env);
-void	cleanup_shell(t_shell *shell);
-
-#endif
+	str = (char *)malloc(2 * sizeof(char));
+	if (!str)
+		return (NULL);
+	str[0] = c;
+	str[1] = '\0';
+	return (str);
+}

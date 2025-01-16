@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:58:32 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/07 19:42:41 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/16 18:43:49 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ms_is_whitespace(char c)
 
 int	ms_is_special(char c)
 {
-	return (c == '|' || c == '<' || c == '>');
+	return (c == '|' || c == '<' || c == '>' || c == '$');
 }
 
 void	skip_whitespace(t_tokenizer *tok)

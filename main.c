@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:45:38 by hui-lim           #+#    #+#             */
-/*   Updated: 2024/12/18 21:58:27 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/16 19:59:29 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,17 @@ static void	process_input(char *input, t_token **token)
 	free_token_list(*token);
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
 	char	*input;
+	t_shell	*shell;
 	t_token	*token;
 
+	(void)argc;
+	(void)argv;
+	shell = init_shell(env);
+	if (!shell)
+		return (1);
 	if (setup_signals() == 1)
 		return (1);
 	while (1)
@@ -90,4 +96,5 @@ int	main(void)
 		process_input(input, &token);
 		free(input);
 	}
+	cleanup_shell(shell);
 }

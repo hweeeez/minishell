@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 19:26:42 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/16 19:29:51 by myuen            ###   ########.fr       */
+/*   Created: 2024/06/01 18:33:21 by myuen             #+#    #+#             */
+/*   Updated: 2025/01/16 20:58:31 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#include "libft.h"
 
-typedef struct s_shell
+char	*ft_strndup(const char *s, unsigned int n)
 {
-	char	**env;
-	int		exit_status;
-	int		interactive;
-}	t_shell;
+	char	*ret;
 
-t_shell	*init_shell(char **env);
-void	cleanup_shell(t_shell *shell);
-
-#endif
+	ret = (char *)malloc((n + 1) * sizeof(char));
+	if (ret == NULL)
+		return (NULL);
+	ft_strlcpy(ret, s, n + 1);
+	return (ret);
+}

@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:53:25 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/07 20:01:05 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/16 18:38:07 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,12 @@ static char	*allocate_quote(t_tokenizer *tok, size_t start, size_t len)
 char	*handle_quote(t_tokenizer *tok)
 {
 	size_t	start;
-	char	quote;
 	size_t	len;
 
-	quote = tok->input[tok->position];
-	start = find_quote_end(tok, quote);
+	tok->quote = tok->input[tok->position];
+	start = find_quote_end(tok, tok->quote);
 	len = get_quote_length(tok, start);
+	if (tok->error)
+		return (NULL);
 	return (allocate_quote(tok, start, len));
 }
