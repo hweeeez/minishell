@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:58:32 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/07 19:38:04 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/17 21:30:23 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,19 @@ void	free_token_list(t_token *head)
 	{
 		temp = head->next;
 		if (head->value)
+		{
 			free(head->value);
+		}
 		free (head);
 		head = temp;
 	}
+}
+
+t_token	*ft_tokenlast(t_token *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst -> next != NULL)
+		lst = lst -> next;
+	return (lst);
 }

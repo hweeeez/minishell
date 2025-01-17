@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:45:38 by hui-lim           #+#    #+#             */
-/*   Updated: 2025/01/16 19:59:29 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/17 21:39:37 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 /*temp test define and function*/
 #define EXIT_CMD "exit"
 
-static void	print_tokens(t_token *tokens)
+static void	print_tokens(t_token *token_list)
 {
 	t_token	*current;
+	int		i;
 
-	current = tokens;
+	i = 1;
+	current = token_list;
+	printf("%10s\n", "Token(s)");
 	while (current)
 	{
-		printf("[%s], Type: ", current->value);
+		printf("%-2d[%s], Type: ", i++, current->value);
 		if (current->type == TOKEN_WORD)
 			printf("WORD\n");
 		else if (current->type == TOKEN_PIPE)
@@ -35,9 +38,11 @@ static void	print_tokens(t_token *tokens)
 			printf("HEREDOC\n");
 		else if (current->type == TOKEN_APPEND)
 			printf("APPEND\n");
+		else
+			printf("UNEXPECTED\n");
 		current = current->next;
 	}
-	printf("\n");
+	printf("%10s\n", "--End of List--");
 }
 
 /*helper functions*/
@@ -51,25 +56,31 @@ static int	handle_empty_input(char *input)
 	return (0);
 }
 
-static int	handle_exit_command(char *input)
+static int	handle_exit_command(char *input, t_token *tok, t_shell *shell)
 {
 	if (*input && ft_strncmp(input, EXIT_CMD, sizeof(EXIT_CMD)) == 0)
 	{
 		ft_putstr_fd("exit\n", 2);
 		free(input);
 		rl_clear_history();
+		free_token_list(tok);
+		cleanup_shell(shell);
 		return (1);
 	}
 	return (0);
 }
 
 /*Edit this function to add more features when minishell is run*/
-static void	process_input(char *input, t_token **token)
+static int	process_input(char *input, t_token **tok, t_shell *shell)
 {
-	*token = tokenize(input);
-	if (*token)
-		print_tokens(*token);
-	free_token_list(*token);
+	if (tokenize(input, tok, shell))
+	{
+		free_token_list(*tok);
+		return (1);
+	}
+	if (*tok)
+		print_tokens(*tok);
+	return (0);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -80,6 +91,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
+	token = NULL;
 	shell = init_shell(env);
 	if (!shell)
 		return (1);
@@ -90,11 +102,11 @@ int	main(int argc, char **argv, char **env)
 		input = readline(PROMPT);
 		if (handle_empty_input(input))
 			return (0);
-		if (handle_exit_command(input))
+		if (handle_exit_command(input, token, shell))
 			return (0);
 		add_history(input);
-		process_input(input, &token);
+		if (process_input(input, &token, shell))
+			printf("Error - token fail");
 		free(input);
 	}
-	cleanup_shell(shell);
 }

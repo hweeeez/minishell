@@ -6,32 +6,27 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:19:11 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/16 21:15:42 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/17 18:50:01 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_var_name(t_tokenizer *tok, size_t *i)
+static char	*expand_env_var(const char *var_name, t_shell *shell)
 {
-	size_t	start;
-	char	*var_name;
+	char	*value;
 
-	start = *i + 1;
-	if (!tok->input[start])
-		return (NULL);
-	if (tok->input[start] == '?' || tok->input[start] == '$')
-	{
-		*i = start;
-		return (ft_strndup(&tok->input[start], 1));
-	}
-	while (tok->input[*i + 1] && (ft_isalnum(tok->input[*i + 1]) || tok->input[*i + 1] == '_'))
-		(*i)++;
-	var_name = ft_strndup(&tok->input[start], *i - start + 1);
-	return (var_name);
+	if (!var_name || !*var_name)
+		return (ft_strdup("$"));
+	if (ft_strncmp(var_name, "?", 1) == 0)
+		return (ft_itoa(shell->exit_status));
+	value = ft_getenv(var_name, shell);
+	if (!value)
+		return (ft_strdup(""));
+	return (ft_strdup(value));
 }
 
-static char	*handle_expansion(t_tokenizer *tok, size_t *i, t_shell *shell)
+static char	*handle_expansion(t_tokenizer *tok, size_t *i)
 {
 	char	*var_name;
 	char	*expanded;
@@ -39,46 +34,64 @@ static char	*handle_expansion(t_tokenizer *tok, size_t *i, t_shell *shell)
 	var_name = get_var_name(tok, i);
 	if (!var_name)
 		return (ft_strdup("$"));
-	expanded = expand_env_var(var_name, shell);
+	expanded = expand_env_var(var_name, tok->shell);
 	free(var_name);
 	return (expanded);
 }
-static char	*expand_env_var(const char *var_name, t_shell *shell)
-{
-	char	*value;
 
-	if (!var_name || !*var_name)
-		return (ft_strdup("$"));
-	if (ft_strcmp(var_name, "?") == 0)
-		return (ft_itoa(shell->exit_status));
-	value = getenv(var_name);
-	if (!value)
-		return (ft_strdup(""));
-	return (ft_strdup(value));
-}
-
-char	*expand_quote(t_tokenizer *tok, t_shell *shell, size_t start, size_t len)
+static int	append_expansion(char **value, t_tokenizer *tok, \
+							size_t *i)
 {
-	char	*value;
 	char	*tmp;
 	char	*expanded;
+
+	tmp = handle_expansion(tok, i);
+	if (!tmp)
+		return (0);
+	expanded = ft_strjoin_free(*value, tmp);
+	if (!expanded)
+		return (0);
+	*value = expanded;
+	return (1);
+}
+
+static int	append_char(char **value, char c)
+{
+	char	*tmp;
+	char	*expanded;
+
+	tmp = ft_chartostr(c);
+	if (!tmp)
+		return (0);
+	expanded = ft_strjoin_free(*value, tmp);
+	if (!expanded)
+		return (0);
+	*value = expanded;
+	return (1);
+}
+
+char	*expand_tok(t_tokenizer *tok, size_t start, size_t len)
+{
+	char	*value;
 	size_t	i;
 
 	value = ft_strdup("");
-	i = start + 1;
-	while (i < start + len - 1)
+	i = start;
+	while (i < (start + len))
 	{
-		if (tok->quote == '"' && tok->input[i] == '$')
+		if ((tok->quote == '"' || tok->quote == 0) \
+			&& tok->input[i] == '$')
 		{
-			tmp = handle_expansion(tok, &i, shell);
-	 		expanded = ft_strjoin_free(value, tmp);
-			value = expanded;
+			if (!append_expansion(&value, tok, &i))
+			{
+				free(value);
+				return (NULL);
+			}
 		}
-		else
+		else if (!append_char(&value, tok->input[i]))
 		{
-			tmp = ft_chartostr(tok->input[i]);
-			expanded = ft_strjoin_free(value, tmp);
-			value = expanded;
+			free(value);
+			return (NULL);
 		}
 		i++;
 	}
