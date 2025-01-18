@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:58:32 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/17 21:29:11 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/18 17:56:39 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		ms_is_whitespace(char c);
 int		ms_is_special(char c);
 void	skip_whitespace(t_tokenizer *tok);
 int		tokenize(const char *input, t_token **head, t_shell *shell);
-void	free_token_list(t_token *head);
+void	free_token_list(t_token **head);
 t_token	*ft_tokenlast(t_token *lst);
 t_token	*handle_special(t_tokenizer *tok);
 char	*handle_quote(t_tokenizer *tok);

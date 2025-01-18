@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:58:32 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/17 21:30:23 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/18 18:02:29 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@ t_token	*new_token(char *value, t_token_type type)
 	return (token);
 }
 
-void	free_token_list(t_token *head)
+void	free_token_list(t_token **head)
 {
 	t_token	*temp;
 
-	while (head)
+	if (!head || !*head)
+		return ;
+	while (*head)
 	{
-		temp = head->next;
-		if (head->value)
-		{
-			free(head->value);
-		}
-		free (head);
-		head = temp;
+		temp = (*head)->next;
+		if ((*head)->value)
+			free((*head)->value);
+		free(*head);
+		*head = temp;
 	}
 }
 

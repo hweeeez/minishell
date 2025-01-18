@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:26:42 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/16 19:29:51 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/18 17:59:26 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ typedef struct s_shell
 }	t_shell;
 
 t_shell	*init_shell(char **env);
-void	cleanup_shell(t_shell *shell);
+void	cleanup_shell(t_shell **shell);
 
 #endif

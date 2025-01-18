@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:28 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/16 19:42:15 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/18 18:07:02 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,12 @@ t_shell	*init_shell(char **env)
 	return (shell);
 }
 
-void	cleanup_shell(t_shell *shell)
+void	cleanup_shell(t_shell **shell)
 {
-	if (!shell)
+	if (!(*shell))
 		return ;
-	if (shell->env)
-		free_env(shell->env);
-	free(shell);
+	if ((*shell)->env)
+		free_env((*shell)->env);
+	free(*shell);
+	*shell = NULL;
 }

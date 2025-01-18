@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:45:38 by hui-lim           #+#    #+#             */
-/*   Updated: 2025/01/17 21:39:37 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/18 19:27:04 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,31 +56,40 @@ static int	handle_empty_input(char *input)
 	return (0);
 }
 
-static int	handle_exit_command(char *input, t_token *tok, t_shell *shell)
+static int	handle_exit_command(char *input)
 {
 	if (*input && ft_strncmp(input, EXIT_CMD, sizeof(EXIT_CMD)) == 0)
 	{
 		ft_putstr_fd("exit\n", 2);
-		free(input);
-		rl_clear_history();
-		free_token_list(tok);
-		cleanup_shell(shell);
 		return (1);
 	}
 	return (0);
 }
 
 /*Edit this function to add more features when minishell is run*/
-static int	process_input(char *input, t_token **tok, t_shell *shell)
+static int	process_input(char *input, t_token **tok, t_shell **shell)
 {
-	if (tokenize(input, tok, shell))
+	if (tokenize(input, tok, *shell))
 	{
-		free_token_list(*tok);
+		printf("Error - token fail\n");
 		return (1);
 	}
 	if (*tok)
 		print_tokens(*tok);
 	return (0);
+}
+
+static int	ms_exit(char *input, t_token **tok, t_shell **shell)
+{
+	int	exit_status;
+
+	exit_status = (*shell)->exit_status;
+	free(input);
+	input = NULL;
+	rl_clear_history();
+	free_token_list(tok);
+	cleanup_shell(shell);
+	return (exit_status);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -92,21 +101,22 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	token = NULL;
+	input = NULL;
 	shell = init_shell(env);
 	if (!shell)
-		return (1);
+		return (ms_exit(input, &token, &shell));
 	if (setup_signals() == 1)
-		return (1);
+		return (ms_exit(input, &token, &shell));
 	while (1)
 	{
 		input = readline(PROMPT);
 		if (handle_empty_input(input))
-			return (0);
-		if (handle_exit_command(input, token, shell))
-			return (0);
+			return (ms_exit(input, &token, &shell));
+		if (handle_exit_command(input))
+			return (ms_exit(input, &token, &shell));
 		add_history(input);
-		if (process_input(input, &token, shell))
-			printf("Error - token fail");
+		process_input(input, &token, &shell);
 		free(input);
+		free_token_list(&token);
 	}
 }

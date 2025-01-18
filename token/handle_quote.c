@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:53:25 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/16 18:38:07 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/18 18:48:50 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,32 @@ static char	*allocate_quote(t_tokenizer *tok, size_t start, size_t len)
 	return (value);
 }
 
+static char	*expand_quote(t_tokenizer *tok, char *value)
+{
+	char	*expanded;
+	size_t	len;
+
+	if (!value || tok->quote == '\'')
+		return (value);
+	len = ft_strlen(value);
+	expanded = expand_tok(tok, tok->position - len - 1, len);
+	free(value);
+	return (expanded);
+}
+
 char	*handle_quote(t_tokenizer *tok)
 {
 	size_t	start;
 	size_t	len;
+	char	*value;
 
 	tok->quote = tok->input[tok->position];
 	start = find_quote_end(tok, tok->quote);
 	len = get_quote_length(tok, start);
 	if (tok->error)
 		return (NULL);
-	return (allocate_quote(tok, start, len));
+	value = allocate_quote(tok, start, len);
+	if (!value)
+		return (NULL);
+	return (expand_quote(tok, value));
 }

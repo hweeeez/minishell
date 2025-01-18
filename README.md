@@ -43,18 +43,19 @@ minishell
 - [x] Update headers
 - [x] Clean up code to fit new headers and Makefile
 - [x] clean memory leaks
-- [x] norm
+- [x] Norm
 
 ###Token:
-- [] add expansion
-- [x] norm
+- [x] Add expansion
+- [] Implement correct word splitting (quotes don't split words) 
+- [] Norm
 
 ###Env:
-- [x] dup env
-- [x] norm
+- [x] Dup env
+- [x] Norm
 
 ###Expansion
-- []read from env
-- []expand word
-- []expand quote
-- []norm
+- [x] Read from env
+- [x] Expand word
+- [x] Expand quote
+- [] Norm

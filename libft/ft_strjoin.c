@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 17:23:16 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/16 21:09:10 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/18 17:35:33 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	}
 	free(s1);
 	free(s2);
+	s1 = NULL;
+	s2 = NULL;
 	return (ret);
 }
