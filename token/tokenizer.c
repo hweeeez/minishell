@@ -12,25 +12,6 @@
 
 #include "minishell.h"
 
-static t_token	*handle_word_token(t_tokenizer *tok)
-{
-	char	*value;
-	size_t	start;
-	size_t	len;
-
-	start = tok->position;
-	while (tok->input[tok->position] && \
-		!ms_is_whitespace(tok->input[tok->position]) && \
-		!ms_is_special(tok->input[tok->position]) && \
-		tok->input[tok->position] != '\'' && tok->input[tok->position] != '\"')
-		tok->position++;
-	len = tok->position - start;
-	value = expand_tok(tok, start, len);
-	if (!value)
-		return (NULL);
-	return (new_token(value, TOKEN_WORD));
-}
-
 static t_token	*process_next_token(t_tokenizer *tok)
 {
 	skip_whitespace(tok);
@@ -40,7 +21,7 @@ static t_token	*process_next_token(t_tokenizer *tok)
 		tok->input[tok->position] == '\"')
 		return (new_token(handle_quote(tok), TOKEN_WORD));
 	if (ms_is_special(tok->input[tok->position]))
-		return (handle_special(tok));
+		return (handle_special_token(tok));
 	return (handle_word_token(tok));
 }
 
@@ -83,7 +64,7 @@ int	tokenize(const char *input, t_token **head, t_shell *shell)
 	if (tok.error || !head)
 	{
 		if (tok.error)
-			printf("Syntax Error - unclosed quotes\n");
+			printf("Syntax Error : unclosed quotes\n");
 		free_token_list(head);
 		return (1);
 	}

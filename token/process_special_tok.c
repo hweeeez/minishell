@@ -49,7 +49,7 @@ static char	*create_token_value(char c, t_token_type type)
 	return (value);
 }
 
-t_token	*handle_special(t_tokenizer *tok)
+t_token	*handle_special_token(t_tokenizer *tok)
 {
 	char			c;
 	char			next;
