@@ -39,7 +39,7 @@ static void	ft_copy_chip(void **dst, const void **src, size_t n)
 }
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
-{	
+{
 	void			*ret;
 	unsigned int	block;
 	unsigned int	chip;
