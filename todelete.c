@@ -1,21 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hui-lim <hui-lim@student.42singapore.      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 18:45:38 by hui-lim           #+#    #+#             */
-/*   Updated: 2024/11/23 18:47:54 by hui-lim          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <stdio.h>
-#include "minishell.h"
-#include "tokenizer.h"
-// cc -g main.c libft.c llist_utils.c string_utils.c token_utils.c tokenizer.c createtree.c ft_handle_direct_path.c ft_path.c treehelper.c traversetree.c ft_heredoc.c parse_utils.c exe_utils.c redir_utils.c signal_utils.c parse_utils_2.c -lreadline
-
-
 static int getTreeHeight(t_node* root) {
     if (root == NULL)
         return 0;
@@ -32,7 +14,7 @@ static void printSpaces(int count) {
         printf("  ");
 }
 
-static void printTree(t_node* root) {
+void printTree(t_node* root) {
     if (root == NULL)
         return;
 
@@ -98,73 +80,37 @@ static void printTree(t_node* root) {
     }
 }
 
-void handle_signal(int sig)
+static void	printarray(char **args)
 {
-	rl_replace_line("", 0);
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_redisplay();
+ int i = 0;
+
+ while (args[i] != NULL)
+ {
+	printf("%s\n", args[i]);
+	i++;
+ }
 }
 
-void get_pwd()
+void	cleantree(t_node **node)
 {
-	char *dir;
-	size_t size;
-	char *buf;
+	t_node	*prevnode;
+	t_node	*leftnode;
 
-	dir = getcwd(buf, size);
-	printf("%s", dir);
-}
-
-int main(int argc, char **argv, char **envp)
-{
-	char *s;
-	struct sigaction sa;
-	struct sigaction quit;
-	t_token *tokens;
-	t_token *current;
-	t_node *tree;
-	t_node *root;
-
-	quit.sa_handler = SIG_IGN;
-	sa.sa_handler = handle_signal;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGQUIT, &quit, NULL);
-	if (sigaction(SIGINT, &sa, NULL) == -1)
-		return (0);
-	while (1)
+	if ((*node) == NULL)
+		return ;
+	if ((*node)->right)
+		cleantree(&((*node)->right));
+	prevnode = (*node)->prev;
+	leftnode = (*node)->left;
+	if ((*node)->type == 0 && (*node)->right == NULL)
 	{
-		s = readline(PROMPT);
-		if (s != NULL)
+		if ((*node)->prev != NULL)
 		{
-			add_history(s);
-			tokens = tokenize(s);
-			if (!tokens)
-			{
-				printf("Error: Failed to tokenize input\n");
-				return (1);
-			}
-			current = tokens;
-			tree = createnode();
-			root = tree;
-			inittree(&tree, current, envp);
-			tree = root;
-			if (execute(tree, envp) == 2)
-			{
-				if (ft_heredoc(tree, envp) > 0)
-				{
-					sigaction(SIGINT, &sa, NULL);
-					rl_event_hook = NULL;
-				}
-			}
-			freetree(&tree);
+			free(*node);
+			(*node) = NULL;
+			prevnode->right = leftnode;
+			if (leftnode)
+				leftnode->prev = prevnode;
 		}
-		if (s == NULL)
-		{
-			rl_clear_history();
-			exit(0);
-		}
-		free(s);
 	}
 }

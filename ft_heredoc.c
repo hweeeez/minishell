@@ -22,6 +22,7 @@ int ft_heredoc(t_node *node, char **envp)
     t_redir  *redirs;
 	struct	sigaction quit;
 	struct	sigaction sig_int;
+	t_exe	*exe;
 
     rl_event_hook=event;
     // if SIGINT exit without executing, if EOF, print eof error msg then execute
@@ -53,7 +54,8 @@ int ft_heredoc(t_node *node, char **envp)
     }
     filefd = open(HEREDOC_FILE, O_RDONLY, 0644);
     redirs = redirs->next;
-    exe_commands(node, filefd, STDOUT_FILENO, envp);
+	initexenode(&exe, filefd);
+    exe_commands(node, &exe, envp);
     waitpid(childpid, NULL, 0);
     close (filefd);
     unlink(HEREDOC_FILE);

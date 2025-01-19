@@ -13,17 +13,31 @@
 #ifndef EXEC_H
 # define EXEC_H
 
+# include "minishell.h"
+
 typedef struct s_sigs
 {
-    struct sigaction ignore;
-    struct sigaction quit;
-    struct sigaction sigint;
-}           t_sigs;
+	struct sigaction	ignore;
+	struct sigaction	quit;
+	struct sigaction	sigint;
+}				t_sigs;
 
-void    ft_coredump_msg(int status, int *flag);
-void    init_exesigs(t_sigs** sigs);
-void    do_sigaction(int sig1, int sig2, t_sigs* sigs);
-int     execute(t_node *node, char **envp);
-int     exe_commands(t_node *node, int input, int output, char **envp);
-void    executechild(t_node *node, int pipefd[2], int puts[2], char** envp);
+typedef struct s_exe
+{
+	pid_t	pid;
+	pid_t	childpid;
+	int		pipefd[2];
+	int		puts[2];
+}				t_exe;
+
+void	ft_coredump_msg(int status);
+void	init_exesigs(t_sigs **sigs);
+void	do_sigaction(int sig1, int sig2, t_sigs *sigs);
+int		execute(t_node *node, char **envp);
+int		exe_commands(t_node *node, t_exe **exe, char **envp);
+int		wait_children(t_exe **exe);
+void	closeputs(t_exe **exe);
+void	initexenode(t_exe **exe, int input);
+void	executechild(t_node *node, t_exe **exe, char **envp);
+
 #endif

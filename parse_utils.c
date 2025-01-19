@@ -12,40 +12,31 @@
 
 #include "minishell.h"
 
-void    makenewnode(t_node **newnode, t_node **tree, int type)
+void	makenewnode(t_node **newnode, t_node **tree, int type)
 {
-    if ((*newnode) == NULL)
-    {
-        (*newnode) = createnode();
-        (*newnode)->type = type;
-        addnode(tree, newnode);
-    }
+	(*newnode) = createnode();
+	(*newnode)->type = type;
+	addnode(tree, *newnode);
 }
 
-void makeredir(t_node **newnode, t_node* tree, t_token **token)
+void	addarg(char ***args, int *nowords, t_node **node, char *add)
 {
- 	t_redir *redir;
-
-    redir = (t_redir*)malloc(sizeof(t_redir));
-    redir->type = (*token)->type;
-    redir->file = (*token)->next->value;
-    redir->next = NULL;
-    if ((*newnode)->redirs == NULL)
-    {
-        (*newnode)->redirs = redir;
-        (*newnode)->rootredir = redir;
-    }
-    else
-    {	
-        (*newnode)->redirs->next = redir;
-        (*newnode)->redirs = (*newnode)->redirs->next;
-    }
-    (*token) = (*token)->next;
+	copyarray(args, *nowords, add);
+	(*nowords)++;
 }
 
-void    addarg(char ***args, int *nowords, char *add, t_node **node)
+t_node	*createnode(void)
 {
-    copyarray(&args, nowords, add);
-    (*node)->args = args;
-    nowords++;
+	t_node	*node;
+
+	node = (t_node *)malloc(sizeof(t_node));
+	node->left = NULL;
+	node->right = NULL;
+	node->type = NODE_PIPE;
+	node->prev = NULL;
+	node->rootredir = NULL;
+	node->redirs = NULL;
+	node->args = NULL;
+	node->argc = 0;
+	return (node);
 }

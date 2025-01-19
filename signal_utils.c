@@ -1,5 +1,4 @@
 #include "minishell.h"
-#include "exec.h"
 
 static void quitchild(int sig)
 {

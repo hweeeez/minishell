@@ -20,3 +20,37 @@ int	get_redir(t_redir *redir)
 	}
 	return (filefd);
 }
+
+int	isredir(int type)
+{
+	if (type == TOKEN_REDIR_IN)
+		return (1);
+	if (type == TOKEN_REDIR_OUT)
+		return (1);
+	if (type == TOKEN_APPEND)
+		return (1);
+	if (type == TOKEN_HEREDOC)
+		return (1);
+	return (0);
+}
+
+void	makeredir(t_node **newnode, t_token **token)
+{
+	t_redir	*redir;
+
+	redir = (t_redir *)malloc(sizeof(t_redir));
+	redir->type = (*token)->type;
+	redir->file = (*token)->next->value;
+	redir->next = NULL;
+	if ((*newnode)->redirs == NULL)
+	{
+		(*newnode)->redirs = redir;
+		(*newnode)->rootredir = redir;
+	}
+	else
+	{	
+		(*newnode)->redirs->next = redir;
+		(*newnode)->redirs = (*newnode)->redirs->next;
+	}
+	(*token) = (*token)->next;
+}

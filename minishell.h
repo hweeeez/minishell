@@ -50,7 +50,7 @@
 # include <math.h>
 #include <string.h>
 #include "tokenizer.h"
-#include "exec.h"
+
 
 struct s_node;
 
@@ -79,6 +79,9 @@ typedef struct s_node
 	struct s_node* right;
 }				t_node;
 
+#include "exec.h"
+#include "parser.h"
+
 void	inittree(t_node** tree, t_token* tokens, char** envp);
 void	parsetoken(t_token** token, t_node** tree, char** envp);
 void	addnode(t_node** tree, t_node* new);
@@ -94,18 +97,15 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 t_node*	createnode();
 void	cleantree(t_node** node);
-void printTree(t_node* root);
 void freetree(t_node** tree);
 void	get_pwd();
 int	execute(t_node *node, char **envp);
-int	exe_commands(t_node *node, int input, int output, char **envp);
-void executechild(t_node *node, int pipefd[2], int puts[2], char** envp);
-void	closeputs(int input, int output);
 int checkif_builtin(char* cmd);
 int ft_strcmp(char* str1, char* str2);
 int	get_redir(t_redir *redir);
 int ft_heredoc(t_node *node, char **envp);
 void freearray(char **args);
 void freeredirs(t_redir *redir);
+int	isredir(int type);
 
 #endif
