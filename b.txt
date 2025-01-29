@@ -1,16 +1,7 @@
-# include <sys/types.h>
-#include <sys/wait.h>
-# include <unistd.h>
-# include <signal.h>
-# include <stdlib.h>
-# include <stdio.h>
-#include <fcntl.h>
-# include <limits.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdlib.h>
-# include <math.h>
-#include <string.h>
+/*   By: hui-lim <hui-lim@student.42singapore.      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/23 18:45:38 by hui-lim           #+#    #+#             */
+/*   Updated: 2024/11/23 18:47:54 by hui-lim          ###   ########.fr       */
+#include <stdio.h>
+#include "minishell.h"
 #include "tokenizer.h"
-#include "exec.h"
-#include "parser.h"

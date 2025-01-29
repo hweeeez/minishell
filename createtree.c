@@ -24,7 +24,24 @@ void	inittree(t_node **tree, t_token *tokens, char **envp)
 	}
 }
 
-void	parsetoken(t_token **tok, t_node **tree, char **envp)
+void	parsetoken(t_token **token, t_node **tree, char **envp)
+{
+	t_redir			*redir;
+	static t_node	*newnode = NULL;
+
+	if ((*tree)->left == NULL)
+		newnode = NULL;
+	if (isredir((*token)->type) == 1)
+	{
+		makeredir(&newnode, token);
+		return ;
+	}
+	if ((*token)->type == TOKEN_PIPE)
+		makenewnode(&newnode, tree, NODE_PIPE);
+	if ((*token)->type == 0)
+		parseword(&newnode, envp, tree, (*token)->value);
+}
+/*void	parsetoken(t_token **tok, t_node **tree, char **envp)
 {
 	t_redir				*redir;
 	static t_node		*newnode = NULL;
@@ -34,7 +51,7 @@ void	parsetoken(t_token **tok, t_node **tree, char **envp)
 		initcmdnode(&cmd, &newnode);
 	if (isredir((*tok)->type) == 1)
 	{
-		parseredir(&newnode, tree, tok);
+		makeredir(&newnode, tok);
 		return ;
 	}
 	if ((*tok)->type == TOKEN_PIPE)
@@ -51,6 +68,7 @@ void	parsetoken(t_token **tok, t_node **tree, char **envp)
 		}
 	}
 }
+*/
 
 void	copyarray(char ***tocopy, int size, char *toadd)
 {
@@ -109,3 +127,7 @@ void	assignnode(t_node **currentnode, t_node **newnode)
 		}
 	}
 }
+
+//cat < main.c | grep "a" > b
+//why is root->left->args[0] = cat but root->left->rootredir->file = "a"
+//is it because i didmt free newnode and its static?

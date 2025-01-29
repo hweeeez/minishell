@@ -1,0 +1,46 @@
+/*   main.c                                             :+:      :+:    :+:   */
+/*   By: hui-lim <hui-lim@student.42singapore.      +#+  +:+       +#+        */
+/*   Created: 2024/11/23 18:45:38 by hui-lim           #+#    #+#             */
+/*   Updated: 2024/11/23 18:47:54 by hui-lim          ###   ########.fr       */
+//cc -g main.c libft.c llist_utils.c string_utils.c token_utils.c tokenizer.c createtree.c ft_handle_direct_path.c ft_path.c treehelper.c traversetree.c ft_heredoc.c parse_utils.c exe_utils.c redir_utils.c signal_utils.c parse_utils_2.c -lreadline
+static int getTreeHeight(t_node* root) {
+// Function to print spaces before nodes
+static void printSpaces(int count) {
+static void printTree(t_node* root) {
+    // Get the height of the tree to determine spacing
+    // Array to store levels
+        // Print spacing based on level and tree height
+        printSpaces(pow(2, height - level - 1));
+                // Prepare next level
+                // Add space between nodes
+                    printSpaces(pow(2, height - level));
+                // Add placeholder for null nodes in next level
+                    printSpaces(pow(2, height - level));
+        // Check if all nodes in next level are NULL
+        int allNull = 1;
+                allNull = 0;
+                break;
+        // If all nodes are NULL, break the loop
+        if (allNull)
+            break;
+void handle_signal(int sig)
+	rl_replace_line("", 0);
+	rl_redisplay();
+	char *dir;
+	char *buf;
+int main(int argc, char **argv, char **envp)
+	char *s;
+	struct sigaction sa;
+	struct sigaction quit;
+	quit.sa_handler = SIG_IGN;
+	sa.sa_handler = handle_signal;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGQUIT, &quit, NULL);
+	if (sigaction(SIGINT, &sa, NULL) == -1)
+		s = readline(PROMPT);
+			add_history(s);
+				printf("Error: Failed to tokenize input\n");
+			tree = createnode();
+					sigaction(SIGINT, &sa, NULL);
+			rl_clear_history();

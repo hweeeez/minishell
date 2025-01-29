@@ -42,3 +42,39 @@ int	wait_children(t_exe **exe)
 	ft_coredump_msg(status);
 	return (exit_status);
 }
+
+void	closeputs(t_exe **exe)
+{
+	if ((*exe)->puts[0] != STDIN_FILENO)
+		close((*exe)->puts[0]);
+	if ((*exe)->puts[1] != STDOUT_FILENO)
+		close((*exe)->puts[1]);
+}
+
+void	exe_rightnode(t_exe **exe, t_node *right, char **envp)
+{
+	t_exe	*childexe;
+
+	close((*exe)->pipefd[1]);
+	initexenode(&childexe);
+	childexe->puts[0] = (*exe)->pipefd[0];
+	(*exe)->childpid = exe_commands(right, &childexe, envp);
+	free(childexe);
+}
+
+void	has_redir(t_exe **exe, t_node *node)
+{
+	if (node->left->rootredir != NULL)
+		get_redir(node->left->rootredir, exe);
+}
+
+void	initexenode(t_exe **exe)
+{
+	(*exe) = (t_exe *)malloc(sizeof(t_exe));
+	(*exe)->childpid = -1;
+	(*exe)->pid = -1;
+	(*exe)->puts[0] = STDIN_FILENO;
+	(*exe)->puts[1] = STDOUT_FILENO;
+	(*exe)->has_hd = 0;
+	(*exe)->exe_hd = 0;
+}

@@ -40,3 +40,33 @@ t_node	*createnode(void)
 	node->argc = 0;
 	return (node);
 }
+
+int	parseword(t_node **newnode, char **envp, t_node **tree, char *tok)
+{
+	char		*word;
+	static int	nowords;
+
+	word = ft_find_cmd_path(tok, &((*newnode)->args), envp);
+	if (word != NULL)
+	{
+		if ((*newnode) == NULL || (*newnode)->type == 0)
+		{
+			makenewnode(newnode, tree, NODE_COMMAND);
+			nowords = 0;
+		}
+		else if ((*newnode)->args != NULL)
+			word = tok;
+		copyarray(&(*newnode)->args, nowords, word);
+		free(word);
+	}
+	else
+		copyarray(&(*newnode)->args, nowords, tok);
+	nowords++;
+}
+
+void	parseredir(t_node **newnode, t_node **tree, t_token **tok)
+{
+	if ((*newnode) == NULL)
+		makenewnode(newnode, tree, 1);
+	makeredir(newnode, tok);
+}

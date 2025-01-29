@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include "minishell.h"
 #include "tokenizer.h"
-// cc -g main.c libft.c llist_utils.c string_utils.c token_utils.c tokenizer.c createtree.c ft_handle_direct_path.c ft_path.c treehelper.c traversetree.c ft_heredoc.c parse_utils.c exe_utils.c redir_utils.c signal_utils.c parse_utils_2.c -lreadline
+//cc -g main.c libft.c llist_utils.c string_utils.c token_utils.c tokenizer.c createtree.c ft_handle_direct_path.c ft_path.c treehelper.c traversetree.c ft_heredoc.c parse_utils.c exe_utils.c redir_utils.c signal_utils.c parse_utils_2.c -lreadline
 
 
 static int getTreeHeight(t_node* root) {

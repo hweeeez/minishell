@@ -102,7 +102,6 @@ void	get_pwd();
 int	execute(t_node *node, char **envp);
 int checkif_builtin(char* cmd);
 int ft_strcmp(char* str1, char* str2);
-int	get_redir(t_redir *redir);
 int ft_heredoc(t_node *node, char **envp);
 void freearray(char **args);
 void freeredirs(t_redir *redir);

@@ -54,7 +54,8 @@ int ft_heredoc(t_node *node, char **envp)
     }
     filefd = open(HEREDOC_FILE, O_RDONLY, 0644);
     redirs = redirs->next;
-	initexenode(&exe, filefd);
+	initexenode(&exe);
+	exe->puts[0] = filefd;
     exe_commands(node, &exe, envp);
     waitpid(childpid, NULL, 0);
     close (filefd);

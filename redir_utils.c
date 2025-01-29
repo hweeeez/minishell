@@ -1,24 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hui-lim <hui-lim@student.42singapore.      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/29 17:19:58 by hui-lim           #+#    #+#             */
+/*   Updated: 2025/01/29 17:20:00 by hui-lim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int	get_redir(t_redir *redir)
+static void	filenotexisterr(char *file)
 {
-	int	filefd;
+	printf("no such file or directory: %s\n", file);
+	exit(0);
+}
 
-	filefd = -1;
-	if (redir != NULL)
+static void	closeput(int input, int output)
+{
+	if (input > -1 && input != STDIN_FILENO)
+		close(input);
+	if (output > -1 && output != STDOUT_FILENO)
+		close(output);
+}
+
+static void	handle_hd(t_redir *redir, t_exe **exe)
+{
+	(*exe)->has_hd = 1;
+	if (redir->next == NULL)
 	{
-		if (redir->type == TOKEN_REDIR_OUT)
-			filefd = open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if (redir->type == TOKEN_APPEND)
-			filefd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		else if (redir->type == TOKEN_REDIR_IN)
-			filefd = open(redir->file, O_RDONLY, 0644);
-		if (redir->next == NULL)
-			return (filefd);
-		else
-			return (get_redir(redir->next));
+		(*exe)->exe_hd = 1;
+		closeput((*exe)->puts[0], (*exe)->puts[1]);
 	}
-	return (filefd);
+}
+
+void	get_redir(t_redir *re, t_exe **x)
+{
+	if (re != NULL)
+	{
+		if (re->type == TOKEN_REDIR_OUT)
+		{
+			closeput(-1, (*x)->puts[1]);
+			(*x)->puts[1] = open(re->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		}
+		else if (re->type == TOKEN_APPEND)
+		{
+			closeput(-1, (*x)->puts[1]);
+			(*x)->puts[1] = open(re->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		}
+		else if (re->type == TOKEN_REDIR_IN)
+		{
+			closeput((*x)->puts[0], -1);
+			if (access(re->file, F_OK | R_OK) == -1)
+				filenotexisterr(re->file);
+			(*x)->puts[0] = open(re->file, O_RDONLY, 0644);
+		}
+		else if (re->type == TOKEN_HEREDOC)
+			handle_hd(re, x);
+		return (get_redir(re->next, x));
+	}
 }
 
 int	isredir(int type)
@@ -40,7 +82,7 @@ void	makeredir(t_node **newnode, t_token **token)
 
 	redir = (t_redir *)malloc(sizeof(t_redir));
 	redir->type = (*token)->type;
-	redir->file = (*token)->next->value;
+	redir->file = ft_strdup((*token)->next->value);
 	redir->next = NULL;
 	if ((*newnode)->redirs == NULL)
 	{
