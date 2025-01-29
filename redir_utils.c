@@ -29,11 +29,6 @@ static void	closeput(int input, int output)
 static void	handle_hd(t_redir *redir, t_exe **exe)
 {
 	(*exe)->has_hd = 1;
-	if (redir->next == NULL)
-	{
-		(*exe)->exe_hd = 1;
-		closeput((*exe)->puts[0], (*exe)->puts[1]);
-	}
 }
 
 void	get_redir(t_redir *re, t_exe **x)

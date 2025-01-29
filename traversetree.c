@@ -17,12 +17,14 @@ int	ft_strcmp(char *str1, char *str2)
 	int	i;
 
 	i = 0;
-	while (str1[i] != '\0')
+	while (str1[i] != '\0' && str2[i] != '\0')
 	{
 		if (str1[i] != str2[i] || str2[i] == '\0')
 			return (-1);
 		i++;
 	}
+	if (str1[i] != '\0' || str2[i] != '\0')
+		return (-1);
 	return (1);
 }
 
@@ -40,6 +42,8 @@ int	execute(t_node *node, char **envp)
 	{
 		if (checkif_builtin(left->args[0]) == 0)
 		{
+			if (left->rootredir->type == TOKEN_HEREDOC)
+				return (2);
 			initexenode(&exe);
 			exe_commands(node, &exe, envp);
 			free(exe);

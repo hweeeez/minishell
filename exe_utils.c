@@ -75,6 +75,8 @@ void	initexenode(t_exe **exe)
 	(*exe)->pid = -1;
 	(*exe)->puts[0] = STDIN_FILENO;
 	(*exe)->puts[1] = STDOUT_FILENO;
+	(*exe)->pipefd[0] = -1;
+	(*exe)->pipefd[1] = -1;
 	(*exe)->has_hd = 0;
 	(*exe)->exe_hd = 0;
 }
