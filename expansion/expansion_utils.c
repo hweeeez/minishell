@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:19:11 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/17 18:26:32 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/30 17:36:36 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ int	is_valid_first_char(char c)
 int	is_valid_var_char(char c)
 {
 	return (ft_isalnum(c) || c == '_');
+}
+
+int	is_quote(char c)
+{
+	return (c == '\'' || c == '"');
 }
 
 char	*ft_getenv(const char *name, t_shell *shell)
@@ -41,23 +46,18 @@ char	*ft_getenv(const char *name, t_shell *shell)
 	return (NULL);
 }
 
-char	*get_var_name(t_tokenizer *tok, size_t *i)
+char	*get_var_name(t_tokenizer *tok, size_t *pos)
 {
 	size_t	start;
 	char	*var_name;
 
-	start = *i + 1;
+	start = *pos;
 	if (!tok->input[start])
 		return (NULL);
-	if (tok->input[start] == '?')
-	{
-		*i = start;
-		return (ft_strndup(&tok->input[start], 1));
-	}
 	if (!is_valid_first_char(tok->input[start]))
 		return (ft_strdup(""));
-	while (tok->input[*i + 1] && is_valid_var_char(tok->input[*i + 1]))
-		(*i)++;
-	var_name = ft_strndup(&tok->input[start], *i - start + 1);
+	while (tok->input[*pos + 1] && is_valid_var_char(tok->input[*pos + 1]))
+		(*pos)++;
+	var_name = ft_strndup(&tok->input[start], *pos - start + 1);
 	return (var_name);
 }

@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:58:32 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/18 17:56:39 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/30 19:06:02 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,21 @@ typedef struct s_tokenizer
 
 void	init_tokenizer(t_tokenizer *tok, const char *input, t_shell *shell);
 t_token	*new_token(char *value, t_token_type type);
-int		ms_is_whitespace(char c);
+int		is_space_tab(char c);
 int		ms_is_special(char c);
 void	skip_whitespace(t_tokenizer *tok);
 int		tokenize(const char *input, t_token **head, t_shell *shell);
 void	free_token_list(t_token **head);
 t_token	*ft_tokenlast(t_token *lst);
 t_token	*handle_special_token(t_tokenizer *tok);
-t_token	*handle_word_token(t_tokenizer *tok);
-char	*handle_quote(t_tokenizer *tok);
+t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
+		char **current_word);
+t_token	*process_double_quote(t_tokenizer *tok, t_shell *shell, \
+		char c, char **current_word);
+t_token	*process_single_quote(t_tokenizer *tok, char c, \
+		char **current_word);
+t_token	*process_token_loop(t_tokenizer *tok, t_shell *shell, \
+		char *current_word);
 
 #endif
 /*
