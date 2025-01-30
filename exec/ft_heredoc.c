@@ -95,5 +95,6 @@ int	ft_heredoc(t_node *node, char **envp)
 	exe_commands(node, &exe, envp);
 	close (filefd);
 	unlink(HEREDOC_FILE);
+	free(exe);
 	return (1);
 }
