@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:58:32 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/30 19:06:02 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/30 20:34:53 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ t_token	*process_single_quote(t_tokenizer *tok, char c, \
 		char **current_word);
 t_token	*process_token_loop(t_tokenizer *tok, t_shell *shell, \
 		char *current_word);
+int		validate_token_syntax(t_token *head);
+int		is_redirection_token(t_token_type type);
+int		print_error(const char *format);
 
 #endif
 /*

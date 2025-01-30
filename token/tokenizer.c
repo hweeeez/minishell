@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 16:58:32 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/30 18:53:35 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/30 20:19:30 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	tokenize(const char *input, t_token **head, t_shell *shell)
 			return (1);
 		}
 	}
-	return (0);
+	return (validate_token_syntax(*head));
 }
 // static t_token	*process_next_token(t_tokenizer *tok)
 // {

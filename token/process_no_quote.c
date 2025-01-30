@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:53:25 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/30 19:28:13 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/30 20:33:26 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	handle_expansion(t_tokenizer *tok, t_shell *shell,
 		*current_word = ft_strjoin_free(*current_word, expanded);
 }
 
-t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c,
+t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 	char **current_word)
 {
 	if (ft_isspace(c))
@@ -76,7 +76,8 @@ t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c,
 		handle_expansion(tok, shell, current_word);
 		return (NULL);
 	}
-	process_default_case(tok, c, current_word);
+	*current_word = ft_strjoin_free(*current_word, ft_chartostr(c));
+	tok->position++;
 	return (NULL);
 }
 // t_token	*handle_word_token(t_tokenizer *tok)

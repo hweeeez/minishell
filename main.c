@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:45:38 by hui-lim           #+#    #+#             */
-/*   Updated: 2025/01/30 19:33:01 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/30 20:20:56 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,7 @@ static int	handle_exit_command(char *input)
 static int	process_input(char *input, t_token **tok, t_shell **shell)
 {
 	if (tokenize(input, tok, *shell))
-	{
-		printf("Error - token fail\n");
 		return (1);
-	}
 	if (*tok)
 		print_tokens(*tok);
 	return (0);
