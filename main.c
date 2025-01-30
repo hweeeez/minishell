@@ -79,7 +79,7 @@ static int	process_input(char *input, t_token **tok, t_shell **shell)
 	return (0);
 }
 
-static int	ms_exit(char *input, t_token **tok, t_shell **shell)
+static int	ms_exit(char *input, t_token **tok, t_shell **shell, t_sigacts **sig)
 {
 	int	exit_status;
 
@@ -89,6 +89,7 @@ static int	ms_exit(char *input, t_token **tok, t_shell **shell)
 	rl_clear_history();
 	free_token_list(tok);
 	cleanup_shell(shell);
+	free(*sig);
 	return (exit_status);
 }
 
@@ -125,16 +126,16 @@ int	main(int argc, char **argv, char **env)
 	input = NULL;
 	shell = init_shell(env);
 	if (!shell)
-		return (ms_exit(input, &token, &shell));
+		return (ms_exit(input, &token, &shell, &sigs));
 	if (setup_signals(&sigs) == 1)
-		return (ms_exit(input, &token, &shell));
+		return (ms_exit(input, &token, &shell, &sigs));
 	while (1)
 	{
 		input = readline(PROMPT);
 		if (handle_empty_input(input))
-			return (ms_exit(input, &token, &shell));
+			return (ms_exit(input, &token, &shell, &sigs));
 		if (handle_exit_command(input))
-			return (ms_exit(input, &token, &shell));
+			return (ms_exit(input, &token, &shell, &sigs));
 		add_history(input);
 		process_input(input, &token, &shell);
 		processtree(token, shell, &sigs);
