@@ -47,8 +47,8 @@ minishell
 
 ###Token:
 - [x] Add expansion
-- [] Implement correct word splitting (quotes don't split words) 
-- [] Norm
+- [x] Implement correct word splitting (quotes don't split words) 
+- [x] Norm
 
 ###Env:
 - [x] Dup env
@@ -58,4 +58,4 @@ minishell
 - [x] Read from env
 - [x] Expand word
 - [x] Expand quote
-- [] Norm
+- [x] Norm
