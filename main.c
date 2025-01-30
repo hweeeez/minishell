@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:45:38 by hui-lim           #+#    #+#             */
-/*   Updated: 2025/01/30 20:20:56 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/30 21:33:01 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,30 +66,6 @@ static int	handle_exit_command(char *input)
 	return (0);
 }
 
-/*Edit this function to add more features when minishell is run*/
-static int	process_input(char *input, t_token **tok, t_shell **shell)
-{
-	if (tokenize(input, tok, *shell))
-		return (1);
-	if (*tok)
-		print_tokens(*tok);
-	return (0);
-}
-
-static int	ms_exit(char *input, t_token **tok, t_shell **shell, t_sigacts **sig)
-{
-	int	exit_status;
-
-	exit_status = (*shell)->exit_status;
-	free(input);
-	input = NULL;
-	rl_clear_history();
-	free_token_list(tok);
-	cleanup_shell(shell);
-	free(*sig);
-	return (exit_status);
-}
-
 static void	processtree(t_token	*token, t_shell	*shell, t_sigacts	**sigs)
 {
 	t_node	*tree;
@@ -108,6 +84,31 @@ static void	processtree(t_token	*token, t_shell	*shell, t_sigacts	**sigs)
 		}
 	}
 	freetree(&tree);
+}
+
+/*Edit this function to add more features when minishell is run*/
+static int	process_input(char *input, t_token **tok, t_shell **shell, t_sigacts **sigs)
+{
+	if (tokenize(input, tok, *shell))
+		return (1);
+	if (*tok)
+		print_tokens(*tok);
+	processtree(*tok, *shell, sigs);
+	return (0);
+}
+
+static int	ms_exit(char *input, t_token **tok, t_shell **shell, t_sigacts **sig)
+{
+	int	exit_status;
+
+	exit_status = (*shell)->exit_status;
+	free(input);
+	input = NULL;
+	rl_clear_history();
+	free_token_list(tok);
+	cleanup_shell(shell);
+	free(*sig);
+	return (exit_status);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -134,9 +135,8 @@ int	main(int argc, char **argv, char **env)
 		if (handle_exit_command(input))
 			return (ms_exit(input, &token, &shell, &sigs));
 		add_history(input);
-		process_input(input, &token, &shell);
-		processtree(token, shell, &sigs);
+		process_input(input, &token, &shell, &sigs);
 		free(input);
-		free_token_list(&token);
+		//free_token_list(&token);
 	}
 }

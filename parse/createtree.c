@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   createtree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hui-lim <hui-lim@student.42singapore.      +#+  +:+       +#+        */
+/*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:11:13 by hui-lim           #+#    #+#             */
-/*   Updated: 2025/01/14 21:11:16 by hui-lim          ###   ########.fr       */
+/*   Updated: 2025/01/30 21:59:04 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	parsetoken(t_token **token, t_node **tree, char **envp)
 	}
 	if ((*token)->type == TOKEN_PIPE)
 		makenewnode(&newnode, tree, NODE_PIPE);
-	if ((*token)->type == 0)
+	if ((*token)->type == TOKEN_WORD)
 		parseword(&newnode, envp, tree, (*token)->value);
 }
 
