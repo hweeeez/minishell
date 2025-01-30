@@ -52,6 +52,8 @@ char	**ft_split(char const *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
+int		ft_strcmp(char *str1, char *str2);
+int		ft_strcmp(char *str1, char *str2);
 /*====================================
 		Memory functions - 7
 =====================================*/

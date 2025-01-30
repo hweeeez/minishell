@@ -92,11 +92,32 @@ static int	ms_exit(char *input, t_token **tok, t_shell **shell)
 	return (exit_status);
 }
 
+static void	processtree(t_token	*token, t_shell	*shell, t_sigacts	**sigs)
+{
+	t_node	*tree;
+	t_node	*root;
+
+	tree = createnode();
+	root = tree;
+	inittree(&tree, token, shell->env);
+	tree = root;
+	if (execute(tree, shell->env) == 2)
+	{
+		if (ft_heredoc(tree, shell->env) > 0)
+		{
+			sigaction(SIGINT, &(*sigs)->sa, NULL);
+			rl_event_hook = NULL;
+		}
+	}
+	freetree(&tree);
+}
+
 int	main(int argc, char **argv, char **env)
 {
-	char	*input;
-	t_shell	*shell;
-	t_token	*token;
+	char		*input;
+	t_shell		*shell;
+	t_token		*token;
+	t_sigacts	*sigs;
 
 	(void)argc;
 	(void)argv;
@@ -105,7 +126,7 @@ int	main(int argc, char **argv, char **env)
 	shell = init_shell(env);
 	if (!shell)
 		return (ms_exit(input, &token, &shell));
-	if (setup_signals() == 1)
+	if (setup_signals(&sigs) == 1)
 		return (ms_exit(input, &token, &shell));
 	while (1)
 	{
@@ -116,6 +137,7 @@ int	main(int argc, char **argv, char **env)
 			return (ms_exit(input, &token, &shell));
 		add_history(input);
 		process_input(input, &token, &shell);
+		processtree(token, shell, &sigs);
 		free(input);
 		free_token_list(&token);
 	}

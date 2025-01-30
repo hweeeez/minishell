@@ -15,7 +15,7 @@ READLINE = -lreadline
 # Header files
 HEADERS = $(INC_DIR)/minishell.h \
           $(INC_DIR)/token.h \
-          $(INC_DIR)/parse.h \
+          $(INC_DIR)/parser.h \
           $(INC_DIR)/exec.h \
           $(INC_DIR)/pipe.h \
           $(INC_DIR)/redirect.h \
@@ -55,19 +55,19 @@ $(LIBFT):
 # Special rule for main.c
 $(MAIN_OBJ): $(MAIN_SRC)
 	mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC) -g -c $< -o $@
 
 # Compile other object files
 # This line makes every .o file depend on ALL headers $(OBJ_DIR)/%.o: %.c  #$(HEADERS)
 $(OBJ_DIR)/%.o: %.c
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC) -c -g $< -o $@
 
 ## HEADERS = $(INC_DIR)/minishell.h  #replace with this line when minshell.h is set up
 
 # Link program
 $(NAME): $(LIBFT) $(OBJ_DIRS) $(OBJS) $(MAIN_OBJ)
-	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) $(LIBFT) $(READLINE) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) $(LIBFT) $(READLINE) -g -o $(NAME)
 
 # Clean object files
 clean:

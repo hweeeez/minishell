@@ -28,6 +28,8 @@ typedef struct s_exe
 	pid_t	childpid;
 	int		pipefd[2];
 	int		puts[2];
+	int		has_hd;
+	int		exe_hd;
 }				t_exe;
 
 void	ft_coredump_msg(int status);

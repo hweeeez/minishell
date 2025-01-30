@@ -25,6 +25,9 @@
 # include <unistd.h>
 # include <signal.h>
 # include <sys/types.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 /************************************/
 /*			Library includes		*/
 /************************************/
@@ -37,13 +40,13 @@
 # include "heredoc.h"
 # include "error.h"
 # include "env.h"
-# include "exec.h"
 # include "expansion.h"
-# include "parse.h"
+# include "token.h"
+# include "parser.h"
+# include "exec.h"
 # include "pipe.h"
 # include "redirect.h"
 # include "sig_control.h"
-# include "token.h"
 
 /************************************/
 /*			Defination				*/
@@ -51,6 +54,14 @@
 # ifndef PROMPT
 #  define PROMPT "weneedtherapy% "
 # endif
+
+# define EXIT_NORMAL 0
+# define EXIT_FAILURE 1
+# define EXIT_CANNOT_EXE 126
+# define EXIT_NOT_FOUND 127
+
+# define FATAL_ERR_SIG 128
+# define HEREDOC_FILE "hd.txt"
 
 /*These should be moved elsewhere?*/
 enum	e_cmd_type
@@ -66,4 +77,5 @@ enum	e_cmd_type
 	SINGLE_QUOTE,
 	DOLLAR_SIGN,
 };
+
 #endif
