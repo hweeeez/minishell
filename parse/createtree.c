@@ -17,6 +17,8 @@ void	inittree(t_node **tree, t_token *tokens, char **envp)
 	t_token	*current;
 
 	current = tokens;
+	if (current->value[0] == '$')
+		return ;
 	while (current)
 	{
 		parsetoken(&current, tree, envp);

@@ -71,6 +71,8 @@ static void	processtree(t_token	*token, t_shell	*shell, t_sigacts	**sigs)
 	t_node	*tree;
 	t_node	*root;
 
+	if (token->value[0] == '$')
+		return ;
 	tree = createnode();
 	root = tree;
 	inittree(&tree, token, shell->env);
