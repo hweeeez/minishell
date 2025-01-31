@@ -45,6 +45,8 @@ void	freearray(char **args)
 	int	i;
 
 	i = 0;
+	if (args == NULL)
+		return ;
 	while (args[i] != NULL)
 	{
 		free(args[i]);

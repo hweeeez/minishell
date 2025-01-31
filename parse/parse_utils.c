@@ -54,6 +54,8 @@ void	parseword(t_node **newnode, char **envp, t_node **tree, char *tok)
 	word = ft_find_cmd_path(tok, &((*newnode)->args), envp);
 	if (word != NULL)
 	{
+		freearray((*newnode)->args);
+		(*newnode)->args = NULL;
 		copyarray(&(*newnode)->args, nowords, word);
 		free(word);
 	}
