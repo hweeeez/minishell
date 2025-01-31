@@ -15,7 +15,9 @@
 void	has_redir(t_exe **exe, t_node *node)
 {
 	if (node->left->rootredir != NULL)
+	{	
 		get_redir(node->left->rootredir, exe);
+	}
 }
 
 static int	checkif_builtin(char *cmd)
@@ -43,6 +45,8 @@ int	execute(t_node *node, char **envp)
 	t_exe	*exe;
 
 	left = node->left;
+	if (left == NULL)
+		return (0);
 	if (node->type == 0)
 	{
 		if (checkif_builtin(left->args[0]) == 0)

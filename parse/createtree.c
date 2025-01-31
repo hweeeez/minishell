@@ -12,19 +12,21 @@
 
 #include "minishell.h"
 
-void	inittree(t_node **tree, t_token *tokens, char **envp)
+int	inittree(t_node **tree, t_token *tokens, char **envp)
 {
 	t_token	*current;
 
 	current = tokens;
 	while (current)
 	{
-		parsetoken(&current, tree, envp);
+		if (parsetoken(&current, tree, envp) == 0)
+			return (0);
 		current = current->next;
 	}
+	return (1);
 }
 
-void	parsetoken(t_token **token, t_node **tree, char **envp)
+int	parsetoken(t_token **token, t_node **tree, char **envp)
 {
 	static t_node	*newnode = NULL;
 
@@ -33,12 +35,16 @@ void	parsetoken(t_token **token, t_node **tree, char **envp)
 	if (isredir((*token)->type) == 1)
 	{
 		makeredir(&newnode, token);
-		return ;
+		return (1);
 	}
 	if ((*token)->type == TOKEN_PIPE)
 		makenewnode(&newnode, tree, NODE_PIPE);
 	if ((*token)->type == TOKEN_WORD)
-		parseword(&newnode, envp, tree, (*token)->value);
+	{
+		if (parseword(&newnode, envp, tree, (*token)->value) == 0)
+			return (0);
+	}
+	return (1);
 }
 
 void	copyarray(char ***tocopy, int size, char *toadd)

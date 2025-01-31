@@ -49,10 +49,10 @@ t_node	*createnode(void);
 int		isredir(int type);
 void	makeredir(t_node **newnode, t_token **token);
 void	addarg(char ***args, int *nowords, char *add);
-void	parseword(t_node **newnode, char **envp, t_node **tree, char *tok);
+int		parseword(t_node **newnode, char **envp, t_node **tree, char *tok);
 void	assignnode(t_node **currentnode, t_node **newnode);
 void	parseredir(t_node **newnode, t_node **tree, t_token **tok);
-void	parsetoken(t_token **token, t_node **tree, char **envp);
+int		parsetoken(t_token **token, t_node **tree, char **envp);
 char	*ft_check_direct_path(char *cmd, char ***cmd_args);
 char	*ft_find_cmd_path(char *cmd, char ***cmd_args, char **envp);
 void	ft_free_split(char ***split);
@@ -61,6 +61,7 @@ void	copyarray(char ***tocopy, int size, char *toadd);
 void	freearray(char **args);
 void	freeredirs(t_redir *redir);
 void	freetree(t_node **tree);
-void	inittree(t_node **tree, t_token *tokens, char **envp);
+int		inittree(t_node **tree, t_token *tokens, char **envp);
+int		check_dir_exists(char *path);
 
 #endif

@@ -15,7 +15,7 @@
 /*temp test define and function*/
 #define EXIT_CMD "exit"
 
-static void	print_tokens(t_token *token_list)
+/*static void	print_tokens(t_token *token_list)
 {
 	t_token	*current;
 	int		i;
@@ -43,7 +43,7 @@ static void	print_tokens(t_token *token_list)
 		current = current->next;
 	}
 	printf("%10s\n", "--End of List--");
-}
+}*/
 
 /*helper functions*/
 static int	handle_empty_input(char *input)
@@ -73,7 +73,12 @@ static void	processtree(t_token	*token, t_shell	*shell, t_sigacts	**sigs)
 
 	tree = createnode();
 	root = tree;
-	inittree(&tree, token, shell->env);
+	if (inittree(&tree, token, shell->env) == 0)
+	{
+		tree = root;
+		freetree(&tree);
+		return ;
+	}
 	tree = root;
 	if (execute(tree, shell->env) == 2)
 	{
@@ -91,8 +96,8 @@ static int	process_input(char *input, t_token **tok, t_shell **shell, t_sigacts 
 {
 	if (tokenize(input, tok, *shell))
 		return (1);
-	if (*tok)
-		print_tokens(*tok);
+	//if (*tok)
+	//	print_tokens(*tok);
 	processtree(*tok, *shell, sigs);
 	return (0);
 }

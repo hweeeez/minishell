@@ -41,7 +41,7 @@ t_node	*createnode(void)
 	return (node);
 }
 
-void	parseword(t_node **newnode, char **envp, t_node **tree, char *tok)
+int	parseword(t_node **newnode, char **envp, t_node **tree, char *tok)
 {
 	char		*word;
 	static int	nowords;
@@ -54,14 +54,27 @@ void	parseword(t_node **newnode, char **envp, t_node **tree, char *tok)
 	word = ft_find_cmd_path(tok, &((*newnode)->args), envp);
 	if (word != NULL)
 	{
-		freearray((*newnode)->args);
-		(*newnode)->args = NULL;
+		if ((*newnode)->args == NULL){
+		//freearray((*newnode)->args);
+		//(*newnode)->args = NULL;
 		copyarray(&(*newnode)->args, nowords, word);
+		}
+		else if (ft_strnstr(tok, (*newnode)->args[0], ft_strlen((*newnode)->args[0])) == 0)
+		{
+			if (check_dir_exists(tok) == 0)
+				return (0);
+			copyarray(&(*newnode)->args, nowords, tok);
+		}
 		free(word);
 	}
 	else
+	{
+		if (check_dir_exists(tok) == 0)
+			return (0);
 		copyarray(&(*newnode)->args, nowords, tok);
+	}
 	nowords++;
+	return (1);
 }
 
 void	parseredir(t_node **newnode, t_node **tree, t_token **tok)

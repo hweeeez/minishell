@@ -26,8 +26,9 @@
 # include <signal.h>
 # include <sys/types.h>
 # include <fcntl.h>
-# include <sys/types.h>
 # include <sys/wait.h>
+# include <errno.h>
+# include <dirent.h>
 /************************************/
 /*			Library includes		*/
 /************************************/
