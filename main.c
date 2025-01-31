@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:45:38 by hui-lim           #+#    #+#             */
-/*   Updated: 2025/01/30 21:33:01 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/31 21:50:50 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,35 @@
 /*temp test define and function*/
 #define EXIT_CMD "exit"
 
-/*static void	print_tokens(t_token *token_list)
-{
-	t_token	*current;
-	int		i;
+// static void	print_tokens(t_token *token_list)
+// {
+// 	t_token	*current;
+// 	int		i;
 
-	i = 1;
-	current = token_list;
-	printf("%10s\n", "Token(s)");
-	while (current)
-	{
-		printf("%-2d[%s], Type: ", i++, current->value);
-		if (current->type == TOKEN_WORD)
-			printf("WORD\n");
-		else if (current->type == TOKEN_PIPE)
-			printf("PIPE\n");
-		else if (current->type == TOKEN_REDIR_IN)
-			printf("REDIR_IN\n");
-		else if (current->type == TOKEN_REDIR_OUT)
-			printf("REDIR_OUT\n");
-		else if (current->type == TOKEN_HEREDOC)
-			printf("HEREDOC\n");
-		else if (current->type == TOKEN_APPEND)
-			printf("APPEND\n");
-		else
-			printf("UNEXPECTED\n");
-		current = current->next;
-	}
-	printf("%10s\n", "--End of List--");
-}*/
+// 	i = 1;
+// 	current = token_list;
+// 	printf("%10s\n", "Token(s)");
+// 	while (current)
+// 	{
+// 		printf("%-2d[%s], Type: ", i++, current->value);
+// 		if (current->type == TOKEN_WORD)
+// 			printf("WORD\n");
+// 		else if (current->type == TOKEN_PIPE)
+// 			printf("PIPE\n");
+// 		else if (current->type == TOKEN_REDIR_IN)
+// 			printf("REDIR_IN\n");
+// 		else if (current->type == TOKEN_REDIR_OUT)
+// 			printf("REDIR_OUT\n");
+// 		else if (current->type == TOKEN_HEREDOC)
+// 			printf("HEREDOC\n");
+// 		else if (current->type == TOKEN_APPEND)
+// 			printf("APPEND\n");
+// 		else
+// 			printf("UNEXPECTED\n");
+// 		current = current->next;
+// 	}
+// 	printf("%10s\n", "--End of List--");
+// }
 
 /*helper functions*/
 static int	handle_empty_input(char *input)
@@ -96,8 +96,8 @@ static int	process_input(char *input, t_token **tok, t_shell **shell, t_sigacts 
 {
 	if (tokenize(input, tok, *shell))
 		return (1);
-	//if (*tok)
-	//	print_tokens(*tok);
+	// if (*tok)
+	// 	print_tokens(*tok);
 	processtree(*tok, *shell, sigs);
 	return (0);
 }

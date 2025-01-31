@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:46:28 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/30 17:15:44 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/31 21:49:51 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,13 @@ t_shell	*init_shell(char **env)
 	shell->env = dup_env(env);
 	if (!shell->env)
 	{
-		free(shell);
+		cleanup_shell(&shell);
+		return (NULL);
+	}
+	shell->cwd = get_working_dir();
+	if (!shell->cwd)
+	{
+		cleanup_shell(&shell);
 		return (NULL);
 	}
 	shell->exit_status = 0;
@@ -73,6 +79,27 @@ void	cleanup_shell(t_shell **shell)
 		return ;
 	if ((*shell)->env)
 		free_env((*shell)->env);
+	if ((*shell)->cwd)
+		free((*shell)->cwd);
 	free(*shell);
 	*shell = NULL;
+}
+
+char	*get_working_dir(void)
+{
+	char	*cwd;
+	char	*dir;
+
+	cwd = getcwd(NULL, 0);
+	if (cwd == NULL)
+	{
+		perror("getcwd failed");
+		return (NULL);
+	}
+	dir = ft_strdup(cwd);
+	free(cwd);
+	if (!dir)
+		return (NULL);
+	printf("Current working directory: %s\n", dir);
+	return (dir);
 }
