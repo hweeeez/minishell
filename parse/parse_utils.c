@@ -51,21 +51,14 @@ int	parseword(t_node **newnode, char **envp, t_node **tree, char *tok)
 		makenewnode(newnode, tree, NODE_COMMAND);
 		nowords = 0;
 	}
-	word = ft_find_cmd_path(tok, &((*newnode)->args), envp);
-	if (word != NULL)
+	if ((*newnode)->args == NULL)
 	{
-		if ((*newnode)->args == NULL){
-		//freearray((*newnode)->args);
-		//(*newnode)->args = NULL;
-		copyarray(&(*newnode)->args, nowords, word);
-		}
-		else if (ft_strnstr(tok, (*newnode)->args[0], ft_strlen((*newnode)->args[0])) == 0)
+		word = ft_find_cmd_path(tok, &((*newnode)->args), envp);
+		if (word != NULL && (*newnode)->args == NULL)
 		{
-			if (check_dir_exists(tok) == 0)
-				return (0);
-			copyarray(&(*newnode)->args, nowords, tok);
+			copyarray(&(*newnode)->args, nowords, word);
+			free(word);
 		}
-		free(word);
 	}
 	else
 	{
