@@ -34,7 +34,7 @@ void	init_exesigs(t_sigs **sigs)
 	(*sigs)->sigint.sa_flags = 0;//SA_SIGINFO;
 	// int errvalue = 0;
 	// union sigval value;
-    // value.sival_ptr = &errvalue;
+	// value.sival_ptr = &errvalue;
 	// shell->exit_status = errvalue;
 	ft_memset(&(*sigs)->quit, 0, sizeof((*sigs)->quit));
 	(*sigs)->quit.sa_handler = NULL;

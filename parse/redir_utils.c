@@ -78,7 +78,7 @@ void	makeredir(t_node **newnode, t_token **token)
 		(*newnode)->rootredir = redir;
 	}
 	else
-	{	
+	{
 		(*newnode)->redirs->next = redir;
 		(*newnode)->redirs = (*newnode)->redirs->next;
 	}

@@ -20,10 +20,21 @@ typedef struct s_shell
 	int		interactive;
 }	t_shell;
 
-t_shell	*init_shell(char **env);
-void	cleanup_shell(t_shell **shell);
-char	*get_working_dir(void);
-char	*get_env_value(t_shell *shell, const char *key);
-int		update_env(t_shell *shell, const char *key, const char *value);
+typedef enum e_file_type
+{
+	TYPE_NONE,
+	TYPE_FILE,
+	TYPE_DIR,
+	TYPE_EXECUTABLE
+}	t_file_type;
+
+t_shell		*init_shell(char **env);
+void		cleanup_shell(t_shell **shell);
+char		*get_working_dir(void);
+char		*get_env_value(t_shell *shell, const char *key);
+int			update_env(t_shell *shell, const char *key, const char *value);
+t_file_type	check_path_type(const char *path);
+int			is_executable(const char *path);
+int			has_permission(const char *path, int mode);
 
 #endif

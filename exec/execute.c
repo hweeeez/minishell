@@ -15,7 +15,7 @@
 void	has_redir(t_exe **exe, t_node *node)
 {
 	if (node->left->rootredir != NULL)
-	{	
+	{
 		get_redir(node->left->rootredir, exe);
 	}
 }
@@ -115,7 +115,7 @@ void	executechild(t_node *node, t_exe **exe, char **envp)
 	}
 	c = node->left->args;
 	if (execve(c[0], c, envp) == -1)
-	{	
+	{
 		printf("Command not found!\n");
 		exit(0);
 	}

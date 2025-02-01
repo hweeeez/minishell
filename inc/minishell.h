@@ -25,6 +25,7 @@
 # include <unistd.h>
 # include <signal.h>
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <errno.h>
@@ -64,7 +65,20 @@
 # define FATAL_ERR_SIG 128
 # define HEREDOC_FILE "hd.txt"
 
-/*These should be moved elsewhere?*/
+/*
+typedef struct s_shell	t_shell;
+typedef enum e_file_type	t_file_type;
+typedef struct s_sigs	t_sigs;
+typedef struct s_exe	t_exe;
+typedef struct s_tokenizer	t_tokenizer;
+typedef enum e_node_type	t_node_type;
+typedef struct s_redir	t_redir;
+typedef struct s_node	t_node;
+typedef struct s_sigacts	t_sigacts;
+typedef struct s_token	t_token;
+typedef struct s_tokenizer	t_tokenizer;
+*/
+/*
 enum	e_cmd_type
 {
 	EXE,
@@ -77,6 +91,6 @@ enum	e_cmd_type
 	DOUBLE_QUOTE,
 	SINGLE_QUOTE,
 	DOLLAR_SIGN,
-};
+};*/
 
 #endif
