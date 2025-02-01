@@ -50,14 +50,17 @@ char	*ft_check_direct_path(char *cmd, char ***cmd_args)
 		path = try_full_path(cmd);
 		if (path)
 			return (set_arg_with_full_path(cmd_args, path));
-		if (access((*cmd_args)[0], F_OK) == 0)
+		if ((*cmd_args != NULL))
 		{
-			if (access((*cmd_args)[0], X_OK) == 0)
+			if (access((*cmd_args)[0], F_OK) == 0)
 			{
-				path = ft_strdup((*cmd_args)[0]);
-				return (path);
+				if (access((*cmd_args)[0], X_OK) == 0)
+				{
+					path = ft_strdup((*cmd_args)[0]);
+					return (path);
+				}
+				perror((*cmd_args)[0]);
 			}
-			perror((*cmd_args)[0]);
 		}
 		else
 			printf("%s: not found\n", cmd);

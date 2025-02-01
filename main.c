@@ -80,9 +80,9 @@ static void	processtree(t_token	*token, t_shell	*shell, t_sigacts	**sigs)
 		return ;
 	}
 	tree = root;
-	if (execute(tree, shell->env) == 2)
+	if (execute(tree, shell) == 2)
 	{
-		if (ft_heredoc(tree, shell->env) > 0)
+		if (ft_heredoc(tree, shell) > 0)
 		{
 			sigaction(SIGINT, &(*sigs)->sa, NULL);
 			rl_event_hook = NULL;

@@ -73,7 +73,7 @@ int	event(void)
 	return (0);
 }
 
-int	ft_heredoc(t_node *node, char **envp)
+int	ft_heredoc(t_node *node, t_shell *shell)
 {
 	int					filefd;
 	t_redir				*redirs;
@@ -92,7 +92,7 @@ int	ft_heredoc(t_node *node, char **envp)
 	node->left->redirs = redirs->next;
 	initexenode(&exe);
 	exe->puts[0] = filefd;
-	exe_commands(node, &exe, envp);
+	exe_commands(node, &exe, shell);
 	close (filefd);
 	unlink(HEREDOC_FILE);
 	free(exe);

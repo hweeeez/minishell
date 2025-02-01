@@ -39,7 +39,7 @@ static int	checkif_builtin(char *cmd)
 	return (0);
 }
 
-int	execute(t_node *node, char **envp)
+int	execute(t_node *node, t_shell *shell)
 {
 	t_node	*left;
 	t_exe	*exe;
@@ -57,14 +57,14 @@ int	execute(t_node *node, char **envp)
 					return (2);
 			}
 			initexenode(&exe);
-			exe_commands(node, &exe, envp);
+			exe_commands(node, &exe, shell);
 			free(exe);
 		}
 	}
 	return (0);
 }
 
-int	exe_commands(t_node *node, t_exe **exe, char **envp)
+int	exe_commands(t_node *node, t_exe **exe, t_shell *shell)
 {
 	t_sigs	*sigs;
 
@@ -80,13 +80,13 @@ int	exe_commands(t_node *node, t_exe **exe, char **envp)
 	if ((*exe)->pid == 0)
 	{
 		do_sigaction(SIGQUIT, SIGINT, sigs);
-		executechild(node, exe, envp);
+		executechild(node, exe, shell->env);
 	}
 	else if ((*exe)->pid > 0)
 		sigaction(SIGINT, &(sigs->ignore), NULL);
 	closeputs(exe);
 	if (node->right != NULL)
-		exe_rightnode(exe, node->right, envp);
+		exe_rightnode(exe, node->right, shell);
 	wait_children(exe);
 	free(sigs);
 	return ((*exe)->pid);

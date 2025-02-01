@@ -51,14 +51,14 @@ void	closeputs(t_exe **exe)
 		close((*exe)->puts[1]);
 }
 
-void	exe_rightnode(t_exe **exe, t_node *right, char **envp)
+void	exe_rightnode(t_exe **exe, t_node *right, t_shell *shell)
 {
 	t_exe	*childexe;
 
 	close((*exe)->pipefd[1]);
 	initexenode(&childexe);
 	childexe->puts[0] = (*exe)->pipefd[0];
-	(*exe)->childpid = exe_commands(right, &childexe, envp);
+	(*exe)->childpid = exe_commands(right, &childexe, shell);
 	free(childexe);
 }
 
