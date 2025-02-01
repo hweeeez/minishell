@@ -135,6 +135,13 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		input = readline(PROMPT);
+		/*if (ft_strcmp(input, "$?") == 1)
+		{
+			printf("%d\n", shell->exit_status);
+			add_history(input);
+			free(input);
+			continue;
+		}*/
 		if (handle_empty_input(input))
 			return (ms_exit(input, &token, &shell, &sigs));
 		if (handle_exit_command(input))

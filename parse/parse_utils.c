@@ -59,6 +59,11 @@ int	parseword(t_node **newnode, char **envp, t_node **tree, char *tok)
 			copyarray(&(*newnode)->args, nowords, word);
 			free(word);
 		}
+		else if (word == NULL)
+		{
+			ft_putstr_fd("Command not found!\n", 2);
+			return (0);
+		}
 	}
 	else
 	{
