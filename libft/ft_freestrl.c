@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   ft_freestrl.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 19:26:42 by myuen             #+#    #+#             */
-/*   Updated: 2025/02/01 19:43:21 by myuen            ###   ########.fr       */
+/*   Created: 2025/02/01 18:43:21 by myuen             #+#    #+#             */
+/*   Updated: 2025/02/01 18:45:12 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#include "libft.h"
 
-typedef struct s_shell
+void	freestrl(char **str_array)
 {
-	char	**env;
-	int		exit_status;
-	int		interactive;
-}	t_shell;
+	size_t	i;
 
-t_shell	*init_shell(char **env);
-void	cleanup_shell(t_shell **shell);
-char	*get_working_dir(void);
-char	*get_env_value(t_shell *shell, const char *key);
-int		update_env(t_shell *shell, const char *key, const char *value);
-
-#endif
+	if (str_array)
+	{
+		i = 0;
+		while (str_array[i])
+			free(str_array[i++]);
+		free(str_array);
+	}
+}

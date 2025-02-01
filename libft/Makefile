@@ -6,7 +6,7 @@
 #    By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 20:32:57 by myuen             #+#    #+#              #
-#    Updated: 2025/01/16 20:59:27 by myuen            ###   ########.fr        #
+#    Updated: 2025/02/01 18:43:02 by myuen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ MAN_SRC = ft_atoi.c ft_isalnum.c ft_isdigit.c ft_memchr.c ft_memmove.c\
 		  ft_strlcat.c ft_strmapi.c ft_strrchr.c ft_tolower.c\
 		  ft_isspace.c ft_iswithin.c ft_isblank.c ft_strtol.c\
 		  ft_isvalid_integer_str.c ft_abs.c ft_chartostr.c\
-		  ft_strndup.c ft_strcmp.c ft_strcpy.c
+		  ft_strndup.c ft_strcmp.c ft_strcpy.c ft_freestrl.c\
+		  ft_dupstrl.c\
 
 # Object directory and object files
 OBJ_DIR = obj

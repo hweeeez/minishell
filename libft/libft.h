@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 19:28:09 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/16 21:10:57 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/01 18:45:37 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 int		ft_strcmp(char *str1, char *str2);
 char	*ft_strcpy(char *src, int size);
+char	**dupstrl(char **str);
+void	freestrl(char **str_array);
 /*====================================
 		Memory functions - 7
 =====================================*/
