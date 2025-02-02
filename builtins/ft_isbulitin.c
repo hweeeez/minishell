@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_isbulitin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:56:24 by myuen             #+#    #+#             */
-/*   Updated: 2025/02/02 21:01:40 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/02 20:39:06 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_env(t_shell *shell)
+int	isbuiltin(char *value)
 {
-	int	i;
-
-	ft_putstr_fd("--minishell env--\n", STDOUT_FILENO);
-	i = 0;
-	if (!shell || !shell->env)
-		return (1);
-	while (shell->env[i])
+	if (value && *value)
 	{
-		ft_putendl_fd(shell->env[i], STDOUT_FILENO);
-		i++;
+		if (ft_strcmp(value, "echo") == 1)
+			return (1);
+		if (ft_strcmp(value, "cd") == 1)
+			return (1);
+		if (ft_strcmp(value, "pwd") == 1)
+			return (1);
+		if (ft_strcmp(value, "export") == 1)
+			return (1);
+		if (ft_strcmp(value, "unset") == 1)
+			return (1);
+		if (ft_strcmp(value, "env") == 1)
+			return (1);
+	//	if (ft_strcmp(value, "exit") == 1)
+	//		return (1);
 	}
 	return (0);
 }

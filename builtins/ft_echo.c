@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 18:19:26 by myuen             #+#    #+#             */
-/*   Updated: 2025/02/02 18:11:31 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/02 21:01:31 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_echo(char **args)
 
 	print_newline = 1;
 	i = 1;
-	printf("minishell echo\n");
+	ft_putstr_fd("--minishell echo--\n", STDOUT_FILENO);
 	while (args[i] && is_n_flag(args[i]))
 	{
 		print_newline = 0;

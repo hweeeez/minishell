@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:56:24 by myuen             #+#    #+#             */
-/*   Updated: 2025/02/01 21:41:39 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/02 21:02:30 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	ft_export(t_shell *shell, char **args)
 	int	i;
 	int	status;
 
+	ft_putstr_fd("--minishell export--\n", STDOUT_FILENO);
 	if (!args[1])
 	{
 		print_env(shell);

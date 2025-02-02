@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:56:24 by myuen             #+#    #+#             */
-/*   Updated: 2025/02/01 20:13:27 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/02 21:02:47 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	ft_cd(t_shell *shell, char *path)
 	char	*new_path;
 	char	*old_pwd;
 
+	ft_putstr_fd("--minishell cd--\n", STDOUT_FILENO);
 	new_path = get_new_cd_path(shell, path);
 	if (!new_path && path && ft_strcmp(path, ".") != 0)
 		return (1);

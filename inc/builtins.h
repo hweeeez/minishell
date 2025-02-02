@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:26:42 by myuen             #+#    #+#             */
-/*   Updated: 2025/02/01 21:22:46 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/02 20:33:21 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ char	*get_new_cd_path(t_shell *shell, char *path);
 int		ft_env(t_shell *shell);
 int		ft_export(t_shell *shell, char **args);
 int		ft_unset(t_shell *shell, char **args);
+int		isbuiltin(char *value);
 
 #endif
