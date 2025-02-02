@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:11:22 by hui-lim           #+#    #+#             */
-/*   Updated: 2025/02/02 18:12:55 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/02 21:17:59 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,23 @@ void	has_redir(t_exe **exe, t_node *node)
 	}
 }
 
-static int	checkif_builtin(char **cmd)
+static int	checkif_builtin(t_shell **shell, char **cmd)
 {
 	if (ft_strcmp(cmd[0], "echo") == 1)
 		return (ft_echo(cmd));
 	if (ft_strcmp(cmd[0], "cd") == 1)
-		return (printf("%s\n", "run cd"), 1);
+		return (ft_cd(*shell, cmd[1]));
 	if (ft_strcmp(cmd[0], "pwd") == 1)
-		return ((printf("%s\n", "run pwd")), 1);
+		return (ft_pwd());
 	if (ft_strcmp(cmd[0], "export") == 1)
-		return (printf("%s\n", "run export"), 1);
+		return (ft_export(*shell, cmd));
 	if (ft_strcmp(cmd[0], "unset") == 1)
-		return (printf("%s\n", "run unset"), 1);
+		return (ft_unset(*shell, cmd));
 	if (ft_strcmp(cmd[0], "env") == 1)
-		return (printf("%s\n", "run env"), 1);
+		return (ft_env(*shell));
 	if (ft_strcmp(cmd[0], "exit") == 1)
 		return (printf("%s\n", "run exit"), 1);
-	return (0);
+	return (-1);
 }
 
 int	execute(t_node *node, t_shell **shell)
@@ -49,7 +49,15 @@ int	execute(t_node *node, t_shell **shell)
 		return (0);
 	if (node->type == 0)
 	{
-		if (checkif_builtin(left->args) == 0)
+		if (checkif_builtin(shell, left->args) != -1)
+		{
+			if (node->right != NULL)
+			{
+				node = node->right;
+				left = node->left;
+			}
+		}
+		if (left != NULL && !isbuiltin(left->args[0]))
 		{
 			if (left->rootredir != NULL)
 			{

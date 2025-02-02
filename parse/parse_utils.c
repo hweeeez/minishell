@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hui-lim <hui-lim@student.42singapore.      +#+  +:+       +#+        */
+/*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:11:40 by hui-lim           #+#    #+#             */
-/*   Updated: 2025/01/14 21:11:42 by hui-lim          ###   ########.fr       */
+/*   Updated: 2025/02/02 20:53:08 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ int	parseword(t_node **newnode, char **envp, t_node **tree, char *tok)
 	}
 	if ((*newnode)->args == NULL)
 	{
-		word = ft_find_cmd_path(tok, &((*newnode)->args), envp);
+		if (isbuiltin(tok))
+			word = ft_strdup(tok);
+		else
+			word = ft_find_cmd_path(tok, &((*newnode)->args), envp);
 		if (word != NULL && (*newnode)->args == NULL)
 		{
 			copyarray(&(*newnode)->args, nowords, word);
@@ -61,7 +64,7 @@ int	parseword(t_node **newnode, char **envp, t_node **tree, char *tok)
 		}
 		else if (word == NULL)
 		{
-			ft_putstr_fd("Command not found!\n", 2);
+			ft_putstr_fd("Command not found!\n", STDERR_FILENO);
 			return (0);
 		}
 	}

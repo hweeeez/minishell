@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 18:56:24 by myuen             #+#    #+#             */
-/*   Updated: 2025/02/01 21:42:31 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/02 21:02:20 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	ft_unset(t_shell *shell, char **args)
 {
 	int	i;
 
+	ft_putstr_fd("--minishell unset--\n", STDOUT_FILENO);
 	i = 1;
 	while (args[i])
 	{
