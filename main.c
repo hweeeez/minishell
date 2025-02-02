@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:45:38 by hui-lim           #+#    #+#             */
-/*   Updated: 2025/02/02 18:19:16 by myuen            ###   ########.fr       */
+/*   Updated: 2025/01/31 21:50:50 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,13 +135,13 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		input = readline(PROMPT);
-		// if (ft_strcmp(input, "$?") == 1)
-		// {
-		// 	printf("%d\n", shell->exit_status);
-		// 	add_history(input);
-		// 	free(input);
-		// 	continue;
-		// }
+		if (input != NULL && ft_strcmp(input, "$?") == 1)
+		{
+			printf("%d\n", shell->exit_status);
+			add_history(input);
+			free(input);
+			continue;
+		}
 		if (handle_empty_input(input))
 			return (ms_exit(input, &token, &shell, &sigs));
 		if (handle_exit_command(input))
