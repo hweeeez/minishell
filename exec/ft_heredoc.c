@@ -73,7 +73,7 @@ int	event(void)
 	return (0);
 }
 
-int	ft_heredoc(t_node *node, t_shell *shell)
+int	ft_heredoc(t_node *node, t_shell **shell)
 {
 	int					filefd;
 	t_redir				*redirs;

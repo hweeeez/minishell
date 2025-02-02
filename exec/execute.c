@@ -20,26 +20,26 @@ void	has_redir(t_exe **exe, t_node *node)
 	}
 }
 
-static int	checkif_builtin(char *cmd)
+static int	checkif_builtin(char **cmd)
 {
-	if (ft_strcmp(cmd, "echo") == 1)
-		return ((printf("%s\n", "run echo")), 1);
-	if (ft_strcmp(cmd, "cd") == 1)
+	if (ft_strcmp(cmd[0], "echo") == 1)
+		return (ft_echo(cmd));
+	if (ft_strcmp(cmd[0], "cd") == 1)
 		return (printf("%s\n", "run cd"), 1);
-	if (ft_strcmp(cmd, "pwd") == 1)
+	if (ft_strcmp(cmd[0], "pwd") == 1)
 		return ((printf("%s\n", "run pwd")), 1);
-	if (ft_strcmp(cmd, "export") == 1)
+	if (ft_strcmp(cmd[0], "export") == 1)
 		return (printf("%s\n", "run export"), 1);
-	if (ft_strcmp(cmd, "unset") == 1)
+	if (ft_strcmp(cmd[0], "unset") == 1)
 		return (printf("%s\n", "run unset"), 1);
-	if (ft_strcmp(cmd, "env") == 1)
+	if (ft_strcmp(cmd[0], "env") == 1)
 		return (printf("%s\n", "run env"), 1);
-	if (ft_strcmp(cmd, "exit") == 1)
+	if (ft_strcmp(cmd[0], "exit") == 1)
 		return (printf("%s\n", "run exit"), 1);
 	return (0);
 }
 
-int	execute(t_node *node, t_shell *shell)
+int	execute(t_node *node, t_shell **shell)
 {
 	t_node	*left;
 	t_exe	*exe;
@@ -49,7 +49,7 @@ int	execute(t_node *node, t_shell *shell)
 		return (0);
 	if (node->type == 0)
 	{
-		if (checkif_builtin(left->args[0]) == 0)
+		if (checkif_builtin(left->args) == 0)
 		{
 			if (left->rootredir != NULL)
 			{
@@ -64,7 +64,7 @@ int	execute(t_node *node, t_shell *shell)
 	return (0);
 }
 
-int	exe_commands(t_node *node, t_exe **exe, t_shell *shell)
+int	exe_commands(t_node *node, t_exe **exe, t_shell **shell)
 {
 	t_sigs	*sigs;
 
@@ -80,14 +80,14 @@ int	exe_commands(t_node *node, t_exe **exe, t_shell *shell)
 	if ((*exe)->pid == 0)
 	{
 		do_sigaction(SIGQUIT, SIGINT, sigs);
-		executechild(node, exe, shell->env);
+		executechild(node, exe, (*shell)->env);
 	}
 	else if ((*exe)->pid > 0)
 		sigaction(SIGINT, &(sigs->ignore), NULL);
 	closeputs(exe);
 	if (node->right != NULL)
 		exe_rightnode(exe, node->right, shell);
-	wait_children(exe);
+	(*shell)->exit_status = wait_children(exe);
 	free(sigs);
 	return ((*exe)->pid);
 }

@@ -66,14 +66,14 @@ static int	handle_exit_command(char *input)
 	return (0);
 }
 
-static void	processtree(t_token	*token, t_shell	*shell, t_sigacts	**sigs)
+static void	processtree(t_token	*token, t_shell	**shell, t_sigacts	**sigs)
 {
 	t_node	*tree;
 	t_node	*root;
 
 	tree = createnode();
 	root = tree;
-	if (inittree(&tree, token, shell->env) == 0)
+	if (inittree(&tree, token, (*shell)->env) == 0)
 	{
 		tree = root;
 		freetree(&tree);
@@ -98,7 +98,7 @@ static int	process_input(char *input, t_token **tok, t_shell **shell, t_sigacts 
 		return (1);
 	// if (*tok)
 	// 	print_tokens(*tok);
-	processtree(*tok, *shell, sigs);
+	processtree(*tok, shell, sigs);
 	return (0);
 }
 
@@ -135,13 +135,13 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		input = readline(PROMPT);
-		/*if (ft_strcmp(input, "$?") == 1)
-		{
-			printf("%d\n", shell->exit_status);
-			add_history(input);
-			free(input);
-			continue;
-		}*/
+		// if (ft_strcmp(input, "$?") == 1)
+		// {
+		// 	printf("%d\n", shell->exit_status);
+		// 	add_history(input);
+		// 	free(input);
+		// 	continue;
+		// }
 		if (handle_empty_input(input))
 			return (ms_exit(input, &token, &shell, &sigs));
 		if (handle_exit_command(input))

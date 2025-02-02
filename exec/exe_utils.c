@@ -51,7 +51,7 @@ void	closeputs(t_exe **exe)
 		close((*exe)->puts[1]);
 }
 
-void	exe_rightnode(t_exe **exe, t_node *right, t_shell *shell)
+void	exe_rightnode(t_exe **exe, t_node *right, t_shell **shell)
 {
 	t_exe	*childexe;
 
