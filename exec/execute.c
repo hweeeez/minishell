@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   traversetree.c                                     :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hui-lim <hui-lim@student.42singapore.      +#+  +:+       +#+        */
+/*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:11:22 by hui-lim           #+#    #+#             */
-/*   Updated: 2025/01/14 21:11:24 by hui-lim          ###   ########.fr       */
+/*   Updated: 2025/02/02 18:12:55 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ void	has_redir(t_exe **exe, t_node *node)
 	}
 }
 
-static int	checkif_builtin(char *cmd)
+static int	checkif_builtin(char **cmd)
 {
-	if (ft_strcmp(cmd, "echo") == 1)
-		return ((printf("%s\n", "run echo")), 1);
-	if (ft_strcmp(cmd, "cd") == 1)
+	if (ft_strcmp(cmd[0], "echo") == 1)
+		return (ft_echo(cmd));
+	if (ft_strcmp(cmd[0], "cd") == 1)
 		return (printf("%s\n", "run cd"), 1);
-	if (ft_strcmp(cmd, "pwd") == 1)
+	if (ft_strcmp(cmd[0], "pwd") == 1)
 		return ((printf("%s\n", "run pwd")), 1);
-	if (ft_strcmp(cmd, "export") == 1)
+	if (ft_strcmp(cmd[0], "export") == 1)
 		return (printf("%s\n", "run export"), 1);
-	if (ft_strcmp(cmd, "unset") == 1)
+	if (ft_strcmp(cmd[0], "unset") == 1)
 		return (printf("%s\n", "run unset"), 1);
-	if (ft_strcmp(cmd, "env") == 1)
+	if (ft_strcmp(cmd[0], "env") == 1)
 		return (printf("%s\n", "run env"), 1);
-	if (ft_strcmp(cmd, "exit") == 1)
+	if (ft_strcmp(cmd[0], "exit") == 1)
 		return (printf("%s\n", "run exit"), 1);
 	return (0);
 }
@@ -49,7 +49,7 @@ int	execute(t_node *node, t_shell *shell)
 		return (0);
 	if (node->type == 0)
 	{
-		if (checkif_builtin(left->args[0]) == 0)
+		if (checkif_builtin(left->args) == 0)
 		{
 			if (left->rootredir != NULL)
 			{

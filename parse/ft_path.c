@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 14:57:34 by myuen             #+#    #+#             */
-/*   Updated: 2025/01/30 21:52:06 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/02 17:49:42 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,28 +61,29 @@ static char	*try_path_with_cmd(char *dir, char *cmd)
 static char	*check_path_directories(char **paths, char *cmd)
 {
 	char	*cmd_path;
-	char	**args;
+	//char	**args;
 	int		i;
 
-	args = ft_split(cmd, ' ');
-	if (!args)
+	// args = ft_split(cmd, ' ');
+	// if (!args)
+	// {
+	// 	ft_free_split(&paths);
+	// 	return (NULL);
+	// }
+	i = 0;
+	while (paths[i])
 	{
-		ft_free_split(&paths);
-		return (NULL);
-	}
-	i = -1;
-	while (paths[++i])
-	{
-		cmd_path = try_path_with_cmd(paths[i], args[0]);
+		cmd_path = try_path_with_cmd(paths[i], cmd);
 		if (cmd_path)
 		{
 			ft_free_split(&paths);
-			ft_free_split(&args);
+			// ft_free_split(&args);
 			return (cmd_path);
 		}
+		i++;
 	}
 	ft_free_split(&paths);
-	ft_free_split(&args);
+	// ft_free_split(&args);
 	return (NULL);
 }
 
