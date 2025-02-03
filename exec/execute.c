@@ -95,7 +95,7 @@ int	exe_commands(t_node *node, t_exe **exe, t_shell **shell)
 	closeputs(exe);
 	if (node->right != NULL)
 		exe_rightnode(exe, node->right, shell);
-	(*shell)->exit_status = wait_children(exe);
+	wait_children(exe, shell);
 	free(sigs);
 	return ((*exe)->pid);
 }

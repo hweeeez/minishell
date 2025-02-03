@@ -30,12 +30,12 @@ typedef struct s_exe
 	int		puts[2];
 }				t_exe;
 
-void	ft_coredump_msg(int status);
+void	ft_coredump_msg(int status, int *exit_status);
 void	init_exesigs(t_sigs **sigs);
 void	do_sigaction(int sig1, int sig2, t_sigs *sigs);
 int		execute(t_node *node, t_shell **shell);
 int		exe_commands(t_node *node, t_exe **exe, t_shell **shell);
-int		wait_children(t_exe **exe);
+int		wait_children(t_exe **exe, t_shell **shell);
 void	closeputs(t_exe **exe);
 void	initexenode(t_exe **exe);
 void	executechild(t_node *node, t_exe **exe, char **envp);
