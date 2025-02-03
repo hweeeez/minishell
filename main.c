@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 18:45:38 by hui-lim           #+#    #+#             */
-/*   Updated: 2025/02/02 18:19:16 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/03 18:19:38 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,20 @@ static int	handle_exit_command(char *input)
 	return (0);
 }
 
+static int	ms_exit(char *input, t_token **tok, t_shell **shell, t_sigacts **sig)
+{
+	int	exit_status;
+
+	exit_status = (*shell)->exit_status;
+	free(input);
+	input = NULL;
+	rl_clear_history();
+	free_token_list(tok);
+	cleanup_shell(shell);
+	free(*sig);
+	return (exit_status);
+}
+
 static void	processtree(t_token	*token, t_shell	**shell, t_sigacts	**sigs)
 {
 	t_node	*tree;
@@ -92,28 +106,32 @@ static void	processtree(t_token	*token, t_shell	**shell, t_sigacts	**sigs)
 }
 
 /*Edit this function to add more features when minishell is run*/
-static int	process_input(char *input, t_token **tok, t_shell **shell, t_sigacts **sigs)
+static int	minishell_loop(char *input, t_token **tok, t_shell **shell, t_sigacts **sigs)
 {
-	if (tokenize(input, tok, *shell))
-		return (1);
-	// if (*tok)
-	// 	print_tokens(*tok);
-	processtree(*tok, shell, sigs);
+	while (1)
+	{
+		input = readline(PROMPT);
+		// if (ft_strcmp(input, "$?") == 1)
+		// {
+		// 	printf("%d\n", shell->exit_status);
+		// 	add_history(input);
+		// 	free(input);
+		// 	continue;
+		// }
+		if (handle_empty_input(input))
+			return (ms_exit(input, tok, shell, sigs));
+		if (handle_exit_command(input))
+			return (ms_exit(input, tok, shell, sigs));
+		add_history(input);
+		if (tokenize(input, tok, *shell))
+			return (1);
+		// if (*tok)
+		// 	print_tokens(*tok);
+		processtree(*tok, shell, sigs);
+		free(input);
+		//free_token_list(&token);
+	}
 	return (0);
-}
-
-static int	ms_exit(char *input, t_token **tok, t_shell **shell, t_sigacts **sig)
-{
-	int	exit_status;
-
-	exit_status = (*shell)->exit_status;
-	free(input);
-	input = NULL;
-	rl_clear_history();
-	free_token_list(tok);
-	cleanup_shell(shell);
-	free(*sig);
-	return (exit_status);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -132,23 +150,5 @@ int	main(int argc, char **argv, char **env)
 		return (ms_exit(input, &token, &shell, &sigs));
 	if (setup_signals(&sigs) == 1)
 		return (ms_exit(input, &token, &shell, &sigs));
-	while (1)
-	{
-		input = readline(PROMPT);
-		// if (ft_strcmp(input, "$?") == 1)
-		// {
-		// 	printf("%d\n", shell->exit_status);
-		// 	add_history(input);
-		// 	free(input);
-		// 	continue;
-		// }
-		if (handle_empty_input(input))
-			return (ms_exit(input, &token, &shell, &sigs));
-		if (handle_exit_command(input))
-			return (ms_exit(input, &token, &shell, &sigs));
-		add_history(input);
-		process_input(input, &token, &shell, &sigs);
-		free(input);
-		//free_token_list(&token);
-	}
+	return (minishell_loop(input, &token, &shell, &sigs));
 }

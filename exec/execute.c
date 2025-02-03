@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 21:11:22 by hui-lim           #+#    #+#             */
-/*   Updated: 2025/02/02 21:17:59 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/03 15:54:02 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	checkif_builtin(t_shell **shell, char **cmd)
 	if (ft_strcmp(cmd[0], "env") == 1)
 		return (ft_env(*shell));
 	if (ft_strcmp(cmd[0], "exit") == 1)
-		return (printf("%s\n", "run exit"), 1);
+		return (ft_exit(*shell, cmd));
 	return (-1);
 }
 
