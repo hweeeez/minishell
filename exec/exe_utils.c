@@ -18,11 +18,10 @@ void	ft_coredump_msg(int status, int *exit_status)
 	{
 		if (WCOREDUMP(status))
 		{
-			ft_putnbr_fd (WTERMSIG(status), 1);
-			//write(1, "Quit (core dumped)", 18);
+			write(1, "Quit (core dumped)", 18);
+			(*exit_status) = ENOTRECOVERABLE;
 		}
 		write (1, "\n", 1);
-		(*exit_status) = ENOTRECOVERABLE;
 	}
 }
 

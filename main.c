@@ -113,7 +113,7 @@ static int	minishell_loop(char *input, t_token **tok, t_shell **shell, t_sigacts
 		input = readline(PROMPT);
 		// if (ft_strcmp(input, "$?") == 1)
 		// {
-		// 	printf("%d\n", shell->exit_status);
+		// 	printf("%d\n", (*shell)->exit_status);
 		// 	add_history(input);
 		// 	free(input);
 		// 	continue;

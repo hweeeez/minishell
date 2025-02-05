@@ -20,25 +20,6 @@ void	has_redir(t_exe **exe, t_node *node)
 	}
 }
 
-int	checkif_builtin(t_shell **shell, char **cmd)
-{
-	if (ft_strcmp(cmd[0], "echo") == 1)
-		return (ft_echo(cmd), 1);
-	if (ft_strcmp(cmd[0], "cd") == 1)
-		return (ft_cd(*shell, cmd[1]));
-	if (ft_strcmp(cmd[0], "pwd") == 1)
-		return (ft_pwd());
-	if (ft_strcmp(cmd[0], "export") == 1)
-		return (ft_export(*shell, cmd));
-	if (ft_strcmp(cmd[0], "unset") == 1)
-		return (ft_unset(*shell, cmd));
-	if (ft_strcmp(cmd[0], "env") == 1)
-		return (ft_env(*shell));
-	if (ft_strcmp(cmd[0], "exit") == 1)
-		return (ft_exit(*shell, cmd));
-	return (-1);
-}
-
 int	execute(t_node *node, t_shell **shell)
 {
 	t_node	*left;
@@ -49,7 +30,7 @@ int	execute(t_node *node, t_shell **shell)
 		return (0);
 	if (node->type == 0)
 	{
-		if (isbuiltin(left->args[0]) != -1)
+		if (isbuiltin(left->args[0]) == 1)
 		{
 			if (node->right == NULL)
 			{
@@ -99,7 +80,7 @@ int	exe_commands(t_node *node, t_exe **exe, t_shell **shell)
 	else if ((*exe)->pid > 0)
 		sigaction(SIGINT, &(sigs->ignore), NULL);
 	closeputs(exe);
-		wait_children(exe, shell);
+	wait_children(exe, shell);
 	if (node->right != NULL)
 		exe_rightnode(exe, node->right, shell);
 	free(sigs);

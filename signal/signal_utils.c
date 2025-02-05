@@ -15,9 +15,6 @@
 static void	quitchild(int sig)//, siginfo_t *info, void *ucontext)
 {
 	(void) sig;
-	//(void)ucontext;
-	// int *errvalue = (int *)info->si_value.sival_ptr;
-	// *errvalue = info->si_errno;
 	exit(0);
 }
 
@@ -31,11 +28,7 @@ void	init_exesigs(t_sigs **sigs)
 	ft_memset(&(*sigs)->sigint, 0, sizeof((*sigs)->sigint));
 	(*sigs)->sigint.sa_handler = quitchild;
 	sigemptyset(&((*sigs)->sigint).sa_mask);
-	(*sigs)->sigint.sa_flags = 0;//SA_SIGINFO;
-	// int errvalue = 0;
-	// union sigval value;
-	// value.sival_ptr = &errvalue;
-	// shell->exit_status = errvalue;
+	(*sigs)->sigint.sa_flags = 0;
 	ft_memset(&(*sigs)->quit, 0, sizeof((*sigs)->quit));
 	(*sigs)->quit.sa_handler = NULL;
 	sigemptyset(&((*sigs)->quit).sa_mask);
