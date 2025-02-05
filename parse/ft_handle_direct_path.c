@@ -56,9 +56,9 @@ char	*ft_check_direct_path(char *cmd, char ***cmd_args)
 				path = ft_strdup((*cmd_args)[0]);
 				return (path);
 			}
-		}
-		else
-			perror((*cmd_args)[0]);
+			else
+				perror((*cmd_args)[0]);
+		}	
 	}
 	return (NULL);
 }

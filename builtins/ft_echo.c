@@ -46,6 +46,7 @@ int	ft_echo(char **args)
 	ft_putstr_fd("--minishell echo--\n", STDOUT_FILENO);
 	while (args[i] && is_n_flag(args[i]))
 	{
+		ft_putstr_fd(args[i], STDOUT_FILENO);
 		print_newline = 0;
 		i++;
 	}

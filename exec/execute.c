@@ -20,10 +20,10 @@ void	has_redir(t_exe **exe, t_node *node)
 	}
 }
 
-static int	checkif_builtin(t_shell **shell, char **cmd)
+int	checkif_builtin(t_shell **shell, char **cmd)
 {
 	if (ft_strcmp(cmd[0], "echo") == 1)
-		return (ft_echo(cmd));
+		return (ft_echo(cmd), 1);
 	if (ft_strcmp(cmd[0], "cd") == 1)
 		return (ft_cd(*shell, cmd[1]));
 	if (ft_strcmp(cmd[0], "pwd") == 1)
@@ -49,15 +49,21 @@ int	execute(t_node *node, t_shell **shell)
 		return (0);
 	if (node->type == 0)
 	{
-		if (checkif_builtin(shell, left->args) != -1)
+		if (isbuiltin(left->args[0]) != -1)
 		{
-			if (node->right != NULL)
+			if (node->right == NULL)
 			{
-				node = node->right;
-				left = node->left;
+				if (node->left->rootredir != NULL)
+				{
+					initexenode(&exe);
+					exe_commands(node, &exe, shell);
+				}
+				else
+					checkif_builtin(shell, left->args);
+				return (0);
 			}
 		}
-		if (left != NULL && !isbuiltin(left->args[0]))
+		if (left != NULL)
 		{
 			if (left->rootredir != NULL)
 			{
@@ -88,22 +94,20 @@ int	exe_commands(t_node *node, t_exe **exe, t_shell **shell)
 	if ((*exe)->pid == 0)
 	{
 		do_sigaction(SIGQUIT, SIGINT, sigs);
-		executechild(node, exe, (*shell)->env);
+		executechild(node, exe, shell);
 	}
 	else if ((*exe)->pid > 0)
 		sigaction(SIGINT, &(sigs->ignore), NULL);
 	closeputs(exe);
+		wait_children(exe, shell);
 	if (node->right != NULL)
 		exe_rightnode(exe, node->right, shell);
-	wait_children(exe, shell);
 	free(sigs);
 	return ((*exe)->pid);
 }
 
-void	executechild(t_node *node, t_exe **exe, char **envp)
+void	executechild(t_node *node, t_exe **exe, t_shell **shell)
 {
-	char	**c;
-
 	has_redir(exe, node);
 	if ((*exe)->puts[0] != STDIN_FILENO)
 	{
@@ -121,10 +125,5 @@ void	executechild(t_node *node, t_exe **exe, char **envp)
 		dup2((*exe)->pipefd[1], STDOUT_FILENO);
 		close((*exe)->pipefd[1]);
 	}
-	c = node->left->args;
-	if (execve(c[0], c, envp) == -1)
-	{
-		printf("Command not found!\n");
-		exit(0);
-	}
+	do_execution(shell, node->left->args);
 }

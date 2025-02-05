@@ -21,6 +21,7 @@
 		"tuple": "c",
 		"type_traits": "c",
 		"utility": "c",
-		"ft_strinstr": "cpp"
+		"ft_strinstr": "cpp",
+		"random": "c"
 	}
 }

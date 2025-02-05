@@ -38,12 +38,14 @@ int		exe_commands(t_node *node, t_exe **exe, t_shell **shell);
 int		wait_children(t_exe **exe, t_shell **shell);
 void	closeputs(t_exe **exe);
 void	initexenode(t_exe **exe);
-void	executechild(t_node *node, t_exe **exe, char **envp);
+void	executechild(t_node *node, t_exe **exe, t_shell **shell);
 void	exe_rightnode(t_exe **exe, t_node *right, t_shell **shell);
 void	exe_out(t_exe **exe, t_node *node);
 int		checkinput(int *input, t_node **node);
 void	get_redir(t_redir *redir, t_exe **exe);
 void	has_redir(t_exe **exe, t_node *node);
 int		ft_heredoc(t_node *node, t_shell **shell);
+int		checkif_builtin(t_shell **shell, char **cmd);
+int		do_execution(t_shell **shell, char **cmd);
 
 #endif

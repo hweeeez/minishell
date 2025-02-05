@@ -18,7 +18,8 @@ void	ft_coredump_msg(int status, int *exit_status)
 	{
 		if (WCOREDUMP(status))
 		{
-			write(1, "Quit (core dumped)", 18);
+			ft_putnbr_fd (WTERMSIG(status), 1);
+			//write(1, "Quit (core dumped)", 18);
 		}
 		write (1, "\n", 1);
 		(*exit_status) = ENOTRECOVERABLE;
@@ -30,6 +31,7 @@ int	wait_children(t_exe **exe, t_shell **shell)
 	int	status;
 	int	exit_status;
 
+	status = 0;
 	exit_status = EXIT_NORMAL;
 	waitpid((*exe)->pid, &status, 0);
 	if (WIFEXITED(status))

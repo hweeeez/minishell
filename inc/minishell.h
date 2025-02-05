@@ -30,6 +30,7 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <dirent.h>
+# include <math.h>
 /************************************/
 /*			Library includes		*/
 /************************************/
