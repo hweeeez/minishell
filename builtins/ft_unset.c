@@ -40,7 +40,7 @@ int	ft_unset(t_shell *shell, char **args)
 {
 	int	i;
 
-	ft_putstr_fd("--minishell unset--\n", STDOUT_FILENO);
+	//ft_putstr_fd("--minishell unset--\n", STDOUT_FILENO);
 	i = 1;
 	while (args[i])
 	{

@@ -18,7 +18,8 @@ typedef struct s_shell
 	char	**env;
 	int		exit_status;
 	int		interactive;
-	int		**pids;
+	pid_t		*pids;
+	int		numpid;
 }	t_shell;
 
 typedef enum e_file_type

@@ -47,5 +47,6 @@ void	has_redir(t_exe **exe, t_node *node);
 int		ft_heredoc(t_node *node, t_shell **shell);
 int		checkif_builtin(t_shell **shell, char **cmd);
 int		do_execution(t_shell **shell, char **cmd);
+void	addchild(pid_t pid, t_shell **shell);
 
 #endif

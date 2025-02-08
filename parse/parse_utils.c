@@ -41,7 +41,7 @@ t_node	*createnode(void)
 	return (node);
 }
 
-int	parseword(t_node **newnode, char **envp, t_node **tree, char *tok)
+int	parseword(t_node **newnode, t_shell ** shell, t_node **tree, char *tok)
 {
 	char		*word;
 	static int	nowords;
@@ -56,7 +56,7 @@ int	parseword(t_node **newnode, char **envp, t_node **tree, char *tok)
 		if (isbuiltin(tok))
 			word = ft_strdup(tok);
 		else
-			word = ft_find_cmd_path(tok, &((*newnode)->args), envp);
+			word = ft_find_cmd_path(tok, &((*newnode)->args), (*shell)->env);
 		if (word != NULL && (*newnode)->args == NULL)
 		{
 			copyarray(&(*newnode)->args, nowords, word);
@@ -65,6 +65,7 @@ int	parseword(t_node **newnode, char **envp, t_node **tree, char *tok)
 		else if (word == NULL)
 		{
 			ft_putstr_fd("Command not found!\n", STDERR_FILENO);
+			(*shell)->exit_status = 127;
 			return (0);
 		}
 	}

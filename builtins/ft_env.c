@@ -16,7 +16,7 @@ int	ft_env(t_shell *shell)
 {
 	int	i;
 
-	ft_putstr_fd("--minishell env--\n", STDOUT_FILENO);
+	//ft_putstr_fd("--minishell env--\n", STDOUT_FILENO);
 	i = 0;
 	if (!shell || !shell->env)
 		return (1);

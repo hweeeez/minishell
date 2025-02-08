@@ -41,7 +41,7 @@ int	ft_cd(t_shell *shell, char *path)
 	char	*new_path;
 	char	*old_pwd;
 
-	ft_putstr_fd("--minishell cd--\n", STDOUT_FILENO);
+	//ft_putstr_fd("--minishell cd--\n", STDOUT_FILENO);
 	new_path = get_new_cd_path(shell, path);
 	if (!new_path && path && ft_strcmp(path, ".") != 0)
 		return (1);

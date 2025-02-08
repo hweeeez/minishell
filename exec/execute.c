@@ -78,12 +78,15 @@ int	exe_commands(t_node *node, t_exe **exe, t_shell **shell)
 		executechild(node, exe, shell);
 	}
 	else if ((*exe)->pid > 0)
+	{	
 		sigaction(SIGINT, &(sigs->ignore), NULL);
-	closeputs(exe);
-	wait_children(exe, shell);
-	if (node->right != NULL)
-		exe_rightnode(exe, node->right, shell);
-	free(sigs);
+		closeputs(exe);
+		//addchild((*exe)->pid, shell);
+		wait_children(exe, shell);
+		if (node->right != NULL)
+			exe_rightnode(exe, node->right, shell);
+		free(sigs);
+	}
 	return ((*exe)->pid);
 }
 
