@@ -27,6 +27,9 @@ t_shell	*init_shell(char **env)
 	}
 	shell->exit_status = 0;
 	shell->interactive = isatty(STDIN_FILENO);
+	shell->numpid = 0;
+	shell->hasprinted = 0;
+	shell->pids = NULL;
 	return (shell);
 }
 

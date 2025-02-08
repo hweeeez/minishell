@@ -20,6 +20,7 @@ typedef struct s_shell
 	int		interactive;
 	pid_t		*pids;
 	int		numpid;
+	int		hasprinted;
 }	t_shell;
 
 typedef enum e_file_type

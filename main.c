@@ -101,9 +101,10 @@ static void	processtree(t_token	*token, t_shell	**shell, t_sigacts	**sigs)
 			sigaction(SIGINT, &(*sigs)->sa, NULL);
 			rl_event_hook = NULL;
 		}
-		free(sigs);
-		setup_signals(sigs);
 	}
+	(*shell)->hasprinted = 0;
+	free(*sigs);
+	setup_signals(sigs);
 	freetree(&tree);
 }
 

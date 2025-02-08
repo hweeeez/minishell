@@ -53,6 +53,7 @@ int	execute(t_node *node, t_shell **shell)
 			}
 			initexenode(&exe);
 			exe_commands(node, &exe, shell);
+			wait_children(shell);
 			free(exe);
 		}
 	}
@@ -81,8 +82,8 @@ int	exe_commands(t_node *node, t_exe **exe, t_shell **shell)
 	{	
 		sigaction(SIGINT, &(sigs->ignore), NULL);
 		closeputs(exe);
-		//addchild((*exe)->pid, shell);
-		wait_children(exe, shell);
+		addchild((*exe)->pid, shell);
+		//wait_children(exe, shell);
 		if (node->right != NULL)
 			exe_rightnode(exe, node->right, shell);
 		free(sigs);
