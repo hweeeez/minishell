@@ -64,8 +64,16 @@ int	parseword(t_node **newnode, t_shell ** shell, t_node **tree, char *tok)
 		}
 		else if (word == NULL)
 		{
-			ft_putstr_fd("Command not found!\n", STDERR_FILENO);
-			(*shell)->exit_status = 127;
+			if (check_path_type(tok) == TYPE_DIR)
+			{
+				ft_putstr_fd("Is a directory!\n", STDERR_FILENO);
+				(*shell)->exit_status = 126;
+			}
+			else
+			{
+				ft_putstr_fd("Command not found!\n", STDERR_FILENO);
+				(*shell)->exit_status = 127;
+			}
 			return (0);
 		}
 	}

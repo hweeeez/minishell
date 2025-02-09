@@ -14,8 +14,16 @@
 
 static void	filenotexisterr(char *file)
 {
-	printf("no such file or directory: %s\n", file);
-	exit(0);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
+	exit(1);
+}
+
+static void	permissiondeniederr(char *file)
+{
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd(": Permission denied\n", 2);
+	exit(1);
 }
 
 static void	closeput(int input, int output)
@@ -26,18 +34,24 @@ static void	closeput(int input, int output)
 		close(output);
 }
 
-void	get_redir(t_redir *re, t_exe **x)
+void	get_redir(t_redir *re, t_exe **x, t_shell **shell)
 {
 	if (re != NULL)
 	{
 		if (re->type == TOKEN_REDIR_OUT)
 		{
 			closeput(-1, (*x)->puts[1]);
+			if (check_dir_exists(re->file) == 0)
+				filenotexisterr(re->file);
+			if (access(re->file, F_OK) == 0 &&  access(re->file, W_OK) == -1)
+				permissiondeniederr(re->file);
 			(*x)->puts[1] = open(re->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		}
 		else if (re->type == TOKEN_APPEND)
 		{
 			closeput(-1, (*x)->puts[1]);
+			if (access(re->file, F_OK) == 0 &&  access(re->file, W_OK) == -1)
+				permissiondeniederr(re->file);
 			(*x)->puts[1] = open(re->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		}
 		else if (re->type == TOKEN_REDIR_IN)
@@ -47,7 +61,7 @@ void	get_redir(t_redir *re, t_exe **x)
 				filenotexisterr(re->file);
 			(*x)->puts[0] = open(re->file, O_RDONLY, 0644);
 		}
-		return (get_redir(re->next, x));
+		return (get_redir(re->next, x, shell));
 	}
 }
 

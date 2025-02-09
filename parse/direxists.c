@@ -25,17 +25,15 @@ static char	*splitdir(char *path)
 
 int	check_dir_exists(char *path)
 {
-	DIR		*dir;
+	//DIR		*dir;
 	char	*name;
 
-	dir = NULL;
+	//dir = NULL;
 	name = splitdir(path);
 	if (name != NULL)
-	{
-		dir = opendir(name);
-		if (dir)
+	{		
+		if (check_path_type(name) == TYPE_DIR)
 		{
-			closedir(dir);
 			return (1);
 		}
 		else if (ENOENT == errno)

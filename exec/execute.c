@@ -12,11 +12,11 @@
 
 #include "minishell.h"
 
-void	has_redir(t_exe **exe, t_node *node)
+void	has_redir(t_exe **exe, t_node *node, t_shell **shell)
 {
 	if (node->left->rootredir != NULL)
 	{
-		get_redir(node->left->rootredir, exe);
+		get_redir(node->left->rootredir, exe, shell);
 	}
 }
 
@@ -93,7 +93,7 @@ int	exe_commands(t_node *node, t_exe **exe, t_shell **shell)
 
 void	executechild(t_node *node, t_exe **exe, t_shell **shell)
 {
-	has_redir(exe, node);
+	has_redir(exe, node, shell);
 	if ((*exe)->puts[0] != STDIN_FILENO)
 	{
 		dup2((*exe)->puts[0], STDIN_FILENO);
