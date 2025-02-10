@@ -34,7 +34,7 @@ int	parsetoken(t_token **token, t_node **tree, t_shell ** shell)
 		newnode = NULL;
 	if (isredir((*token)->type) == 1)
 	{
-		makeredir(&newnode, token);
+		parseredir(&newnode, tree, token);
 		return (1);
 	}
 	if ((*token)->type == TOKEN_PIPE)

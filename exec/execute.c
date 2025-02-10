@@ -38,6 +38,8 @@ int	execute(t_node *node, t_shell **shell)
 				{
 					initexenode(&exe);
 					exe_commands(node, &exe, shell);
+					wait_children(shell);
+					free(exe);
 				}
 				else
 					checkif_builtin(shell, left->args);
@@ -72,7 +74,10 @@ int	exe_commands(t_node *node, t_exe **exe, t_shell **shell)
 	}
 	(*exe)->pid = fork();
 	if ((*exe)->pid == -1)
+	{
+		perror("fork failed");
 		return (-1);
+	}
 	if ((*exe)->pid == 0)
 	{
 		do_sigaction(SIGQUIT, SIGINT, sigs);

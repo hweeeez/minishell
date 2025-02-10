@@ -12,6 +12,13 @@
 
 #include "minishell.h"
 
+static int	ispath(char *tok)
+{
+	if (tok[0] == '/' || (tok[0] == '.' && tok[1] == '/'))
+		return (1);
+	return (0);
+}
+
 void	makenewnode(t_node **newnode, t_node **tree, int type)
 {
 	(*newnode) = createnode();
@@ -64,10 +71,26 @@ int	parseword(t_node **newnode, t_shell ** shell, t_node **tree, char *tok)
 		}
 		else if (word == NULL)
 		{
-			if (check_path_type(tok) == TYPE_DIR)
+			if (ispath(tok))
 			{
-				ft_putstr_fd("Is a directory!\n", STDERR_FILENO);
-				(*shell)->exit_status = 126;
+				if (check_path_type(tok) == TYPE_DIR)
+				{
+					ft_putstr_fd("Is a directory!\n", STDERR_FILENO);
+					(*shell)->exit_status = 126;
+				}
+				else if (check_path_type(tok) == TYPE_FILE)
+				{
+					if (access(tok, W_OK) == -1)
+					{
+						ft_putstr_fd("Permission denied!\n", STDERR_FILENO);
+						(*shell)->exit_status = 126;
+					}
+				}
+				else
+				{
+					ft_putstr_fd("No such file or directory!\n", STDERR_FILENO);
+					(*shell)->exit_status = 127;
+				}
 			}
 			else
 			{
