@@ -28,12 +28,11 @@ static int	is_n_flag(const char *arg)
 	return (1);
 }
 
-static void	handle_printing(const char *str, size_t i)
+static void	handle_printing(const char *str, int is_last)
 {
 	ft_putstr_fd((char *)str, STDOUT_FILENO);
-	//if (str[i + 1])
-	//	ft_putchar_fd(' ', STDOUT_FILENO);
-	(void)i;
+	if (!is_last)
+		ft_putchar_fd(' ', STDOUT_FILENO);
 	return ;
 }
 
@@ -47,13 +46,12 @@ int	ft_echo(char **args)
 	//ft_putstr_fd("--minishell echo--\n", STDOUT_FILENO);
 	while (args[i] && is_n_flag(args[i]))
 	{
-		ft_putstr_fd(args[i], STDOUT_FILENO);
 		print_newline = 0;
 		i++;
 	}
 	while (args[i])
 	{
-		handle_printing(args[i], i);
+		handle_printing(args[i], args[i + 1] == NULL);
 		i++;
 	}
 	if (print_newline)
