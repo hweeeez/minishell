@@ -74,29 +74,17 @@ int	parseword(t_node **newnode, t_shell ** shell, t_node **tree, char *tok)
 			if (ispath(tok))
 			{
 				if (check_path_type(tok) == TYPE_DIR)
-				{
-					ft_putstr_fd("Is a directory!\n", STDERR_FILENO);
-					(*shell)->exit_status = 126;
-				}
+					print_parse_error(tok, "Is a directory", 126, shell);
 				else if (check_path_type(tok) == TYPE_FILE)
 				{
 					if (access(tok, W_OK) == -1)
-					{
-						ft_putstr_fd("Permission denied!\n", STDERR_FILENO);
-						(*shell)->exit_status = 126;
-					}
+						print_parse_error(tok, "Permission denied", 126, shell);
 				}
 				else
-				{
-					ft_putstr_fd("No such file or directory!\n", STDERR_FILENO);
-					(*shell)->exit_status = 127;
-				}
+					print_parse_error(tok, "No such file or directory", 127, shell);
 			}
 			else
-			{
-				ft_putstr_fd("Command not found!\n", STDERR_FILENO);
-				(*shell)->exit_status = 127;
-			}
+				print_parse_error(tok, "Command not found", 127, shell);
 			return (0);
 		}
 	}

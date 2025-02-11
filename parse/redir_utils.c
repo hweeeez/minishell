@@ -43,14 +43,14 @@ void	get_redir(t_redir *re, t_exe **x, t_shell **shell)
 			closeput(-1, (*x)->puts[1]);
 			if (check_dir_exists(re->file) == 0)
 				filenotexisterr(re->file);
-			if (access(re->file, F_OK) == 0 &&  access(re->file, W_OK) == -1)
+			if (access(re->file, F_OK) == 0 && access(re->file, W_OK) == -1)
 				permissiondeniederr(re->file);
 			(*x)->puts[1] = open(re->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		}
 		else if (re->type == TOKEN_APPEND)
 		{
 			closeput(-1, (*x)->puts[1]);
-			if (access(re->file, F_OK) == 0 &&  access(re->file, W_OK) == -1)
+			if (access(re->file, F_OK) == 0 && access(re->file, W_OK) == -1)
 				permissiondeniederr(re->file);
 			(*x)->puts[1] = open(re->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		}

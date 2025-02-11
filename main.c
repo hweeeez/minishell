@@ -114,13 +114,13 @@ static int	minishell_loop(char *input, t_token **tok, t_shell **shell, t_sigacts
 	while (1)
 	{
 		input = readline(PROMPT);
-		if (input != NULL && ft_strcmp(input, "$?") == 1)
-		{
-			printf("%d\n", (*shell)->exit_status);
-			add_history(input);
-			free(input);
-			continue;
-		}
+		// if (input != NULL && ft_strcmp(input, "$?") == 1)
+		// {
+		// 	printf("%d\n", (*shell)->exit_status);
+		// 	add_history(input);
+		// 	free(input);
+		// 	continue;
+		// }
 		if (handle_empty_input(input))
 			return (ms_exit(input, tok, shell, sigs));
 		if (handle_exit_command(input))
