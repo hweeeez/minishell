@@ -22,7 +22,7 @@ int	ft_exit(t_shell *shell, char **args)
 	if (!ft_isvalid_integer_str(args[1], 10))
 	{
 		ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
-		exit(255);
+		exit(2);
 	}
 	if (args[2])
 	{

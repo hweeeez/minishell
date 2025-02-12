@@ -84,7 +84,7 @@ int	parseword(t_node **newnode, t_shell ** shell, t_node **tree, char *tok)
 					print_parse_error(tok, "No such file or directory", 127, shell);
 			}
 			else
-				print_parse_error(tok, "Command not found", 127, shell);
+				print_parse_error(tok, "command not found", 127, shell);
 			return (0);
 		}
 	}

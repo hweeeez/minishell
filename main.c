@@ -89,8 +89,8 @@ static void	processtree(t_token	*token, t_shell	**shell, t_sigacts	**sigs)
 	root = tree;
 	if (inittree(&tree, token, shell) == 0)
 	{
-		tree = root;
-		freetree(&tree);
+		//tree = root;
+		freetree(&root);
 		return ;
 	}
 	tree = root;
@@ -123,11 +123,15 @@ static int	minishell_loop(char *input, t_token **tok, t_shell **shell, t_sigacts
 		// }
 		if (handle_empty_input(input))
 			return (ms_exit(input, tok, shell, sigs));
-		if (handle_exit_command(input))
+		if (handle_exit_command(input))//need to be replaced
 			return (ms_exit(input, tok, shell, sigs));
 		add_history(input);
 		if (tokenize(input, tok, *shell))
-			return (1);
+		{
+			free(input);
+			continue ;
+		}
+			//return (1);
 		// if (*tok)
 		// 	print_tokens(*tok);
 		processtree(*tok, shell, sigs);

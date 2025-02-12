@@ -56,13 +56,14 @@ int	tokenize(const char *input, t_token **head, t_shell *shell)
 	t_tokenizer	tok;
 
 	init_tokenizer(&tok, input, shell);
-	free_token_list(head);
+	free_token_list(head); //every new line is a new tokenlist
 	process_token_list(&tok, head, shell);
 	if (tok.error || !head)
 	{
 		if (tok.error)
 		{
-			printf("Syntax Error : unclosed quotes or other errors\n");
+			ft_putstr_fd("Syntax Error : unclosed quotes or"
+				" other errors\n", STDERR_FILENO);
 			free_token_list(head);
 			return (1);
 		}

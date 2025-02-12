@@ -16,7 +16,8 @@
 typedef struct s_shell
 {
 	char	**env;
-	int		exit_status;
+	//int		exit_status;
+	volatile sig_atomic_t exit_status;
 	int		interactive;
 	pid_t		*pids;
 	int		numpid;
