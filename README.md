@@ -38,24 +38,95 @@ minishell
 ├── main.c
 └── Makefile
 ```
-###Main branch:
-- [x] Write Makefile
-- [x] Update headers
-- [x] Clean up code to fit new headers and Makefile
-- [x] clean memory leaks
-- [x] Norm
+# Minishell Project Tasks 🐚
 
-###Token:
-- [x] Add expansion
-- [x] Implement correct word splitting (quotes don't split words) 
-- [x] Norm
+## Current Development Tasks
 
-###Env:
-- [x] Dup env
-- [x] Norm
+### 1. Signal Handling
+- [ ] Fix SIGINT (Ctrl+C) exit status to return 130
+- [ ] Review and fix signal handling in heredoc context
 
-###Expansion
-- [x] Read from env
-- [x] Expand word
-- [x] Expand quote
-- [x] Norm
+### 2. Variable Expansion & Word Splitting
+- [ ] Fix word splitting for variables
+  ```bash
+  # Issue example:
+  export name="ninja          turtle"
+  echo $name     # Should output: ninja turtle
+  echo "$name"   # Should preserve original spacing
+  ```
+- [ ] Preserve spaces in quoted variable expansions
+
+### 3. File Operations & Permissions
+- [ ] Implement proper handling for non-executable files
+- [ ] Add validation for `.` and `..` directory execution attempts (in token phase?)
+
+### 4. Redirections & Pipes
+- [ ] Fix pipe closing issues in redirect operations:
+  ```bash
+  # Test cases:
+  > test
+  >> test
+  ```
+- [ ] Implement correct behavior for multiple heredocs
+- [ ] Fix heredoc behavior in pipe sequences
+- [ ] Handle multiple redirections:
+  ```bash
+  # Test case:
+  cat < makefile < asd
+  ```
+- [ ] Ensure pipe sequence continues with invalid commands:
+  ```bash
+  # Should continue execution despite 'blah' failing
+  sleep 5 | blah | ls
+  ```
+
+### 5. Memory Management
+- [ ] Implement cleanup() functions for all components
+
+### 6. Additional Tasks
+- [ ] Add/check error messages for failure cases
+
+## Testing Requirements
+
+### Signal Tests
+```bash
+# Test cases
+ctrl+C during command execution
+ctrl+C during heredoc
+ctrl+C in empty prompt
+```
+
+### Variable Expansion Tests
+```bash
+# Test cases
+export var="a   b   c"
+echo $var
+echo "$var"
+echo '$var'
+```
+
+### Redirection Tests
+```bash
+# Test cases
+cmd > file1 > file2
+cmd >> file1 >> file2
+cat < file1 < file2
+```
+
+### Pipe Tests
+```bash
+# Test cases
+cmd1 | cmd2 | invalid_cmd | cmd3
+cmd1 | cmd2 > file | cmd3
+```
+
+## Progress Tracking
+- Keep this README updated as tasks are completed
+- Mark completed tasks with [x]
+- Add new edge cases as discovered
+
+## Guidelines
+1. Test before marking tasks as complete
+2. Update behavior changes
+3. Add anything missing to this doc.
+
