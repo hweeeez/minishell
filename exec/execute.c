@@ -42,7 +42,7 @@ int	execute(t_node *node, t_shell **shell)
 					free(exe);
 				}
 				else
-					checkif_builtin(shell, left->args);
+					(*shell)->exit_status = checkif_builtin(shell, left->args);
 				return (0);
 			}
 		}

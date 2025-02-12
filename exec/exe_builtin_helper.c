@@ -4,7 +4,11 @@
 //builtins need to write to stdout, but do not read from stdin (but we should still dup2)
 int	do_execution(t_shell **shell, char **cmd)
 {
-	if (checkif_builtin(shell, cmd) == -1)
+	int	builtinvalue;
+
+	builtinvalue = checkif_builtin(shell, cmd);
+	printf("%d\n", builtinvalue);
+	if (builtinvalue == -1)
 	{
 		if (execve(cmd[0], cmd, (*shell)->env) == -1)
 		{
@@ -13,7 +17,7 @@ int	do_execution(t_shell **shell, char **cmd)
 		}
 	}
 	else
-		exit(0);
+		exit(builtinvalue);
 	return (1);
 }
 
