@@ -30,7 +30,7 @@ int	execute(t_node *node, t_shell **shell)
 		return (0);
 	if (node->type == 0)
 	{
-		if (isbuiltin(left->args[0]) == 1)
+		if (left->args != NULL && isbuiltin(left->args[0]) == 1)
 		{
 			if (node->right == NULL)
 			{

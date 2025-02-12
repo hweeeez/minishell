@@ -6,6 +6,8 @@ int	do_execution(t_shell **shell, char **cmd)
 {
 	int	builtinvalue;
 
+	if (cmd == NULL)
+		exit(0);
 	builtinvalue = checkif_builtin(shell, cmd);
 	if (builtinvalue == -1)
 	{
