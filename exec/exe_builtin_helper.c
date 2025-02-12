@@ -7,7 +7,6 @@ int	do_execution(t_shell **shell, char **cmd)
 	int	builtinvalue;
 
 	builtinvalue = checkif_builtin(shell, cmd);
-	printf("%d\n", builtinvalue);
 	if (builtinvalue == -1)
 	{
 		if (execve(cmd[0], cmd, (*shell)->env) == -1)
@@ -17,14 +16,14 @@ int	do_execution(t_shell **shell, char **cmd)
 		}
 	}
 	else
-		exit(builtinvalue);
+		exit(0);
 	return (1);
 }
 
 int	checkif_builtin(t_shell **shell, char **cmd)
 {
 	if (ft_strcmp(cmd[0], "echo") == 1)
-		return (ft_echo(cmd), 1);
+		return (ft_echo(cmd));
 	if (ft_strcmp(cmd[0], "cd") == 1)
 		return (ft_cd(*shell, cmd[1]));
 	if (ft_strcmp(cmd[0], "pwd") == 1)
