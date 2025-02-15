@@ -68,6 +68,7 @@ int	tokenize(const char *input, t_token **head, t_shell *shell)
 			return (1);
 		}
 	}
+	//split_token function
 	return (validate_token_syntax(*head));
 }
 // static t_token	*process_next_token(t_tokenizer *tok)

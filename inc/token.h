@@ -36,6 +36,7 @@ typedef struct s_token
 	char			*value;
 	t_token_type	type;
 	struct s_token	*next;
+	int				need_to_split;
 }	t_token;
 
 typedef struct s_tokenizer
@@ -45,10 +46,11 @@ typedef struct s_tokenizer
 	char		quote;
 	int			error;
 	t_shell		*shell;
+	int			word_split;
 }	t_tokenizer;
 
 void	init_tokenizer(t_tokenizer *tok, const char *input, t_shell *shell);
-t_token	*new_token(char *value, t_token_type type);
+t_token	*new_token(char *value, t_token_type type, int split);
 int		is_space_tab(char c);
 int		ms_is_special(char c);
 void	skip_whitespace(t_tokenizer *tok);

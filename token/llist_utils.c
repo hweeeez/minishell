@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_token	*new_token(char *value, t_token_type type)
+t_token	*new_token(char *value, t_token_type type, int split)
 {
 	t_token	*token;
 
@@ -22,6 +22,7 @@ t_token	*new_token(char *value, t_token_type type)
 	token->value = value;
 	token->type = type;
 	token->next = NULL;
+	token->need_to_split = split;
 	return (token);
 }
 

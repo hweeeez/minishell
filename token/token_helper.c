@@ -33,12 +33,15 @@ static t_token	*final_token(t_tokenizer *tok, char *current_word)
 	}
 	if (ft_strlen(current_word))
 	{
-		token = new_token(current_word, TOKEN_WORD);
+		token = new_token(current_word, TOKEN_WORD, tok->word_split);
+		tok->word_split = 0;
 		return (token);
 	}
 	if (current_word)
 		free(current_word);
-	return (new_token(NULL, TOKEN_EOF));
+	token = new_token(NULL, TOKEN_EOF, tok->word_split);
+	tok->word_split = 0;
+	return (token);
 }
 
 static t_token	*process_token_decision(t_tokenizer *tok, t_shell *shell,

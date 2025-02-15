@@ -51,20 +51,21 @@ static char	*create_token_value(char c, t_token_type type)
 
 t_token	*handle_special_token(t_tokenizer *tok)
 {
-	char			c;
-	char			next;
+//	char			c;
+//	char			next;
 	char			*value;
 	t_token_type	type;
 	size_t			extra_pos;
+	t_token			*token;
 
-	c = tok->input[tok->position];
-	next = tok->input[tok->position + 1];
 	extra_pos = 0;
-	type = determine_token_type(c, next, &extra_pos);
+	type = determine_token_type(tok->input[tok->position], tok->input[tok->position + 1], &extra_pos);
 	tok->position += extra_pos;
-	value = create_token_value(c, type);
+	value = create_token_value(tok->input[tok->position], type);
 	if (!value)
 		return (NULL);
 	tok->position++;
-	return (new_token(value, type));
+	token = new_token(value, type, tok->word_split);
+	tok->word_split = 0;
+	return (token);
 }

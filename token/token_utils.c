@@ -19,6 +19,7 @@ void	init_tokenizer(t_tokenizer *tok, const char *input, t_shell *shell)
 	tok->quote = '0';
 	tok->error = 0;
 	tok->shell = shell;
+	tok->word_split = 0;
 }
 
 int	is_space_tab(char c)

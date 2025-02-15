@@ -18,7 +18,8 @@ static t_token	*handle_space(t_tokenizer *tok, char **current_word)
 
 	if (ft_strlen(*current_word))
 	{
-		token = new_token(*current_word, TOKEN_WORD);
+		token = new_token(*current_word, TOKEN_WORD, tok->word_split);
+		tok->word_split = 0;
 		tok->position++;
 		return (token);
 	}
@@ -38,7 +39,8 @@ static t_token	*handle_special(t_tokenizer *tok, char **current_word)
 
 	if (ft_strlen(*current_word))
 	{
-		token = new_token(*current_word, TOKEN_WORD);
+		token = new_token(*current_word, TOKEN_WORD, tok->word_split);
+		tok->word_split = 0;
 		return (token);
 	}
 	return (free(*current_word), handle_special_token(tok));
