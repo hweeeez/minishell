@@ -56,7 +56,13 @@ void add_token(t_token *head, t_token *new)
 
 	current = ft_tokenlast(head);
 	if (current)
+	{
 		current->next = new;
+		printf("adding current->next %s\n", new->value);
+	}
 	else
+	{
+		printf("adding new->next %s\n", new->value);
 		head = new;
+	}
 }

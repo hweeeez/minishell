@@ -111,6 +111,7 @@ t_token	*tokenize_expanded_string(char *expanded)
 	i = 0;
 	while (split[i])
 	{
+		printf("%d: #%s#\n", i, split[i]);
 		token = new_token(split[i], TOKEN_WORD);
 		if (!token)
 		{
@@ -118,7 +119,11 @@ t_token	*tokenize_expanded_string(char *expanded)
 			freestrl(split);
 			return (NULL);
 		}
-		add_token(token_head, token);
+		else
+		{
+			printf("Adding tokens\n");
+			add_token(token_head, token);
+		}
 		i++;
 	}
 	freestrl(split);

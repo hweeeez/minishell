@@ -26,10 +26,10 @@ static t_token	*process_next_token(t_tokenizer *tok, t_shell *shell)
 
 static void	process_token_list(t_tokenizer *tok, t_token **head, t_shell *shell)
 {
-	t_token	*current;
+	t_token	*last;
 	t_token	*new;
 
-	current = NULL;
+	last = NULL;
 	while (!tok->error)
 	{
 		new = process_next_token(tok, shell);
@@ -46,8 +46,11 @@ static void	process_token_list(t_tokenizer *tok, t_token **head, t_shell *shell)
 		if (!(*head))
 			*head = new;
 		else
-			current->next = new;
-		current = new;
+		{
+			last = ft_tokenlast(*head);
+			last->next = new;
+		}
+		//current = new;
 	}
 	if (tok->error)
 		free_token_list(head);
