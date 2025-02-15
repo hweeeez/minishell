@@ -66,7 +66,7 @@ static int	handle_exit_command(char *input)
 	return (0);
 }
 
-static int	ms_exit(char *input, t_token **tok, t_shell **shell, t_sigacts **sig)
+static int	ms_exit(char *input, t_token **tok, t_shell **shell)
 {
 	int	exit_status;
 
@@ -76,11 +76,10 @@ static int	ms_exit(char *input, t_token **tok, t_shell **shell, t_sigacts **sig)
 	rl_clear_history();
 	free_token_list(tok);
 	cleanup_shell(shell);
-	free(*sig);
 	return (exit_status);
 }
 
-static void	processtree(t_token	*token, t_shell	**shell, t_sigacts	**sigs)
+static void	processtree(t_token	*token, t_shell	**shell, struct sigaction *sigs)
 {
 	t_node	*tree;
 	t_node	*root;
@@ -98,18 +97,18 @@ static void	processtree(t_token	*token, t_shell	**shell, t_sigacts	**sigs)
 	{
 		if (ft_heredoc(tree, shell) > 0)
 		{
-			sigaction(SIGINT, &(*sigs)->sa, NULL);
+			sigaction(SIGINT, sigs, NULL);
 			rl_event_hook = NULL;
 		}
 	}
 	(*shell)->hasprinted = 0;
-	free(*sigs);
+	//free(*sigs);
 	setup_signals(sigs);
 	freetree(&tree);
 }
 
 /*Edit this function to add more features when minishell is run*/
-static int	minishell_loop(char *input, t_token **tok, t_shell **shell, t_sigacts **sigs)
+static int	minishell_loop(char *input, t_token **tok, t_shell **shell, struct sigaction *sigs)
 {
 	while (1)
 	{
@@ -122,9 +121,9 @@ static int	minishell_loop(char *input, t_token **tok, t_shell **shell, t_sigacts
 		// 	continue;
 		// }
 		if (handle_empty_input(input))
-			return (ms_exit(input, tok, shell, sigs));
+			return (ms_exit(input, tok, shell));
 		if (handle_exit_command(input))//need to be replaced
-			return (ms_exit(input, tok, shell, sigs));
+			return (ms_exit(input, tok, shell));
 		add_history(input);
 		if (tokenize(input, tok, *shell))
 		{
@@ -146,7 +145,8 @@ int	main(int argc, char **argv, char **env)
 	char		*input;
 	t_shell		*shell;
 	t_token		*token;
-	t_sigacts	*sigs;
+	//t_sigacts	*sigs;
+	struct sigaction	sigint;
 
 	(void)argc;
 	(void)argv;
@@ -154,8 +154,8 @@ int	main(int argc, char **argv, char **env)
 	input = NULL;
 	shell = init_shell(env);
 	if (!shell)
-		return (ms_exit(input, &token, &shell, &sigs));
-	if (setup_signals(&sigs) == 1)
-		return (ms_exit(input, &token, &shell, &sigs));
-	return (minishell_loop(input, &token, &shell, &sigs));
+		return (ms_exit(input, &token, &shell));
+	if (setup_signals(&sigint) == 1)
+		return (ms_exit(input, &token, &shell));
+	return (minishell_loop(input, &token, &shell, &sigint));
 }

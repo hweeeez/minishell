@@ -21,20 +21,20 @@ void	handle_signal(int sig)
 	rl_redisplay();
 }
 
-int	setup_signals(t_sigacts **sig)
+int	setup_signals(struct sigaction *sig)
 {
 	struct sigaction	quit;
 
-	(*sig) = (t_sigacts *)malloc(sizeof(t_sigacts));
-	ft_memset(&(*sig)->sa, 0, sizeof((*sig)->sa));
+	//(*sig) = (t_sigacts *)malloc(sizeof(t_sigacts));
+	ft_memset(sig, 0, sizeof(sig));
 	ft_memset(&quit, 0, sizeof(quit));
 	quit.sa_handler = SIG_IGN;
-	(*sig)->sa.sa_handler = handle_signal;
-	sigemptyset(&(*sig)->sa.sa_mask);
-	(*sig)->sa.sa_flags = 0;
+	(*sig).sa_handler = handle_signal;
+	sigemptyset(&(*sig).sa_mask);
+	(*sig).sa_flags = 0;
 	if (sigaction(SIGQUIT, &quit, NULL) == -1)
 		return (1);
-	if (sigaction(SIGINT, &(*sig)->sa, NULL) == -1)
+	if (sigaction(SIGINT, sig, NULL) == -1)
 		return (1);
 	return (0);
 }

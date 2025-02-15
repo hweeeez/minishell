@@ -19,6 +19,6 @@ typedef struct s_sigacts
 }				t_sigacts;
 
 void	handle_signal(int sig);
-int		setup_signals(t_sigacts **sig);
+int		setup_signals(struct sigaction *sig);
 
 #endif
