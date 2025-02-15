@@ -43,8 +43,8 @@ minishell
 ## Current Development Tasks
 
 ### 1. Signal Handling
-- [ ] Fix SIGINT (Ctrl+C) exit status to return 130
-- [ ] Review and fix signal handling in heredoc context
+- [X] Fix SIGINT (Ctrl+C) exit status to return 130
+- [X] Review and fix signal handling in heredoc context
 
 ### 2. Variable Expansion & Word Splitting
 - [ ] Fix word splitting for variables

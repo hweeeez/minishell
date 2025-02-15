@@ -102,7 +102,6 @@ static void	processtree(t_token	*token, t_shell	**shell, struct sigaction *sigs)
 		}
 	}
 	(*shell)->hasprinted = 0;
-	//free(*sigs);
 	setup_signals(sigs);
 	freetree(&tree);
 }
@@ -113,13 +112,6 @@ static int	minishell_loop(char *input, t_token **tok, t_shell **shell, struct si
 	while (1)
 	{
 		input = readline(PROMPT);
-		// if (input != NULL && ft_strcmp(input, "$?") == 1)
-		// {
-		// 	printf("%d\n", (*shell)->exit_status);
-		// 	add_history(input);
-		// 	free(input);
-		// 	continue;
-		// }
 		if (handle_empty_input(input))
 			return (ms_exit(input, tok, shell));
 		if (handle_exit_command(input))//need to be replaced
@@ -130,12 +122,8 @@ static int	minishell_loop(char *input, t_token **tok, t_shell **shell, struct si
 			free(input);
 			continue ;
 		}
-			//return (1);
-		// if (*tok)
-		// 	print_tokens(*tok);
 		processtree(*tok, shell, sigs);
 		free(input);
-		//free_token_list(&token);
 	}
 	return (0);
 }
@@ -145,7 +133,6 @@ int	main(int argc, char **argv, char **env)
 	char		*input;
 	t_shell		*shell;
 	t_token		*token;
-	//t_sigacts	*sigs;
 	struct sigaction	sigint;
 
 	(void)argc;

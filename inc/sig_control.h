@@ -13,11 +13,6 @@
 #ifndef SIG_CONTROL_H
 # define SIG_CONTROL_H
 
-typedef struct s_sigacts
-{
-	struct sigaction	sa;
-}				t_sigacts;
-
 void	handle_signal(int sig);
 int		setup_signals(struct sigaction *sig);
 

@@ -67,28 +67,43 @@ int	wait_children(t_shell **shell)
 	return (0);
 }
 
-static void	appendpid(pid_t pid, pid_t **arr, t_shell *shell)
+// static void	appendpid(pid_t pid, pid_t **arr, t_shell *shell)
+// {
+// 	pid_t		*temp;
+// 	int		i;
+
+// 	i = 0;
+// 	temp = (int *)malloc(sizeof(pid_t) * (shell->numpid));
+// 	if (*arr != NULL)
+// 	{
+// 		while (i < shell->numpid - 1)
+// 		{
+// 			temp[i] = (*arr)[i];
+// 			i++;
+// 		}
+// 		free(*arr);
+// 	}
+// 	temp[i] = (pid);
+// 	*arr = temp;
+// }
+
+void	addchild(pid_t pid, t_shell **shell)
 {
 	pid_t		*temp;
 	int		i;
 
+	(*shell)->numpid++;
 	i = 0;
-	temp = (int *)malloc(sizeof(pid_t) * (shell->numpid));
-	if (*arr != NULL)
+	temp = (int *)malloc(sizeof(pid_t) * ((*shell)->numpid));
+	if ((*shell)->pids != NULL)
 	{
-		while (i < shell->numpid - 1)
+		while (i < (*shell)->numpid - 1)
 		{
-			temp[i] = (*arr)[i];
+			temp[i] = ((*shell)->pids)[i];
 			i++;
 		}
-		free(*arr);
+		free((*shell)->pids);
 	}
 	temp[i] = (pid);
-	*arr = temp;
-}
-
-void	addchild(pid_t pid, t_shell **shell)
-{
-	(*shell)->numpid++;
-	appendpid(pid, &(*shell)->pids, *shell);
+	(*shell)->pids = temp;
 }

@@ -39,7 +39,7 @@ static int	parsehd(char *s, char *file, int filefd)
 	return (0);
 }
 
-static int	readhd(t_redir *redirs, int filefd)
+static int	readhd(t_redir *redirs, int filefd, t_shell **shell)
 {
 	char	*s;
 
@@ -63,6 +63,7 @@ static int	readhd(t_redir *redirs, int filefd)
 	{
 		close(filefd);
 		unlink(HEREDOC_FILE);
+		(*shell)->exit_status = 130;
 		return (1);
 	}
 	return (0);
@@ -86,13 +87,14 @@ int	ft_heredoc(t_node *node, t_shell **shell)
 	sigaction(SIGINT, &sig_int, NULL);
 	redirs = node->left->rootredir;
 	filefd = open(HEREDOC_FILE, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (readhd(redirs, filefd) == 1)
+	if (readhd(redirs, filefd, shell) == 1)
 		return (1);
 	filefd = open(HEREDOC_FILE, O_RDONLY, 0644);
 	node->left->redirs = redirs->next;
 	initexenode(&exe);
 	exe->puts[0] = filefd;
 	exe_commands(node, &exe, shell);
+	wait_children(shell);
 	close (filefd);
 	unlink(HEREDOC_FILE);
 	free(exe);

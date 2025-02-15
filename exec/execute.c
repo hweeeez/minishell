@@ -36,10 +36,13 @@ int	execute(t_node *node, t_shell **shell)
 			{
 				if (node->left->rootredir != NULL)
 				{
+					(*shell)->pids = NULL;
 					initexenode(&exe);
 					exe_commands(node, &exe, shell);
 					wait_children(shell);
 					free(exe);
+					if ((*shell)->pids != NULL)
+						free((*shell)->pids);
 				}
 				else
 					(*shell)->exit_status = checkif_builtin(shell, left->args);
@@ -53,10 +56,13 @@ int	execute(t_node *node, t_shell **shell)
 				if (left->rootredir->type == TOKEN_HEREDOC)
 					return (2);
 			}
+			(*shell)->pids = NULL;
 			initexenode(&exe);
 			exe_commands(node, &exe, shell);
 			wait_children(shell);
 			free(exe);
+			if ((*shell)->pids != NULL)
+				free((*shell)->pids);
 		}
 	}
 	return (0);
