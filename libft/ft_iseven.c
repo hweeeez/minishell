@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	iseven(int n)
+int	ft_iseven(int n)
 {
-	return (!(isodd(n)));
+	return (!(ft_isodd(n)));
 }
