@@ -17,6 +17,8 @@ static t_token	*process_next_token(t_tokenizer *tok, t_shell *shell)
 	char	*current_word;
 
 	current_word = ft_strdup("");
+	if (!current_word)
+		return (NULL);
 	skip_whitespace(tok);
 	tok->quote = '0';
 	return (process_token_loop(tok, shell, current_word));

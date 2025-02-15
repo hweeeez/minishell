@@ -45,6 +45,7 @@ typedef struct s_tokenizer
 	char		quote;
 	int			error;
 	t_shell		*shell;
+	int			split_word;
 }	t_tokenizer;
 
 void	init_tokenizer(t_tokenizer *tok, const char *input, t_shell *shell);
@@ -67,6 +68,7 @@ t_token	*process_token_loop(t_tokenizer *tok, t_shell *shell, \
 int		validate_token_syntax(t_token *head);
 int		is_redirection_token(t_token_type type);
 int		print_error(const char *format);
+void	add_token(t_token *head, t_token *new);
 
 #endif
 /*

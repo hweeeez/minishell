@@ -25,6 +25,7 @@ t_token	*process_double_quote(t_tokenizer *tok, t_shell *shell,
 	else if (c == '$')
 	{
 		expanded = expand(tok, shell);
+		printf("double q #%s# | #%c#\n", expanded, tok->input[tok->position]);
 		if (expanded)
 			*current_word = ft_strjoin_free(*current_word, expanded);
 	}

@@ -31,11 +31,17 @@ static t_token	*final_token(t_tokenizer *tok, char *current_word)
 		free(current_word);
 		return (NULL);
 	}
-	if (ft_strlen(current_word))
+	if (current_word)
 	{
-		token = new_token(current_word, TOKEN_WORD);
-		return (token);
+		printf("final_token: %s\n", current_word);
+		if (ft_strlen(current_word))
+		{
+			token = new_token(current_word, TOKEN_WORD);
+			return (token);
+		}
 	}
+	else
+		return (NULL);
 	if (current_word)
 		free(current_word);
 	return (new_token(NULL, TOKEN_EOF));
@@ -82,6 +88,7 @@ t_token	*process_token_loop(t_tokenizer *tok, t_shell *shell,
 		token = process_token_decision(tok, shell, c, &current_word);
 		if (token)
 			return (token);
+		//tok->position++;
 	}
 	return (final_token(tok, current_word));
 }

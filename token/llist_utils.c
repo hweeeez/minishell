@@ -49,3 +49,14 @@ t_token	*ft_tokenlast(t_token *lst)
 		lst = lst -> next;
 	return (lst);
 }
+
+void add_token(t_token *head, t_token *new)
+{
+	t_token	*current;
+
+	current = ft_tokenlast(head);
+	if (current)
+		current->next = new;
+	else
+		head = new;
+}

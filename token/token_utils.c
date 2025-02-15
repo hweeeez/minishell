@@ -19,6 +19,7 @@ void	init_tokenizer(t_tokenizer *tok, const char *input, t_shell *shell)
 	tok->quote = '0';
 	tok->error = 0;
 	tok->shell = shell;
+	tok->shell = 0;
 }
 
 int	is_space_tab(char c)
@@ -33,6 +34,8 @@ int	ms_is_special(char c)
 
 void	skip_whitespace(t_tokenizer *tok)
 {
+	if (!tok->input)
+		return;
 	while (tok->input[tok->position] && \
 				ft_isspace(tok->input[tok->position]))
 		tok->position++;

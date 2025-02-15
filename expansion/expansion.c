@@ -23,6 +23,20 @@ static char	*expand_env_var(const char *var_name, t_shell *shell)
 		return (ft_strdup(""));
 	return (ft_strdup(value));
 }
+static char	*get_variable_name(t_tokenizer *tok, size_t *start)
+{
+	char	*var_name;
+
+	if (!is_valid_first_char(tok->input[*start]))
+		return (ft_strdup("$"));
+	var_name = get_var_name(tok, &tok->position);
+	if (!var_name)
+		return (ft_strdup(""));
+	//printf("var_name #%s#\n", var_name);
+	//printf("tok->pos #%c#\n", tok->input[tok->position]);
+	tok->position++;
+	return (var_name);
+}
 
 char	*expand(t_tokenizer *tok, t_shell *shell)
 {
@@ -32,20 +46,83 @@ char	*expand(t_tokenizer *tok, t_shell *shell)
 
 	value = NULL;
 	start = ++(tok->position);
+	//printf("expand start = %ld, input[start] = %c\n", tok->position, tok->input[tok->position]);
 	if (tok->input[start] == '?')
 	{
 		tok->position++;
-		return (ft_itoa(tok->shell->exit_status));
+		if (!shell)
+			return (ft_strdup(""));
+		return (ft_itoa(shell->exit_status));
 	}
-	if (!is_valid_first_char(tok->input[start]))
-		return (ft_strdup("$"));
-	var_name = get_var_name(tok, &tok->position);
+	var_name = get_variable_name(tok, &start);
 	if (!var_name)
 		return (ft_strdup(""));
-	tok->position++;
+	//tok->position++;
 	value = expand_env_var(var_name, shell);
 	free(var_name);
 	return (value);
+}
+
+char	*expand_split(t_tokenizer *tok, t_shell *shell)
+{
+	char	*value;
+	char	*var_name;
+	char	*trimmed_value;
+	size_t	start;
+
+	value = NULL;
+	start = ++(tok->position);
+	if (tok->input[start] == '?')
+	{
+		tok->position++;
+		if (!shell)
+			return (ft_strdup(""));
+		return (ft_itoa(shell->exit_status));
+	}
+	var_name = get_variable_name(tok, &start);
+	if (!var_name)
+		return (ft_strdup(""));
+	//printf("var_name = #%s# expand_split = %ld, input[pos] = %c\n", var_name, tok->position, tok->input[tok->position]);
+	//tok->position++;
+	//printf("var_name = #%s# expand_split = %ld, input[pos] = %c\n", var_name, tok->position, tok->input[tok->position]);
+	value = expand_env_var(var_name, shell);
+	free(var_name);
+	if (value)
+	{
+		trimmed_value = word_split(value);
+		free(value);
+		return (trimmed_value);
+	}
+	return (ft_strdup(""));
+}
+t_token	*tokenize_expanded_string(char *expanded)
+{
+	t_token	*token_head;
+	t_token	*token;
+	char	**split;
+	int		i;
+
+	if (!expanded)
+		return (NULL);
+	split = ft_split(expanded, ' ');
+	if (!split)
+		return (NULL);
+	token_head = NULL;
+	i = 0;
+	while (split[i])
+	{
+		token = new_token(split[i], TOKEN_WORD);
+		if (!token)
+		{
+			free_token_list(&token_head);
+			freestrl(split);
+			return (NULL);
+		}
+		add_token(token_head, token);
+		i++;
+	}
+	freestrl(split);
+	return (token_head);
 }
 
 // static char	*handle_expansion(t_tokenizer *tok, size_t *i)

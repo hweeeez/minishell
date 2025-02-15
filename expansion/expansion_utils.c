@@ -51,6 +51,7 @@ char	*get_var_name(t_tokenizer *tok, size_t *pos)
 	size_t	start;
 	char	*var_name;
 
+	var_name = NULL;
 	start = *pos;
 	if (!tok->input[start])
 		return (NULL);

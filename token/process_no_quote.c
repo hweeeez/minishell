@@ -41,22 +41,44 @@ static t_token	*handle_special(t_tokenizer *tok, char **current_word)
 		token = new_token(*current_word, TOKEN_WORD);
 		return (token);
 	}
+	tok->position++;
 	return (free(*current_word), handle_special_token(tok));
 }
 
-static void	handle_expansion(t_tokenizer *tok, t_shell *shell,
-	char **current_word)
-{
-	char	*expanded;
+// static void	handle_expansion(t_tokenizer *tok, t_shell *shell,
+// 	char **current_word)
+// {
+// 	char	*expanded;
 
-	expanded = expand(tok, shell);
-	if (expanded)
-		*current_word = ft_strjoin_free(*current_word, expanded);
+// 	expanded = expand_split(tok, shell);
+// 	if (expanded)
+// 		*current_word = ft_strjoin_free(*current_word, expanded);
+// }
+
+static t_token	*handle_expansion(t_tokenizer *tok, t_shell *shell, char **current_word)
+{
+	//char	*expanded;
+	t_token	*tokens;
+
+	*current_word = ft_strjoin_free(*current_word, expand_split(tok, shell));
+	printf("c_word: #%s#\n", *current_word);
+	if (!*current_word)
+		return (NULL);
+	tokens = tokenize_expanded_string(*current_word);
+	free(*current_word);
+	*current_word = NULL;
+	if (tokens)
+	{
+		return (tokens);
+	}
+	return (NULL);
 }
 
 t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 	char **current_word)
 {
+	t_token	*token;
+
 	if (ft_isspace(c))
 		return (handle_space(tok, current_word));
 	if (c == '\'')
@@ -73,10 +95,15 @@ t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 		return (handle_special(tok, current_word));
 	if (c == '$')
 	{
-		handle_expansion(tok, shell, current_word);
-		return (NULL);
+		token = handle_expansion(tok, shell, current_word);
+		if (token)
+			return (token);
+		else
+			return (NULL);
 	}
+	printf("no q #%c#\n", tok->input[tok->position]);
 	*current_word = ft_strjoin_free(*current_word, ft_chartostr(c));
+	printf("current word:#%s#\n", *current_word);
 	tok->position++;
 	return (NULL);
 }
