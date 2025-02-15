@@ -99,9 +99,7 @@ t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 		token = handle_expansion(tok, shell, current_word);
 		*current_word = ft_strdup("");
 		if (token)
-		{
 			return (token);
-		}
 		else
 			return (NULL);
 	}
