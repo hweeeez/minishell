@@ -1,2 +1,0 @@
---minishell pwd--
-/home/hui-lim/Documents/mini/minishell

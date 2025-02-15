@@ -95,11 +95,11 @@ static void	processtree(t_token	*token, t_shell	**shell, struct sigaction *sigs)
 	tree = root;
 	if (execute(tree, shell) == 2)
 	{
-		if (ft_heredoc(tree, shell) > 0)
-		{
-			sigaction(SIGINT, sigs, NULL);
-			rl_event_hook = NULL;
-		}
+		// if (ft_heredoc(tree, shell) > 0)
+		// {
+		// 	sigaction(SIGINT, sigs, NULL);
+		// 	rl_event_hook = NULL;
+		// }
 	}
 	(*shell)->hasprinted = 0;
 	setup_signals(sigs);

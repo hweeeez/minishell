@@ -1,6 +1,6 @@
 # minishell 🐚
 # 2024
-
+#valgrind --suppressions=readline.supp --leak-check=full --track-fds=yes --show-leak-kinds=all ./minishell
 #sigint(ctrl c) and sigquit(ctrl \) - ignore sigquit, sigint use readline function
 #read, tokenize, ast nodes, parse, expansion, execute
 
@@ -67,7 +67,7 @@ minishell
   > test
   >> test
   ```
-- [ ] Implement correct behavior for multiple heredocs
+- [X] Implement correct behavior for multiple heredocs
 - [ ] Fix heredoc behavior in pipe sequences
 - [ ] Handle multiple redirections:
   ```bash
@@ -85,7 +85,13 @@ minishell
 
 ### 6. Additional Tasks
 - [ ] Add/check error messages for failure cases
-
+		// if (input != NULL && ft_strcmp(input, "$?") == 1)
+		// {
+		// 	printf("%d\n", (*shell)->exit_status);
+		// 	add_history(input);
+		// 	free(input);
+		// 	continue;
+		// }
 ## Testing Requirements
 
 ### Signal Tests

@@ -30,7 +30,7 @@ int	checkif_builtin(t_shell **shell, char **cmd)
 	{
 		if (cmd[1+1] != NULL)
 		{
-			ft_putstr_fd("cd: too many arguments",STDERR_FILENO);
+			ft_putstr_fd("cd: too many arguments\n",STDERR_FILENO);
 			return (1);
 		}
 		return (ft_cd(*shell, cmd[1]));

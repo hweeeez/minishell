@@ -49,21 +49,13 @@ int	execute(t_node *node, t_shell **shell)
 				return (0);
 			}
 		}
-		if (left != NULL)
-		{
-			if (left->rootredir != NULL)
-			{
-				if (left->rootredir->type == TOKEN_HEREDOC)
-					return (2);
-			}
-			(*shell)->pids = NULL;
-			initexenode(&exe);
-			exe_commands(node, &exe, shell);
-			wait_children(shell);
-			free(exe);
-			if ((*shell)->pids != NULL)
-				free((*shell)->pids);
-		}
+		(*shell)->pids = NULL;
+		initexenode(&exe);
+		exe_commands(node, &exe, shell);
+		wait_children(shell);
+		free(exe);
+		if ((*shell)->pids != NULL)
+			free((*shell)->pids);
 	}
 	return (0);
 }
@@ -73,25 +65,33 @@ int	exe_commands(t_node *node, t_exe **exe, t_shell **shell)
 	t_sigs	*sigs;
 
 	init_exesigs(&sigs);
+	has_redir(exe, node, shell);
 	if (node->right != NULL || node->left->redirs != NULL)
 	{
 		if (pipe((*exe)->pipefd) == -1)
 			return (-1);
 	}
 	(*exe)->pid = fork();
-	if ((*exe)->pid == -1)
-	{
-		perror("fork failed");
-		return (-1);
-	}
 	if ((*exe)->pid == 0)
 	{
 		do_sigaction(SIGQUIT, SIGINT, sigs);
 		executechild(node, exe, shell);
 	}
+	else if ((*exe)->pid == -1)
+	{
+		perror("fork failed");
+		return (-1);
+	}
 	else if ((*exe)->pid > 0)
 	{	
 		sigaction(SIGINT, &(sigs->ignore), NULL);
+		if (node->right == NULL)
+		{
+			if ((*exe)->pipefd[0] > -1)
+				close((*exe)->pipefd[0]);
+			if ((*exe)->pipefd[1] > -1)
+				close((*exe)->pipefd[1]);
+		}
 		closeputs(exe);
 		addchild((*exe)->pid, shell);
 		//wait_children(exe, shell);
@@ -104,16 +104,29 @@ int	exe_commands(t_node *node, t_exe **exe, t_shell **shell)
 
 void	executechild(t_node *node, t_exe **exe, t_shell **shell)
 {
-	has_redir(exe, node, shell);
 	if ((*exe)->puts[0] != STDIN_FILENO)
 	{
 		dup2((*exe)->puts[0], STDIN_FILENO);
 		close((*exe)->puts[0]);
+		if (node->right == NULL)
+		{
+			if ((*exe)->pipefd[0] > -1)
+				close((*exe)->pipefd[0]);
+			if ((*exe)->pipefd[1] > -1)
+				close((*exe)->pipefd[1]);
+		}
 	}
 	if ((*exe)->puts[1] != STDOUT_FILENO)
 	{
 		dup2((*exe)->puts[1], STDOUT_FILENO);
 		close((*exe)->puts[1]);
+		if (node->right == NULL)
+		{
+			if ((*exe)->pipefd[0] > -1)
+				close((*exe)->pipefd[0]);
+			if ((*exe)->pipefd[1] > -1)
+				close((*exe)->pipefd[1]);
+		}
 	}
 	else if (node->right != NULL)
 	{

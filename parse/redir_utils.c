@@ -61,6 +61,13 @@ void	get_redir(t_redir *re, t_exe **x, t_shell **shell)
 				filenotexisterr(re->file);
 			(*x)->puts[0] = open(re->file, O_RDONLY, 0644);
 		}
+		else if (re->type == TOKEN_HEREDOC)
+		{
+			closeput((*x)->puts[0], -1);
+			ft_heredoc(re, shell);
+			(*shell)->hasprinted = 1;
+			(*x)->puts[0] = open(HEREDOC_FILE, O_RDONLY, 0644);
+		}
 		return (get_redir(re->next, x, shell));
 	}
 }
