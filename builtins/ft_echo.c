@@ -54,7 +54,7 @@ int	ft_echo(char **args)
 		handle_printing(args[i], args[i + 1] == NULL);
 		i++;
 	}
-	if (print_newline)
+	if (print_newline && i > 1)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	return (0);
 }

@@ -30,7 +30,7 @@ typedef struct s_exe
 	int		puts[2];
 }				t_exe;
 
-void	ft_coredump_msg(int status, int *exit_status, t_shell **shell);
+void	ft_coredump_msg(int status, t_shell **shell);
 void	init_exesigs(t_sigs **sigs);
 void	do_sigaction(int sig1, int sig2, t_sigs *sigs);
 int		execute(t_node *node, t_shell **shell);
@@ -42,8 +42,8 @@ void	executechild(t_node *node, t_exe **exe, t_shell **shell);
 void	exe_rightnode(t_exe **exe, t_node *right, t_shell **shell);
 void	exe_out(t_exe **exe, t_node *node);
 int		checkinput(int *input, t_node **node);
-void	get_redir(t_redir *redir, t_exe **exe, t_shell **shell);
-void	has_redir(t_exe **exe, t_node *node, t_shell **shell);
+int		get_redir(t_redir *redir, t_exe **exe, t_shell **shell);
+int		has_redir(t_exe **exe, t_node *node, t_shell **shell);
 int		ft_heredoc(t_redir *redirs, t_shell **shell);
 int		checkif_builtin(t_shell **shell, char **cmd);
 int		do_execution(t_shell **shell, char **cmd);

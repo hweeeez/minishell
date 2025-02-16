@@ -12,12 +12,19 @@
 
 #include "minishell.h"
 
-void	has_redir(t_exe **exe, t_node *node, t_shell **shell)
+int	has_redir(t_exe **exe, t_node *node, t_shell **shell)
 {
+	int	valid;
+
+	valid = 0;
 	if (node->left->rootredir != NULL)
 	{
-		get_redir(node->left->rootredir, exe, shell);
+		valid = get_redir(node->left->rootredir, exe, shell);
+		(*shell)->redir_status = valid;
+		return (valid);
 	}
+	(*shell)->redir_status = -1;
+	return (0);
 }
 
 int	execute(t_node *node, t_shell **shell)
@@ -53,6 +60,8 @@ int	execute(t_node *node, t_shell **shell)
 		initexenode(&exe);
 		exe_commands(node, &exe, shell);
 		wait_children(shell);
+		if ((*shell)->redir_status == 1)
+			(*shell)->exit_status = (*shell)->redir_status;
 		free(exe);
 		if ((*shell)->pids != NULL)
 			free((*shell)->pids);
@@ -63,27 +72,28 @@ int	execute(t_node *node, t_shell **shell)
 int	exe_commands(t_node *node, t_exe **exe, t_shell **shell)
 {
 	t_sigs	*sigs;
+	int		canrun;
 
 	init_exesigs(&sigs);
-	has_redir(exe, node, shell);
+	canrun = has_redir(exe, node, shell);
 	if (node->right != NULL || node->left->redirs != NULL)
 	{
 		if (pipe((*exe)->pipefd) == -1)
 			return (-1);
 	}
-	(*exe)->pid = fork();
+	if (canrun == 0)
+		(*exe)->pid = fork();
+	else if (node->right != NULL)
+		(*exe)->pid = 1;
 	if ((*exe)->pid == 0)
 	{
 		do_sigaction(SIGQUIT, SIGINT, sigs);
 		executechild(node, exe, shell);
 	}
 	else if ((*exe)->pid == -1)
-	{
-		perror("fork failed");
 		return (-1);
-	}
 	else if ((*exe)->pid > 0)
-	{	
+	{
 		sigaction(SIGINT, &(sigs->ignore), NULL);
 		if (node->right == NULL)
 		{

@@ -1,29 +1,30 @@
 #include "minishell.h"
 
-void	ft_coredump_msg(int status, int *exit_status, t_shell **shell)
+void	ft_coredump_msg(int status, t_shell **shell)
 {
 	if (WIFSIGNALED(status))
 	{
 		if (WCOREDUMP(status))
 		{
 			if ((*shell)->hasprinted == 0)
-				write(1, "Quit (core dumped)", 18);
-			(*exit_status) = ENOTRECOVERABLE;
+				{
+					write(1, "Quit (core dumped)", 18);
+					write (1, "\n", 1);
+					(*shell)->hasprinted = 1;
+				}
+			(*shell)->exit_status = ENOTRECOVERABLE;
 		}
-		if ((*shell)->hasprinted == 0)
-			write (1, "\n", 1);
-		(*shell)->hasprinted = 1;
 	}
 }
 
 static void	wait_pid(pid_t proc, t_shell **shell)
 {
 	int	status;
-	int	exit_status;
+	//int	exit_status;
 	pid_t	pid;
 
 	status = 0;
-	exit_status = EXIT_NORMAL;
+	//exit_status = EXIT_NORMAL;
 	while(1)
 	{
 		pid = waitpid(proc, &status, 0);
@@ -39,18 +40,18 @@ static void	wait_pid(pid_t proc, t_shell **shell)
 		if (pid > 0)
 		{
 			if (WIFEXITED(status))
-				exit_status = WEXITSTATUS(status);
+				(*shell)->exit_status = WEXITSTATUS(status);
 			else if (WIFSIGNALED(status))
 			{
-				exit_status = WTERMSIG(status) + FATAL_ERR_SIG;
+				(*shell)->exit_status = WTERMSIG(status) + FATAL_ERR_SIG;
 			}
 			else
-				exit_status = EXIT_FAILURE;
-			ft_coredump_msg(status, &exit_status, shell);
+				(*shell)->exit_status = EXIT_FAILURE;
+			ft_coredump_msg(status, shell);
 			break;
 		}
 	}
-	(*shell)->exit_status = exit_status;
+	//(*shell)->exit_status = exit_status;
 }
 
 int	wait_children(t_shell **shell)

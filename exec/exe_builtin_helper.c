@@ -14,7 +14,7 @@ int	do_execution(t_shell **shell, char **cmd)
 		if (execve(cmd[0], cmd, (*shell)->env) == -1)
 		{
 			perror(cmd[0]);
-			exit(0);
+			exit(errno);
 		}
 	}
 	else

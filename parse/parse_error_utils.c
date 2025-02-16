@@ -27,14 +27,14 @@ int    handle_path(char *tok, t_shell **shell)
     if (path_type != 0)
     {
         if (check_path_type(tok) == TYPE_DIR)
-            print_parse_error(tok, "Is a directory", 126, shell);
+            return (print_parse_error(tok, "Is a directory", 126, shell), -1);
         else if (check_path_type(tok) == TYPE_FILE)
         {
             if ((path_type == 2 && access(tok, X_OK) == -1) || (path_type == 1 && access(tok, W_OK) == -1))
-                print_parse_error(tok, "Permission denied", 126, shell);
+            return (print_parse_error(tok, "Permission denied", 126, shell), -1);
         }
         else
-            print_parse_error(tok, "No such file or directory", 127, shell);
+            return (print_parse_error(tok, "No such file or directory", 127, shell), -1);
         return (1);
     }
     return (0);
