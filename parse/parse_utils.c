@@ -12,13 +12,6 @@
 
 #include "minishell.h"
 
-static int	ispath(char *tok)
-{
-	if (tok[0] == '/' || (tok[0] == '.' && tok[1] == '/'))
-		return (1);
-	return (0);
-}
-
 void	makenewnode(t_node **newnode, t_node **tree, int type)
 {
 	(*newnode) = createnode();
@@ -71,19 +64,7 @@ int	parseword(t_node **newnode, t_shell ** shell, t_node **tree, char *tok)
 		}
 		else if (word == NULL)
 		{
-			if (ispath(tok))
-			{
-				if (check_path_type(tok) == TYPE_DIR)
-					print_parse_error(tok, "Is a directory", 126, shell);
-				else if (check_path_type(tok) == TYPE_FILE)
-				{
-					if (access(tok, W_OK) == -1)
-						print_parse_error(tok, "Permission denied", 126, shell);
-				}
-				else
-					print_parse_error(tok, "No such file or directory", 127, shell);
-			}
-			else
+			if (handle_path(tok, shell) == 0)
 				print_parse_error(tok, "command not found", 127, shell);
 			return (0);
 		}
