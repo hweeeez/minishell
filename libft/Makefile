@@ -24,8 +24,9 @@ MAN_SRC = ft_atoi.c ft_isalnum.c ft_isdigit.c ft_memchr.c ft_memmove.c\
 		  ft_strlcat.c ft_strmapi.c ft_strrchr.c ft_tolower.c\
 		  ft_isspace.c ft_iswithin.c ft_isblank.c ft_strtol.c\
 		  ft_isvalid_integer_str.c ft_abs.c ft_chartostr.c\
-		  ft_strndup.c ft_strcmp.c ft_strcpy.c ft_freestrl.c\
-		  ft_dupstrl.c ft_strtok.c ft_isodd.c ft_iseven.c
+		  ft_strndup.c ft_strcmp.c ft_strcpy.c ft_free_split.c\
+		  ft_dup_split.c ft_strtok.c ft_isodd.c ft_iseven.c\
+		  ft_splitany.c
 
 # Object directory and object files
 OBJ_DIR = obj

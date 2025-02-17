@@ -75,6 +75,7 @@ t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 		return (handle_special(tok, current_word));
 	if (c == '$')
 	{
+		tok->word_split = 1;
 		handle_expansion(tok, shell, current_word);
 		return (NULL);
 	}

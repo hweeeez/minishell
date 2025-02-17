@@ -6,12 +6,22 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 19:37:15 by myuen             #+#    #+#             */
-/*   Updated: 2025/02/15 16:17:24 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/17 17:27:20 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+// static int	has_delim(const char *str, const char *delim)
+// {
+// 	while (*delim)
+// 	{
+// 		if (ft_strchr(str, *delim))
+// 			return (1);
+// 		delim++;
+// 	}
+// 	return (0);
+// }
 static int	is_delim(char c, const char *delim)
 {
 	while (*delim)
@@ -23,78 +33,44 @@ static int	is_delim(char c, const char *delim)
 	return (0);
 }
 
-static int	count_substr(const char *s, const char *delim)
+char	*ft_strtok(char *str, const char *delim)
 {
-	int	count;
-	int	in_str;
+	static char	*next_token = NULL;
+	char		*token_start;
 
-	count = 0;
-	in_str = 0;
-	if (s)
-	{
-		while (*s)
-		{
-			if (is_delim(*s, delim))
-				in_str = 0;
-			else if (!in_str)
-			{
-				in_str = 1;
-				count++;
-			}
-			s++;
-		}
-	}
-	return (count);
-}
-
-static char	*extract_substr(char **pos, const char *delim)
-{
-	char	*start;
-
-	if (!(*pos))
+	if (str != NULL)
+		next_token = str;
+	if (next_token == NULL)
 		return (NULL);
-	while (is_delim(**pos, delim))
-		(*pos)++;
-	start = *pos;
-	while (**pos && !is_delim(**pos, delim))
-		(*pos)++;
-	return (ft_substr(start, 0, *pos - start));
-}
-
-static void	free_str(char **s, unsigned int count)
-{
-	while (count > 0)
+	while (*next_token && is_delim(*next_token, delim))
+		next_token++;
+	if (*next_token == '\0')
+		return (NULL);
+	token_start = next_token;
+	while (*next_token && !is_delim(*next_token, delim))
+		next_token++;
+	if (*next_token)
 	{
-		free(s[--count]);
-		s[count] = NULL;
+		*next_token = '\0';
+		next_token++;
 	}
-	free(s);
+	else
+		next_token = NULL;
+	return (ft_strdup(token_start));
 }
-
-char	**ft_strtok(const char *s, const char *delim)
-{
-	char			**ret;
-	char			*read_pos;
-	unsigned int	substr_total;
-	unsigned int	substr_index;
-
-	substr_total = count_substr(s, delim);
-	ret = (char **)malloc((substr_total + 1) * sizeof(char *));
-	if (ret)
-	{
-		read_pos = (char *)s;
-		substr_index = 0;
-		while (substr_index < substr_total)
-		{
-			ret[substr_index] = extract_substr(&read_pos, delim);
-			if (!ret[substr_index])
-			{
-				free_str(ret, substr_index);
-				return (NULL);
-			}
-			substr_index++;
-		}
-		ret[substr_index] = NULL;
+/*
+int main() {
+	char str[] = "  Hello,  World! 42  is awesome!  ";
+	char *token;
+	
+	printf("Tokens:\n");
+	
+	// First call with the string
+	token = ft_strtok(str, " ,!");
+	while (token != NULL) {
+		printf("[%s]\n", token);
+		token = ft_strtok(NULL, " ,!"); // Subsequent calls with NULL
 	}
-	return (ret);
-}
+
+	return 0;
+}*/

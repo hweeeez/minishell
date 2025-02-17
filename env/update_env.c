@@ -59,7 +59,7 @@ static int	copy_env_entries(char **new_env, char **old_env, char *new_str)
 		new_env[size] = ft_strdup(old_env[size]);
 		if (!new_env[size])
 		{
-			freestrl(new_env);
+			free_split(new_env);
 			free(new_str);
 			return (-1);
 		}
@@ -91,7 +91,7 @@ static int	add_new_env(t_shell *shell, const char *key, const char *value)
 		return (1);
 	new_env[size] = new_str;
 	new_env[size + 1] = NULL;
-	freestrl(shell->env);
+	free_split(shell->env);
 	shell->env = new_env;
 	return (0);
 }

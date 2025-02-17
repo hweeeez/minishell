@@ -56,10 +56,11 @@ char	*ft_strcpy(char *src, int size);
 /*======================================
 		String Array functions - 4
 =======================================*/
-char	**ft_strtok(const char *s, const char *delim);
+char	*ft_strtok(char *str, const char *delim);
 char	**ft_split(char const *s, char c);
-char	**dupstrl(char **str);
-void	freestrl(char **str_array);
+char	**ft_splitany(const char *s, const char *delim);
+char	**dup_split(char **str);
+void	free_split(char **str_array);
 /*====================================
 		Memory functions - 7
 =====================================*/

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dupstrl.c                                       :+:      :+:    :+:   */
+/*   ft_dup_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	**dupstrl(char **str)
+char	**dup_split(char **str)
 {
 	char	**new_str_array;
 	size_t	i;
@@ -30,7 +30,7 @@ char	**dupstrl(char **str)
 		new_str_array[i] = ft_strdup(str[i]);
 		if (!new_str_array[i])
 		{
-			freestrl(new_str_array);
+			free_split(new_str_array);
 			return (NULL);
 		}
 		i++;

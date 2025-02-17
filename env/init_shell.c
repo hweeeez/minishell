@@ -19,7 +19,7 @@ t_shell	*init_shell(char **env)
 	shell = (t_shell *)malloc(sizeof(t_shell));
 	if (!shell)
 		return (NULL);
-	shell->env = dupstrl(env);
+	shell->env = dup_split(env);
 	if (!shell->env)
 	{
 		cleanup_shell(&shell);
@@ -38,7 +38,7 @@ void	cleanup_shell(t_shell **shell)
 	if (!(*shell))
 		return ;
 	if ((*shell)->env)
-		freestrl((*shell)->env);
+		free_split((*shell)->env);
 	free(*shell);
 	*shell = NULL;
 }
