@@ -47,14 +47,14 @@ minishell
 - [X] Review and fix signal handling in heredoc context
 
 ### 2. Variable Expansion & Word Splitting
-- [ ] Fix word splitting for variables
+- [x] Fix word splitting for variables
   ```bash
   # Issue example:
   export name="ninja          turtle"
   echo $name     # Should output: ninja turtle
   echo "$name"   # Should preserve original spacing
   ```
-- [ ] Preserve spaces in quoted variable expansions
+- [x] Preserve spaces in quoted variable expansions
 
 ### 3. File Operations & Permissions
 - [ ] Implement proper handling for non-executable files
