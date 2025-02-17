@@ -5,6 +5,7 @@
 int	do_execution(t_shell **shell, char **cmd)
 {
 	int	builtinvalue;
+	char	*command;
 
 	if (cmd == NULL)
 		exit(0);
@@ -13,7 +14,11 @@ int	do_execution(t_shell **shell, char **cmd)
 	{
 		if (execve(cmd[0], cmd, (*shell)->env) == -1)
 		{
-			perror(cmd[0]);
+			command = ft_find_cmd_path(cmd[0], &cmd, (*shell)->env);
+			if (command == NULL)
+				exit(127);
+			else
+				free(command);
 			exit(errno);
 		}
 	}

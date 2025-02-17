@@ -10,7 +10,7 @@ void    print_parse_error(char *cmd, char *error, int status, t_shell **shell)
     (*shell)->exit_status = status;
 }
 
-static int	ispath(char *tok)
+int	ispath(char *tok)
 {
 	if (tok[0] == '/')
 		return (1);
