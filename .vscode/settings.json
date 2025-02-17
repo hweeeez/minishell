@@ -22,6 +22,7 @@
 		"type_traits": "c",
 		"utility": "c",
 		"ft_strinstr": "cpp",
-		"random": "c"
+		"random": "c",
+		"ranges": "c"
 	}
 }

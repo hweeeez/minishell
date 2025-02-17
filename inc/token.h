@@ -69,6 +69,11 @@ t_token	*process_token_loop(t_tokenizer *tok, t_shell *shell, \
 int		validate_token_syntax(t_token *head);
 int		is_redirection_token(t_token_type type);
 int		print_error(const char *format);
+void	split_node(t_token **head);
+int		node_split_id(t_token *head);
+int		find_split_index(t_token *head);
+t_token	*create_first_token(char **orginal);
+void	create_and_link_tokens(t_token **prev);
 
 #endif
 /*
