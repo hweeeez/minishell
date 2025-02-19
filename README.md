@@ -45,6 +45,7 @@ minishell
 ### 1. Signal Handling
 - [X] Fix SIGINT (Ctrl+C) exit status to return 130
 - [X] Review and fix signal handling in heredoc context
+- [ ] ctrl-D (EOF) prints exit
 
 ### 2. Variable Expansion & Word Splitting
 - [x] Fix word splitting for variables
