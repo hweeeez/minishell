@@ -64,7 +64,7 @@ static int	readhd(t_redir *redirs, int filefd, t_shell **shell)
 		close(filefd);
 		unlink(HEREDOC_FILE);
 		(*shell)->exit_status = 130;
-		return (1);
+		return (130);
 	}
 	return (0);
 }
@@ -82,13 +82,13 @@ int	ft_heredoc(t_redir *redirs, t_shell **shell)
 	//t_exe				*exe;
 
 	rl_event_hook = event;
-	sig_int.sa_handler = exit_hd;
 	g_received_sigint = 0;
 	ft_memset(&sig_int, 0, sizeof(sig_int));
 	sigemptyset(&sig_int.sa_mask);
 	sig_int.sa_flags = 0;
+	sig_int.sa_handler = exit_hd;
 	if (sigaction(SIGINT, &sig_int, NULL) == -1)
-		exit(1);
+		return (-1);
 	if (check_path_type(HEREDOC_FILE) == TYPE_FILE)
 	{
 		filefd = open(HEREDOC_FILE, O_RDONLY, 0644);
@@ -96,8 +96,8 @@ int	ft_heredoc(t_redir *redirs, t_shell **shell)
 		close(filefd);
 	}
 	filefd = open(HEREDOC_FILE, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (readhd(redirs, filefd, shell) == 1)
-		return (exit(1), -1);
+	if (readhd(redirs, filefd, shell) == 130)
+		return (130);
 	close (filefd);
 	return (filefd);
 }

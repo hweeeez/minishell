@@ -36,6 +36,9 @@ static void	closeput(int input, int output)
 
 int	get_redir(t_redir *re, t_exe **x, t_shell **shell)
 {
+	int	hd;
+
+	hd = 0;
 	if (re != NULL)
 	{
 		if (re->type == TOKEN_REDIR_OUT)
@@ -64,8 +67,9 @@ int	get_redir(t_redir *re, t_exe **x, t_shell **shell)
 		else if (re->type == TOKEN_HEREDOC)
 		{
 			closeput((*x)->puts[0], -1);
-			ft_heredoc(re, shell);
-			//(*shell)->hasprinted = 1;
+			hd = ft_heredoc(re, shell);
+			if (hd == -1 || hd == 130)
+				return(130);
 			(*x)->puts[0] = open(HEREDOC_FILE, O_RDONLY, 0644);
 		}
 		return (get_redir(re->next, x, shell));
