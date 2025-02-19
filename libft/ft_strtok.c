@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 19:37:15 by myuen             #+#    #+#             */
-/*   Updated: 2025/02/17 20:10:34 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/19 19:31:47 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_strtok(char *str, const char *delim)
 	static char	*next_token = NULL;
 	char		*token_start;
 
-	if(!delim)
+	if (!delim)
 		return (NULL);
 	if (str != NULL)
 		next_token = str;

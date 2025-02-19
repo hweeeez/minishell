@@ -30,6 +30,10 @@ int	isbuiltin(char *value)
 			return (1);
 		if (ft_strcmp(value, "exit") == 1)
 			return (1);
+		if (ft_strcmp(value, ".") == 1)
+			return (1);
+		if (ft_strcmp(value, "..") == 1)
+			return (1);
 	}
 	return (0);
 }

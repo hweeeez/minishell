@@ -13,16 +13,19 @@
 #ifndef ENV_H
 # define ENV_H
 
+typedef struct s_token	t_token;
+
 typedef struct s_shell
 {
-	char	**env;
-	//int		exit_status;
-	volatile sig_atomic_t exit_status;
-	int		interactive;
-	pid_t		*pids;
-	int		numpid;
-	int		hasprinted;
-	int		redir_status;
+	char					**env;
+	//int						exit_status;
+	volatile sig_atomic_t	exit_status;
+	int						interactive;
+	pid_t					*pids;
+	int						numpid;
+	int						hasprinted;
+	int						redir_status;
+	t_token					*token;
 }	t_shell;
 
 typedef enum e_file_type

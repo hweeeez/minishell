@@ -30,6 +30,7 @@ t_shell	*init_shell(char **env)
 	shell->numpid = 0;
 	shell->hasprinted = 0;
 	shell->pids = NULL;
+	shell->token = NULL;
 	return (shell);
 }
 
@@ -37,8 +38,16 @@ void	cleanup_shell(t_shell **shell)
 {
 	if (!(*shell))
 		return ;
+	if ((*shell)->token)
+	{
+		free_token_list(&(*shell)->token);
+		(*shell)->token = NULL;
+	}
 	if ((*shell)->env)
+	{
 		free_split((*shell)->env);
+		(*shell)->env = NULL;
+	}
 	free(*shell);
 	*shell = NULL;
 }

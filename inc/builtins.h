@@ -22,9 +22,9 @@ char	*get_new_cd_path(t_shell *shell, char *path);
 int		ft_env(t_shell *shell);
 int		ft_export(t_shell *shell, char **args);
 int		ft_unset(t_shell *shell, char **args);
-int		ft_exit(t_shell *shell, char **args);
+int		ft_exit(t_shell **shell, char **args);
 int		isbuiltin(char *value);
-int     ft_dot(char **args);
-int     ft_dotdot(void);
+int		ft_dot(char **args);
+int		ft_dotdot(void);
 
 #endif

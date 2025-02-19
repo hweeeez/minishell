@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exe_builtin_helper.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myuen <myuen@student.42singapore.sg>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/19 19:27:53 by myuen             #+#    #+#             */
+/*   Updated: 2025/02/19 19:28:05 by myuen            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -42,6 +53,11 @@ int	checkif_builtin(t_shell **shell, char **cmd)
 	if (ft_strcmp(cmd[0], "env") == 1)
 		return (ft_env(*shell));
 	if (ft_strcmp(cmd[0], "exit") == 1)
-		return (ft_exit(*shell, cmd));
+		return (ft_exit(shell, cmd));
+	if (ft_strcmp(cmd[0], ".") == 1)
+		return (ft_dot(cmd));
+	if (ft_strcmp(cmd[0], "..") == 1)
+		return (ft_dotdot());
 	return (-1);
 }
+

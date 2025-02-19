@@ -12,9 +12,6 @@
 
 #include "minishell.h"
 
-/*temp test define and function*/
-#define EXIT_CMD "exit"
-
 // static void	print_tokens(t_token *token_list)
 // {
 // 	t_token	*current;
@@ -56,28 +53,15 @@ static int	handle_empty_input(char *input)
 	return (0);
 }
 
-static int	handle_exit_command(char *input)
-{
-	if (*input && ft_strncmp(input, EXIT_CMD, sizeof(EXIT_CMD)) == 0)
-	{
-		ft_putstr_fd("exit\n", 2);
-		return (1);
-	}
-	return (0);
-}
-
-static int	ms_exit(char *input, t_token **tok, t_shell **shell)
-{
-	int	exit_status;
-
-	exit_status = (*shell)->exit_status;
-	free(input);
-	input = NULL;
-	rl_clear_history();
-	free_token_list(tok);
-	cleanup_shell(shell);
-	return (exit_status);
-}
+// static int	handle_exit_command(char *input)
+// {
+// 	if (*input && ft_strncmp(input, EXIT_CMD, sizeof(EXIT_CMD)) == 0)
+// 	{
+// 		// ft_putstr_fd("exit\n", 2);
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 
 static void	processtree(t_token	*token, t_shell	**shell, struct sigaction *sigs)
 {
@@ -113,18 +97,19 @@ static int	minishell_loop(char *input, t_token **tok, t_shell **shell, struct si
 	{
 		input = readline(PROMPT);
 		if (handle_empty_input(input))
-			return (ms_exit(input, tok, shell));
-		if (handle_exit_command(input))//need to be replaced
-			return (ms_exit(input, tok, shell));
+			continue ;
+			// return (ft_exit(shell, NULL));
+		// if (handle_exit_command(input))
+		// 	return (ft_exit(shell, NULL));
 		add_history(input);
 		if (tokenize(input, tok, *shell))
 		{
 			free(input);
 			continue ;
 		}
+		free(input);
 		//print_tokens(*tok);
 		processtree(*tok, shell, sigs);
-		free(input);
 	}
 	return (0);
 }
@@ -133,17 +118,15 @@ int	main(int argc, char **argv, char **env)
 {
 	char		*input;
 	t_shell		*shell;
-	t_token		*token;
 	struct sigaction	sigint;
 
 	(void)argc;
 	(void)argv;
-	token = NULL;
 	input = NULL;
 	shell = init_shell(env);
 	if (!shell)
-		return (ms_exit(input, &token, &shell));
+		exit(1);
 	if (setup_signals(&sigint) == 1)
-		return (ms_exit(input, &token, &shell));
-	return (minishell_loop(input, &token, &shell, &sigint));
+		return (ft_exit(&shell, NULL));
+	return (minishell_loop(input, &(shell->token), &shell, &sigint));
 }
