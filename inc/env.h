@@ -14,6 +14,7 @@
 # define ENV_H
 
 typedef struct s_token	t_token;
+typedef struct s_node	t_node;
 
 typedef struct s_shell
 {
@@ -26,6 +27,8 @@ typedef struct s_shell
 	int						hasprinted;
 	int						redir_status;
 	t_token					*token;
+	t_node					*tree;
+	t_node					*root;
 }	t_shell;
 
 typedef enum e_file_type

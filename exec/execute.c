@@ -88,7 +88,7 @@ int	exe_commands(t_node *node, t_exe **exe, t_shell **shell)
 	if ((*exe)->pid == 0)
 	{
 		do_sigaction(SIGQUIT, SIGINT, sigs);
-		executechild(node, exe, shell);
+		executechild(node, exe, shell, &sigs);
 	}
 	else if ((*exe)->pid == -1)
 		return (-1);
@@ -112,7 +112,7 @@ int	exe_commands(t_node *node, t_exe **exe, t_shell **shell)
 	return ((*exe)->pid);
 }
 
-void	executechild(t_node *node, t_exe **exe, t_shell **shell)
+void	executechild(t_node *node, t_exe **exe, t_shell **shell, t_sigs **sigs)
 {
 	if ((*exe)->puts[0] != STDIN_FILENO)
 	{
@@ -144,5 +144,5 @@ void	executechild(t_node *node, t_exe **exe, t_shell **shell)
 		dup2((*exe)->pipefd[1], STDOUT_FILENO);
 		close((*exe)->pipefd[1]);
 	}
-	do_execution(shell, node->left->args);
+	do_execution(shell, node->left->args, sigs, exe);
 }

@@ -12,14 +12,22 @@
 
 #include "minishell.h"
 
+static void	exitchild(t_shell **shell, int exitcode, t_sigs **sigs, t_exe **exe)
+{
+	(*shell)->exit_status = 127;
+	free(*sigs);
+	free(*exe);
+	ft_exit(shell, NULL);
+}
+
 //builtins need to write to stdout, but do not read from stdin (but we should still dup2)
-int	do_execution(t_shell **shell, char **cmd)
+int	do_execution(t_shell **shell, char **cmd, t_sigs **sigs, t_exe **exe)
 {
 	int	builtinvalue;
 	char	*command;
 
 	if (cmd == NULL)
-		exit(0);
+		exitchild(shell, 0, sigs, exe);
 	builtinvalue = checkif_builtin(shell, cmd);
 	if (builtinvalue == -1)
 	{
@@ -27,10 +35,10 @@ int	do_execution(t_shell **shell, char **cmd)
 		{
 			command = ft_find_cmd_path(cmd[0], &cmd, (*shell)->env);
 			if (command == NULL)
-				exit(127);
+				exitchild(shell, 127, sigs, exe);
 			else
 				free(command);
-			exit(errno);
+			exitchild(shell, errno, sigs, exe);
 		}
 	}
 	else

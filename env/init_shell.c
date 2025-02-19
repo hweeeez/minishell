@@ -48,6 +48,11 @@ void	cleanup_shell(t_shell **shell)
 		free_split((*shell)->env);
 		(*shell)->env = NULL;
 	}
+	if ((*shell)->root)
+	{
+		freetree(&((*shell)->root));
+		(*shell)->root = NULL;
+	}
 	free(*shell);
 	*shell = NULL;
 }

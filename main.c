@@ -65,19 +65,19 @@ static int	handle_empty_input(char *input)
 
 static void	processtree(t_token	*token, t_shell	**shell, struct sigaction *sigs)
 {
-	t_node	*tree;
-	t_node	*root;
+	//t_node	*tree;
+	//t_node	*root;
 
-	tree = createnode();
-	root = tree;
-	if (inittree(&tree, token, shell) == 0)
+	(*shell)->tree = createnode();
+	(*shell)->root = (*shell)->tree;
+	if (inittree(&(*shell)->tree, token, shell) == 0)
 	{
 		//tree = root;
-		freetree(&root);
+		freetree(&(*shell)->root);
 		return ;
 	}
-	tree = root;
-	if (execute(tree, shell) == 2)
+	(*shell)->tree = (*shell)->root;
+	if (execute((*shell)->tree, shell) == 2)
 	{
 		// if (ft_heredoc(tree, shell) > 0)
 		// {
@@ -87,7 +87,7 @@ static void	processtree(t_token	*token, t_shell	**shell, struct sigaction *sigs)
 	}
 	(*shell)->hasprinted = 0;
 	setup_signals(sigs);
-	freetree(&tree);
+	freetree(&(*shell)->tree);
 }
 
 /*Edit this function to add more features when minishell is run*/
@@ -97,7 +97,7 @@ static int	minishell_loop(char *input, t_token **tok, t_shell **shell, struct si
 	{
 		input = readline(PROMPT);
 		if (handle_empty_input(input))
-			continue ;
+			ft_exit(shell, NULL) ;
 			// return (ft_exit(shell, NULL));
 		// if (handle_exit_command(input))
 		// 	return (ft_exit(shell, NULL));
