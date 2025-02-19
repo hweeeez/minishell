@@ -32,14 +32,7 @@ int	checkif_builtin(t_shell **shell, char **cmd)
 	if (ft_strcmp(cmd[0], "echo") == 1)
 		return (ft_echo(cmd));
 	if (ft_strcmp(cmd[0], "cd") == 1)
-	{
-		if (cmd[1+1] != NULL)
-		{
-			ft_putstr_fd("cd: too many arguments\n",STDERR_FILENO);
-			return (1);
-		}
-		return (ft_cd(*shell, cmd[1]));
-	}
+		return (ft_cd(*shell, cmd));
 	if (ft_strcmp(cmd[0], "pwd") == 1)
 		return (ft_pwd());
 	if (ft_strcmp(cmd[0], "export") == 1)

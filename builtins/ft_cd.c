@@ -12,6 +12,16 @@
 
 #include "minishell.h"
 
+static int	check_cd_args(char **cmd)
+{
+	if (cmd[1 + 1] != NULL)
+	{
+		ft_putstr_fd("cd: too many arguments\n", STDERR_FILENO);
+		return (1);
+	}
+	return (0);
+}
+
 static int	handle_cd_error(char *old_pwd, char *path)
 {
 	free(old_pwd);
@@ -36,21 +46,25 @@ static int	update_pwd_vars(t_shell *shell, char *old_pwd)
 	return (0);
 }
 
-int	ft_cd(t_shell *shell, char *path)
+int	ft_cd(t_shell *shell, char **cmd)
 {
 	char	*new_path;
 	char	*old_pwd;
 
 	//ft_putstr_fd("--minishell cd--\n", STDOUT_FILENO);
-	new_path = get_new_cd_path(shell, path);
-	if (!new_path && path && ft_strcmp(path, ".") != 0)
+	if (check_cd_args(cmd))
+	{
 		return (1);
-	if (ft_strcmp(path, ".") == 0)
+	}
+	new_path = get_new_cd_path(shell, cmd[1]);
+	if (!new_path && cmd[1] && ft_strcmp(cmd[1], ".") != 0)
+		return (1);
+	if (ft_strcmp(cmd[1], ".") == 0)
 		return (0);
 	old_pwd = getcwd(NULL, 0);
 	if (!old_pwd)
 		return (1);
 	if (chdir(new_path) != 0)
-		return (handle_cd_error(old_pwd, path));
+		return (handle_cd_error(old_pwd, cmd[1]));
 	return (update_pwd_vars(shell, old_pwd));
 }
