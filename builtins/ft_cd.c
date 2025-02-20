@@ -57,9 +57,9 @@ int	ft_cd(t_shell *shell, char **cmd)
 		return (1);
 	}
 	new_path = get_new_cd_path(shell, cmd[1]);
-	if (!new_path && cmd[1] && ft_strcmp(cmd[1], ".") != 0)
+	if (!new_path && cmd[1] && ft_strncmp(cmd[1], ".", 2) != 0)
 		return (1);
-	if (ft_strcmp(cmd[1], ".") == 0)
+	if (ft_strncmp(cmd[1], ".", 2) == 0)
 		return (0);
 	old_pwd = getcwd(NULL, 0);
 	if (!old_pwd)

@@ -147,3 +147,4 @@ int	main(int argc, char **argv, char **env)
 		return (ms_exit(input, &token, &shell));
 	return (minishell_loop(input, &token, &shell, &sigint));
 }
+hello

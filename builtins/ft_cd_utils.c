@@ -42,12 +42,12 @@ char	*get_new_cd_path(t_shell *shell, char *path)
 		if (handle_cd_home(shell, &path))
 			return (NULL);
 	}
-	else if (ft_strcmp(path, "-") == 0)
+	else if (ft_strncmp(path, "-", 2) == 0)
 	{
 		if (handle_cd_prev(shell, &path))
 			return (NULL);
 	}
-	else if (ft_strcmp(path, ".") == 0)
+	else if (ft_strncmp(path, ".", 2) == 0)
 		return (NULL);
 	return (path);
 }

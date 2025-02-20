@@ -59,6 +59,8 @@ static void	handle_expansion(t_tokenizer *tok, t_shell *shell,
 t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 	char **current_word)
 {
+	//t_token	*token;
+
 	if (ft_isspace(c))
 		return (handle_space(tok, current_word));
 	if (c == '\'')
@@ -68,6 +70,18 @@ t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 	}
 	if (c == '"')
 	{
+		// if (tok->input[tok->position + 1] && tok->input[tok->position + 1] == '"')
+		// {
+		// 	if (ft_strncmp(*current_word,"",1))
+		// 	{
+		// 		tok->position += 2;
+		// 		if (current_word)
+		// 			free(current_word);
+		// 		token = new_token(ft_strdup(""), TOKEN_WORD, tok->word_split);
+		// 		tok->word_split = 0;
+		// 		return (token);
+		// 	}
+		// }
 		handle_quotes(tok, '"');
 		return (NULL);
 	}
