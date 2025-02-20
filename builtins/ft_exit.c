@@ -28,7 +28,6 @@ int ft_exit(t_shell **shell, char **args)
 	//printf(">> Current exit_status: %d\n", exit_code);
 	// Only print exit message if in interactive mode
 	//if (is_interactive)
-		ft_putstr_fd("exit\n", 1);
 	// Handle case with no args or just the command name
 	if (!args || !args[0])
 	{
@@ -38,6 +37,7 @@ int ft_exit(t_shell **shell, char **args)
 		cleanup_shell(shell);
 		*shell = NULL;
 		//printf(">> Shell cleanup done\n");
+		ft_putstr_fd("exit\n", 1);
 		exit(exit_code);
 	}
 	// If no argument after command name
@@ -49,6 +49,7 @@ int ft_exit(t_shell **shell, char **args)
 		cleanup_shell(shell);
 		*shell = NULL;
 		//printf(">> Shell cleanup done\n");
+		ft_putstr_fd("exit\n", 1);
 		exit(exit_code);
 	}
 	// Print args for debugging
@@ -67,6 +68,7 @@ int ft_exit(t_shell **shell, char **args)
 		cleanup_shell(shell);
 		*shell = NULL;
 		//printf(">> Shell cleanup done\n");
+		ft_putstr_fd("exit\n", 1);
 		exit(2);
 	}
 	if (args[2])
@@ -83,6 +85,7 @@ int ft_exit(t_shell **shell, char **args)
 	cleanup_shell(shell);
 	//printf(">> Shell cleanup done\n");
 	*shell = NULL;
+	ft_putstr_fd("exit\n", 1);
 	exit(exit_code);
 }
 
