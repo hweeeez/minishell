@@ -64,7 +64,10 @@ int	execute(t_node *node, t_shell **shell)
 			(*shell)->exit_status = (*shell)->redir_status;
 		free(exe);
 		if ((*shell)->pids != NULL)
+		{
 			free((*shell)->pids);
+			(*shell)->pids = NULL;
+		}
 	}
 	return (0);
 }

@@ -88,7 +88,6 @@ int	validate_token_syntax(t_token *head)
 	current = head;
 	while (current)
 	{
-		//printf("Checking token: %s (type: %d)\n", current->value, current->type);
 		if (current->type == TOKEN_PIPE && \
 			(!prev || !current->next || current->next->type == TOKEN_PIPE))
 			return (print_error("syntax error : unexpected token `|'\n"));

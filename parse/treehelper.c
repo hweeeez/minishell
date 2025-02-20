@@ -29,7 +29,10 @@ void	freetree(t_node **tree)
 		if ((current)->left != NULL)
 		{
 			if (current->left->args != NULL)
+			{
 				freearray(current->left->args);
+				current->left->args = NULL;
+			}
 			if (current->left->rootredir != NULL)
 				freeredirs(current->left->rootredir);
 			free(current->left);

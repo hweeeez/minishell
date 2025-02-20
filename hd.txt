@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 dwqd
 wd..
+=======
+dfg
+>>>>>>> f30a3fb (fixed more)
