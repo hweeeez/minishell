@@ -20,12 +20,10 @@ static int is_valid_filename(char *str)
 	int			result;
 
 	if (!str || *str == '\0')
-		return (1);
-	// if (ft_strncmp(str, ".", 2) == 0 || ft_strncmp(str, "..", 3) == 0)
-	// 	return (0);
+		return (0);
 	last_slash = ft_strrchr(str, '/');
 	if (!last_slash)
-		return (1);
+		return (access(".", W_OK) == 0);
 	dir_path = ft_strndup(str, last_slash - str);
 	if (!dir_path)
 		return (0);
@@ -51,11 +49,8 @@ static int check_redirection_error(t_token *current)
 		//printf("heredoc detected\n");
 		if (current->next->type != TOKEN_WORD)
 			return (print_error("syntax error: unexpected token after '<<'\n"));
-		if (current->next->value == NULL || strcmp(current->next->value, "") == 0)
-		{
-			//printf("null string deteched\n");
+		if (current->next->value == NULL)
 			return (0);
-		}
 	}
 	else if (is_redirection_token(current->type))
 	{
@@ -79,14 +74,14 @@ int	validate_token_syntax(t_token *head)
 	if (!head)
 		return (0);
 	if (head->type == TOKEN_PIPE)
-		return (print_error("syntax error : unexpected token `|'\n"));
+		return (print_error("syntax error : unexpected token near `|'\n"));
 	prev = NULL;
 	current = head;
 	while (current)
 	{
 		if (current->type == TOKEN_PIPE && \
 			(!prev || !current->next || current->next->type == TOKEN_PIPE))
-			return (print_error("syntax error : unexpected token `|'\n"));
+			return (print_error("syntax error : unexpected token near `|'\n"));
 		if (is_redirection_token(current->type))
 		{
 			if (check_redirection_error(current))
