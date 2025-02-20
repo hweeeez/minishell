@@ -45,8 +45,8 @@ minishell
 ### 1. Signal Handling
 - [X] Fix SIGINT (Ctrl+C) exit status to return 130
 - [X] Review and fix signal handling in heredoc context
-- [ ] ctrl-D (EOF) prints exit
-- [ ] ctrl-D (EOF) Invalid read of size 8 at 0x10B8A5: freetree (treehelper.c:25)
+- [x] ctrl-D (EOF) prints exit
+- [x] ctrl-D (EOF) Invalid read of size 8 at 0x10B8A5: freetree (treehelper.c:25)
 
 ### 2. Variable Expansion & Word Splitting
 - [x] Fix word splitting for variables
@@ -57,10 +57,11 @@ minishell
   echo "$name"   # Should preserve original spacing
   ```
 - [x] Preserve spaces in quoted variable expansions
+- [x] "" and '' are tokens when sandwish by spaces, or end of input 
 
 ### 3. File Operations & Permissions
 - [ ] Implement proper handling for non-executable files
-- [ ] Invalid cmd calls exit (and prints exit)
+- [x] Invalid cmd calls exit (and prints exit)
 - [x] Add validation for `.` and `..` directory execution attempts
 
 ### 4. Redirections & Pipes
@@ -84,7 +85,7 @@ minishell
   ```
 
 ### 5. Memory Management
-- [ ] Implement cleanup() functions for all components
+- [x] Implement cleanup() functions for all components
 
 ### 6. Additional Tasks
 - [ ] Add/check error messages for failure cases
