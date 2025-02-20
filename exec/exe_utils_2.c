@@ -19,13 +19,14 @@ void	ft_coredump_msg(int status, t_shell **shell)
 		if (WCOREDUMP(status))
 		{
 			if ((*shell)->hasprinted == 0)
-				{
-					write(1, "Quit (core dumped)", 18);
-					write (1, "\n", 1);
-					(*shell)->hasprinted = 1;
-				}
+			{
+				write(1, "Quit (core dumped)", 18);
+				(*shell)->hasprinted = 1;
+			}
 			(*shell)->exit_status = ENOTRECOVERABLE;
 		}
+		if ((*shell)->skipnl == 0)
+			write (1, "\n", 1);
 	}
 }
 

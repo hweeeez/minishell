@@ -32,6 +32,7 @@ t_shell	*init_shell(char **env)
 	shell->pids = NULL;
 	shell->token = NULL;
 	shell->root = NULL;
+	shell->skipnl = 0;
 	return (shell);
 }
 
