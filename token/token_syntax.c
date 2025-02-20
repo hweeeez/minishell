@@ -12,21 +12,33 @@
 
 #include "minishell.h"
 
-int is_valid_filename(char *str)
+static int is_valid_filename(char *str)
 {
+	char		*last_slash;
+	char		*dir_path;
 	struct stat path_stat;
+	int			result;
+
 	if (!str || *str == '\0')
 		return (1);
-	if (ft_strncmp(str, ".", 2) == 0 || ft_strncmp(str, "..", 3) == 0)
+	// if (ft_strncmp(str, ".", 2) == 0 || ft_strncmp(str, "..", 3) == 0)
+	// 	return (0);
+	last_slash = ft_strrchr(str, '/');
+	if (!last_slash)
+		return (1);
+	dir_path = ft_strndup(str, last_slash - str);
+	if (!dir_path)
 		return (0);
-	if (stat(str, &path_stat) == 0 && ((path_stat.st_mode & S_IFMT) == S_IFDIR))
-		return (0);
-	return (1);
+	result = (stat(dir_path, &path_stat) == 0 && \
+			((path_stat.st_mode & S_IFMT) == S_IFDIR) && \
+			(access(dir_path, W_OK) == 0));
+	free(dir_path);
+	return (result);
 }
 
-int	is_redirection_token(t_token_type type)
+static int	is_redirection_token(t_token_type type)
 {
-	return (type == TOKEN_REDIR_IN || type == TOKEN_REDIR_OUT || \
+	return (type == TOKEN_REDIR_IN || type == TOKEN_REDIR_OUT ||
 			type == TOKEN_APPEND || type == TOKEN_HEREDOC);
 }
 
@@ -59,22 +71,6 @@ static int check_redirection_error(t_token *current)
 	return (0);
 }
 
-// static int	check_redirection_error(t_token *current)
-// {
-// 	if (!current->next)
-// 		return (print_error("syntax error : unexpected token `newline'\n"));
-// 	if (current->next->type != TOKEN_WORD)
-// 	{
-// 		if (current->next->type == TOKEN_PIPE)
-// 			return (print_error("syntax error : unexpected token `|'\n"));
-// 		else if (is_redirection_token(current->next->type))
-// 			return (print_error("syntax error : unexpected token `>'\n"));
-// 		else
-// 			return (print_error("syntax error : unexpected token\n"));
-// 	}
-// 	return (0);
-// }
-
 int	validate_token_syntax(t_token *head)
 {
 	t_token	*current;
@@ -101,3 +97,30 @@ int	validate_token_syntax(t_token *head)
 	}
 	return (0);
 }
+
+// static int	check_redirection_error(t_token *current)
+// {
+// 	if (!current->next)
+// 		return (print_error("syntax error : unexpected token `newline'\n"));
+// 	if (current->next->type != TOKEN_WORD)
+// 	{
+// 		if (current->next->type == TOKEN_PIPE)
+// 			return (print_error("syntax error : unexpected token `|'\n"));
+// 		else if (is_redirection_token(current->next->type))
+// 			return (print_error("syntax error : unexpected token `>'\n"));
+// 		else
+// 			return (print_error("syntax error : unexpected token\n"));
+// 	}
+// 	return (0);
+// }
+// int is_valid_filename(char *str)
+// {
+// 	struct stat path_stat;
+// 	if (!str || *str == '\0')
+// 		return (1);
+// 	if (ft_strncmp(str, ".", 2) == 0 || ft_strncmp(str, "..", 3) == 0)
+// 		return (0);
+// 	if (stat(str, &path_stat) == 0 && ((path_stat.st_mode & S_IFMT) == S_IFDIR))
+// 		return (0);
+// 	return (1);
+// }

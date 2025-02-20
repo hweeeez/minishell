@@ -26,13 +26,13 @@ t_shell	*init_shell(char **env)
 		return (NULL);
 	}
 	shell->exit_status = 0;
-	shell->interactive = isatty(STDIN_FILENO);
 	shell->numpid = 0;
 	shell->hasprinted = 0;
 	shell->pids = NULL;
 	shell->token = NULL;
 	shell->root = NULL;
 	shell->skipnl = 0;
+	shell->parent_pid = getpid();
 	return (shell);
 }
 

@@ -26,7 +26,6 @@ typedef enum e_token_type
 	TOKEN_HEREDOC,
 	TOKEN_EOF,
 	TOKEN_ERROR,
-	TOKEN_NULL
 }	t_token_type;
 
 /************************************/
@@ -68,8 +67,6 @@ t_token	*process_single_quote(t_tokenizer *tok, char c, \
 t_token	*process_token_loop(t_tokenizer *tok, t_shell *shell, \
 		char *current_word);
 int		validate_token_syntax(t_token *head);
-int		is_redirection_token(t_token_type type);
-int		print_error(const char *format);
 void	split_node(t_token **head);
 int		node_split_id(t_token *head);
 int		find_split_index(t_token *head);

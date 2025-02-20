@@ -66,14 +66,11 @@ t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 		return (handle_space(tok, current_word));
 	if (c == '\'')
 	{
-		if (tok->input[tok->position + 1] && tok->input[tok->position + 1] == '\'')
+		if (tok->input[tok->position + 1] == '\'' &&
+			!ft_strlen(*current_word) &&
+			(!tok->input[tok->position + 2] ||
+			 ft_isspace(tok->input[tok->position + 2])))
 		{
-			if (ft_strlen(*current_word))
-			{
-				token = new_token(*current_word, TOKEN_WORD, tok->word_split);
-				tok->word_split = 0;
-				return (token);
-			}
 			token = new_token(*current_word, TOKEN_WORD, tok->word_split);
 			tok->word_split = 0;
 			tok->position++;
@@ -85,14 +82,11 @@ t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 	}
 	if (c == '"')
 	{
-		if (tok->input[tok->position + 1] && tok->input[tok->position + 1] == '"')
+		if (tok->input[tok->position + 1] == '\"' &&
+			!ft_strlen(*current_word) &&
+			(!tok->input[tok->position + 2] ||
+			 ft_isspace(tok->input[tok->position + 2])))
 		{
-			if (ft_strlen(*current_word))
-			{
-				token = new_token(*current_word, TOKEN_WORD, tok->word_split);
-				tok->word_split = 0;
-				return (token);
-			}
 			token = new_token(*current_word, TOKEN_WORD, tok->word_split);
 			tok->word_split = 0;
 			tok->position++;
