@@ -31,12 +31,13 @@ t_shell	*init_shell(char **env)
 	shell->hasprinted = 0;
 	shell->pids = NULL;
 	shell->token = NULL;
+	shell->root = NULL;
 	return (shell);
 }
 
 void	cleanup_shell(t_shell **shell)
 {
-	if (!(*shell))
+	if (!shell || !(*shell))
 		return ;
 	if ((*shell)->token)
 	{

@@ -14,7 +14,8 @@
 
 static void	exitchild(t_shell **shell, int exitcode, t_sigs **sigs, t_exe **exe)
 {
-	(*shell)->exit_status = 127;
+	(void) exitcode; //need exit code?
+	(*shell)->exit_status = 127; // = exitcode?
 	free(*sigs);
 	free(*exe);
 	ft_exit(shell, NULL);

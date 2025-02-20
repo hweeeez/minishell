@@ -46,6 +46,7 @@ minishell
 - [X] Fix SIGINT (Ctrl+C) exit status to return 130
 - [X] Review and fix signal handling in heredoc context
 - [ ] ctrl-D (EOF) prints exit
+- [ ] ctrl-D (EOF) Invalid read of size 8 at 0x10B8A5: freetree (treehelper.c:25)
 
 ### 2. Variable Expansion & Word Splitting
 - [x] Fix word splitting for variables
@@ -59,7 +60,8 @@ minishell
 
 ### 3. File Operations & Permissions
 - [ ] Implement proper handling for non-executable files
-- [ ] Add validation for `.` and `..` directory execution attempts (in token phase?)
+- [ ] Invalid cmd calls exit (and prints exit)
+- [x] Add validation for `.` and `..` directory execution attempts
 
 ### 4. Redirections & Pipes
 - [ ] Fix pipe closing issues in redirect operations:
@@ -86,13 +88,13 @@ minishell
 
 ### 6. Additional Tasks
 - [ ] Add/check error messages for failure cases
-		// if (input != NULL && ft_strcmp(input, "$?") == 1)
-		// {
-		// 	printf("%d\n", (*shell)->exit_status);
-		// 	add_history(input);
-		// 	free(input);
-		// 	continue;
-		// }
+      if (input != NULL && ft_strcmp(input, "$?") == 1)
+		  {
+		    printf("%d\n", (*shell)->exit_status);
+		    add_history(input);
+		    free(input);
+		    continue;
+      }
 ## Testing Requirements
 
 ### Signal Tests

@@ -18,7 +18,7 @@ void	freetree(t_node **tree)
 	t_node	*next;
 
 	current = *tree;
-	if (tree == NULL || *tree == NULL)
+	if (tree == NULL || *tree == NULL)//md: is this check supposed to go first?
 		return ;
 	while (current != NULL)
 	{
@@ -53,6 +53,7 @@ void	freearray(char **args)
 		i++;
 	}
 	free(args);
+	args = NULL;
 }
 
 void	freeredirs(t_redir *redir)
