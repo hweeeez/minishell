@@ -54,7 +54,10 @@ int	parseword(t_node **newnode, t_shell ** shell, t_node **tree, char *tok)
 	if ((*newnode)->args == NULL)
 	{
 		if (isbuiltin(tok))
+		{
 			word = ft_strdup(tok);
+			(*shell)->skipnl = 1;
+		}
 		else
 			word = ft_find_cmd_path(tok, &((*newnode)->args), (*shell)->env);
 		if (word != NULL && (*newnode)->args == NULL)

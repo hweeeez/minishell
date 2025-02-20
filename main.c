@@ -86,8 +86,9 @@ static void	processtree(t_token	*token, t_shell	**shell, struct sigaction *sigs)
 		// }
 	}
 	(*shell)->hasprinted = 0;
+	(*shell)->skipnl = 0;
 	setup_signals(sigs);
-	freetree(&(*shell)->tree);
+	freetree(&(*shell)->root);
 }
 
 /*Edit this function to add more features when minishell is run*/
