@@ -15,10 +15,10 @@
 int ft_exit(t_shell **shell, char **args)
 {
 	int exit_code;
-	int is_interactive;
+	//int is_interactive;
 
 	exit_code = (*shell)->exit_status;
-	is_interactive = isatty(STDIN_FILENO);
+	//is_interactive = isatty(STDIN_FILENO);
 	//printf(">> Entering ft_exit\n");
 	if (!shell || !*shell)
 	{
@@ -27,7 +27,7 @@ int ft_exit(t_shell **shell, char **args)
 	}
 	//printf(">> Current exit_status: %d\n", exit_code);
 	// Only print exit message if in interactive mode
-	if (is_interactive)
+	//if (is_interactive)
 		ft_putstr_fd("exit\n", 1);
 	// Handle case with no args or just the command name
 	if (!args || !args[0])

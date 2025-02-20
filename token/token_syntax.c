@@ -18,7 +18,7 @@ int is_valid_filename(char *str)
 	if (!str || *str == '\0')
 		return (1);
 	if (ft_strncmp(str, ".", 2) == 0 || ft_strncmp(str, "..", 3) == 0)
-		return (1);
+		return (0);
 	if (stat(str, &path_stat) == 0 && ((path_stat.st_mode & S_IFMT) == S_IFDIR))
 		return (0);
 	return (1);
@@ -36,12 +36,12 @@ static int check_redirection_error(t_token *current)
 		return (print_error("syntax error: unexpected token near 'newline'\n"));
 	if (current->type == TOKEN_HEREDOC)
 	{
-		printf("heredoc detected\n");
+		//printf("heredoc detected\n");
 		if (current->next->type != TOKEN_WORD)
 			return (print_error("syntax error: unexpected token after '<<'\n"));
 		if (current->next->value == NULL || strcmp(current->next->value, "") == 0)
 		{
-			printf("null string deteched\n");
+			//printf("null string deteched\n");
 			return (0);
 		}
 	}
@@ -88,7 +88,7 @@ int	validate_token_syntax(t_token *head)
 	current = head;
 	while (current)
 	{
-		printf("Checking token: %s (type: %d)\n", current->value, current->type);
+		//printf("Checking token: %s (type: %d)\n", current->value, current->type);
 		if (current->type == TOKEN_PIPE && \
 			(!prev || !current->next || current->next->type == TOKEN_PIPE))
 			return (print_error("syntax error : unexpected token `|'\n"));

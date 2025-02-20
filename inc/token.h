@@ -26,6 +26,7 @@ typedef enum e_token_type
 	TOKEN_HEREDOC,
 	TOKEN_EOF,
 	TOKEN_ERROR,
+	TOKEN_NULL
 }	t_token_type;
 
 /************************************/

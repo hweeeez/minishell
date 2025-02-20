@@ -43,7 +43,8 @@ static t_token	*handle_special(t_tokenizer *tok, char **current_word)
 		tok->word_split = 0;
 		return (token);
 	}
-	return (free(*current_word), handle_special_token(tok));
+	free(*current_word);
+	return (handle_special_token(tok));
 }
 
 static void	handle_expansion(t_tokenizer *tok, t_shell *shell,
@@ -59,29 +60,45 @@ static void	handle_expansion(t_tokenizer *tok, t_shell *shell,
 t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 	char **current_word)
 {
-	//t_token	*token;
+	t_token	*token;
 
 	if (ft_isspace(c))
 		return (handle_space(tok, current_word));
 	if (c == '\'')
 	{
+		if (tok->input[tok->position + 1] && tok->input[tok->position + 1] == '\'')
+		{
+			if (ft_strlen(*current_word))
+			{
+				token = new_token(*current_word, TOKEN_WORD, tok->word_split);
+				tok->word_split = 0;
+				return (token);
+			}
+			token = new_token(*current_word, TOKEN_WORD, tok->word_split);
+			tok->word_split = 0;
+			tok->position++;
+			tok->position++;
+			return (token);
+		}
 		handle_quotes(tok, '\'');
 		return (NULL);
 	}
 	if (c == '"')
 	{
-		// if (tok->input[tok->position + 1] && tok->input[tok->position + 1] == '"')
-		// {
-		// 	if (ft_strncmp(*current_word,"",1))
-		// 	{
-		// 		tok->position += 2;
-		// 		if (current_word)
-		// 			free(current_word);
-		// 		token = new_token(ft_strdup(""), TOKEN_WORD, tok->word_split);
-		// 		tok->word_split = 0;
-		// 		return (token);
-		// 	}
-		// }
+		if (tok->input[tok->position + 1] && tok->input[tok->position + 1] == '"')
+		{
+			if (ft_strlen(*current_word))
+			{
+				token = new_token(*current_word, TOKEN_WORD, tok->word_split);
+				tok->word_split = 0;
+				return (token);
+			}
+			token = new_token(*current_word, TOKEN_WORD, tok->word_split);
+			tok->word_split = 0;
+			tok->position++;
+			tok->position++;
+			return (token);
+		}
 		handle_quotes(tok, '"');
 		return (NULL);
 	}
