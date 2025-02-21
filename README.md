@@ -64,7 +64,11 @@ minishell
 - [x] Invalid cmd calls exit (and prints exit)
 - [x] Add validation for `.` and `..` directory execution attempts
 
-### 4. Redirections & Pipes
+### 4. Heredoc
+- [ ] Implement heredoc expansion
+- [ ] Implement heredoc delimiter with ''
+
+### 5. Redirections & Pipes
 - [ ] Fix pipe closing issues in redirect operations:
   ```bash
   # Test cases:
@@ -84,10 +88,10 @@ minishell
   sleep 5 | blah | ls
   ```
 
-### 5. Memory Management
+### 6. Memory Management
 - [x] Implement cleanup() functions for all components
 
-### 6. Additional Tasks
+### 7. Additional Tasks
 - [ ] Add/check error messages for failure cases
       if (input != NULL && ft_strcmp(input, "$?") == 1)
 		  {

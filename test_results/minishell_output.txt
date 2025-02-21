@@ -1,6 +1,0 @@
-weneedtherapy% sleep 1 && echo done
-/usr/bin/sleep: invalid time interval ‘&&’
-/usr/bin/sleep: invalid time interval ‘echo’
-/usr/bin/sleep: invalid time interval ‘done’
-Try '/usr/bin/sleep --help' for more information.
-weneedtherapy% 
