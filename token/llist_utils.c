@@ -23,6 +23,7 @@ t_token	*new_token(char *value, t_token_type type, int split)
 	token->type = type;
 	token->next = NULL;
 	token->need_to_split = split;
+	token->insinglequote = 0;
 	return (token);
 }
 

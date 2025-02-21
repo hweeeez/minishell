@@ -20,5 +20,8 @@ int		is_valid_first_char(char c);
 int		is_valid_var_char(char c);
 char	*ft_getenv(const char *name, t_shell *shell);
 char	*get_var_name(t_tokenizer *tok, size_t *i);
+char	*hd_expand_env_var(const char *var_name, t_shell *shell);
+char	*hd_get_var_name(const char *str, size_t *pos);
+char	*expand_heredoc(const char *input, t_shell *shell);
 
 #endif
