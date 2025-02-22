@@ -12,9 +12,6 @@
 
 #include "minishell.h"
 
-#include <unistd.h>
-#include <stdlib.h>
-
 static void cleanup_and_exit(t_shell **shell, int exit_code)
 {
 	rl_clear_history();
