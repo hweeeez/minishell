@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:35:11 by myuen             #+#    #+#             */
-/*   Updated: 2025/02/22 19:13:47 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/22 21:08:30 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ void	add_quotes_to_heredoc_tokens(t_token *head)
 		if (curr->type == TOKEN_WORD && curr->hdquote == 1 &&
 			prev && prev->type == TOKEN_HEREDOC)
 		{
-			printf("current value: %s\n", curr->value);
 			add_quotes_to_value(curr);
-			printf("new value: %s\n", curr->value);
 		}
 		prev = curr;
 		curr = curr->next;

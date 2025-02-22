@@ -22,7 +22,7 @@ t_token	*process_double_quote(t_tokenizer *tok, t_shell *shell,
 		tok->quote = '0';
 		tok->position++;
 	}
-	else if (c == '$')
+	else if (c == '$' && !pre_is_heredoc(shell->token))
 	{
 		expanded = expand(tok, shell);
 		if (expanded)
