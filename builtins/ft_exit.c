@@ -12,47 +12,94 @@
 
 #include "minishell.h"
 
-int ft_exit(t_shell **shell, char **args)
+#include <unistd.h>
+#include <stdlib.h>
+
+static void cleanup_and_exit(t_shell **shell, int exit_code)
 {
-	int		exit_code;
-	int		is_interactive;
-	pid_t	current_pid;
+	rl_clear_history();
+	cleanup_shell(shell);
+	*shell = NULL;
+	exit(exit_code);
+}
 
-	exit_code = (*shell)->exit_status;
-	is_interactive = isatty(STDIN_FILENO);
-	current_pid = getpid();
-
-	if (!shell || !*shell)
-		exit(1);
-	if (is_interactive && current_pid == (*shell)->parent_pid)
+static void print_interactive_exit(t_shell *shell)
+{
+	if (isatty(STDIN_FILENO) && getpid() == shell->parent_pid)
 		ft_putstr_fd("exit\n", 1);
+}
+
+static int check_exit_arguments(t_shell **shell, char **args)
+{
 	if (!args || !args[0] || !args[1])
-	{
-		rl_clear_history();
-		cleanup_shell(shell);
-		*shell = NULL;
-		exit(exit_code);
-	}
+		cleanup_and_exit(shell, (*shell)->exit_status);
 	if (!ft_isvalid_integer_str(args[1], 10))
 	{
 		ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
-		rl_clear_history();
-		cleanup_shell(shell);
-		*shell = NULL;
-		exit(2);
+		cleanup_and_exit(shell, 2);
 	}
 	if (args[2])
 	{
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		return (1);
 	}
+	return (0);
+}
+
+int ft_exit(t_shell **shell, char **args)
+{
+	int		exit_code;
+
+	if (!shell || !*shell)
+		exit(1);
+	print_interactive_exit(*shell);
+	if (check_exit_arguments(shell, args))
+		return (1);
 	exit_code = ft_atoi(args[1]) % 256;
-	rl_clear_history();
-	cleanup_shell(shell);
-	*shell = NULL;
-	exit(exit_code);
+	cleanup_and_exit(shell, exit_code);
+	return (0);
 }
 /*
+// int ft_exit(t_shell **shell, char **args)
+// {
+// 	int		exit_code;
+// 	int		is_interactive;
+// 	pid_t	current_pid;
+
+// 	exit_code = (*shell)->exit_status;
+// 	is_interactive = isatty(STDIN_FILENO);
+// 	current_pid = getpid();
+
+// 	if (!shell || !*shell)
+// 		exit(1);
+// 	if (is_interactive && current_pid == (*shell)->parent_pid)
+// 		ft_putstr_fd("exit\n", 1);
+// 	if (!args || !args[0] || !args[1])
+// 	{
+// 		rl_clear_history();
+// 		cleanup_shell(shell);
+// 		*shell = NULL;
+// 		exit(exit_code);
+// 	}
+// 	if (!ft_isvalid_integer_str(args[1], 10))
+// 	{
+// 		ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
+// 		rl_clear_history();
+// 		cleanup_shell(shell);
+// 		*shell = NULL;
+// 		exit(2);
+// 	}
+// 	if (args[2])
+// 	{
+// 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+// 		return (1);
+// 	}
+// 	exit_code = ft_atoi(args[1]) % 256;
+// 	rl_clear_history();
+// 	cleanup_shell(shell);
+// 	*shell = NULL;
+// 	exit(exit_code);
+// }
 int ft_exit(t_shell **shell, char **args)
 {
 	int exit_code;
@@ -129,7 +176,6 @@ int ft_exit(t_shell **shell, char **args)
 	ft_putstr_fd("exit\n", 1);
 	exit(exit_code);
 }
-*/
 // int ft_exit(t_shell **shell, char **args)
 // {
 //     int exit_code;
@@ -197,7 +243,6 @@ int ft_exit(t_shell **shell, char **args)
 //     printf(">> Exiting with code: %d\n", exit_code);
 //     exit(exit_code);
 // }
-
 // int	ft_exit(t_shell **shell, char **args)
 // {
 // 	int	exit_code;
@@ -220,3 +265,4 @@ int ft_exit(t_shell **shell, char **args)
 // 	ft_putstr_fd("exit\n", 1);
 // 	exit(exit_code);
 // }
+*/
