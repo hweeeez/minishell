@@ -40,13 +40,14 @@ void	closeputs(t_exe **exe);
 void	initexenode(t_exe **exe);
 void	executechild(t_node *node, t_exe **exe, t_shell **shell, t_sigs **sigs);
 void	exe_rightnode(t_exe **exe, t_node *right, t_shell **shell);
-void	exe_out(t_exe **exe, t_node *node);
-int		checkinput(int *input, t_node **node);
+// void	exe_out(t_exe **exe, t_node *node);
+// int		checkinput(int *input, t_node **node);
 int		get_redir(t_redir *redir, t_exe **exe, t_shell **shell);
 int		has_redir(t_exe **exe, t_node *node, t_shell **shell);
 int		ft_heredoc(t_redir *redirs, t_shell **shell);
 int		checkif_builtin(t_shell **shell, char **cmd);
 int		do_execution(t_shell **shell, char **cmd, t_sigs **sigs, t_exe **exe);
 void	addchild(pid_t pid, t_shell **shell);
+int		ft_heredoc_noexpand(t_redir *redirs, t_shell **shell);
 
 #endif
