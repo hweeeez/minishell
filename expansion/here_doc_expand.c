@@ -12,7 +12,9 @@ static char	*hd_expand_var(const char *input, size_t *pos, t_shell *shell)
 		return (ft_itoa(shell->exit_status));
 	}
 	if (!is_valid_first_char(input[*pos]))
+	{
 		return (ft_strdup("$"));
+	}
 	var_name = hd_get_var_name(input, pos);
 	if (!var_name)
 		return (ft_strdup(""));

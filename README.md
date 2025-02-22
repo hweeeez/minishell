@@ -65,8 +65,9 @@ minishell
 - [x] Add validation for `.` and `..` directory execution attempts
 
 ### 4. Heredoc
-- [ ] Implement heredoc expansion
-- [ ] Implement heredoc delimiter with ''
+- [x] Implement heredoc expansion
+- [x] Implement heredoc delimiter with ''
+- [x] Implement heredoc delimiter with no expansion
 
 ### 5. Redirections & Pipes
 - [ ] Fix pipe closing issues in redirect operations:
