@@ -74,6 +74,11 @@ int	parseword(t_node **newnode, t_shell ** shell, t_node **tree, char *tok)
 			else if (handle_path(tok, shell) == 0)
 				print_parse_error(tok, "command not found", 127, shell);
 		}
+		else if (word != NULL && (*newnode)->args != NULL)
+		{
+			nowords++;
+			return (1);
+		}
 	}
 	else if (check_dir_exists(tok) == 0)
 		return (0);
