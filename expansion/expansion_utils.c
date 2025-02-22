@@ -55,7 +55,9 @@ char	*get_var_name(t_tokenizer *tok, size_t *pos)
 	if (!tok->input[start])
 		return (NULL);
 	if (!is_valid_first_char(tok->input[start]))
+	{
 		return (ft_strdup(""));
+	}
 	while (tok->input[*pos + 1] && is_valid_var_char(tok->input[*pos + 1]))
 		(*pos)++;
 	var_name = ft_strndup(&tok->input[start], *pos - start + 1);

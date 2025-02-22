@@ -26,7 +26,12 @@ void	exit_hd(int sig)
 	return ;
 }
 
-static int	parsehd(char *s, char *file, int filefd, t_shell **shell)
+int	event(void)
+{
+	return (0);
+}
+
+int	parsehd(char *s, char *file, int filefd, t_shell **shell, int expand_flag)
 {
 	char	*temp;
 
@@ -36,17 +41,19 @@ static int	parsehd(char *s, char *file, int filefd, t_shell **shell)
 		close(filefd);
 		return (1);
 	}
-	//(void) shell;
-	temp = s;
-	s = expand_heredoc((const char *)s, *shell);
-	free (temp);
+	if (expand_flag)
+	{
+		temp = s;
+		s = expand_heredoc((const char *)s, *shell);
+		free (temp);
+	}
 	write(filefd, s, ft_strlen(s));
 	write(filefd, "\n", 1);
 	free(s);
 	return (0);
 }
 
-static int	readhd(t_redir *redirs, int filefd, t_shell **shell)
+int	readhd(t_redir *redirs, int filefd, t_shell **shell, int expand_flag)
 {
 	char	*s;
 
@@ -55,7 +62,7 @@ static int	readhd(t_redir *redirs, int filefd, t_shell **shell)
 		s = readline("> ");
 		if (s != NULL)
 		{
-			if (parsehd(s, redirs->file, filefd, shell) == 1)
+			if (parsehd(s, redirs->file, filefd, shell, expand_flag) == 1)
 				break ;
 		}
 		else
@@ -76,12 +83,7 @@ static int	readhd(t_redir *redirs, int filefd, t_shell **shell)
 	return (0);
 }
 
-int	event(void)
-{
-	return (0);
-}
-
-int	ft_heredoc_noexpand(t_redir *redirs, t_shell **shell)
+int	ft_heredoc_exe(t_redir *redirs, t_shell **shell, int expand_flag)
 {
 	int					filefd;
 	//t_redir				*redirs;
@@ -103,53 +105,8 @@ int	ft_heredoc_noexpand(t_redir *redirs, t_shell **shell)
 		close(filefd);
 	}
 	filefd = open(HEREDOC_FILE, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (readhd(redirs, filefd, shell) == 130)
+	if (readhd(redirs, filefd, shell, expand_flag) == 130)
 		return (130);
 	close (filefd);
 	return (filefd);
-}
-
-int	ft_heredoc_expand(t_redir *redirs, t_shell **shell)
-{
-	int					filefd;
-	//t_redir				*redirs;
-	struct sigaction	sig_int;
-	//t_exe				*exe;
-
-	rl_event_hook = event;
-	g_received_sigint = 0;
-	ft_memset(&sig_int, 0, sizeof(sig_int));
-	sigemptyset(&sig_int.sa_mask);
-	sig_int.sa_flags = 0;
-	sig_int.sa_handler = exit_hd;
-	if (sigaction(SIGINT, &sig_int, NULL) == -1)
-		return (-1);
-	if (check_path_type(HEREDOC_FILE) == TYPE_FILE)
-	{
-		filefd = open(HEREDOC_FILE, O_RDONLY, 0644);
-		unlink(HEREDOC_FILE);
-		close(filefd);
-	}
-	filefd = open(HEREDOC_FILE, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (readhd(redirs, filefd, shell) == 130)
-		return (130);
-	close (filefd);
-	return (filefd);
-}
-
-int	ft_heredoc(t_redir *redirs, t_shell **shell)
-{
-	char	*temp;
-
-	if (redirs->file[0] == '\'')
-	{
-		temp = redirs->file;
-		redirs->file = trim_char(redirs->file, '\'');
-		free(temp);
-		return (ft_heredoc_noexpand(redirs, shell));
-	}
-	else
-	{
-		return (ft_heredoc_expand(redirs, shell));
-	}
 }

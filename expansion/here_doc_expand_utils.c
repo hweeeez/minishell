@@ -21,9 +21,12 @@ char	*hd_get_var_name(const char *str, size_t *pos)
 	if (!str[start])
 		return (NULL);
 	if (!is_valid_first_char(str[start]))
+	{
 		return (ft_strdup(""));
+	}
 	while (str[*pos + 1] && is_valid_var_char(str[*pos + 1]))
 		(*pos)++;
 	var_name = ft_strndup(&str[start], *pos - start + 1);
+	(*pos)++;
 	return (var_name);
 }

@@ -38,7 +38,9 @@ char	*expand(t_tokenizer *tok, t_shell *shell)
 		return (ft_itoa(tok->shell->exit_status));
 	}
 	if (!is_valid_first_char(tok->input[start]))
+	{
 		return (ft_strdup("$"));
+	}
 	var_name = get_var_name(tok, &tok->position);
 	if (!var_name)
 		return (ft_strdup(""));
