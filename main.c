@@ -12,35 +12,35 @@
 
 #include "minishell.h"
 
-// static void	print_tokens(t_token *token_list)
-// {
-// 	t_token	*current;
-// 	int		i;
+static void	print_tokens(t_token *token_list)
+{
+	t_token	*current;
+	int		i;
 
-// 	i = 1;
-// 	current = token_list;
-// 	printf("%10s\n", "Token(s)");
-// 	while (current)
-// 	{
-// 		printf("%-2d[%s] | Split: %d | Type: ", i++, current->value, current->need_to_split);
-// 		if (current->type == TOKEN_WORD)
-// 			printf("WORD\n");
-// 		else if (current->type == TOKEN_PIPE)
-// 			printf("PIPE\n");
-// 		else if (current->type == TOKEN_REDIR_IN)
-// 			printf("REDIR_IN\n");
-// 		else if (current->type == TOKEN_REDIR_OUT)
-// 			printf("REDIR_OUT\n");
-// 		else if (current->type == TOKEN_HEREDOC)
-// 			printf("HEREDOC\n");
-// 		else if (current->type == TOKEN_APPEND)
-// 			printf("APPEND\n");
-// 		else
-// 			printf("UNEXPECTED\n");
-// 		current = current->next;
-// 	}
-// 	printf("%10s\n", "--End of List--");
-// }
+	i = 1;
+	current = token_list;
+	printf("%10s\n", "Token(s)");
+	while (current)
+	{
+		printf("%-2d[%s] | Type: ", i++, current->value);
+		if (current->type == TOKEN_WORD)
+			printf("WORD\n");
+		else if (current->type == TOKEN_PIPE)
+			printf("PIPE\n");
+		else if (current->type == TOKEN_REDIR_IN)
+			printf("REDIR_IN\n");
+		else if (current->type == TOKEN_REDIR_OUT)
+			printf("REDIR_OUT\n");
+		else if (current->type == TOKEN_HEREDOC)
+			printf("HEREDOC\n");
+		else if (current->type == TOKEN_APPEND)
+			printf("APPEND\n");
+		else
+			printf("UNEXPECTED\n");
+		current = current->next;
+	}
+	printf("%10s\n", "--End of List--");
+}
 
 /*helper functions*/
 static int	handle_empty_input(char *input)
@@ -91,7 +91,6 @@ static void	processtree(t_token	*token, t_shell	**shell, struct sigaction *sigs)
 	freetree(&(*shell)->root);
 }
 
-/*Edit this function to add more features when minishell is run*/
 static int	minishell_loop(char *input, t_token **tok, t_shell **shell, struct sigaction *sigs)
 {
 	while (1)
@@ -109,7 +108,7 @@ static int	minishell_loop(char *input, t_token **tok, t_shell **shell, struct si
 			continue ;
 		}
 		free(input);
-		//print_tokens(*tok);
+		print_tokens(*tok);
 		processtree(*tok, shell, sigs);
 	}
 	return (0);

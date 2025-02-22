@@ -37,21 +37,23 @@ typedef struct s_token
 	t_token_type	type;
 	struct s_token	*next;
 	int				need_to_split;
-	int				insinglequote;
+	int				hdquote;
 }	t_token;
 
 typedef struct s_tokenizer
 {
-	const char	*input;
-	size_t		position;
-	char		quote;
-	int			error;
-	t_shell		*shell;
-	int			word_split;
+	const char		*input;
+	size_t			position;
+	char			quote;
+	int				error;
+	t_shell			*shell;
+	int				word_split;
+	int				hd_quote;
+	//t_token_type	prev_token_type;
 }	t_tokenizer;
 
 void	init_tokenizer(t_tokenizer *tok, const char *input, t_shell *shell);
-t_token	*new_token(char *value, t_token_type type, int split);
+t_token	*new_token(char *value, t_token_type type, int split, int hd_add_quote);
 int		is_space_tab(char c);
 int		ms_is_special(char c);
 void	skip_whitespace(t_tokenizer *tok);
@@ -73,8 +75,11 @@ int		node_split_id(t_token *head);
 int		find_split_index(t_token *head);
 t_token	*create_first_token(char **orginal);
 void	create_and_link_tokens(t_token **prev);
+void	add_quotes_to_heredoc_tokens(t_token *head);
+char	*trim_char(const char *str, char c);
 
 #endif
+
 /*
     TOKEN_WORD,       // Regular word/command/argument
     TOKEN_PIPE,       // |

@@ -18,8 +18,9 @@ static t_token	*handle_space(t_tokenizer *tok, char **current_word)
 
 	if (ft_strlen(*current_word))
 	{
-		token = new_token(*current_word, TOKEN_WORD, tok->word_split);
+		token = new_token(*current_word, TOKEN_WORD, tok->word_split, tok->hd_quote);
 		tok->word_split = 0;
+		tok->hd_quote = 0;
 		tok->position++;
 		return (token);
 	}
@@ -39,8 +40,9 @@ static t_token	*handle_special(t_tokenizer *tok, char **current_word)
 
 	if (ft_strlen(*current_word))
 	{
-		token = new_token(*current_word, TOKEN_WORD, tok->word_split);
+		token = new_token(*current_word, TOKEN_WORD, tok->word_split, tok->hd_quote);
 		tok->word_split = 0;
+		tok->hd_quote = 0;
 		return (token);
 	}
 	free(*current_word);
@@ -57,6 +59,21 @@ static void	handle_expansion(t_tokenizer *tok, t_shell *shell,
 		*current_word = ft_strjoin_free(*current_word, expanded);
 }
 
+static t_token *process_empty_quote(t_tokenizer *tok, char quote, char **current_word)
+{
+	if (tok->input[tok->position + 1] == quote &&
+	    !ft_strlen(*current_word) &&
+	    (!tok->input[tok->position + 2] || ft_isspace(tok->input[tok->position + 2])))
+	{
+		t_token *token = new_token(*current_word, TOKEN_WORD, tok->word_split, tok->hd_quote);
+		tok->word_split = 0;
+		tok->hd_quote = 0;
+		tok->position += 2;
+		return token;
+	}
+	return (NULL);
+}
+
 t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 	char **current_word)
 {
@@ -64,36 +81,13 @@ t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 
 	if (ft_isspace(c))
 		return (handle_space(tok, current_word));
-	if (c == '\'')
+	if (c == '\'' || c == '"')
 	{
-		if (tok->input[tok->position + 1] == '\'' &&
-			!ft_strlen(*current_word) &&
-			(!tok->input[tok->position + 2] ||
-			 ft_isspace(tok->input[tok->position + 2])))
-		{
-			token = new_token(*current_word, TOKEN_WORD, tok->word_split);
-			tok->word_split = 0;
-			tok->position++;
-			tok->position++;
+		token = process_empty_quote(tok, c, current_word);
+		if (token)
 			return (token);
-		}
-		handle_quotes(tok, '\'');
-		return (NULL);
-	}
-	if (c == '"')
-	{
-		if (tok->input[tok->position + 1] == '\"' &&
-			!ft_strlen(*current_word) &&
-			(!tok->input[tok->position + 2] ||
-			 ft_isspace(tok->input[tok->position + 2])))
-		{
-			token = new_token(*current_word, TOKEN_WORD, tok->word_split);
-			tok->word_split = 0;
-			tok->position++;
-			tok->position++;
-			return (token);
-		}
-		handle_quotes(tok, '"');
+		tok->hd_quote = 1;
+		handle_quotes(tok, c);
 		return (NULL);
 	}
 	if (ms_is_special(c))
