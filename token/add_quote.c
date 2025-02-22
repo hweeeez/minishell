@@ -14,8 +14,11 @@
 
 static void	add_quotes_to_value(t_token *token)
 {
-	size_t old_len = ft_strlen(token->value);
-	char *new_value = malloc(old_len + 3);
+	size_t	old_len;
+	char	*new_value;
+
+	old_len = ft_strlen(token->value);
+	new_value = malloc(old_len + 3);
 	if (!new_value)
 		return;
 	new_value[0] = '\'';
@@ -28,12 +31,14 @@ static void	add_quotes_to_value(t_token *token)
 
 void	add_quotes_to_heredoc_tokens(t_token *head)
 {
-	t_token *prev = NULL;
-	t_token *curr = head;
+	t_token	*prev;
+	t_token	*curr;
 
+	prev = NULL;
+	curr = head;
 	while (curr != NULL)
 	{
-		if (curr->type == TOKEN_WORD && curr->hdquote == 1 &&
+		if (curr->type == TOKEN_WORD && curr->hdquote == 1 && \
 			prev && prev->type == TOKEN_HEREDOC)
 		{
 			add_quotes_to_value(curr);
@@ -45,8 +50,8 @@ void	add_quotes_to_heredoc_tokens(t_token *head)
 
 char	*trim_char(const char *str, char c)
 {
-	size_t len;
-	char   *new_str;
+	size_t	len;
+	char	*new_str;
 
 	if (!str)
 		return NULL;
