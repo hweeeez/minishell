@@ -1,2 +1,2 @@
-$USER
-'$USER;
+user
+myuenR

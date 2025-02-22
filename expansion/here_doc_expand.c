@@ -25,14 +25,10 @@ static char	*hd_expand_var(const char *input, size_t *pos, t_shell *shell)
 
 static char	*process_expansion(const char *input, size_t *i, char *expanded, t_shell *shell)
 {
-	char	*temp;
 	char	*var_value;
 
 	var_value = hd_expand_var(input, i, shell);
-	temp = expanded;
 	expanded = ft_strjoin_free(expanded, var_value);
-	free(temp);
-	free(var_value);
 	return (expanded);
 }
 
