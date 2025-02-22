@@ -56,7 +56,7 @@ int	tokenize(const char *input, t_token **head, t_shell *shell)
 	t_tokenizer	tok;
 
 	init_tokenizer(&tok, input, shell);
-	free_token_list(head); //every new line is a new tokenlist
+	free_token_list(head);
 	process_token_list(&tok, head, shell);
 	if (tok.error || !head)
 	{
@@ -68,9 +68,13 @@ int	tokenize(const char *input, t_token **head, t_shell *shell)
 			return (1);
 		}
 	}
+	//go throught llist and look for word->hdquote, after a heredoc token
+	add_quotes_to_heredoc_tokens(*head);
 	while (node_split_id(*head) > -1)
 		split_node(head);
-	return (validate_token_syntax(*head));
+	if (validate_token_syntax(*head))
+		return (1);
+	return (0);
 }
 // static t_token	*process_next_token(t_tokenizer *tok)
 // {

@@ -39,14 +39,16 @@ static t_token	*final_token(t_tokenizer *tok, char *current_word)
     // }
 	if (ft_strlen(current_word))
 	{
-		token = new_token(current_word, TOKEN_WORD, tok->word_split);
+		token = new_token(current_word, TOKEN_WORD, tok->word_split, tok->hd_quote);
 		tok->word_split = 0;
+		tok->hd_quote = 0;
 		return (token);
 	}
 	if (current_word)
 		free(current_word);
-	token = new_token(NULL, TOKEN_EOF, tok->word_split);
+	token = new_token(NULL, TOKEN_EOF, tok->word_split, tok->hd_quote);
 	tok->word_split = 0;
+	tok->hd_quote = 0;
 	return (token);
 }
 

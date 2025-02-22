@@ -64,7 +64,8 @@ t_token	*handle_special_token(t_tokenizer *tok)
 	if (!value)
 		return (NULL);
 	tok->position++;
-	token = new_token(value, type, tok->word_split);
+	token = new_token(value, type, tok->word_split, tok->hd_quote);
 	tok->word_split = 0;
+	tok->hd_quote = 0;
 	return (token);
 }

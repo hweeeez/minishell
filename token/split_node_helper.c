@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:35:11 by myuen             #+#    #+#             */
-/*   Updated: 2025/02/17 21:29:08 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/22 18:13:16 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_token	*create_first_token(char **orginal)
 	value = ft_strtok(*orginal, " \n\t");
 	if (!value)
 		return (NULL);
-	new_node = new_token(value, TOKEN_WORD, 0);
+	new_node = new_token(value, TOKEN_WORD, 0, 0);
 	return (new_node);
 }
 
@@ -59,7 +59,7 @@ void	create_and_link_tokens(t_token **prev)
 	value = ft_strtok(NULL, " \n\t");
 	while (value)
 	{
-		new_node = new_token(value, TOKEN_WORD, 0);
+		new_node = new_token(value, TOKEN_WORD, 0, 0);
 		if (*prev)
 			(*prev)->next = new_node;
 		*prev = new_node;

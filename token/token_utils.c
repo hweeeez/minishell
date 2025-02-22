@@ -20,6 +20,8 @@ void	init_tokenizer(t_tokenizer *tok, const char *input, t_shell *shell)
 	tok->error = 0;
 	tok->shell = shell;
 	tok->word_split = 0;
+	tok->hd_quote = 0;
+	//tok->prev_token_type = TOKEN_WORD;
 }
 
 int	is_space_tab(char c)
