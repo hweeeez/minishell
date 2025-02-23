@@ -21,7 +21,7 @@ int	has_redir(t_execontainer **con, t_node *node, t_shell **shell)
 	valid = 0;
 	if (node->left->rootredir != NULL)
 	{
-		valid = get_redir(node->left->rootredir, &exe, shell);
+		valid = get_redir(node->left->rootredir, &exe, shell, con);
 		(*con)->redir_status = valid;
 		return (valid);
 	}
@@ -47,6 +47,7 @@ int	execute(t_node *node, t_shell **shell)
 		cont->exes = (t_exe **)malloc(sizeof(t_exe *));
 		if (left->args != NULL && isbuiltin(left->args[0]) == 1)
 		{
+			(cont)->skipnl = 1;
 			if (node->right == NULL)
 			{
 				if (node->left->rootredir != NULL)
@@ -93,7 +94,9 @@ int	exe_commands(t_node *node, t_execontainer **con, t_shell **shell)
 {
 	t_sigs	*sigs;
 	int		canrun;
+	pid_t	pid;
 
+	pid = -1;
 	init_exesigs(&sigs);
 	addsig(&sigs, con);
 	canrun = has_redir(con, node, shell);
@@ -103,17 +106,18 @@ int	exe_commands(t_node *node, t_execontainer **con, t_shell **shell)
 			return (-1);
 	}
 	if (canrun == 0)
-		(*con)->exes[(*con)->numpid - 1]->pid = fork();
+		pid = fork();
 	else if (node->right != NULL)
-		(*con)->exes[(*con)->numpid - 1]->pid = 1;
-	if ((*con)->exes[(*con)->numpid - 1]->pid == 0)
+		pid = 1;
+	addpid(pid, con);
+	if (pid == 0)
 	{
 		do_sigaction(SIGQUIT, SIGINT, (*con)->sigs[(*con)->numpid - 1]);
 		executechild(node, con, shell);
 	}
-	else if ((*con)->exes[(*con)->numpid - 1]->pid == -1)
+	else if (pid == -1)
 		return (-1);
-	else if ((*con)->exes[(*con)->numpid - 1]->pid > 0)
+	else if (pid > 0)
 	{
 		sigaction(SIGINT, &((*con)->sigs[(*con)->numpid - 1]->ignore), NULL);
 		if (node->right == NULL)
@@ -124,7 +128,6 @@ int	exe_commands(t_node *node, t_execontainer **con, t_shell **shell)
 				close((*con)->exes[(*con)->numpid - 1]->pipefd[1]);
 		}
 		closeputs(&(*con)->exes[(*con)->numpid - 1]);
-		addpid((*con)->exes[(*con)->numpid - 1]->pid, con);
 		if (node->right != NULL)
 			exe_rightnode(con, node->right, shell);
 		free(sigs);
