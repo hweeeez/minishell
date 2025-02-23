@@ -58,7 +58,7 @@ char	*ft_find_cmd_path(char *cmd, char ***cmd_args, char **envp);
 void	ft_free_split(char ***split);
 void	addnode(t_node **currentnode, t_node *newnode);
 void	copyarray(char ***tocopy, int size, char *toadd);
-void	freearray(char **args);
+void	freearray(void **args);
 void	freeredirs(t_redir *redir);
 void	freetree(t_node **tree);
 int		inittree(t_node **tree, t_token *tokens, t_shell **shell);

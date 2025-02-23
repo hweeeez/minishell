@@ -26,12 +26,10 @@ int	setup_signals(struct sigaction *sig)
 	struct sigaction	quit;
 
 	//(*sig) = (t_sigacts *)malloc(sizeof(t_sigacts));
-	ft_memset(sig, 0, sizeof(sig));
+	ft_memset(sig, 0, sizeof(*sig));
 	ft_memset(&quit, 0, sizeof(quit));
 	quit.sa_handler = SIG_IGN;
 	(*sig).sa_handler = handle_signal;
-	sigemptyset(&(*sig).sa_mask);
-	(*sig).sa_flags = 0;
 	if (sigaction(SIGQUIT, &quit, NULL) == -1)
 		return (1);
 	if (sigaction(SIGINT, sig, NULL) == -1)

@@ -21,16 +21,10 @@ typedef struct s_shell
 	char					**env;
 	//int						exit_status;
 	volatile sig_atomic_t	exit_status;
-	pid_t					*pids;
 	pid_t					parent_pid;
-	int						numpid;
-	int						hasprinted;
-	int						redir_status;
 	t_token					*token;
 	t_node					*tree;
 	t_node					*root;
-	int						skipnl;
-
 }	t_shell;
 
 typedef enum e_file_type

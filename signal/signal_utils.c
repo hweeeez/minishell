@@ -21,22 +21,26 @@ static void	quitchild(int sig)//, siginfo_t *info, void *ucontext)
 void	init_exesigs(t_sigs **sigs)
 {
 	(*sigs) = (t_sigs *)malloc(sizeof(t_sigs));
+	ft_memset(&(*sigs)->sigpipe, 0, sizeof((*sigs)->sigpipe));
+	(*sigs)->sigpipe.sa_handler = SIG_IGN;
 	ft_memset(&(*sigs)->ignore, 0, sizeof((*sigs)->ignore));
 	(*sigs)->ignore.sa_handler = SIG_IGN;
-	sigemptyset(&((*sigs)->ignore).sa_mask);
-	(*sigs)->ignore.sa_flags = 0;
+	//sigemptyset(&((*sigs)->ignore).sa_mask);
+	//(*sigs)->ignore.sa_flags = 0;
 	ft_memset(&(*sigs)->sigint, 0, sizeof((*sigs)->sigint));
 	(*sigs)->sigint.sa_handler = quitchild;
-	sigemptyset(&((*sigs)->sigint).sa_mask);
-	(*sigs)->sigint.sa_flags = 0;
+	//sigemptyset(&((*sigs)->sigint).sa_mask);
+	//(*sigs)->sigint.sa_flags = 0;
 	ft_memset(&(*sigs)->quit, 0, sizeof((*sigs)->quit));
 	(*sigs)->quit.sa_handler = NULL;
-	sigemptyset(&((*sigs)->quit).sa_mask);
-	(*sigs)->quit.sa_flags = 0;
+	//sigemptyset(&((*sigs)->quit).sa_mask);
+	//(*sigs)->quit.sa_flags = 0;
 }
 
 void	do_sigaction(int sig1, int sig2, t_sigs *sigs)
 {
+	if (sigaction(SIGPIPE, &(sigs->sigpipe), NULL) == -1)
+		return ;
 	if (sig1 == SIGQUIT)
 		sigaction(SIGQUIT, &(sigs->quit), NULL);
 	if (sig2 == SIGINT)
