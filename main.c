@@ -84,8 +84,8 @@ static void	processtree(t_token	*token, t_shell	**shell, struct sigaction *sigs)
 		// 	rl_event_hook = NULL;
 		// }
 	}
-	(*shell)->hasprinted = 0;
-	(*shell)->skipnl = 0;
+	//(*shell)->hasprinted = 0;
+	//(*shell)->skipnl = 0;
 	setup_signals(sigs);
 	freetree(&(*shell)->root);
 }

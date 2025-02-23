@@ -12,15 +12,12 @@
 
 #include "minishell.h"
 
-static void	exitchild(t_shell **shell, int exitcode, t_sigs **sigs, t_execontainer **exe)
+static void	exitchild(t_shell **shell, int exitcode, t_execontainer **exe)
 {
 	int	i;
 
 	i = 0;
-	printf("asd %d\n", (*exe)->numpid);
 	(*shell)->exit_status = exitcode;
-	free(*sigs);
-	*sigs = NULL;
 	if ((*exe)->pids != NULL)
 	{
 		free((*exe)->pids);
@@ -28,38 +25,39 @@ static void	exitchild(t_shell **shell, int exitcode, t_sigs **sigs, t_execontain
 	}
 	while (i < (*exe)->numpid)
 	{
-		free((*exe)->exes[i]);;
+		free((*exe)->exes[i]);
+		free((*exe)->sigs[i]);
+		i++;
 	}
 	free((*exe)->exes);
+	free((*exe)->sigs);
 	free(*exe);
 	*exe = NULL;
 	ft_exit(shell, NULL);
 }
 
 //builtins need to write to stdout, but do not read from stdin (but we should still dup2)
-int	do_execution(t_shell **shell, char **cmd, t_sigs **sigs, t_execontainer **exe)
+int	do_execution(t_shell **shell, char **cmd, t_execontainer **exe)
 {
 	int	builtinvalue;
 	char	*command;
 
 	if (cmd == NULL)
-		exitchild(shell, 0, sigs, exe);
+		exitchild(shell, 0, exe);
 	builtinvalue = checkif_builtin(shell, cmd);
-	if (errno == EPIPE)
-		printf("PIEPIEP");
 	if (builtinvalue == -1)
 	{
 		if (execve(cmd[0], cmd, (*shell)->env) == -1)
 		{
 			command = ft_find_cmd_path(cmd[0], &cmd, (*shell)->env);
 			if (command == NULL)
-				exitchild(shell, 127, sigs, exe);
+				exitchild(shell, 127, exe);
 			else
 				free(command);
-			exitchild(shell, errno, sigs, exe);
+			exitchild(shell, errno, exe);
 		}
 	}
-	exitchild(shell, 0, sigs, exe);
+	exitchild(shell, 0, exe);
 	return (1);
 }
 

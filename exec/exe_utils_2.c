@@ -165,3 +165,24 @@ void	addchild(t_exe **add, t_execontainer **cont)
 	temp[i] = *add;
 	((*cont)->exes) = temp;
 }
+
+void	addsig(t_sigs **add, t_execontainer **cont)
+{
+	t_sigs	**temp;
+	int		i;
+
+	i = 0;
+	temp = (t_sigs **)malloc(sizeof(t_sigs) * ((*cont)->numpid));
+	if ((*cont)->sigs != NULL)
+	{
+		while (i < (*cont)->numpid - 1)
+		{
+			temp[i] = ((*cont)->sigs)[i];
+			//free((*cont)->exes[i]);
+			i++;
+		}
+		free((*cont)->sigs);
+	}
+	temp[i] = *add;
+	((*cont)->sigs) = temp;
+}

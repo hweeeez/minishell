@@ -71,7 +71,7 @@ int	get_redir(t_redir *re, t_exe **x, t_shell **shell)
 			if (hd == -1 || hd == 130)
 				return(130);
 			(*x)->puts[0] = open(HEREDOC_FILE, O_RDONLY, 0644);
-			(*shell)->skipnl = 1;
+			//(*shell)->skipnl = 1;
 		}
 		return (get_redir(re->next, x, shell));
 	}

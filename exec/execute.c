@@ -77,9 +77,12 @@ int	execute(t_node *node, t_shell **shell)
 		}
 		while (i < (cont)->numpid)
 		{
-			free((cont)->exes[i]);;
+			free((cont)->exes[i]);
+			free((cont)->sigs[i]);
+			i++;
 		}
 		free((cont)->exes);
+		free(cont->sigs);
 		free(cont);
 		free(exe);
 	}
@@ -92,6 +95,7 @@ int	exe_commands(t_node *node, t_execontainer **con, t_shell **shell)
 	int		canrun;
 
 	init_exesigs(&sigs);
+	addsig(&sigs, con);
 	canrun = has_redir(con, node, shell);
 	if (node->right != NULL || node->left->redirs != NULL)
 	{
@@ -104,14 +108,14 @@ int	exe_commands(t_node *node, t_execontainer **con, t_shell **shell)
 		(*con)->exes[(*con)->numpid - 1]->pid = 1;
 	if ((*con)->exes[(*con)->numpid - 1]->pid == 0)
 	{
-		do_sigaction(SIGQUIT, SIGINT, sigs);
-		executechild(node, con, shell, &sigs);
+		do_sigaction(SIGQUIT, SIGINT, (*con)->sigs[(*con)->numpid - 1]);
+		executechild(node, con, shell);
 	}
 	else if ((*con)->exes[(*con)->numpid - 1]->pid == -1)
 		return (-1);
 	else if ((*con)->exes[(*con)->numpid - 1]->pid > 0)
 	{
-		sigaction(SIGINT, &(sigs->ignore), NULL);
+		sigaction(SIGINT, &((*con)->sigs[(*con)->numpid - 1]->ignore), NULL);
 		if (node->right == NULL)
 		{
 			if ((*con)->exes[(*con)->numpid - 1]->pipefd[0] > -1)
@@ -128,7 +132,7 @@ int	exe_commands(t_node *node, t_execontainer **con, t_shell **shell)
 	return (1);
 }
 
-void	executechild(t_node *node, t_execontainer **con, t_shell **shell, t_sigs **sigs)
+void	executechild(t_node *node, t_execontainer **con, t_shell **shell)
 {
 	t_exe	*exe;
 
@@ -163,5 +167,5 @@ void	executechild(t_node *node, t_execontainer **con, t_shell **shell, t_sigs **
 		dup2(exe->pipefd[1], STDOUT_FILENO);
 		close(exe->pipefd[1]);
 	}
-	do_execution(shell, node->left->args, sigs, con);
+	do_execution(shell, node->left->args, con);
 }
