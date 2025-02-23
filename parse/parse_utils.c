@@ -56,7 +56,7 @@ int	parseword(t_node **newnode, t_shell ** shell, t_node **tree, char *tok)
 		if (isbuiltin(tok))
 		{
 			word = ft_strdup(tok);
-			(*shell)->skipnl = 1;
+			//(*shell)->skipnl = 1;
 		}
 		else
 			word = ft_find_cmd_path(tok, &((*newnode)->args), (*shell)->env);
@@ -73,6 +73,11 @@ int	parseword(t_node **newnode, t_shell ** shell, t_node **tree, char *tok)
 				return(0);
 			else if (handle_path(tok, shell) == 0)
 				print_parse_error(tok, "command not found", 127, shell);
+		}
+		else if (word != NULL && (*newnode)->args != NULL)
+		{
+			nowords++;
+			return (1);
 		}
 	}
 	else if (check_dir_exists(tok) == 0)

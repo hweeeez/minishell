@@ -20,14 +20,17 @@ void	closeputs(t_exe **exe)
 		close((*exe)->puts[1]);
 }
 
-void	exe_rightnode(t_exe **exe, t_node *right, t_shell **shell)
+void	exe_rightnode(t_execontainer **con, t_node *right, t_shell **shell)
 {
 	t_exe	*childexe;
+	t_exe	*exe;
 
-	close((*exe)->pipefd[1]);
+	exe = (*con)->exes[(*con)->numpid - 1];
+	close((exe)->pipefd[1]);
 	initexenode(&childexe);
-	childexe->puts[0] = (*exe)->pipefd[0];
-	exe_commands(right, &childexe, shell);
+	childexe->puts[0] = (exe)->pipefd[0];
+	addchild(&childexe, con);
+	exe_commands(right, con, shell);
 	free(childexe);
 }
 

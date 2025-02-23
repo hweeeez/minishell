@@ -12,22 +12,38 @@
 
 #include "minishell.h"
 
-static void	exitchild(t_shell **shell, int exitcode, t_sigs **sigs, t_exe **exe)
+static void	exitchild(t_shell **shell, int exitcode, t_execontainer **exe)
 {
+	int	i;
+
+	i = 0;
 	(*shell)->exit_status = exitcode;
-	free(*sigs);
+	if ((*exe)->pids != NULL)
+	{
+		free((*exe)->pids);
+		(*exe)->pids = NULL;
+	}
+	while (i < (*exe)->numpid)
+	{
+		free((*exe)->exes[i]);
+		free((*exe)->sigs[i]);
+		i++;
+	}
+	free((*exe)->exes);
+	free((*exe)->sigs);
 	free(*exe);
+	*exe = NULL;
 	ft_exit(shell, NULL);
 }
 
 //builtins need to write to stdout, but do not read from stdin (but we should still dup2)
-int	do_execution(t_shell **shell, char **cmd, t_sigs **sigs, t_exe **exe)
+int	do_execution(t_shell **shell, char **cmd, t_execontainer **exe)
 {
 	int	builtinvalue;
 	char	*command;
 
 	if (cmd == NULL)
-		exitchild(shell, 0, sigs, exe);
+		exitchild(shell, 0, exe);
 	builtinvalue = checkif_builtin(shell, cmd);
 	if (builtinvalue == -1)
 	{
@@ -35,13 +51,13 @@ int	do_execution(t_shell **shell, char **cmd, t_sigs **sigs, t_exe **exe)
 		{
 			command = ft_find_cmd_path(cmd[0], &cmd, (*shell)->env);
 			if (command == NULL)
-				exitchild(shell, 127, sigs, exe);
+				exitchild(shell, 127, exe);
 			else
 				free(command);
-			exitchild(shell, errno, sigs, exe);
+			exitchild(shell, errno, exe);
 		}
 	}
-	exitchild(shell, 0, sigs, exe);
+	exitchild(shell, 0, exe);
 	return (1);
 }
 
@@ -68,3 +84,10 @@ int	checkif_builtin(t_shell **shell, char **cmd)
 	return (-1);
 }
 
+void	initexecontainer(t_execontainer ** con)
+{
+	(*con) = (t_execontainer *)malloc(sizeof(t_execontainer));
+	(*con)->exes = (t_exe **)malloc(sizeof(t_exe *));
+	(*con)->hasprinted = 0;
+	(*con)->numpid = 0;
+}

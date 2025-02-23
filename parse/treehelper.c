@@ -30,7 +30,7 @@ void	freetree(t_node **tree)
 		{
 			if (current->left->args != NULL)
 			{
-				freearray(current->left->args);
+				freearray((void **)current->left->args);
 				current->left->args = NULL;
 			}
 			if (current->left->rootredir != NULL)
@@ -44,7 +44,7 @@ void	freetree(t_node **tree)
 	(*tree) = NULL;
 }
 
-void	freearray(char **args)
+void	freearray(void **args)
 {
 	int	i;
 
