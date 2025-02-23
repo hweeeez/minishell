@@ -1,1 +1,2 @@
-dsfdsf
+$USER
+'$USER;

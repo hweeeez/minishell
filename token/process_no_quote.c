@@ -92,7 +92,7 @@ t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 	}
 	if (ms_is_special(c))
 		return (handle_special(tok, current_word));
-	if (c == '$')
+	if (c == '$' && !pre_is_heredoc(shell->token))
 	{
 		tok->word_split = 1;
 		handle_expansion(tok, shell, current_word);
