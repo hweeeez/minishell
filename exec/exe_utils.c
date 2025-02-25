@@ -31,7 +31,6 @@ void	exe_rightnode(t_execontainer **con, t_node *right, t_shell **shell)
 	childexe->puts[0] = (exe)->pipefd[0];
 	addchild(&childexe, con);
 	exe_commands(right, con, shell);
-	free(childexe);
 }
 
 void	initexenode(t_exe **exe)

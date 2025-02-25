@@ -70,13 +70,15 @@ static void	wait_pid(pid_t proc, t_shell **shell, t_execontainer **con)
 int	wait_children(t_execontainer **con, t_shell **shell)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while ((*con)->numpid > 0)
+	j = (*con)->numpid;
+	while (j> 0)
 	{
 		wait_pid((*con)->pids[i], shell, con);
 		i++;
-		(*con)->numpid--;
+		j--;
 	}
 	return (0);
 }

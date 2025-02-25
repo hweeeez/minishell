@@ -96,7 +96,7 @@ static int	minishell_loop(char *input, t_token **tok, t_shell **shell, struct si
 	{
 		input = readline(PROMPT);
 		if (handle_empty_input(input))
-			ft_exit(shell, NULL) ;
+			ft_exit(shell, NULL, NULL) ;
 			// return (ft_exit(shell, NULL));
 		// if (handle_exit_command(input))
 		// 	return (ft_exit(shell, NULL));
@@ -126,6 +126,6 @@ int	main(int argc, char **argv, char **env)
 	if (!shell)
 		exit(1);
 	if (setup_signals(&sigint) == 1)
-		return (ft_exit(&shell, NULL));
+		return (ft_exit(&shell, NULL, NULL));
 	return (minishell_loop(input, &(shell->token), &shell, &sigint));
 }

@@ -12,12 +12,13 @@
 
 #include "minishell.h"
 
-static void	exitchild(t_shell **shell, int exitcode, t_execontainer **exe)
+void	free_exe(t_execontainer **exe)
 {
 	int	i;
 
 	i = 0;
-	(*shell)->exit_status = exitcode;
+	if (*exe == NULL)
+		return ;
 	if ((*exe)->pids != NULL)
 	{
 		free((*exe)->pids);
@@ -25,18 +26,26 @@ static void	exitchild(t_shell **shell, int exitcode, t_execontainer **exe)
 	}
 	while (i < (*exe)->numpid)
 	{
-		free((*exe)->exes[i]);
-		free((*exe)->sigs[i]);
+		if ((*exe)->exes[i] != NULL)
+			free((*exe)->exes[i]);
+		if ((*exe)->sigs != NULL)
+			free((*exe)->sigs[i]);
 		i++;
 	}
+	if ((*exe)->numpid == 0 && (*exe)->isbuiltin != 1)
+		free((*exe)->exes[0]);
 	free((*exe)->exes);
 	free((*exe)->sigs);
 	free(*exe);
 	*exe = NULL;
-	ft_exit(shell, NULL);
 }
 
-//builtins need to write to stdout, but do not read from stdin (but we should still dup2)
+static void	exitchild(t_shell **shell, int exitcode, t_execontainer **exe)
+{
+	(*shell)->exit_status = exitcode;
+	ft_exit(shell, NULL, exe);
+}
+
 int	do_execution(t_shell **shell, char **cmd, t_execontainer **exe)
 {
 	int	builtinvalue;
@@ -44,7 +53,7 @@ int	do_execution(t_shell **shell, char **cmd, t_execontainer **exe)
 
 	if (cmd == NULL)
 		exitchild(shell, 0, exe);
-	builtinvalue = checkif_builtin(shell, cmd);
+	builtinvalue = checkif_builtin(shell, cmd, exe);
 	if (builtinvalue == -1)
 	{
 		if (execve(cmd[0], cmd, (*shell)->env) == -1)
@@ -61,26 +70,26 @@ int	do_execution(t_shell **shell, char **cmd, t_execontainer **exe)
 	return (1);
 }
 
-int	checkif_builtin(t_shell **shell, char **cmd)
+int	checkif_builtin(t_shell **shell, char **cmd, t_execontainer **exe)
 {
 	if (ft_strcmp(cmd[0], "echo") == 1)
-		return (ft_echo(cmd));
+		return ((*exe)->isbuiltin = 1, ft_echo(cmd));
 	if (ft_strcmp(cmd[0], "cd") == 1)
-		return (ft_cd(*shell, cmd));
+		return ((*exe)->isbuiltin = 1, ft_cd(*shell, cmd));
 	if (ft_strcmp(cmd[0], "pwd") == 1)
-		return (ft_pwd());
+		return ((*exe)->isbuiltin = 1, ft_pwd());
 	if (ft_strcmp(cmd[0], "export") == 1)
-		return (ft_export(*shell, cmd));
+		return ((*exe)->isbuiltin = 1, ft_export(*shell, cmd));
 	if (ft_strcmp(cmd[0], "unset") == 1)
-		return (ft_unset(*shell, cmd));
+		return ((*exe)->isbuiltin = 1, ft_unset(*shell, cmd));
 	if (ft_strcmp(cmd[0], "env") == 1)
-		return (ft_env(*shell));
+		return ((*exe)->isbuiltin = 1, ft_env(*shell));
 	if (ft_strcmp(cmd[0], "exit") == 1)
-		return (ft_exit(shell, cmd));
+		return ((*exe)->isbuiltin = 1, ft_exit(shell, cmd, exe));
 	if (ft_strcmp(cmd[0], ".") == 1)
-		return (ft_dot(cmd));
+		return ((*exe)->isbuiltin = 1, ft_dot(cmd));
 	if (ft_strcmp(cmd[0], "..") == 1)
-		return (ft_dotdot());
+		return ((*exe)->isbuiltin = 1, ft_dotdot());
 	return (-1);
 }
 

@@ -34,9 +34,7 @@ int execute(t_node *node, t_shell **shell)
 	t_node *left;
 	t_execontainer *cont;
 	t_exe *exe;
-	int i;
 
-	i = 0;
 	cont = (t_execontainer *)malloc(sizeof(t_execontainer)); //this is not freed in some path
 	if (!cont)
 	{
@@ -66,19 +64,10 @@ int execute(t_node *node, t_shell **shell)
 					addchild(&exe, &cont);
 					exe_commands(node, &cont, shell);
 					wait_children(&cont, shell);
-					free(exe);
-					if (cont->pids != NULL)
-						free(cont->pids);
 				}
 				else
-				{
-					free(cont->exes);
-					cont->exes = NULL;
-					free(cont);
-					(*shell)->exit_status = checkif_builtin(shell, left->args);
-				}
-					
-				return (0);
+					(*shell)->exit_status = checkif_builtin(shell, left->args, &cont);	
+				return (free_exe(&cont), 0);
 			}
 		}
 		initexenode(&exe);
@@ -87,23 +76,8 @@ int execute(t_node *node, t_shell **shell)
 		wait_children(&cont, shell);
 		if (cont->redir_status == 1)
 			(*shell)->exit_status = cont->redir_status;
-		if (cont->pids != NULL)
-		{
-			free(cont->pids);
-			cont->pids = NULL;
-		}
-		while (i < (cont)->numpid)
-		{
-			free((cont)->exes[i]);
-			free((cont)->sigs[i]);
-			i++;
-		}
-		free((cont)->exes);
-		free(*cont->sigs);// this is freeded in some paths and not this path for cat > missing
-		free(cont->sigs);
-		free(cont);
-		free(exe);
 	}
+	free_exe(&cont);
 	return (0);
 }
 
@@ -113,11 +87,11 @@ int exe_commands(t_node *node, t_execontainer **con, t_shell **shell)
 	int canrun;
 	pid_t pid;
 
-	pid = -1;
 	init_exesigs(&sigs);
 	addsig(&sigs, con);
+	pid = -1;
 	canrun = has_redir(con, node, shell);
-	if (node->right != NULL || node->left->redirs != NULL)
+	if (node->right != NULL || (node->left->redirs != NULL && canrun == 0))
 	{
 		if (pipe((*con)->exes[(*con)->numpid - 1]->pipefd) == -1)
 			return (-1);
@@ -148,8 +122,6 @@ int exe_commands(t_node *node, t_execontainer **con, t_shell **shell)
 		closeputs(&(*con)->exes[(*con)->numpid - 1]);
 		if (node->right != NULL)
 			exe_rightnode(con, node->right, shell);
-		free(sigs);
-		*(*con)->sigs = NULL; // mutiple -> sig pointer, need to set to null
 	}
 	return (1);
 }

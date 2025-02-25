@@ -40,6 +40,7 @@ typedef struct s_execontainer
 	int		skipnl;
 	t_exe	**exes;
 	t_sigs	**sigs;
+	int		isbuiltin;
 }				t_execontainer;
 
 void	ft_coredump_msg(int status, t_shell **shell, t_execontainer **con);
@@ -58,10 +59,11 @@ int		get_redir(t_redir *redir, t_exe **exe, t_shell **shell, t_execontainer **co
 int		has_redir(t_execontainer **exe, t_node *node, t_shell **shell);
 int		ft_heredoc(t_redir *redirs, t_shell **shell);
 int		ft_heredoc_exe(t_redir *redirs, t_shell **shell, int expand_flag);
-int		checkif_builtin(t_shell **shell, char **cmd);
+int		checkif_builtin(t_shell **shell, char **cmd, t_execontainer **exe);
 int		do_execution(t_shell **shell, char **cmd, t_execontainer **exe);
 void	addchild(t_exe **add, t_execontainer **cont);
 void	addpid(pid_t pid, t_execontainer **con);
 void	addsig(t_sigs **add, t_execontainer **cont);
+void	free_exe(t_execontainer **exe);
 
 #endif

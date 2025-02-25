@@ -43,10 +43,12 @@ static int check_exit_arguments(t_shell **shell, char **args)
 	return (0);
 }
 
-int ft_exit(t_shell **shell, char **args)
+int ft_exit(t_shell **shell, char **args, t_execontainer **exe)
 {
 	int		exit_code;
 
+	if (exe != NULL)
+		free_exe(exe);
 	if (!shell || !*shell)
 		exit(1);
 	print_interactive_exit(*shell);
