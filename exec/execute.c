@@ -98,7 +98,6 @@ int execute(t_node *node, t_shell **shell)
 			free((cont)->sigs[i]);
 			i++;
 		}
-		ft_putstr_fd("reached line - execute.c 87\n", STDERR_FILENO);
 		free((cont)->exes);
 		free(*cont->sigs);// this is freeded in some paths and not this path for cat > missing
 		free(cont->sigs);
