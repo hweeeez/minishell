@@ -22,7 +22,7 @@ static void cleanup_and_exit(t_shell **shell, int exit_code)
 
 static void print_interactive_exit(t_shell *shell)
 {
-	if (isatty(STDIN_FILENO) && getpid() == shell->parent_pid)
+	if (isatty(STDIN_FILENO) && shell->parent)
 		ft_putstr_fd("exit\n", 1);
 }
 

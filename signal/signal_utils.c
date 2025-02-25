@@ -21,6 +21,10 @@ static void	quitchild(int sig)//, siginfo_t *info, void *ucontext)
 void	init_exesigs(t_sigs **sigs)
 {
 	(*sigs) = (t_sigs *)malloc(sizeof(t_sigs));
+	if (!(*sigs))
+	{
+		(void) (*sigs); //handle error
+	}
 	ft_memset(&(*sigs)->sigpipe, 0, sizeof((*sigs)->sigpipe));
 	(*sigs)->sigpipe.sa_handler = SIG_IGN;
 	ft_memset(&(*sigs)->ignore, 0, sizeof((*sigs)->ignore));

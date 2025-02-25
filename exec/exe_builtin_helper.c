@@ -16,6 +16,7 @@ static void	exitchild(t_shell **shell, int exitcode, t_execontainer **exe)
 {
 	int	i;
 
+	ft_putstr_fd("exe_builitin_helper - exitchild()\n", 2);
 	i = 0;
 	(*shell)->exit_status = exitcode;
 	if ((*exe)->pids != NULL)

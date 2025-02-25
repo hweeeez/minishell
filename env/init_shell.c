@@ -28,7 +28,7 @@ t_shell	*init_shell(char **env)
 	shell->exit_status = 0;
 	shell->token = NULL;
 	shell->root = NULL;
-	shell->parent_pid = getpid();
+	shell->parent = 1; //getpid is forbidden 
 	return (shell);
 }
 

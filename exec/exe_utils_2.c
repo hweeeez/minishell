@@ -109,6 +109,10 @@ void	addpid(pid_t pid, t_execontainer **con)
 	//(*con)->numpid++;
 	i = 0;
 	temp = (int *)malloc(sizeof(pid_t) * ((*con)->numpid));
+	if (!temp)
+	{
+		(void) temp; //handle error
+	}
 	if ((*con)->pids != NULL)
 	{
 		while (i < (*con)->numpid - 1)
@@ -152,6 +156,10 @@ void	addchild(t_exe **add, t_execontainer **cont)
 	(*cont)->numpid++;
 	i = 0;
 	temp = (t_exe **)malloc(sizeof(t_exe) * ((*cont)->numpid));
+	if (!temp)
+	{
+		(void) temp; //handle error
+	}
 	if ((*cont)->exes != NULL)
 	{
 		while (i < (*cont)->numpid - 1)
@@ -173,6 +181,10 @@ void	addsig(t_sigs **add, t_execontainer **cont)
 
 	i = 0;
 	temp = (t_sigs **)malloc(sizeof(t_sigs) * ((*cont)->numpid));
+	if (!temp)
+	{
+		(void) temp; //handle error
+	}
 	if ((*cont)->sigs != NULL)
 	{
 		while (i < (*cont)->numpid - 1)

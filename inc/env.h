@@ -22,7 +22,7 @@ typedef struct s_shell
 	char					**env;
 	//int						exit_status;//
 	volatile sig_atomic_t	exit_status;
-	pid_t					parent_pid;
+	pid_t					parent;
 	t_token					*token;
 	t_node					*tree;
 	t_node					*root;

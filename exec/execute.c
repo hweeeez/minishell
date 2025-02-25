@@ -12,10 +12,10 @@
 
 #include "minishell.h"
 
-int	has_redir(t_execontainer **con, t_node *node, t_shell **shell)
+int has_redir(t_execontainer **con, t_node *node, t_shell **shell)
 {
-	int	valid;
-	t_exe	*exe;
+	int valid;
+	t_exe *exe;
 
 	exe = (*con)->exes[(*con)->numpid - 1];
 	valid = 0;
@@ -29,22 +29,32 @@ int	has_redir(t_execontainer **con, t_node *node, t_shell **shell)
 	return (0);
 }
 
-int	execute(t_node *node, t_shell **shell)
+int execute(t_node *node, t_shell **shell)
 {
-	t_node	*left;
+	t_node *left;
 	t_execontainer *cont;
-	t_exe	*exe;
-	int i = 0;
+	t_exe *exe;
+	int i;
 
-	cont = (t_execontainer *)malloc(sizeof(t_execontainer));;
+	i = 0;
+	cont = (t_execontainer *)malloc(sizeof(t_execontainer)); //this is not freed in some path
+	if (!cont)
+	{
+		(void) cont; //handle error
+	}
+	ft_memset(cont, 0, sizeof(t_execontainer));
 	cont->exes = NULL;
 	left = node->left;
 	if (left == NULL)
 		return (0);
-	if (node->type == 0)
+	if (node->type == NODE_PIPE)
 	{
-		ft_memset(cont, 0, sizeof(t_execontainer));
-		cont->exes = (t_exe **)malloc(sizeof(t_exe *));
+		//ft_memset(cont, 0, sizeof(t_execontainer));
+		cont->exes = (t_exe **)malloc(sizeof(t_exe *)); //this is not freed in some path
+		if (!cont->exes)
+		{
+			(void) cont->exes; //handle error
+		}
 		if (left->args != NULL && isbuiltin(left->args[0]) == 1)
 		{
 			(cont)->skipnl = 1;
@@ -61,7 +71,13 @@ int	execute(t_node *node, t_shell **shell)
 						free(cont->pids);
 				}
 				else
+				{
+					free(cont->exes);
+					cont->exes = NULL;
+					free(cont);
 					(*shell)->exit_status = checkif_builtin(shell, left->args);
+				}
+					
 				return (0);
 			}
 		}
@@ -82,7 +98,9 @@ int	execute(t_node *node, t_shell **shell)
 			free((cont)->sigs[i]);
 			i++;
 		}
+		ft_putstr_fd("reached line - execute.c 87\n", STDERR_FILENO);
 		free((cont)->exes);
+		free(*cont->sigs);// this is freeded in some paths and not this path for cat > missing
 		free(cont->sigs);
 		free(cont);
 		free(exe);
@@ -90,11 +108,11 @@ int	execute(t_node *node, t_shell **shell)
 	return (0);
 }
 
-int	exe_commands(t_node *node, t_execontainer **con, t_shell **shell)
+int exe_commands(t_node *node, t_execontainer **con, t_shell **shell)
 {
-	t_sigs	*sigs;
-	int		canrun;
-	pid_t	pid;
+	t_sigs *sigs;
+	int canrun;
+	pid_t pid;
 
 	pid = -1;
 	init_exesigs(&sigs);
@@ -110,8 +128,9 @@ int	exe_commands(t_node *node, t_execontainer **con, t_shell **shell)
 	else if (node->right != NULL)
 		pid = 1;
 	addpid(pid, con);
-	if (pid == 0)
+	if (pid == 0) 
 	{
+		(*shell)->parent = 0;//need to change the (isparent?) flag in shell
 		do_sigaction(SIGQUIT, SIGINT, (*con)->sigs[(*con)->numpid - 1]);
 		executechild(node, con, shell);
 	}
@@ -131,13 +150,14 @@ int	exe_commands(t_node *node, t_execontainer **con, t_shell **shell)
 		if (node->right != NULL)
 			exe_rightnode(con, node->right, shell);
 		free(sigs);
+		*(*con)->sigs = NULL; // mutiple -> sig pointer, need to set to null
 	}
 	return (1);
 }
 
-void	executechild(t_node *node, t_execontainer **con, t_shell **shell)
+void executechild(t_node *node, t_execontainer **con, t_shell **shell)
 {
-	t_exe	*exe;
+	t_exe *exe;
 
 	exe = (*con)->exes[(*con)->numpid - 1];
 	if ((exe)->puts[0] != STDIN_FILENO)
