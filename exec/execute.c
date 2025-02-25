@@ -44,7 +44,7 @@ int execute(t_node *node, t_shell **shell)
 	cont->exes = NULL;
 	left = node->left;
 	if (left == NULL)
-		return (0);
+		return (free(cont), 0);
 	if (node->type == NODE_PIPE)
 	{
 		//ft_memset(cont, 0, sizeof(t_execontainer));
