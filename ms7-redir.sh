@@ -86,7 +86,7 @@ commands=(
   "cat tmp_redir_out2"
   "/bin/echo 3"
   "cat tmp_redir_out3"
-  "rm tmp_redir_out tmp_redir_out1 tmp_redir_out2 tmp_redir_out3"
+  #"rm tmp_redir_out tmp_redir_out1 tmp_redir_out2 tmp_redir_out3"
   
   ### CLEANUP COMMANDS ###
   "> out"

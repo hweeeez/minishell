@@ -24,10 +24,10 @@ void	init_tokenizer(t_tokenizer *tok, const char *input, t_shell *shell)
 	//tok->prev_token_type = TOKEN_WORD;
 }
 
-int	is_space_tab(char c)
-{
-	return (c == ' ' || c == '\t');
-}
+// int	is_space_tab(char c)
+// {
+// 	return (c == ' ' || c == '\t' || c == '\n');
+// }
 
 int	ms_is_special(char c)
 {

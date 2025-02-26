@@ -54,7 +54,6 @@ typedef struct s_tokenizer
 
 void			init_tokenizer(t_tokenizer *tok, const char *input, t_shell *shell);
 t_token			*new_token(char *value, t_token_type type, int split, int hd_add_quote);
-int				is_space_tab(char c);
 int				ms_is_special(char c);
 void			skip_whitespace(t_tokenizer *tok);
 int				tokenize(const char *input, t_token **head, t_shell *shell);
@@ -81,7 +80,7 @@ t_token_type	last_token_type(t_token *head);
 int				pre_is_heredoc(t_token *head);
 
 #endif
-
+//int				is_space_tab(char c);
 /*
     TOKEN_WORD,       // Regular word/command/argument
     TOKEN_PIPE,       // |
