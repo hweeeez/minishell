@@ -24,6 +24,7 @@ typedef struct s_shell
 	t_token					*token;
 	t_node					*tree;
 	t_node					*root;
+	int						expand_flag;
 }	t_shell;
 
 typedef enum e_file_type

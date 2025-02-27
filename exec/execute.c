@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int has_redir(t_execontainer **con, t_node *node, t_shell **shell)
+int	has_redir(t_exebox **con, t_node *node, t_shell **shell)
 {
 	int		valid;
 	t_exe	*exe;
@@ -29,132 +29,60 @@ int has_redir(t_execontainer **con, t_node *node, t_shell **shell)
 	return (0);
 }
 
-int execute(t_node *node, t_shell **shell)
+static void	init_exe(t_exe **exe, t_exebox **box, t_shell **shell, t_node *node)
+{
+	initexenode(exe);
+	addchild(exe, box);
+	exe_commands(node, box, shell);
+	wait_children(box, shell);
+}
+
+static int	onlybuiltin(t_exebox **box, t_node *node, t_exe **exe, t_shell **s)
 {
 	t_node			*left;
-	t_execontainer	*cont;
-	t_exe			*exe;
 
-	cont = (t_execontainer *)malloc(sizeof(t_execontainer)); //this is not freed in some path
-	if (!cont)
-		memerr_exit(1);
-	ft_memset(cont, 0, sizeof(t_execontainer));
-	cont->exes = NULL;
 	left = node->left;
-	if (left == NULL)
-		return (free(cont), 0);
-	if (node->type == NODE_PIPE)
+	if (left->args != NULL && isbuiltin(left->args[0]) == 1)
 	{
-		cont->exes = (t_exe **)malloc(sizeof(t_exe *)); //this is not freed in some path
-		if (cont->exes == NULL)
-			memerr_exit(1);
-		if (left->args != NULL && isbuiltin(left->args[0]) == 1)
+		if (ft_strcmp(left->args[0], "echo") != 1)
+			(*box)->skipnl = 1;
+		if (node->right == NULL)
 		{
-			(cont)->skipnl = 1;
-			if (node->right == NULL)
-			{
-				if (node->left->rootredir != NULL)
-				{
-					initexenode(&(exe));
-					addchild(&exe, &cont);
-					exe_commands(node, &cont, shell);
-					wait_children(&cont, shell);
-				}
-				else
-					(*shell)->exit_status = checkif_builtin(shell, left->args, &cont);	
-				return (free_exe(&cont), 0);
-			}
+			if (node->left->rootredir != NULL)
+				init_exe(exe, box, s, node);
+			else
+				(*s)->exit_status = checkif_builtin(s, left->args, box);
+			return (free_exe(box), 0);
 		}
-		initexenode(&exe);
-		addchild(&exe, &cont);
-		exe_commands(node, &cont, shell);
-		wait_children(&cont, shell);
-		if (cont->redir_status == 1)
-			(*shell)->exit_status = cont->redir_status;
 	}
-	free_exe(&cont);
 	return (0);
 }
 
-int exe_commands(t_node *node, t_execontainer **con, t_shell **shell)
+int	execute(t_node *node, t_shell **shell)
 {
-	t_sigs	*sigs;
-	int		canrun;
-	pid_t	pid;
+	t_node			*left;
+	t_exebox		*box;
+	t_exe			*exe;
 
-	init_exesigs(&sigs);
-	addsig(&sigs, con);
-	pid = -1;
-	canrun = has_redir(con, node, shell);
-	if (node->right != NULL || (node->left->redirs != NULL && canrun == 0))
+	box = (t_exebox *)malloc(sizeof(t_exebox));
+	if (!box)
+		memerr_exit(1);
+	ft_memset(box, 0, sizeof(t_exebox));
+	box->exes = NULL;
+	left = node->left;
+	if (left == NULL)
+		return (free(box), 0);
+	if (node->type == NODE_PIPE)
 	{
-		if (pipe((*con)->exes[(*con)->numpid - 1]->pipefd) == -1)
-			return (-1);
+		box->exes = (t_exe **)malloc(sizeof(t_exe *));
+		if (box->exes == NULL)
+			memerr_exit(1);
+		if (onlybuiltin(&box, node, &exe, shell) == 0)
+			return (0);
+		init_exe(&exe, &box, shell, node);
+		if (box->redir_status == 1)
+			(*shell)->exit_status = box->redir_status;
 	}
-	if (canrun == 0)
-		pid = fork();
-	else if (node->right != NULL)
-		pid = 1;
-	addpid(pid, con);
-	if (pid == 0) 
-	{
-		(*shell)->parent = 0;//need to change the (isparent?) flag in shell
-		do_sigaction(SIGQUIT, SIGINT, (*con)->sigs[(*con)->numpid - 1]);
-		executechild(node, con, shell);
-	}
-	else if (pid == -1)
-		return (-1);
-	else if (pid > 0)
-	{
-		sigaction(SIGINT, &((*con)->sigs[(*con)->numpid - 1]->ignore), NULL);
-		if (node->right == NULL)
-		{
-			if ((*con)->exes[(*con)->numpid - 1]->pipefd[0] > -1)
-				close((*con)->exes[(*con)->numpid - 1]->pipefd[0]);
-			if ((*con)->exes[(*con)->numpid - 1]->pipefd[1] > -1)
-				close((*con)->exes[(*con)->numpid - 1]->pipefd[1]);
-		}
-		closeputs(&(*con)->exes[(*con)->numpid - 1]);
-		if (node->right != NULL)
-			exe_rightnode(con, node->right, shell);
-	}
-	return (1);
-}
-
-void executechild(t_node *node, t_execontainer **con, t_shell **shell)
-{
-	t_exe	*exe;
-
-	exe = (*con)->exes[(*con)->numpid - 1];
-	if ((exe)->puts[0] != STDIN_FILENO)
-	{
-		dup2((exe)->puts[0], STDIN_FILENO);
-		close((exe)->puts[0]);
-		if (node->right == NULL)
-		{
-			if ((exe)->pipefd[0] > -1)
-				close((exe)->pipefd[0]);
-			if ((exe)->pipefd[1] > -1)
-				close((exe)->pipefd[1]);
-		}
-	}
-	if ((exe)->puts[1] != STDOUT_FILENO)
-	{
-		dup2((exe)->puts[1], STDOUT_FILENO);
-		close((exe)->puts[1]);
-		if (node->right == NULL)
-		{
-			if ((exe)->pipefd[0] > -1)
-				close((exe)->pipefd[0]);
-			if ((exe)->pipefd[1] > -1)
-				close((exe)->pipefd[1]);
-		}
-	}
-	else if (node->right != NULL)
-	{
-		close((exe)->pipefd[0]);
-		dup2(exe->pipefd[1], STDOUT_FILENO);
-		close(exe->pipefd[1]);
-	}
-	do_execution(shell, node->left->args, con);
+	free_exe(&box);
+	return (0);
 }

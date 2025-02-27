@@ -12,79 +12,53 @@
 
 #include "minishell.h"
 
-void	makenewnode(t_node **newnode, t_node **tree, int type)
+static void	getword(char **word, char *tok, t_node **new, t_shell **shell)
 {
-	(*newnode) = createnode();
-	(*newnode)->type = type;
-	addnode(tree, *newnode);
+	if (isbuiltin(tok))
+		*word = ft_strdup(tok);
+	else
+		*word = ft_find_cmd_path(tok, &((*new)->args), (*shell)->env);
 }
 
-void	addarg(char ***args, int *nowords, char *add)
+static int	handle_word(char **word, int *no, t_node **new, char *tok)
 {
-	copyarray(args, *nowords, add);
-	(*nowords)++;
+	if (*word != NULL && (*new)->args == NULL)
+		return (copyarray(&(*new)->args, *no, *word), free(*word), (*no)++, 1);
+	else if (*word == NULL)
+	{
+		if (handle_path(tok) == -1)
+			return (0);
+		else if (handle_path(tok) == 0)
+			print_parse_error(tok, "command not found");
+	}
+	else if (*word != NULL && (*new)->args != NULL)
+		return ((*no)++, 1);
+	return (-1);
 }
 
-t_node	*createnode(void)
-{
-	t_node	*node;
-
-	node = (t_node *)malloc(sizeof(t_node));
-	node->left = NULL;
-	node->right = NULL;
-	node->type = NODE_PIPE;
-	node->prev = NULL;
-	node->rootredir = NULL;
-	node->redirs = NULL;
-	node->args = NULL;
-	node->argc = 0;
-	return (node);
-}
-
-int	parseword(t_node **newnode, t_shell ** shell, t_node **tree, char *tok)
+int	parseword(t_node **new, t_shell **shell, t_node **tree, char *tok)
 {
 	char		*word;
-	static int	nowords;
+	static int	no;
+	int			handleword;
 
-	if ((*newnode) == NULL || (*newnode)->type == 0)
+	word = NULL;
+	handleword = 0;
+	if ((*new) == NULL || (*new)->type == 0)
 	{
-		makenewnode(newnode, tree, NODE_COMMAND);
-		nowords = 0;
+		makenewnode(new, tree, NODE_COMMAND);
+		no = 0;
 	}
-	if ((*newnode)->args == NULL)
+	if ((*new)->args == NULL)
 	{
-		if (isbuiltin(tok))
-		{
-			word = ft_strdup(tok);
-			//(*shell)->skipnl = 1;
-		}
-		else
-			word = ft_find_cmd_path(tok, &((*newnode)->args), (*shell)->env);
-		if (word != NULL && (*newnode)->args == NULL)
-		{
-			copyarray(&(*newnode)->args, nowords, word);
-			free(word);
-			nowords++;
-			return (1);
-		}
-		else if (word == NULL)
-		{
-			if (handle_path(tok, shell) == -1)
-				return(0);
-			else if (handle_path(tok, shell) == 0)
-				print_parse_error(tok, "command not found", 127, shell);
-		}
-		else if (word != NULL && (*newnode)->args != NULL)
-		{
-			nowords++;
-			return (1);
-		}
+		getword(&word, tok, new, shell);
+		handleword = handle_word(&word, &no, new, tok);
+		if (handleword != -1)
+			return (handleword);
 	}
 	else if (check_dir_exists(tok) == 0)
 		return (0);
-	copyarray(&(*newnode)->args, nowords, tok);
-	nowords++;
-	return (1);
+	return (copyarray(&(*new)->args, no, tok), no++, 1);
 }
 
 void	parseredir(t_node **newnode, t_node **tree, t_token **tok)

@@ -42,27 +42,3 @@ void	do_sigaction(int sig1, int sig2, t_sigs *sigs)
 	if (sig2 == SIGINT)
 		sigaction(SIGINT, &(sigs->sigint), NULL);
 }
-/*
-void	init_exesigs(t_sigs **sigs)
-{
-	(*sigs) = (t_sigs *)malloc(sizeof(t_sigs));
-	if (!(*sigs))
-	{
-		(void) (*sigs); //handle error
-	}
-	ft_memset(&(*sigs)->sigpipe, 0, sizeof((*sigs)->sigpipe));
-	(*sigs)->sigpipe.sa_handler = SIG_IGN;
-	ft_memset(&(*sigs)->ignore, 0, sizeof((*sigs)->ignore));
-	(*sigs)->ignore.sa_handler = SIG_IGN;
-	//sigemptyset(&((*sigs)->ignore).sa_mask);
-	//(*sigs)->ignore.sa_flags = 0;
-	ft_memset(&(*sigs)->sigint, 0, sizeof((*sigs)->sigint));
-	(*sigs)->sigint.sa_handler = quitchild;
-	//sigemptyset(&((*sigs)->sigint).sa_mask);
-	//(*sigs)->sigint.sa_flags = 0;
-	ft_memset(&(*sigs)->quit, 0, sizeof((*sigs)->quit));
-	(*sigs)->quit.sa_handler = NULL;
-	//sigemptyset(&((*sigs)->quit).sa_mask);
-	//(*sigs)->quit.sa_flags = 0;
-}
-*/

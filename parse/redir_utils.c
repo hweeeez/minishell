@@ -12,21 +12,25 @@
 
 #include "minishell.h"
 
-static void	filenotexisterr(char *file, t_shell **shell)
+static int	handle_redirin(t_redir *re, t_exe **x, t_shell **shell)
 {
-	ft_putstr_fd(file, 2);
-	ft_putstr_fd(": No such file or directory\n", 2);
-	(*shell)->exit_status = 1;
+	closeput((*x)->puts[0], -1);
+	if (access(re->file, F_OK | R_OK) == -1)
+		return (filenotexisterr(re->file, shell), 1);
+	(*x)->puts[0] = open(re->file, O_RDONLY, 0644);
+	return (0);
 }
 
-static void	permissiondeniederr(char *file, t_shell **shell)
+static int	handle_redirappend(t_redir *re, t_exe **x, t_shell **shell)
 {
-	ft_putstr_fd(file, 2);
-	ft_putstr_fd(": Permission denied\n", 2);
-	(*shell)->exit_status = 1;
+	closeput(-1, (*x)->puts[1]);
+	if (access(re->file, F_OK) == 0 && access(re->file, W_OK) == -1)
+		return (permissiondeniederr(re->file, shell), 1);
+	(*x)->puts[1] = open(re->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	return (0);
 }
 
-static void	closeput(int input, int output)
+void	closeput(int input, int output)
 {
 	if (input > -1 && input != STDIN_FILENO)
 		close(input);
@@ -34,80 +38,45 @@ static void	closeput(int input, int output)
 		close(output);
 }
 
-int	get_redir(t_redir *re, t_exe **x, t_shell **shell, t_execontainer **con)
+static int	handle_hd(t_redir *re, t_exe **x, t_shell **shell, t_exebox **con)
 {
 	int	hd;
 
 	hd = 0;
+	closeput((*x)->puts[0], -1);
+	hd = ft_heredoc(re, shell);
+	if (hd == -1 || hd == 130)
+		return (130);
+	(*x)->puts[0] = open(HEREDOC_FILE, O_RDONLY, 0644);
+	(*con)->skipnl = 1;
+	return (1);
+}
+
+int	get_redir(t_redir *re, t_exe **x, t_shell **shell, t_exebox **con)
+{
 	if (re != NULL)
 	{
 		if (re->type == TOKEN_REDIR_OUT)
 		{
-			closeput(-1, (*x)->puts[1]);
-			if (check_dir_exists(re->file) == 0)
-				return (filenotexisterr(re->file, shell), 1);
-			if (access(re->file, F_OK) == 0 && access(re->file, W_OK) == -1)
-				return (permissiondeniederr(re->file, shell), 1);
-			(*x)->puts[1] = open(re->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			if (handle_redirout(re, x, shell) == 1)
+				return (1);
 		}
 		else if (re->type == TOKEN_APPEND)
 		{
-			closeput(-1, (*x)->puts[1]);
-			if (access(re->file, F_OK) == 0 && access(re->file, W_OK) == -1)
-				return (permissiondeniederr(re->file, shell), 1);
-			(*x)->puts[1] = open(re->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			if (handle_redirappend(re, x, shell) == 1)
+				return (1);
 		}
 		else if (re->type == TOKEN_REDIR_IN)
 		{
-			closeput((*x)->puts[0], -1);
-			if (access(re->file, F_OK | R_OK) == -1)
-				return (filenotexisterr(re->file, shell), 1);
-			(*x)->puts[0] = open(re->file, O_RDONLY, 0644);
+			if (handle_redirin(re, x, shell) == 1)
+				return (1);
 		}
 		else if (re->type == TOKEN_HEREDOC)
 		{
-			closeput((*x)->puts[0], -1);
-			hd = ft_heredoc(re, shell);
-			if (hd == -1 || hd == 130)
-				return(130);
-			(*x)->puts[0] = open(HEREDOC_FILE, O_RDONLY, 0644);
-			(*con)->skipnl = 1;
+			if (handle_hd(re, x, shell, con) == 130)
+				return (130);
 		}
 		return (get_redir(re->next, x, shell, con));
 	}
 	return (0);
-}
-
-int	isredir(int type)
-{
-	if (type == TOKEN_REDIR_IN)
-		return (1);
-	if (type == TOKEN_REDIR_OUT)
-		return (1);
-	if (type == TOKEN_APPEND)
-		return (1);
-	if (type == TOKEN_HEREDOC)
-		return (1);
-	return (0);
-}
-
-void	makeredir(t_node **newnode, t_token **token)
-{
-	t_redir	*redir;
-
-	redir = (t_redir *)malloc(sizeof(t_redir));
-	redir->type = (*token)->type;
-	redir->file = ft_strdup((*token)->next->value);
-	redir->next = NULL;
-	if ((*newnode)->redirs == NULL)
-	{
-		(*newnode)->redirs = redir;
-		(*newnode)->rootredir = redir;
-	}
-	else
-	{
-		(*newnode)->redirs->next = redir;
-		(*newnode)->redirs = (*newnode)->redirs->next;
-	}
-	(*token) = (*token)->next;
 }

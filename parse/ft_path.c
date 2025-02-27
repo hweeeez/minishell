@@ -61,15 +61,8 @@ static char	*try_path_with_cmd(char *dir, char *cmd)
 static char	*check_path_directories(char **paths, char *cmd)
 {
 	char	*cmd_path;
-	//char	**args;
 	int		i;
 
-	// args = ft_split(cmd, ' ');
-	// if (!args)
-	// {
-	// 	ft_free_split(&paths);
-	// 	return (NULL);
-	// }
 	i = 0;
 	while (paths[i])
 	{
@@ -77,13 +70,11 @@ static char	*check_path_directories(char **paths, char *cmd)
 		if (cmd_path)
 		{
 			ft_free_split(&paths);
-			// ft_free_split(&args);
 			return (cmd_path);
 		}
 		i++;
 	}
 	ft_free_split(&paths);
-	// ft_free_split(&args);
 	return (NULL);
 }
 

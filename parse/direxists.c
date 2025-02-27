@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   direxists.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hui-lim <hui-lim@student.42singapore.      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 21:47:19 by hui-lim           #+#    #+#             */
+/*   Updated: 2025/02/27 21:47:21 by hui-lim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -26,13 +37,10 @@ static char	*splitdir(char *path)
 int	check_dir_exists(char *path)
 {
 	char	*name;
-	//DIR		*dir;
 
-
-	//dir = NULL;
 	name = splitdir(path);
 	if (name != NULL)
-	{		
+	{
 		if (check_path_type(name) == TYPE_DIR)
 		{
 			return (1);

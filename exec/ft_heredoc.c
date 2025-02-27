@@ -31,7 +31,7 @@ int	event(void)
 	return (0);
 }
 
-int	parsehd(char *s, char *file, int filefd, t_shell **shell, int expand_flag)
+int	parsehd(char *s, char *file, int filefd, t_shell **shell)
 {
 	char	*temp;
 
@@ -41,7 +41,7 @@ int	parsehd(char *s, char *file, int filefd, t_shell **shell, int expand_flag)
 		close(filefd);
 		return (1);
 	}
-	if (expand_flag)
+	if ((*shell)->expand_flag == 1)
 	{
 		temp = s;
 		s = expand_heredoc((const char *)s, *shell);
@@ -53,7 +53,7 @@ int	parsehd(char *s, char *file, int filefd, t_shell **shell, int expand_flag)
 	return (0);
 }
 
-int	readhd(t_redir *redirs, int filefd, t_shell **shell, int expand_flag)
+int	readhd(t_redir *redirs, int filefd, t_shell **shell)
 {
 	char	*s;
 
@@ -62,33 +62,24 @@ int	readhd(t_redir *redirs, int filefd, t_shell **shell, int expand_flag)
 		s = readline("> ");
 		if (s != NULL)
 		{
-			if (parsehd(s, redirs->file, filefd, shell, expand_flag) == 1)
+			if (parsehd(s, redirs->file, filefd, shell) == 1)
 				break ;
 		}
 		else
 		{
-			ft_putstr_fd("warning: here-document delimited by end-of-file\n", 2);
-			close(filefd);
+			handle_eof(filefd);
 			break ;
 		}
-		//free(s);
 	}
 	if (g_received_sigint == 1)
-	{
-		close(filefd);
-		unlink(HEREDOC_FILE);
-		(*shell)->exit_status = 130;
-		return (130);
-	}
+		return (handle_sigint(filefd, shell), 130);
 	return (0);
 }
 
-int	ft_heredoc_exe(t_redir *redirs, t_shell **shell, int expand_flag)
+int	ft_heredoc_exe(t_redir *redirs, t_shell **shell)
 {
 	int					filefd;
-	//t_redir				*redirs;
 	struct sigaction	sig_int;
-	//t_exe				*exe;
 
 	rl_event_hook = event;
 	g_received_sigint = 0;
@@ -105,7 +96,7 @@ int	ft_heredoc_exe(t_redir *redirs, t_shell **shell, int expand_flag)
 		close(filefd);
 	}
 	filefd = open(HEREDOC_FILE, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (readhd(redirs, filefd, shell, expand_flag) == 130)
+	if (readhd(redirs, filefd, shell) == 130)
 		return (130);
 	close (filefd);
 	return (filefd);
