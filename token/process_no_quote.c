@@ -18,7 +18,8 @@ static t_token	*handle_space(t_tokenizer *tok, char **current_word)
 
 	if (ft_strlen(*current_word))
 	{
-		token = new_token(*current_word, TOKEN_WORD, tok->word_split, tok->hd_quote);
+		token = new_token(*current_word, TOKEN_WORD, \
+				tok->word_split, tok->hd_quote);
 		tok->word_split = 0;
 		tok->hd_quote = 0;
 		tok->position++;
@@ -28,19 +29,14 @@ static t_token	*handle_space(t_tokenizer *tok, char **current_word)
 	return (NULL);
 }
 
-static void	handle_quotes(t_tokenizer *tok, char quote_type)
-{
-	tok->quote = quote_type;
-	tok->position++;
-}
-
 static t_token	*handle_special(t_tokenizer *tok, char **current_word)
 {
 	t_token	*token;
 
 	if (ft_strlen(*current_word))
 	{
-		token = new_token(*current_word, TOKEN_WORD, tok->word_split, tok->hd_quote);
+		token = new_token(*current_word, TOKEN_WORD, \
+				tok->word_split, tok->hd_quote);
 		tok->word_split = 0;
 		tok->hd_quote = 0;
 		return (token);
@@ -59,17 +55,22 @@ static void	handle_expansion(t_tokenizer *tok, t_shell *shell,
 		*current_word = ft_strjoin_free(*current_word, expanded);
 }
 
-static t_token *process_empty_quote(t_tokenizer *tok, char quote, char **current_word)
+static t_token	*process_empty_quote(t_tokenizer *tok, \
+				char quote, char **current_word)
 {
-	if (tok->input[tok->position + 1] == quote &&
-	    !ft_strlen(*current_word) &&
-	    (!tok->input[tok->position + 2] || ft_isspace(tok->input[tok->position + 2])))
+	t_token	*token;
+
+	if (tok->input[tok->position + 1] == quote && \
+		!ft_strlen(*current_word) && \
+		(!tok->input[tok->position + 2] || \
+		ft_isspace(tok->input[tok->position + 2])))
 	{
-		t_token *token = new_token(*current_word, TOKEN_WORD, tok->word_split, tok->hd_quote);
+		token = new_token(*current_word, TOKEN_WORD, \
+				tok->word_split, tok->hd_quote);
 		tok->word_split = 0;
 		tok->hd_quote = 0;
 		tok->position += 2;
-		return token;
+		return (token);
 	}
 	return (NULL);
 }
@@ -87,7 +88,8 @@ t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 		if (token)
 			return (token);
 		tok->hd_quote = 1;
-		handle_quotes(tok, c);
+		tok->quote = c;
+		tok->position++;
 		return (NULL);
 	}
 	if (ms_is_special(c))
@@ -102,6 +104,13 @@ t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 	tok->position++;
 	return (NULL);
 }
+
+// static void	handle_quotes(t_tokenizer *tok, char quote_type)
+// {
+// 	tok->quote = quote_type;
+// 	tok->position++;
+// }
+
 // t_token	*handle_word_token(t_tokenizer *tok)
 // {
 // 	char	*value;

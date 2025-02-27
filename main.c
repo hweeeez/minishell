@@ -12,36 +12,6 @@
 
 #include "minishell.h"
 
-// static void	print_tokens(t_token *token_list)
-// {
-// 	t_token	*current;
-// 	int		i;
-
-// 	i = 1;
-// 	current = token_list;
-// 	printf("%10s\n", "Token(s)");
-// 	while (current)
-// 	{
-// 		printf("%-2d[%s] | Type: ", i++, current->value);
-// 		if (current->type == TOKEN_WORD)
-// 			printf("WORD\n");
-// 		else if (current->type == TOKEN_PIPE)
-// 			printf("PIPE\n");
-// 		else if (current->type == TOKEN_REDIR_IN)
-// 			printf("REDIR_IN\n");
-// 		else if (current->type == TOKEN_REDIR_OUT)
-// 			printf("REDIR_OUT\n");
-// 		else if (current->type == TOKEN_HEREDOC)
-// 			printf("HEREDOC\n");
-// 		else if (current->type == TOKEN_APPEND)
-// 			printf("APPEND\n");
-// 		else
-// 			printf("UNEXPECTED\n");
-// 		current = current->next;
-// 	}
-// 	printf("%10s\n", "--End of List--");
-// }
-
 static int	handle_empty_input(char *input)
 {
 	if (!input)
@@ -52,16 +22,100 @@ static int	handle_empty_input(char *input)
 	return (0);
 }
 
-// static int	handle_exit_command(char *input)
-// {
-// 	if (*input && ft_strncmp(input, EXIT_CMD, sizeof(EXIT_CMD)) == 0)
-// 	{
-// 		// ft_putstr_fd("exit\n", 2);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
+static void	processtree(t_token	*token, t_shell	**shell, struct sigaction *sigs)
+{
+	(*shell)->tree = createnode();
+	(*shell)->root = (*shell)->tree;
+	if (inittree(&(*shell)->tree, token, shell) == 0)
+	{
+		freetree(&(*shell)->root);
+		return ;
+	}
+	(*shell)->tree = (*shell)->root;
+	execute((*shell)->tree, shell);
+	setup_signals(sigs);
+	freetree(&(*shell)->root);
+}
 
+static int	minishell_loop(char *input, t_token **tok, \
+				t_shell **shell, struct sigaction *sigs)
+{
+	while (1)
+	{
+		input = readline(PROMPT);
+		if (handle_empty_input(input))
+			ft_exit(shell, NULL, NULL);
+		add_history(input);
+		if (tokenize(input, tok, *shell))
+		{
+			free(input);
+			continue ;
+		}
+		free(input);
+		processtree(*tok, shell, sigs);
+	}
+	return (0);
+}
+
+int	main(int argc, char **argv, char **env)
+{
+	char				*input;
+	t_shell				*shell;
+	struct sigaction	sigint;
+
+	(void)argc;
+	(void)argv;
+	input = NULL;
+	shell = init_shell(env);
+	if (!shell)
+		exit(1);
+	if (setup_signals(&sigint) == 1)
+		return (ft_exit(&shell, NULL, NULL));
+	return (minishell_loop(input, &(shell->token), &shell, &sigint));
+}
+
+/*
+static void	print_tokens(t_token *token_list)
+{
+	t_token	*current;
+	int		i;
+
+	i = 1;
+	current = token_list;
+	printf("%10s\n", "Token(s)");
+	while (current)
+	{
+		printf("%-2d[%s] | Type: ", i++, current->value);
+		if (current->type == TOKEN_WORD)
+			printf("WORD\n");
+		else if (current->type == TOKEN_PIPE)
+			printf("PIPE\n");
+		else if (current->type == TOKEN_REDIR_IN)
+			printf("REDIR_IN\n");
+		else if (current->type == TOKEN_REDIR_OUT)
+			printf("REDIR_OUT\n");
+		else if (current->type == TOKEN_HEREDOC)
+			printf("HEREDOC\n");
+		else if (current->type == TOKEN_APPEND)
+			printf("APPEND\n");
+		else
+			printf("UNEXPECTED\n");
+		current = current->next;
+	}
+	printf("%10s\n", "--End of List--");
+}*/
+/*
+static int	handle_exit_command(char *input)
+{
+	if (*input && ft_strncmp(input, EXIT_CMD, sizeof(EXIT_CMD)) == 0)
+	{
+		// ft_putstr_fd("exit\n", 2);
+		return (1);
+	}
+	return (0);
+}*/
+
+/*
 static void	processtree(t_token	*token, t_shell	**shell, struct sigaction *sigs)
 {
 	//t_node	*tree;
@@ -88,9 +142,10 @@ static void	processtree(t_token	*token, t_shell	**shell, struct sigaction *sigs)
 	//(*shell)->skipnl = 0;
 	setup_signals(sigs);
 	freetree(&(*shell)->root);
-}
-
-static int	minishell_loop(char *input, t_token **tok, t_shell **shell, struct sigaction *sigs)
+}*/
+/*
+static int	minishell_loop(char *input, t_token **tok, 
+			t_shell **shell, struct sigaction *sigs)
 {
 	while (1)
 	{
@@ -111,21 +166,4 @@ static int	minishell_loop(char *input, t_token **tok, t_shell **shell, struct si
 		processtree(*tok, shell, sigs);
 	}
 	return (0);
-}
-
-int	main(int argc, char **argv, char **env)
-{
-	char		*input;
-	t_shell		*shell;
-	struct sigaction	sigint;
-
-	(void)argc;
-	(void)argv;
-	input = NULL;
-	shell = init_shell(env);
-	if (!shell)
-		exit(1);
-	if (setup_signals(&sigint) == 1)
-		return (ft_exit(&shell, NULL, NULL));
-	return (minishell_loop(input, &(shell->token), &shell, &sigint));
-}
+}*/

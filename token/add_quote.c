@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:35:11 by myuen             #+#    #+#             */
-/*   Updated: 2025/02/22 21:08:30 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/27 18:29:23 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	add_quotes_to_value(t_token *token)
 	old_len = ft_strlen(token->value);
 	new_value = malloc(old_len + 3);
 	if (!new_value)
-		return;
+		memerr_exit(1);
 	new_value[0] = '\'';
 	ft_memcpy(new_value + 1, token->value, old_len);
 	new_value[old_len + 1] = '\'';
@@ -54,14 +54,14 @@ char	*trim_char(const char *str, char c)
 	char	*new_str;
 
 	if (!str)
-		return NULL;
+		return (NULL);
 	len = ft_strlen(str);
 	if (len < 2 || str[0] != c || str[len - 1] != c)
-		return ft_strdup(str);
+		return (ft_strdup(str));
 	new_str = malloc(len - 1);
 	if (!new_str)
-		return NULL;
+		return (NULL);
 	ft_memcpy(new_str, str + 1, len - 2);
 	new_str[len - 2] = '\0';
-	return new_str;
+	return (new_str);
 }

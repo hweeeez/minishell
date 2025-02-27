@@ -25,7 +25,6 @@ int	setup_signals(struct sigaction *sig)
 {
 	struct sigaction	quit;
 
-	//(*sig) = (t_sigacts *)malloc(sizeof(t_sigacts));
 	ft_memset(sig, 0, sizeof(*sig));
 	ft_memset(&quit, 0, sizeof(quit));
 	quit.sa_handler = SIG_IGN;

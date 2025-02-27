@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   here_doc_expand.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/27 18:03:00 by myuen             #+#    #+#             */
+/*   Updated: 2025/02/27 18:03:43 by myuen            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static char	*hd_expand_var(const char *input, size_t *pos, t_shell *shell)
@@ -25,7 +37,8 @@ static char	*hd_expand_var(const char *input, size_t *pos, t_shell *shell)
 	return (value);
 }
 
-static char	*process_expansion(const char *input, size_t *i, char *expanded, t_shell *shell)
+static char	*process_expansion(const char *input, size_t *i, \
+				char *expanded, t_shell *shell)
 {
 	char	*var_value;
 

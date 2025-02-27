@@ -31,6 +31,7 @@ SRC_DIRS = token parse exec pipe redirect builtins heredoc signal error expansio
 
 # Source files (separate main.c)
 #SRCS = $(wildcard $(SRC_DIRS:=/*.c))
+#parse/parse_utils2.c parse/redir_utils2.c
 SRCS =	builtins/ft_cd_utils.c builtins/ft_cd.c builtins/ft_dot.c builtins/ft_dotdot.c builtins/ft_echo.c \
 		builtins/ft_env.c builtins/ft_exit.c builtins/ft_export.c builtins/ft_isbulitin.c builtins/ft_pwd.c \
 		builtins/ft_unset.c \

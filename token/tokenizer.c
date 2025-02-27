@@ -68,7 +68,6 @@ int	tokenize(const char *input, t_token **head, t_shell *shell)
 			return (1);
 		}
 	}
-	//go throught llist and look for word->hdquote, after a heredoc token
 	add_quotes_to_heredoc_tokens(*head);
 	while (node_split_id(*head) > -1)
 		split_node(head);

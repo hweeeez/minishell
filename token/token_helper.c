@@ -31,15 +31,10 @@ static t_token	*final_token(t_tokenizer *tok, char *current_word)
 		free(current_word);
 		return (NULL);
 	}
-	// if (ft_strcmp(current_word, "") == 0)
-    // {
-    //     token = new_token(ft_strdup(""), TOKEN_WORD, tok->word_split);
-    //     tok->word_split = 0;
-    //     return (token);
-    // }
 	if (ft_strlen(current_word))
 	{
-		token = new_token(current_word, TOKEN_WORD, tok->word_split, tok->hd_quote);
+		token = new_token(current_word, TOKEN_WORD, \
+				tok->word_split, tok->hd_quote);
 		tok->word_split = 0;
 		tok->hd_quote = 0;
 		return (token);

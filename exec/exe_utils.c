@@ -36,6 +36,8 @@ void	exe_rightnode(t_execontainer **con, t_node *right, t_shell **shell)
 void	initexenode(t_exe **exe)
 {
 	(*exe) = (t_exe *)malloc(sizeof(t_exe));
+	if (*(exe) == NULL)
+		memerr_exit(1);
 	(*exe)->childpid = -1;
 	(*exe)->pid = -1;
 	(*exe)->puts[0] = STDIN_FILENO;

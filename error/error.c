@@ -6,7 +6,7 @@
 /*   By: myuen <myuen@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 19:59:26 by myuen             #+#    #+#             */
-/*   Updated: 2025/02/20 18:55:24 by myuen            ###   ########.fr       */
+/*   Updated: 2025/02/27 17:44:56 by myuen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,10 @@ int	print_error(const char *format)
 {
 	ft_putstr_fd((char *)format, STDERR_FILENO);
 	return (1);
+}
+
+void	memerr_exit(int i)
+{
+	ft_putstr_fd("Memory Allocation Error\n", STDERR_FILENO);
+	exit (i);
 }

@@ -12,11 +12,11 @@
 
 #include "minishell.h"
 
-static int is_valid_filename(char *str)
+static int	is_valid_filename(char *str)
 {
 	char		*last_slash;
 	char		*dir_path;
-	struct stat path_stat;
+	struct stat	path_stat;
 	int			result;
 
 	if (!str || *str == '\0')
@@ -36,17 +36,16 @@ static int is_valid_filename(char *str)
 
 static int	is_redirection_token(t_token_type type)
 {
-	return (type == TOKEN_REDIR_IN || type == TOKEN_REDIR_OUT ||
+	return (type == TOKEN_REDIR_IN || type == TOKEN_REDIR_OUT || \
 			type == TOKEN_APPEND || type == TOKEN_HEREDOC);
 }
 
-static int check_redirection_error(t_token *current)
+static int	check_redirection_error(t_token *current)
 {
 	if (!current->next)
 		return (print_error("syntax error: unexpected token near 'newline'\n"));
 	if (current->type == TOKEN_HEREDOC)
 	{
-		//printf("heredoc detected\n");
 		if (current->next->type != TOKEN_WORD)
 			return (print_error("syntax error: unexpected token after '<<'\n"));
 		if (current->next->value == NULL)

@@ -12,12 +12,37 @@
 
 #include "minishell.h"
 
-static void	quitchild(int sig)//, siginfo_t *info, void *ucontext)
+static void	quitchild(int sig)
 {
 	(void) sig;
 	exit(0);
 }
 
+void	init_exesigs(t_sigs **sigs)
+{
+	(*sigs) = (t_sigs *)malloc(sizeof(t_sigs));
+	if (!(*sigs))
+		memerr_exit(1);
+	ft_memset(&(*sigs)->sigpipe, 0, sizeof((*sigs)->sigpipe));
+	(*sigs)->sigpipe.sa_handler = SIG_IGN;
+	ft_memset(&(*sigs)->ignore, 0, sizeof((*sigs)->ignore));
+	(*sigs)->ignore.sa_handler = SIG_IGN;
+	ft_memset(&(*sigs)->sigint, 0, sizeof((*sigs)->sigint));
+	(*sigs)->sigint.sa_handler = quitchild;
+	ft_memset(&(*sigs)->quit, 0, sizeof((*sigs)->quit));
+	(*sigs)->quit.sa_handler = NULL;
+}
+
+void	do_sigaction(int sig1, int sig2, t_sigs *sigs)
+{
+	if (sigaction(SIGPIPE, &(sigs->sigpipe), NULL) == -1)
+		return ;
+	if (sig1 == SIGQUIT)
+		sigaction(SIGQUIT, &(sigs->quit), NULL);
+	if (sig2 == SIGINT)
+		sigaction(SIGINT, &(sigs->sigint), NULL);
+}
+/*
 void	init_exesigs(t_sigs **sigs)
 {
 	(*sigs) = (t_sigs *)malloc(sizeof(t_sigs));
@@ -40,13 +65,4 @@ void	init_exesigs(t_sigs **sigs)
 	//sigemptyset(&((*sigs)->quit).sa_mask);
 	//(*sigs)->quit.sa_flags = 0;
 }
-
-void	do_sigaction(int sig1, int sig2, t_sigs *sigs)
-{
-	if (sigaction(SIGPIPE, &(sigs->sigpipe), NULL) == -1)
-		return ;
-	if (sig1 == SIGQUIT)
-		sigaction(SIGQUIT, &(sigs->quit), NULL);
-	if (sig2 == SIGINT)
-		sigaction(SIGINT, &(sigs->sigint), NULL);
-}
+*/

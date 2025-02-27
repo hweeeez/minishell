@@ -25,8 +25,9 @@ static char	*splitdir(char *path)
 
 int	check_dir_exists(char *path)
 {
-	//DIR		*dir;
 	char	*name;
+	//DIR		*dir;
+
 
 	//dir = NULL;
 	name = splitdir(path);

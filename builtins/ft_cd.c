@@ -51,7 +51,6 @@ int	ft_cd(t_shell *shell, char **cmd)
 	char	*new_path;
 	char	*old_pwd;
 
-	//ft_putstr_fd("--minishell cd--\n", STDOUT_FILENO);
 	if (check_cd_args(cmd))
 	{
 		return (1);

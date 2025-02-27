@@ -14,8 +14,8 @@
 
 int has_redir(t_execontainer **con, t_node *node, t_shell **shell)
 {
-	int valid;
-	t_exe *exe;
+	int		valid;
+	t_exe	*exe;
 
 	exe = (*con)->exes[(*con)->numpid - 1];
 	valid = 0;
@@ -31,15 +31,13 @@ int has_redir(t_execontainer **con, t_node *node, t_shell **shell)
 
 int execute(t_node *node, t_shell **shell)
 {
-	t_node *left;
-	t_execontainer *cont;
-	t_exe *exe;
+	t_node			*left;
+	t_execontainer	*cont;
+	t_exe			*exe;
 
 	cont = (t_execontainer *)malloc(sizeof(t_execontainer)); //this is not freed in some path
 	if (!cont)
-	{
-		(void) cont; //handle error
-	}
+		memerr_exit(1);
 	ft_memset(cont, 0, sizeof(t_execontainer));
 	cont->exes = NULL;
 	left = node->left;
@@ -47,12 +45,9 @@ int execute(t_node *node, t_shell **shell)
 		return (free(cont), 0);
 	if (node->type == NODE_PIPE)
 	{
-		//ft_memset(cont, 0, sizeof(t_execontainer));
 		cont->exes = (t_exe **)malloc(sizeof(t_exe *)); //this is not freed in some path
-		if (!cont->exes)
-		{
-			(void) cont->exes; //handle error
-		}
+		if (cont->exes == NULL)
+			memerr_exit(1);
 		if (left->args != NULL && isbuiltin(left->args[0]) == 1)
 		{
 			(cont)->skipnl = 1;
@@ -83,9 +78,9 @@ int execute(t_node *node, t_shell **shell)
 
 int exe_commands(t_node *node, t_execontainer **con, t_shell **shell)
 {
-	t_sigs *sigs;
-	int canrun;
-	pid_t pid;
+	t_sigs	*sigs;
+	int		canrun;
+	pid_t	pid;
 
 	init_exesigs(&sigs);
 	addsig(&sigs, con);
@@ -128,7 +123,7 @@ int exe_commands(t_node *node, t_execontainer **con, t_shell **shell)
 
 void executechild(t_node *node, t_execontainer **con, t_shell **shell)
 {
-	t_exe *exe;
+	t_exe	*exe;
 
 	exe = (*con)->exes[(*con)->numpid - 1];
 	if ((exe)->puts[0] != STDIN_FILENO)

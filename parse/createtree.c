@@ -26,7 +26,7 @@ int	inittree(t_node **tree, t_token *tokens, t_shell **shell)
 	return (1);
 }
 
-int	parsetoken(t_token **token, t_node **tree, t_shell ** shell)
+int	parsetoken(t_token **token, t_node **tree, t_shell **shell)
 {
 	static t_node	*newnode = NULL;
 

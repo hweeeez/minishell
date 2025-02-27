@@ -15,13 +15,11 @@
 
 typedef struct s_token	t_token;
 typedef struct s_node	t_node;
-typedef __sig_atomic_t sig_atomic_t;
 
 typedef struct s_shell
 {
 	char					**env;
-	//int						exit_status;//
-	volatile sig_atomic_t	exit_status;
+	volatile int			exit_status;
 	pid_t					parent;
 	t_token					*token;
 	t_node					*tree;

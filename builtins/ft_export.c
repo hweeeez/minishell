@@ -75,7 +75,6 @@ int	ft_export(t_shell *shell, char **args)
 	int	i;
 	int	status;
 
-	//ft_putstr_fd("--minishell export--\n", STDOUT_FILENO);
 	if (!args[1])
 	{
 		print_env(shell);

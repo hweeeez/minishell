@@ -48,7 +48,7 @@ static void	exitchild(t_shell **shell, int exitcode, t_execontainer **exe)
 
 int	do_execution(t_shell **shell, char **cmd, t_execontainer **exe)
 {
-	int	builtinvalue;
+	int		builtinvalue;
 	char	*command;
 
 	if (cmd == NULL)
@@ -93,10 +93,14 @@ int	checkif_builtin(t_shell **shell, char **cmd, t_execontainer **exe)
 	return (-1);
 }
 
-void	initexecontainer(t_execontainer ** con)
+void	initexecontainer(t_execontainer **con)
 {
 	(*con) = (t_execontainer *)malloc(sizeof(t_execontainer));
+	if ((*con) == NULL)
+		memerr_exit(1);
 	(*con)->exes = (t_exe **)malloc(sizeof(t_exe *));
+	if ((*con)->exes == NULL)
+		memerr_exit(1);
 	(*con)->hasprinted = 0;
 	(*con)->numpid = 0;
 }

@@ -63,7 +63,7 @@ void	freeredirs(t_redir *redir);
 void	freetree(t_node **tree);
 int		inittree(t_node **tree, t_token *tokens, t_shell **shell);
 int		check_dir_exists(char *path);
-void    print_parse_error(char *cmd, char *error, int status, t_shell **shell);
+void	print_parse_error(char *cmd, char *error, int status, t_shell **shell);
 int		handle_path(char *tok, t_shell **shell);
 int		ispath(char *tok);
 
