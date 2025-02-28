@@ -27,7 +27,7 @@ int	node_split_id(t_token *head)
 		else
 		{
 			current = current->next;
-		}	
+		}
 	}
 	return (-1);
 }

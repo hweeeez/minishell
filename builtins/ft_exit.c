@@ -30,7 +30,7 @@ static int	check_exit_arguments(t_shell **shell, char **args)
 {
 	if (!args || !args[0] || !args[1])
 		cleanup_and_exit(shell, (*shell)->exit_status);
-	if (!ft_isvalid_integer_str(args[1], 10))
+	if (!ft_isvalid_long_str(args[1], 10))
 	{
 		ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
 		cleanup_and_exit(shell, 2);
@@ -54,7 +54,7 @@ int	ft_exit(t_shell **shell, char **args, t_execontainer **exe)
 	print_interactive_exit(*shell);
 	if (check_exit_arguments(shell, args))
 		return (1);
-	exit_code = ft_atoi(args[1]) % 256;
+	exit_code = ft_strtoull(args[1], NULL, 10) % 256;
 	cleanup_and_exit(shell, exit_code);
 	return (0);
 }
