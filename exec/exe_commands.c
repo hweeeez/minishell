@@ -69,9 +69,11 @@ int	exe_commands(t_node *node, t_exebox **con, t_shell **shell)
 	else if (node->right != NULL)
 		pid = 1;
 	addpid(pid, con);
+	if (canrun == 130)
+		return (1);
 	if (pid == 0)
 		handle_child(node, con, shell);
-	else if (pid == -1)
+	else if (pid == -1 && canrun == 0)
 		return (ft_exit(shell, NULL, con), -1);
 	else if (pid > 0)
 		handle_parent(node, con, shell);

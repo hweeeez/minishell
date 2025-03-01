@@ -12,12 +12,13 @@
 
 #include "minishell.h"
 
-void	print_parse_error(char *cmd, char *error)
+void	parse_error(char *cmd, char *error, int status, t_shell **shell)
 {
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd(error, STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
+	(*shell)->exit_status = status;
 }
 
 int	ispath(char *t)
@@ -29,7 +30,7 @@ int	ispath(char *t)
 	return (0);
 }
 
-int	handle_path(char *t)
+int	handle_path(char *t, t_shell **s)
 {
 	int	path_type;
 
@@ -37,16 +38,16 @@ int	handle_path(char *t)
 	if (path_type != 0)
 	{
 		if (check_path_type(t) == TYPE_DIR)
-			return (print_parse_error(t, "Is a directory"), -1);
+			return (parse_error(t, "Is a directory", 126, s), -1);
 		else if (check_path_type(t) == TYPE_FILE)
 		{
 			if ((path_type == 2 && access(t, X_OK) == -1))
-				return (print_parse_error(t, "Permission denied"), -1);
+				return (parse_error(t, "Permission denied", 126, s), -1);
 			if (path_type == 1 && access(t, W_OK) == -1)
-				return (print_parse_error(t, "Permission denied"), -1);
+				return (parse_error(t, "Permission denied", 126, s), -1);
 		}
 		else
-			return (print_parse_error(t, "No such file or directory"), -1);
+			return (parse_error(t, "No such file or directory", 127, s), -1);
 		return (1);
 	}
 	return (0);

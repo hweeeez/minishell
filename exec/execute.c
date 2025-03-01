@@ -52,7 +52,7 @@ static int	onlybuiltin(t_exebox **box, t_node *node, t_exe **exe, t_shell **s)
 				init_exe(exe, box, s, node);
 			else
 				(*s)->exit_status = checkif_builtin(s, left->args, box);
-			return (free_exe(box), 0);
+			return (free_exe(box), 1);
 		}
 	}
 	return (0);
@@ -77,7 +77,7 @@ int	execute(t_node *node, t_shell **shell)
 		box->exes = (t_exe **)malloc(sizeof(t_exe *));
 		if (box->exes == NULL)
 			memerr_exit(1);
-		if (onlybuiltin(&box, node, &exe, shell) == 0)
+		if (onlybuiltin(&box, node, &exe, shell) != 0)
 			return (0);
 		init_exe(&exe, &box, shell, node);
 		if (box->redir_status == 1)

@@ -84,8 +84,6 @@ int	ft_heredoc_exe(t_redir *redirs, t_shell **shell)
 	rl_event_hook = event;
 	g_received_sigint = 0;
 	ft_memset(&sig_int, 0, sizeof(sig_int));
-	sigemptyset(&sig_int.sa_mask);
-	sig_int.sa_flags = 0;
 	sig_int.sa_handler = exit_hd;
 	if (sigaction(SIGINT, &sig_int, NULL) == -1)
 		return (-1);

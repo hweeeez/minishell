@@ -15,8 +15,10 @@
 static int	handle_redirin(t_redir *re, t_exe **x, t_shell **shell)
 {
 	closeput((*x)->puts[0], -1);
-	if (access(re->file, F_OK | R_OK) == -1)
+	if (access(re->file, F_OK) == -1)
 		return (filenotexisterr(re->file, shell), 1);
+	else if (access(re->file, F_OK | R_OK) == -1)
+		return (permissiondeniederr(re->file, shell), 1);
 	(*x)->puts[0] = open(re->file, O_RDONLY, 0644);
 	return (0);
 }

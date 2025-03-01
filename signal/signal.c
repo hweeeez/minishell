@@ -19,6 +19,7 @@ void	handle_signal(int sig)
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_redisplay();
+	g_received_sigint = 1;
 }
 
 int	setup_signals(struct sigaction *sig)

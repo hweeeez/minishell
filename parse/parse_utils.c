@@ -20,20 +20,19 @@ static void	getword(char **word, char *tok, t_node **new, t_shell **shell)
 		*word = ft_find_cmd_path(tok, &((*new)->args), (*shell)->env);
 }
 
-static int	handle_word(char **word, int *no, t_node **new, char *tok)
+static int	handle_word(char *tok, t_shell **shell)
 {
-	if (*word != NULL && (*new)->args == NULL)
-		return (copyarray(&(*new)->args, *no, *word), free(*word), (*no)++, 1);
-	else if (*word == NULL)
-	{
-		if (handle_path(tok) == -1)
-			return (0);
-		else if (handle_path(tok) == 0)
-			print_parse_error(tok, "command not found");
-	}
-	else if (*word != NULL && (*new)->args != NULL)
-		return ((*no)++, 1);
-	return (-1);
+	if (handle_path(tok, shell) == -1)
+		return (0);
+	else if (handle_path(tok, shell) == 0)
+		parse_error(tok, "command not found", 127, shell);
+	return (1);
+}
+
+static void	init_newnode(t_node **new, t_node **tree, int *no)
+{
+	makenewnode(new, tree, NODE_COMMAND);
+	*no = 0;
 }
 
 int	parseword(t_node **new, t_shell **shell, t_node **tree, char *tok)
@@ -45,16 +44,19 @@ int	parseword(t_node **new, t_shell **shell, t_node **tree, char *tok)
 	word = NULL;
 	handleword = 0;
 	if ((*new) == NULL || (*new)->type == 0)
-	{
-		makenewnode(new, tree, NODE_COMMAND);
-		no = 0;
-	}
+		init_newnode(new, tree, &no);
 	if ((*new)->args == NULL)
 	{
 		getword(&word, tok, new, shell);
-		handleword = handle_word(&word, &no, new, tok);
-		if (handleword != -1)
-			return (handleword);
+		if (word != NULL && (*new)->args == NULL)
+			return (copyarray(&(*new)->args, no, word), free(word), (no)++, 1);
+		else if (word == NULL)
+		{
+			if (handle_word(tok, shell) == 0)
+				return (0);
+		}
+		else if (word != NULL && (*new)->args != NULL)
+			return ((no)++, 1);
 	}
 	else if (check_dir_exists(tok) == 0)
 		return (0);

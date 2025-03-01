@@ -66,6 +66,8 @@
 # define FATAL_ERR_SIG 128
 # define HEREDOC_FILE "hd.txt"
 
+extern int	g_received_sigint;
+
 /*
 typedef struct s_shell	t_shell;
 typedef enum e_file_type	t_file_type;
