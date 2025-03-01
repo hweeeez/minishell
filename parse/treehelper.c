@@ -12,12 +12,25 @@
 
 #include "minishell.h"
 
+static void	free_node(t_node **current)
+{
+	if ((*current)->left->args != NULL)
+	{
+		freearray((void **)(*current)->left->args);
+		(*current)->left->args = NULL;
+	}
+	if ((*current)->left->rootredir != NULL)
+		freeredirs((*current)->left->rootredir);
+	free((*current)->left);
+	(*current)->left = NULL;
+}
+
 void	freetree(t_node **tree)
 {
 	t_node	*current;
 	t_node	*next;
 
-	if (tree == NULL || *tree == NULL)//md: is this check supposed to go first?
+	if (tree == NULL || *tree == NULL)
 		return ;
 	current = *tree;
 	while (current != NULL)
@@ -26,18 +39,8 @@ void	freetree(t_node **tree)
 			next = current->right;
 		else
 			next = NULL;
-		if ((current)->left != NULL)
-		{
-			if (current->left->args != NULL)
-			{
-				freearray((void **)current->left->args);
-				current->left->args = NULL;
-			}
-			if (current->left->rootredir != NULL)
-				freeredirs(current->left->rootredir);
-			free(current->left);
-			current->left = NULL;
-		}
+		if (current->left != NULL)
+			free_node(&current);
 		free(current);
 		current = next;
 	}

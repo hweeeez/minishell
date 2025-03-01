@@ -47,6 +47,11 @@ static int	minishell_loop(char *input, t_token **tok, \
 			ft_exit(shell, NULL, NULL);
 		if (input[0] != '\0')
 			add_history(input);
+		if (g_received_sigint == 1)
+		{
+			(*shell)->exit_status = 130;
+			g_received_sigint = 0;
+		}
 		if (tokenize(input, tok, *shell))
 		{
 			free(input);

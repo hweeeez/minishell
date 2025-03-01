@@ -12,19 +12,6 @@
 
 #include "minishell.h"
 
-// static char	*try_full_path(char *cmd)
-// {
-// 	if (access(cmd, F_OK) == 0)
-// 	{
-// 		if (access(cmd, X_OK) == 0)
-// 		{
-// 			return (ft_strdup(cmd));
-// 		}
-// 		perror(cmd);
-// 	}
-// 	return (NULL);
-// }
-
 static char	*set_arg_with_full_path(char ***cmd_args, char *path)
 {
 	char	**new_args;
@@ -58,7 +45,7 @@ char	*ft_check_direct_path(char *cmd, char ***cmd_args)
 			}
 			else
 				perror((*cmd_args)[0]);
-		}	
+		}
 	}
 	return (NULL);
 }

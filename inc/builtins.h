@@ -14,7 +14,7 @@
 # define BUILTINS_H
 
 typedef struct s_shell			t_shell;
-typedef struct s_execontainer	t_execontainer;
+typedef struct s_exebox			t_exebox;
 
 int		ft_echo(char **args);
 int		ft_pwd(void);
@@ -23,7 +23,7 @@ char	*get_new_cd_path(t_shell *shell, char *path);
 int		ft_env(t_shell *shell);
 int		ft_export(t_shell *shell, char **args);
 int		ft_unset(t_shell *shell, char **args);
-int		ft_exit(t_shell **shell, char **args, t_execontainer **exe);
+int		ft_exit(t_shell **shell, char **args, t_exebox **exe);
 int		isbuiltin(char *value);
 int		ft_dot(char **args);
 int		ft_dotdot(void);

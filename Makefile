@@ -37,9 +37,9 @@ SRCS =	builtins/ft_cd_utils.c builtins/ft_cd.c builtins/ft_dot.c builtins/ft_dot
 		builtins/ft_unset.c \
 		env/check_file_access.c env/check_file_type.c env/env_utils.c env/init_shell.c env/update_env.c \
 		error/error.c \
-		exec/exe_builtin_helper.c exec/exe_utils_2.c exec/exe_utils.c exec/execute.c exec/ft_heredoc_utils.c exec/ft_heredoc.c \
+		exec/exe_builtin_helper.c exec/exe_utils_2.c exec/exe_utils.c exec/execute.c exec/ft_heredoc_utils.c exec/ft_heredoc.c exec/exe_add_funcs.c exec/exe_commands.c exec/executechild.c \
 		expansion/expansion_utils.c expansion/expansion.c expansion/here_doc_expand_utils.c expansion/here_doc_expand.c \
-		parse/createtree.c parse/direxists.c parse/ft_handle_direct_path.c parse/ft_path.c parse/parse_error_utils.c \
+		parse/createtree.c parse/direxists.c parse/ft_handle_direct_path.c parse/ft_path.c parse/parse_error_utils.c parse/parse_helper.c parse/redir_helper.c\
 		parse/parse_utils.c parse/redir_utils.c parse/treehelper.c \
 		signal/signal_utils.c signal/signal.c \
 		token/add_quote.c token/llist_utils.c token/process_no_quote.c token/process_quote.c token/process_special_tok.c \

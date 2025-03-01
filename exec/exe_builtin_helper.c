@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	free_exe(t_execontainer **exe)
+void	free_exe(t_exebox **exe)
 {
 	int	i;
 
@@ -40,13 +40,13 @@ void	free_exe(t_execontainer **exe)
 	*exe = NULL;
 }
 
-static void	exitchild(t_shell **shell, int exitcode, t_execontainer **exe)
+static void	exitchild(t_shell **shell, int exitcode, t_exebox **exe)
 {
 	(*shell)->exit_status = exitcode;
 	ft_exit(shell, NULL, exe);
 }
 
-int	do_execution(t_shell **shell, char **cmd, t_execontainer **exe)
+int	do_execution(t_shell **shell, char **cmd, t_exebox **exe)
 {
 	int		builtinvalue;
 	char	*command;
@@ -70,7 +70,7 @@ int	do_execution(t_shell **shell, char **cmd, t_execontainer **exe)
 	return (1);
 }
 
-int	checkif_builtin(t_shell **shell, char **cmd, t_execontainer **exe)
+int	checkif_builtin(t_shell **shell, char **cmd, t_exebox **exe)
 {
 	if (ft_strcmp(cmd[0], "echo") == 1)
 		return ((*exe)->isbuiltin = 1, ft_echo(cmd));
@@ -93,9 +93,9 @@ int	checkif_builtin(t_shell **shell, char **cmd, t_execontainer **exe)
 	return (-1);
 }
 
-void	initexecontainer(t_execontainer **con)
+void	initexecontainer(t_exebox **con)
 {
-	(*con) = (t_execontainer *)malloc(sizeof(t_execontainer));
+	(*con) = (t_exebox *)malloc(sizeof(t_exebox));
 	if ((*con) == NULL)
 		memerr_exit(1);
 	(*con)->exes = (t_exe **)malloc(sizeof(t_exe *));

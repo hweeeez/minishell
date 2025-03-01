@@ -29,6 +29,7 @@ t_shell	*init_shell(char **env)
 	shell->token = NULL;
 	shell->root = NULL;
 	shell->parent = 1;
+	shell->expand_flag = 0;
 	return (shell);
 }
 
