@@ -75,19 +75,19 @@ cd does_not_exist
 pwd"
 
   "pwd
-cd /root 2>/dev/null
+cd /root #2>/dev/null
 pwd"
 
   "pwd
-cd + 2>/dev/null
+cd + #2>/dev/null
 pwd"
 
   "pwd
-cd -invalid 2>/dev/null
+cd -invalid #2>/dev/null
 pwd"
 
   "pwd
-cd 'bad dir' 2>/dev/null
+cd 'bad dir' #2>/dev/null
 pwd"
 
   # Edge Cases

@@ -44,14 +44,14 @@ static int	onlybuiltin(t_exebox **box, t_node *node, t_exe **exe, t_shell **s)
 	left = node->left;
 	if (left->args != NULL && isbuiltin(left->args[0]) == 1)
 	{
-		if (ft_strcmp(left->args[0], "echo") != 1)
-			(*box)->skipnl = 1;
 		if (node->right == NULL)
 		{
 			if (node->left->rootredir != NULL)
 				init_exe(exe, box, s, node);
 			else
 				(*s)->exit_status = checkif_builtin(s, left->args, box);
+			if (ft_strcmp(left->args[0], "echo") == 1 && left->args[1] == NULL)
+				write(1, "\n", 1);
 			return (free_exe(box), 1);
 		}
 	}

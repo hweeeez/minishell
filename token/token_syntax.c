@@ -12,28 +12,6 @@
 
 #include "minishell.h"
 
-static int	is_valid_filename(char *str)
-{
-	char		*last_slash;
-	char		*dir_path;
-	struct stat	path_stat;
-	int			result;
-
-	if (!str || *str == '\0')
-		return (0);
-	last_slash = ft_strrchr(str, '/');
-	if (!last_slash)
-		return (access(".", W_OK) == 0);
-	dir_path = ft_strndup(str, last_slash - str);
-	if (!dir_path)
-		return (0);
-	result = (stat(dir_path, &path_stat) == 0 && \
-			((path_stat.st_mode & S_IFMT) == S_IFDIR) && \
-			(access(dir_path, W_OK) == 0));
-	free(dir_path);
-	return (result);
-}
-
 static int	is_redirection_token(t_token_type type)
 {
 	return (type == TOKEN_REDIR_IN || type == TOKEN_REDIR_OUT || \

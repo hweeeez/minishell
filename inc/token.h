@@ -79,6 +79,7 @@ void			add_quotes_to_heredoc_tokens(t_token *head);
 char			*trim_char(const char *str, char c);
 t_token_type	last_token_type(t_token *head);
 int				pre_is_heredoc(t_token *head);
+int				is_valid_filename(char *filename);
 
 #endif
 //int				is_space_tab(char c);
