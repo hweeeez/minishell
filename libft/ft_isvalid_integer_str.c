@@ -17,10 +17,10 @@ int	ft_isvalid_integer_str(const char *str, int base)
 	char	*endptr;
 	long	result;
 
-	if (str)
+	if (str && str [0])
 	{
 		result = ft_strtol(str, &endptr, base);
-		if (*endptr != '\0' || str == endptr)
+		if (endptr == NULL || *endptr != '\0' || str == endptr)
 			return (0);
 		if (result > INT_MAX || result < INT_MIN)
 			return (0);

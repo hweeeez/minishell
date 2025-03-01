@@ -45,7 +45,8 @@ static int	minishell_loop(char *input, t_token **tok, \
 		input = readline(PROMPT);
 		if (handle_empty_input(input))
 			ft_exit(shell, NULL, NULL);
-		add_history(input);
+		if (input[0] != '\0')
+			add_history(input);
 		if (g_received_sigint == 1)
 		{
 			(*shell)->exit_status = 130;
