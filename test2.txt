@@ -1,0 +1,1025 @@
+c1r2s5% ps -aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.0 167664 13036 ?        Ss   Feb28   0:45 /sbin/init
+root           2  0.0  0.0      0     0 ?        S    Feb28   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        I<   Feb28   0:00 [rcu_gp]
+root           4  0.0  0.0      0     0 ?        I<   Feb28   0:00 [rcu_par_gp]
+root           5  0.0  0.0      0     0 ?        I<   Feb28   0:00 [slub_flushwq]
+root           6  0.0  0.0      0     0 ?        I<   Feb28   0:00 [netns]
+root           8  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/0:0H-events_highpri]
+root          10  0.0  0.0      0     0 ?        I<   Feb28   0:00 [mm_percpu_wq]
+root          11  0.0  0.0      0     0 ?        S    Feb28   0:00 [rcu_tasks_rude_]
+root          12  0.0  0.0      0     0 ?        S    Feb28   0:00 [rcu_tasks_trace]
+root          13  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/0]
+root          14  0.0  0.0      0     0 ?        I    Feb28   2:13 [rcu_sched]
+root          15  0.0  0.0      0     0 ?        S    Feb28   0:01 [migration/0]
+root          16  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/0]
+root          18  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/0]
+root          19  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/1]
+root          20  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/1]
+root          21  0.0  0.0      0     0 ?        S    Feb28   0:01 [migration/1]
+root          22  0.0  0.0      0     0 ?        S    Feb28   0:01 [ksoftirqd/1]
+root          24  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/1:0H-kblockd]
+root          25  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/2]
+root          26  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/2]
+root          27  0.0  0.0      0     0 ?        S    Feb28   0:01 [migration/2]
+root          28  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/2]
+root          30  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/2:0H-events_highpri]
+root          31  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/3]
+root          32  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/3]
+root          33  0.0  0.0      0     0 ?        S    Feb28   0:01 [migration/3]
+root          34  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/3]
+root          36  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/3:0H-events_highpri]
+root          37  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/4]
+root          38  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/4]
+root          39  0.0  0.0      0     0 ?        S    Feb28   0:01 [migration/4]
+root          40  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/4]
+root          42  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/4:0H-events_highpri]
+root          43  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/5]
+root          44  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/5]
+root          45  0.0  0.0      0     0 ?        S    Feb28   0:01 [migration/5]
+root          46  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/5]
+root          48  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/5:0H-events_highpri]
+root          49  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/6]
+root          50  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/6]
+root          51  0.0  0.0      0     0 ?        S    Feb28   0:01 [migration/6]
+root          52  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/6]
+root          54  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/6:0H-events_highpri]
+root          55  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/7]
+root          56  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/7]
+root          57  0.0  0.0      0     0 ?        S    Feb28   0:01 [migration/7]
+root          58  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/7]
+root          60  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/7:0H-events_highpri]
+root          61  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/8]
+root          62  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/8]
+root          63  0.0  0.0      0     0 ?        S    Feb28   0:02 [migration/8]
+root          64  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/8]
+root          66  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/8:0H-events_highpri]
+root          67  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/9]
+root          68  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/9]
+root          69  0.0  0.0      0     0 ?        S    Feb28   0:01 [migration/9]
+root          70  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/9]
+root          72  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/9:0H-events_highpri]
+root          73  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/10]
+root          74  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/10]
+root          75  0.0  0.0      0     0 ?        S    Feb28   0:02 [migration/10]
+root          76  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/10]
+root          78  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/10:0H-events_highpri]
+root          79  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/11]
+root          80  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/11]
+root          81  0.0  0.0      0     0 ?        S    Feb28   0:02 [migration/11]
+root          82  0.0  0.0      0     0 ?        S    Feb28   0:09 [ksoftirqd/11]
+root          84  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/11:0H-events_highpri]
+root          85  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/12]
+root          86  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/12]
+root          87  0.0  0.0      0     0 ?        S    Feb28   0:02 [migration/12]
+root          88  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/12]
+root          90  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/12:0H-events_highpri]
+root          91  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/13]
+root          92  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/13]
+root          93  0.0  0.0      0     0 ?        S    Feb28   0:01 [migration/13]
+root          94  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/13]
+root          96  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/13:0H-events_highpri]
+root          97  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/14]
+root          98  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/14]
+root          99  0.0  0.0      0     0 ?        S    Feb28   0:02 [migration/14]
+root         100  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/14]
+root         102  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/14:0H-events_highpri]
+root         103  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/15]
+root         104  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/15]
+root         105  0.0  0.0      0     0 ?        S    Feb28   0:01 [migration/15]
+root         106  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/15]
+root         108  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/15:0H-events_highpri]
+root         109  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/16]
+root         110  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/16]
+root         111  0.0  0.0      0     0 ?        S    Feb28   0:04 [migration/16]
+root         112  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/16]
+root         114  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/16:0H-events_highpri]
+root         115  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/17]
+root         116  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/17]
+root         117  0.0  0.0      0     0 ?        S    Feb28   0:03 [migration/17]
+root         118  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/17]
+root         120  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/17:0H-events_highpri]
+root         121  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/18]
+root         122  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/18]
+root         123  0.0  0.0      0     0 ?        S    Feb28   0:03 [migration/18]
+root         124  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/18]
+root         126  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/18:0H-events_highpri]
+root         127  0.0  0.0      0     0 ?        S    Feb28   0:00 [cpuhp/19]
+root         128  0.0  0.0      0     0 ?        S    Feb28   0:00 [idle_inject/19]
+root         129  0.0  0.0      0     0 ?        S    Feb28   0:03 [migration/19]
+root         130  0.0  0.0      0     0 ?        S    Feb28   0:00 [ksoftirqd/19]
+root         132  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/19:0H-events_highpri]
+root         133  0.0  0.0      0     0 ?        S    Feb28   0:00 [kdevtmpfs]
+root         134  0.0  0.0      0     0 ?        I<   Feb28   0:00 [inet_frag_wq]
+root         135  0.0  0.0      0     0 ?        S    Feb28   0:00 [kauditd]
+root         139  0.0  0.0      0     0 ?        S    Feb28   0:00 [khungtaskd]
+root         140  0.0  0.0      0     0 ?        S    Feb28   0:00 [oom_reaper]
+root         141  0.0  0.0      0     0 ?        I<   Feb28   0:00 [writeback]
+root         142  0.0  0.0      0     0 ?        S    Feb28   0:10 [kcompactd0]
+root         143  0.0  0.0      0     0 ?        SN   Feb28   0:00 [ksmd]
+root         144  0.0  0.0      0     0 ?        SN   Feb28   0:01 [khugepaged]
+root         191  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kintegrityd]
+root         192  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kblockd]
+root         193  0.0  0.0      0     0 ?        I<   Feb28   0:00 [blkcg_punt_bio]
+root         211  0.0  0.0      0     0 ?        I<   Feb28   0:00 [tpm_dev_wq]
+root         212  0.0  0.0      0     0 ?        I<   Feb28   0:00 [ata_sff]
+root         213  0.0  0.0      0     0 ?        I<   Feb28   0:00 [md]
+root         214  0.0  0.0      0     0 ?        I<   Feb28   0:00 [edac-poller]
+root         215  0.0  0.0      0     0 ?        I<   Feb28   0:00 [devfreq_wq]
+root         216  0.0  0.0      0     0 ?        S    Feb28   0:00 [watchdogd]
+root         218  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/0:1H-events_highpri]
+root         220  0.0  0.0      0     0 ?        S    Feb28   0:00 [kswapd0]
+root         221  0.0  0.0      0     0 ?        S    Feb28   0:00 [ecryptfs-kthrea]
+root         223  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kthrotld]
+root         224  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/122-aerdrv]
+root         225  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/123-aerdrv]
+root         226  0.0  0.0      0     0 ?        I<   Feb28   0:00 [acpi_thermal_pm]
+root         228  0.0  0.0      0     0 ?        I<   Feb28   0:00 [vfio-irqfd-clea]
+root         229  0.0  0.0      0     0 ?        I<   Feb28   0:00 [mld]
+root         230  0.0  0.0      0     0 ?        I<   Feb28   0:00 [ipv6_addrconf]
+root         239  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kstrp]
+root         242  0.0  0.0      0     0 ?        I<   Feb28   0:00 [zswap-shrink]
+root         268  0.0  0.0      0     0 ?        I<   Feb28   0:00 [charger_manager]
+root         291  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/2:1H-events_highpri]
+root         357  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/15:1H-events_highpri]
+root         358  0.0  0.0      0     0 ?        I<   Feb28   0:02 [kworker/14:1H-events_highpri]
+root         359  0.0  0.0      0     0 ?        I<   Feb28   0:02 [kworker/12:1H-kblockd]
+root         360  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/11:1H-events_highpri]
+root         361  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/9:1H-xfs-log/sda]
+root         370  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/3:1H-kblockd]
+root         371  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/13:1H-kblockd]
+root         373  0.0  0.0      0     0 ?        I<   Feb28   0:00 [cryptd]
+root         374  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/148-aerdrv]
+root         391  0.0  0.0      0     0 ?        I<   Feb28   0:00 [nvme-wq]
+root         393  0.0  0.0      0     0 ?        I<   Feb28   0:00 [nvme-reset-wq]
+root         395  0.0  0.0      0     0 ?        I<   Feb28   0:00 [nvme-delete-wq]
+root         407  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/10:1H-kblockd]
+root         411  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/18:1H-events_highpri]
+root         417  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/17:1H-events_highpri]
+root         420  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/6:1H-events_highpri]
+root         434  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/8:1H-kblockd]
+root         436  0.0  0.0      0     0 ?        S    Feb28   0:00 [card0-crtc0]
+root         437  0.0  0.0      0     0 ?        S    Feb28   0:00 [card0-crtc1]
+root         438  0.0  0.0      0     0 ?        S    Feb28   0:00 [card0-crtc2]
+root         439  0.0  0.0      0     0 ?        S    Feb28   0:00 [card0-crtc3]
+root         443  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/4:1H-events_highpri]
+root         445  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kdmflush]
+root         446  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kdmflush]
+root         460  0.0  0.0      0     0 ?        S    Feb28   0:00 [gfx_0.0.0]
+root         461  0.0  0.0      0     0 ?        S    Feb28   0:00 [comp_1.0.0]
+root         462  0.0  0.0      0     0 ?        S    Feb28   0:00 [comp_1.1.0]
+root         463  0.0  0.0      0     0 ?        S    Feb28   0:00 [comp_1.2.0]
+root         464  0.0  0.0      0     0 ?        S    Feb28   0:00 [comp_1.3.0]
+root         465  0.0  0.0      0     0 ?        S    Feb28   0:00 [comp_1.0.1]
+root         466  0.0  0.0      0     0 ?        S    Feb28   0:00 [comp_1.1.1]
+root         467  0.0  0.0      0     0 ?        S    Feb28   0:00 [comp_1.2.1]
+root         468  0.0  0.0      0     0 ?        S    Feb28   0:00 [comp_1.3.1]
+root         469  0.0  0.0      0     0 ?        S    Feb28   0:00 [sdma0]
+root         470  0.0  0.0      0     0 ?        S    Feb28   0:00 [vcn_dec_0]
+root         487  0.0  0.0      0     0 ?        I<   Feb28   0:01 [kworker/16:1H-kblockd]
+root         538  0.0  0.0      0     0 ?        I<   Feb28   0:00 [amdgpu_dm_hpd_r]
+root         539  0.0  0.0      0     0 ?        I<   Feb28   0:00 [dm_vblank_contr]
+root         540  0.0  0.0      0     0 ?        S    Feb28   0:00 [card1-crtc0]
+root         541  0.0  0.0      0     0 ?        S    Feb28   0:00 [card1-crtc1]
+root         561  0.0  0.0      0     0 ?        I<   Feb28   0:00 [raid5wq]
+root         607  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/1:1H-kblockd]
+root         610  0.0  0.0      0     0 ?        S    Feb28   0:03 [jbd2/dm-0-8]
+root         612  0.0  0.0      0     0 ?        I<   Feb28   0:00 [ext4-rsv-conver]
+root         693  0.0  0.9 221032 146124 ?       S<s  Feb28   0:21 /lib/systemd/systemd-journald
+root         695  0.0  0.0      0     0 ?        I<   Feb28   0:00 [rpciod]
+root         696  0.0  0.0      0     0 ?        I<   Feb28   0:00 [xprtiod]
+root         727  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kaluad]
+root         729  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kmpath_rdacd]
+root         730  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kmpathd]
+root         731  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kmpath_handlerd]
+root         734  0.0  0.1 289372 27276 ?        SLsl Feb28   0:18 /sbin/multipathd -d -s
+root         761  0.0  0.0  26780  7068 ?        Ss   Feb28   0:00 /lib/systemd/systemd-udevd
+root         823  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/7:1H-kblockd]
+root         849  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/170-mei_me]
+root         854  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/19:1H-kblockd]
+root         911  0.0  0.0      0     0 ?        I<   Feb28   0:00 [cfg80211]
+root         922  0.0  0.0      0     0 ?        I<   Feb28   0:00 [kworker/5:1H-kblockd]
+root         936  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/171-iwlwifi]
+root         937  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/172-iwlwifi]
+root         938  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/173-iwlwifi]
+root         939  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/174-iwlwifi]
+root         940  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/175-iwlwifi]
+root         941  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/176-iwlwifi]
+root         942  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/177-iwlwifi]
+root         943  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/178-iwlwifi]
+root         944  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/179-iwlwifi]
+root         945  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/180-iwlwifi]
+root         949  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/181-iwlwifi]
+root         950  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/182-iwlwifi]
+root         951  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/183-iwlwifi]
+root         952  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/184-iwlwifi]
+root         953  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/185-iwlwifi]
+root         954  0.0  0.0      0     0 ?        S    Feb28   0:00 [irq/186-iwlwifi]
+root        1056  0.0  0.0      0     0 ?        S    Feb28   0:00 [jbd2/dm-1-8]
+root        1057  0.0  0.0      0     0 ?        I<   Feb28   0:00 [ext4-rsv-conver]
+root        1102  0.0  0.0      0     0 ?        S    Feb28   0:00 [jbd2/nvme0n1p2-]
+root        1103  0.0  0.0      0     0 ?        I<   Feb28   0:00 [ext4-rsv-conver]
+root        1146  0.0  0.0  22980 14308 ?        Ss   Feb28   0:00 /usr/sbin/rpc.svcgssd
+_rpc        1154  0.0  0.0   8104  4060 ?        Ss   Feb28   0:00 /sbin/rpcbind -f -w
+systemd+    1157  0.0  0.0  89364  6648 ?        Ssl  Feb28   0:00 /lib/systemd/systemd-timesyncd
+root        1160  0.0  0.0   5128   172 ?        Ss   Feb28   0:00 /usr/sbin/blkmapd
+root        1162  0.0  0.0   3108  2028 ?        Ss   Feb28   0:00 /usr/sbin/rpc.idmapd
+root        1164  0.0  0.0   5464  2664 ?        Ss   Feb28   0:00 /usr/sbin/nfsdcld
+root        1166  0.0  0.0 181748  5208 ?        Ssl  Feb28   0:00 /usr/sbin/rpc.gssd
+root        1250  0.0  0.0      0     0 ?        I<   Feb28   0:00 [iprt-VBoxWQueue]
+root        1251  0.0  0.0      0     0 ?        S    Feb28   0:00 [iprt-VBoxTscThr]
+systemd+    1259  0.0  0.0  16256  8488 ?        Ss   Feb28   0:00 /lib/systemd/systemd-networkd
+systemd+    1261  0.0  0.0  27580 15828 ?        Ss   Feb28   0:07 /lib/systemd/systemd-resolved
+avahi       1274  0.0  0.0  23136  9608 ?        Ss   Feb28   0:00 avahi-daemon: running [c1r2s5.local]
+root        1275  0.0  0.0  10720  5576 ?        Ss   Feb28   0:00 /usr/lib/bluetooth/bluetoothd
+message+    1276  0.0  0.1  30612 18280 ?        Ss   Feb28   0:29 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root        1277  0.0  0.1 267200 24832 ?        Ssl  Feb28   0:04 /usr/sbin/NetworkManager --no-daemon
+root        1286  0.0  0.0  82836  3788 ?        Ssl  Feb28   0:27 /usr/sbin/irqbalance --foreground
+root        1290  0.0  0.1  41156 21464 ?        Ss   Feb28   0:00 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+root        1296  0.0  0.0 237148 10848 ?        Ssl  Feb28   0:02 /usr/libexec/polkitd --no-debug
+root        1299  0.0  0.0 764204 14472 ?        Ssl  Feb28   0:06 /usr/sbin/nscd
+root        1300  0.0  0.0 240084  7676 ?        Ssl  Feb28   0:00 /usr/libexec/power-profiles-daemon
+prometh+    1317  0.0  0.0 1160200 12340 ?       Ssl  Feb28   0:00 /usr/bin/prometheus-node-exporter
+root        1326  0.0  0.0 223912  6520 ?        Ssl  Feb28   0:06 /usr/sbin/rsyslogd -n -iNONE
+root        1331  0.0  0.0  11400  5540 ?        Ss   Feb28   0:00 /usr/sbin/smartd -n
+root        1334  0.0  0.2 2653180 33616 ?       Ssl  Feb28   0:33 /usr/lib/snapd/snapd
+root        1338  0.0  0.0 255772 13852 ?        Ssl  Feb28   0:04 /usr/libexec/accounts-daemon
+root        1339  0.0  0.0 236260  6916 ?        Ssl  Feb28   0:00 /usr/libexec/switcheroo-control
+root        1341  0.0  0.0  48580  8440 ?        Ss   Feb28   0:07 /lib/systemd/systemd-logind
+root        1346  0.0  0.0  14952  7032 ?        Ss   Feb28   0:07 /lib/systemd/systemd-machined
+root        1352  0.0  0.0 275856 10980 ?        Ssl  Feb28   0:03 /usr/sbin/thermald --systemd --dbus-enable --adaptive
+root        1353  0.0  0.0 393412 13316 ?        Ssl  Feb28   0:00 /usr/libexec/udisks2/udisksd
+root        1358  0.0  0.0  16504  5888 ?        Ss   Feb28   0:01 /sbin/wpa_supplicant -u -s -O /run/wpa_supplicant
+root        1371  0.0  0.1 131188 26180 ?        SNsl Feb28   2:04 /bin/osqueryd --flagfile /etc/osquery/osquery.flags --config_path /etc/osquery/osquery.conf
+root        1372  0.0  0.1 1539356 18676 ?       Ssl  Feb28   0:20 /bin/crc run -c /etc/crc/config.yml
+root        1432  0.0  0.2 1230596 33468 ?       SNl  Feb28   1:10 /bin/osqueryd
+avahi       1721  0.0  0.0  22732  1504 ?        S    Feb28   0:00 avahi-daemon: chroot helper
+root        1753  0.0  0.0 244240 12616 ?        Ssl  Feb28   0:00 /usr/sbin/ModemManager
+redis       1763  0.2  0.0  69580 11284 ?        Ssl  Feb28   6:15 /usr/bin/redis-server 127.0.0.1:6379
+root        1766  0.0  0.0   2892   932 ?        Ss   Feb28   0:00 /bin/sh /snap/cups/1067/scripts/run-cups-browsed
+root        1769  0.0  0.0   2892  1608 ?        Ss   Feb28   0:00 /bin/sh /snap/cups/1067/scripts/run-cupsd
+root        1782  0.0  0.0   8748  3324 ?        Ss   Feb28   0:00 /usr/bin/k5start -q -f /etc/krb5.keytab -FP -K 60 -b -p /run/k5start.pid -L -U
+root        1788  0.0  0.1  39700 28096 ?        Ss   Feb28   0:45 /usr/bin/python3 /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
+root        1807  0.0  0.1 118172 23764 ?        Ssl  Feb28   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+root        1810  0.1  0.2 2392460 41104 ?       Ssl  Feb28   3:51 /usr/bin/containerd
+root        1849  0.0  0.0   5348   420 ?        Ss   Feb28   0:00 /usr/sbin/rpc.mountd
+statd       1855  0.0  0.0   4988  2204 ?        Ss   Feb28   0:00 /sbin/rpc.statd
+root        1859  0.0  0.4 2857332 66292 ?       Ssl  Feb28   0:37 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root        1861  0.0  0.0  15644  9280 ?        Ss   Feb28   0:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+root        1863  0.0  0.0      0     0 ?        I<   Feb28   0:00 [nfsiod]
+root        1866  0.0  0.0      0     0 ?        I    Feb28   0:00 [lockd]
+root        1905  0.0  0.0      0     0 ?        I    Feb28   0:00 [NFSv4 callback]
+root        1930  0.0  0.1 1553416 25720 ?       Ssl  Feb28   0:00 /usr/sbin/libvirtd
+nslcd       1969  0.0  0.0 387196  2984 ?        Sl   Feb28   0:00 /usr/sbin/nslcd
+root        1975  0.0  0.0   9476  2972 ?        Ss   Feb28   0:00 /usr/sbin/cron -f -P
+root        1976  0.0  0.0      0     0 ?        I    Feb28   0:00 [nfsd]
+root        1977  0.0  0.0      0     0 ?        I    Feb28   0:00 [nfsd]
+root        1978  0.0  0.0      0     0 ?        I    Feb28   0:00 [nfsd]
+root        1982  0.0  0.0      0     0 ?        I    Feb28   0:00 [nfsd]
+root        1986  0.0  0.0      0     0 ?        I    Feb28   0:00 [nfsd]
+root        1989  0.0  0.0      0     0 ?        I    Feb28   0:00 [nfsd]
+root        1990  0.0  0.0      0     0 ?        I    Feb28   0:00 [nfsd]
+root        1992  0.0  0.0      0     0 ?        I    Feb28   0:00 [nfsd]
+root        2042  0.0  0.0  25612  8364 ?        Ss   Feb28   0:00 /usr/bin/x11vnc -forever -loop -noxdamage -repeat -display :0 -auth /var/run/lightdm/root/:0 -rfbauth /root/.vnc/passwd -rfbport 5900 -shared
+libvirt+    2224  0.0  0.0  10508   380 ?        S    Feb28   0:00 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/default.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper
+root        2225  0.0  0.0  10508   380 ?        S    Feb28   0:00 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/default.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper
+root        2363  0.0  0.0   9952  3796 ?        S    Feb28   0:00 /bin/bash /usr/local/bin/deepthought-worker-wrapper
+root        2364  0.0  0.1  42568 29752 ?        S    Feb28   0:33 /usr/bin/python3 /usr/share/42/ftpkg-srv.py
+root        2367  0.0  0.2  53440 41780 ?        S    Feb28   1:59 /opt/venvs/deepthought-worker/bin/python /opt/venvs/deepthought-worker/bin/celery -A deepthought.worker worker --loglevel=DEBUG --without-gossip
+root        2382  0.0  0.2  56628 40280 ?        S    Feb28   0:03 /opt/venvs/deepthought-worker/bin/python /opt/venvs/deepthought-worker/bin/celery -A deepthought.worker worker --loglevel=DEBUG --without-gossip
+root        2387  0.0  0.0 242124  8800 ?        Ssl  Feb28   0:00 /usr/libexec/upowerd
+rtkit       2439  0.0  0.0 154216  1532 ?        SNsl Feb28   0:02 /usr/libexec/rtkit-daemon
+root        2638  0.0  0.0      0     0 ?        S<   Feb28   0:00 [krfcommd]
+root        2835  0.0  0.0  61680 12464 ?        S    Feb28   0:00 cupsd -f -s /var/snap/cups/common/etc/cups/cups-files.conf -c /var/snap/cups/common/etc/cups/cupsd.conf
+root        2869  0.0  0.0   2892   120 ?        S    Feb28   0:00 /bin/sh /snap/cups/1067/scripts/run-cups-browsed
+root       34359  0.0  0.2 373392 40348 ?        Ssl  Mar01   0:25 /usr/libexec/packagekitd
+root       49938  0.0  0.0  12924   768 ?        Ss   Mar01   0:05 /sbin/iscsid
+root       49939  0.0  0.0  14208 14160 ?        S<Ls Mar01   0:00 /sbin/iscsid
+root       49941  0.0  0.0      0     0 ?        I<   Mar01   0:00 [iscsi_eh]
+root       49942  0.0  0.0      0     0 ?        I<   Mar01   0:00 [iscsi_conn_clea]
+root       50038  0.0  0.0      0     0 ?        I<   Mar01   0:00 [xfsalloc]
+root       50039  0.0  0.0      0     0 ?        I<   Mar01   0:00 [xfs_mru_cache]
+colord     51019  0.0  0.0 245508 13652 ?        Ssl  Mar01   0:00 /usr/libexec/colord
+root      191489  0.0  0.0 306992  7892 ?        SLsl Mar01   0:00 /usr/sbin/lightdm
+root      196007  0.0  0.0      0     0 ?        I    Mar01   0:00 [kworker/15:1-mm_percpu_wq]
+root      202519  0.0  0.0  73628 14388 ?        Ss   00:00   0:00 /usr/sbin/cupsd -l
+root      202523  0.0  0.0 172464 11388 ?        Ssl  00:00   0:00 /usr/sbin/cups-browsed
+root      224104  0.0  0.0      0     0 ?        I    07:11   0:12 [kworker/11:1-events]
+root      250032  0.0  0.0      0     0 ?        I    15:17   0:00 [kworker/5:0-events]
+root      254422  0.0  0.0      0     0 ?        I    16:02   0:00 [kworker/13:0-events]
+root      337650  0.0  0.0      0     0 ?        I    18:37   0:01 [kworker/19:1-events]
+root      337738  0.0  0.0      0     0 ?        I    18:37   0:00 [kworker/5:2]
+root      379556  0.0  0.0      0     0 ?        I    19:26   0:00 [kworker/13:2]
+root      386489  0.0  0.0      0     0 ?        I    19:34   0:00 [kworker/15:0-rcu_par_gp]
+root      386663  0.0  0.0      0     0 ?        I    19:34   0:00 [kworker/1:2-events]
+root      386757  2.4  0.8 3377132 144208 tty7   Rsl+ 19:34   3:05 /usr/lib/xorg/Xorg -core :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch
+root      386814  0.0  0.1  51008 19052 ?        S    19:34   0:06 /usr/bin/x11vnc -forever -loop -noxdamage -repeat -display :0 -auth /var/run/lightdm/root/:0 -rfbauth /root/.vnc/passwd -rfbport 5900 -shared
+root      388244  0.0  0.1 181568 20480 ?        Sl   19:57   0:00 lightdm --session-child 12 19
+root      388272  0.0  0.0      0     0 ?        I    19:57   0:01 [kworker/9:1-mm_percpu_wq]
+root      388298  0.0  0.0      0     0 ?        I    19:57   0:00 [kworker/19:0]
+root      388341  0.0  0.0      0     0 ?        S    19:57   0:00 [scsi_eh_0]
+root      388342  0.0  0.0      0     0 ?        I<   19:57   0:00 [scsi_tmf_0]
+root      388343  0.0  0.0      0     0 ?        I<   19:57   0:00 [iscsi_q_0]
+root      388344  0.0  0.0      0     0 ?        I<   19:57   0:00 [scsi_wq_0]
+root      388426  0.0  0.0      0     0 ?        I<   19:57   0:00 [xfs-buf/sda]
+root      388427  0.0  0.0      0     0 ?        I<   19:57   0:00 [xfs-conv/sda]
+root      388429  0.0  0.0      0     0 ?        I<   19:57   0:00 [xfs-reclaim/sda]
+root      388430  0.0  0.0      0     0 ?        I<   19:57   0:00 [xfs-blockgc/sda]
+root      388431  0.0  0.0      0     0 ?        I<   19:57   0:00 [xfs-inodegc/sda]
+root      388432  0.0  0.0      0     0 ?        I<   19:57   0:00 [xfs-log/sda]
+root      388433  0.0  0.0      0     0 ?        I<   19:57   0:00 [xfs-cil/sda]
+root      388434  0.0  0.0      0     0 ?        S    19:57   0:02 [xfsaild/sda]
+hui-lim   388484  0.0  0.0  19056 11768 ?        Ss   19:57   0:00 /lib/systemd/systemd --user
+hui-lim   388486  0.0  0.0 184788  9652 ?        S    19:57   0:00 (sd-pam)
+hui-lim   388498  0.0  0.0 1826752 11344 ?       Ssl  19:57   0:00 rootlesskit --state-dir=/run/user/102164/dockerd-rootless --net=slirp4netns --mtu=65520 --slirp4netns-sandbox=auto --slirp4netns-seccomp=auto --
+hui-lim   388499  0.0  0.0  39968  7004 ?        S<sl 19:57   0:00 /usr/bin/pipewire
+hui-lim   388501  0.0  0.0  23624  6504 ?        Ssl  19:57   0:00 /usr/bin/pipewire-media-session
+hui-lim   388504  0.0  0.1 1411644 22440 ?       S<sl 19:57   0:04 /usr/bin/pulseaudio --daemonize=no --log-target=journal
+hui-lim   388519  0.0  0.0 388244  8156 ?        Sl   19:57   0:00 /usr/bin/gnome-keyring-daemon --daemonize --login
+hui-lim   388523  0.0  0.0 1826540 10104 ?       Sl   19:57   0:00 /proc/self/exe --state-dir=/run/user/102164/dockerd-rootless --net=slirp4netns --mtu=65520 --slirp4netns-sandbox=auto --slirp4netns-seccomp=auto
+hui-lim   388535  0.0  0.0   9832  5856 ?        Ss   19:57   0:02 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+hui-lim   388537  0.0  0.0 2124388 13788 ?       Ssl  19:57   0:00 /usr/sbin/ft-init hooks login-user env GNOME_SHELL_SESSION_MODE=ubuntu /usr/bin/gnome-session --systemd --session=ubuntu
+hui-lim   388563  0.0  0.0   5872  3312 ?        S    19:57   0:00 slirp4netns --mtu 65520 -r 3 --disable-host-loopback --enable-sandbox --enable-seccomp 388523 tap0
+hui-lim   388571  0.0  0.0 296832 15992 ?        Sl   19:57   0:00 /usr/libexec/gnome-session-binary
+hui-lim   388581  0.0  0.4 2708844 67220 ?       Sl   19:57   0:01 dockerd
+hui-lim   388611  0.1  0.2 2392204 41628 ?       Ssl  19:57   0:07 containerd --config /run/user/102164/docker/containerd/containerd.toml
+root      388641  0.0  0.0      0     0 ?        I    19:57   0:00 [kworker/3:2-rcu_gp]
+hui-lim   388937  0.0  0.0 156968  5732 ?        Ssl  19:58   0:00 /usr/libexec/dconf-service
+hui-lim   389041  0.0  0.0 309796  7916 ?        Ssl  19:58   0:00 /usr/libexec/at-spi-bus-launcher
+hui-lim   389047  0.0  0.0   8672  4340 ?        S    19:58   0:00 /usr/bin/dbus-daemon --config-file=/usr/share/defaults/at-spi2/accessibility.conf --nofork --print-address 12 --address=unix:path=/run/user/1021
+hui-lim   389073  0.0  0.0  91680  5232 ?        Ssl  19:58   0:00 /usr/libexec/gnome-session-ctl --monitor
+hui-lim   389083  0.0  0.0 240420  8276 ?        Ssl  19:58   0:00 /usr/libexec/gvfsd
+hui-lim   389089  0.0  0.0 380896  6504 ?        Sl   19:58   0:00 /usr/libexec/gvfsd-fuse /run/user/102164/gvfs -f
+hui-lim   389093  0.0  0.1 519276 17700 ?        Ssl  19:58   0:00 /usr/libexec/gnome-session-binary --systemd-service --session=gnome
+hui-lim   389118  2.7  1.7 8977476 279964 ?      Rsl  19:58   2:47 /usr/bin/gnome-shell
+hui-lim   389177  0.0  0.0 235920  5304 ?        Ssl  19:58   0:00 /usr/libexec/xdg-permission-store
+hui-lim   389179  0.0  0.1 582820 17964 ?        Sl   19:58   0:00 /usr/libexec/gnome-shell-calendar-server
+hui-lim   389188  0.0  0.1 1072188 26252 ?       Ssl  19:58   0:00 /usr/libexec/evolution-source-registry
+hui-lim   389196  0.0  0.2 578308 38968 ?        Sl   19:58   0:00 /usr/libexec/goa-daemon
+hui-lim   389200  0.0  0.1 840492 30316 ?        Ssl  19:58   0:00 /usr/libexec/evolution-calendar-factory
+hui-lim   389208  0.0  0.0 338172 14984 ?        Sl   19:58   0:00 /usr/libexec/goa-identity-service
+hui-lim   389221  0.0  0.1 672176 28632 ?        Ssl  19:58   0:00 /usr/libexec/evolution-addressbook-factory
+hui-lim   389225  0.0  0.0 315924  9376 ?        Ssl  19:58   0:00 /usr/libexec/gvfs-udisks2-volume-monitor
+hui-lim   389237  0.0  0.0 236404  6688 ?        Ssl  19:58   0:00 /usr/libexec/gvfs-goa-volume-monitor
+hui-lim   389246  0.0  0.0 236228  6676 ?        Ssl  19:58   0:00 /usr/libexec/gvfs-mtp-volume-monitor
+hui-lim   389250  0.0  0.0 237316  6964 ?        Ssl  19:58   0:00 /usr/libexec/gvfs-gphoto2-volume-monitor
+hui-lim   389254  0.0  0.0 314980  8188 ?        Ssl  19:58   0:00 /usr/libexec/gvfs-afc-volume-monitor
+hui-lim   389262  0.0  0.1 2931044 27748 ?       Sl   19:58   0:00 /usr/bin/gjs /usr/share/gnome-shell/org.gnome.Shell.Notifications
+hui-lim   389264  0.0  0.0 162760  8156 ?        Sl   19:58   0:01 /usr/libexec/at-spi2-registryd --use-gnome-session
+hui-lim   389282  0.0  0.0   2892   980 ?        Ss   19:58   0:00 sh -c /usr/bin/ibus-daemon --panel disable $([ "$XDG_SESSION_TYPE" = "x11" ] && echo "--xim")
+hui-lim   389283  0.0  0.0 310208  6848 ?        Ssl  19:58   0:00 /usr/libexec/gsd-a11y-settings
+hui-lim   389285  0.4  0.0 315980 13516 ?        Sl   19:58   0:30 /usr/bin/ibus-daemon --panel disable --xim
+hui-lim   389287  0.0  0.1 460152 26512 ?        Ssl  19:58   0:00 /usr/libexec/gsd-color
+hui-lim   389289  0.0  0.1 375252 16144 ?        Ssl  19:58   0:00 /usr/libexec/gsd-datetime
+hui-lim   389290  0.0  0.0 311712  7760 ?        Ssl  19:58   0:00 /usr/libexec/gsd-housekeeping
+hui-lim   389293  0.0  0.1 338124 22444 ?        Ssl  19:58   0:00 /usr/libexec/gsd-keyboard
+hui-lim   389296  0.0  0.1 862048 27464 ?        Ssl  19:58   0:00 /usr/libexec/gsd-media-keys
+hui-lim   389297  0.0  0.1 448384 25764 ?        Ssl  19:58   0:00 /usr/libexec/gsd-power
+hui-lim   389298  0.0  0.0 232272  6824 ?        Sl   19:58   0:00 /usr/libexec/gsd-disk-utility-notify
+hui-lim   389300  0.0  0.0 249844 11660 ?        Ssl  19:58   0:00 /usr/libexec/gsd-print-notifications
+hui-lim   389305  0.0  0.0 457628  6284 ?        Ssl  19:58   0:00 /usr/libexec/gsd-rfkill
+hui-lim   389307  0.0  0.0 236060  5392 ?        Ssl  19:58   0:00 /usr/libexec/gsd-screensaver-proxy
+hui-lim   389311  0.0  0.0 465592 10340 ?        Ssl  19:58   0:00 /usr/libexec/gsd-sharing
+hui-lim   389314  0.0  0.0 385820  8128 ?        Ssl  19:58   0:00 /usr/libexec/gsd-smartcard
+hui-lim   389318  0.0  0.0 319124  9312 ?        Ssl  19:58   0:00 /usr/libexec/gsd-sound
+hui-lim   389324  0.0  0.0 384960  7284 ?        Ssl  19:58   0:00 /usr/libexec/gsd-usb-protection
+hui-lim   389326  0.0  0.4 819792 65196 ?        Sl   19:58   0:00 /usr/libexec/evolution-data-server/evolution-alarm-notify
+hui-lim   389327  0.0  0.1 338512 23012 ?        Ssl  19:58   0:00 /usr/libexec/gsd-wacom
+hui-lim   389331  0.0  0.1 342760 27384 ?        Ssl  19:58   0:00 /usr/libexec/gsd-xsettings
+hui-lim   389338  0.0  2.1 933844 350676 ?       Sl   19:58   0:04 /usr/bin/gnome-software --gapplication-service
+hui-lim   389377  0.0  0.0 342128 13876 ?        Sl   19:58   0:00 /usr/libexec/gsd-printer
+hui-lim   389381  0.0  0.1 2865500 27256 ?       Sl   19:58   0:00 /usr/bin/gjs /usr/share/gnome-shell/org.gnome.ScreenSaver
+hui-lim   389412  0.0  0.0 163252  7396 ?        Sl   19:58   0:00 /usr/libexec/ibus-memconf
+hui-lim   389414  0.1  0.1 270644 28628 ?        Sl   19:58   0:06 /usr/libexec/ibus-extension-gtk3
+hui-lim   389417  0.0  0.1 190824 22472 ?        Sl   19:58   0:00 /usr/libexec/ibus-x11 --kill-daemon
+hui-lim   389419  0.0  0.0 655096  8952 ?        Sl   19:58   0:06 /usr/libexec/ibus-portal
+root      389428  0.0  0.0      0     0 ?        I    19:58   0:00 [kworker/17:2-events]
+root      389474  0.0  0.2 394676 33824 ?        Ssl  19:58   0:00 /usr/libexec/fwupd/fwupd
+hui-lim   389495  0.0  0.2 667304 34156 ?        SNsl 19:58   0:00 /usr/libexec/tracker-miner-fs-3
+hui-lim   389503  0.1  0.0 314836 14132 ?        Sl   19:58   0:11 /usr/lib/ibus-mozc/ibus-engine-mozc --ibus
+hui-lim   389508  0.0  0.1 188676 29692 ?        SLl  19:58   0:00 /usr/lib/mozc/mozc_server
+hui-lim   389586  1.9  4.4 34888992 713976 ?     SLl  19:58   1:59 /opt/google/chrome/chrome
+hui-lim   389591  0.0  0.0   8280  1012 ?        S    19:58   0:00 cat
+hui-lim   389592  0.0  0.0   8280  1060 ?        S    19:58   0:00 cat
+hui-lim   389595  0.0  0.0 33577076 3364 ?       Sl   19:58   0:00 /opt/google/chrome/chrome_crashpad_handler --monitor-self --monitor-self-annotation=ptype=crashpad-handler --database=/home/hui-lim/.config/goog
+hui-lim   389597  0.0  0.0 33567840 1748 ?       Sl   19:58   0:00 /opt/google/chrome/chrome_crashpad_handler --no-periodic-tasks --monitor-self-annotation=ptype=crashpad-handler --database=/home/hui-lim/.config
+hui-lim   389603  0.0  0.3 34201784 60560 ?      S    19:58   0:00 /opt/google/chrome/chrome --type=zygote --no-zygote-sandbox --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-
+hui-lim   389604  0.0  0.3 34201776 60868 ?      S    19:58   0:00 /opt/google/chrome/chrome --type=zygote --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f89
+hui-lim   389606  0.0  0.1 34201800 17096 ?      S    19:58   0:00 /opt/google/chrome/chrome --type=zygote --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f89
+hui-lim   389631  1.7  1.6 34870836 259588 ?     Sl   19:58   1:49 /opt/google/chrome/chrome --type=gpu-process --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-
+hui-lim   389632  0.0  0.0 476548 14264 ?        Ssl  19:58   0:00 /usr/libexec/xdg-desktop-portal
+hui-lim   389637  0.0  0.0 462952  7360 ?        Ssl  19:58   0:00 /usr/libexec/xdg-document-portal
+root      389642  0.0  0.0   3008  1024 ?        Ss   19:58   0:00 fusermount3 -o rw,nosuid,nodev,fsname=portal,auto_unmount,subtype=portal -- /run/user/102164/doc
+hui-lim   389646  0.0  0.5 2150836 88632 ?       Ssl  19:58   0:01 /usr/libexec/xdg-desktop-portal-gnome
+hui-lim   389734  0.0  0.1 341600 26168 ?        Ssl  19:58   0:00 /usr/libexec/xdg-desktop-portal-gtk
+hui-lim   389741  0.6  1.1 34079980 187796 ?     Sl   19:58   0:37 /opt/google/chrome/chrome --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --string-annot
+hui-lim   389751  0.0  0.3 34270396 62924 ?      Sl   19:58   0:01 /opt/google/chrome/chrome --type=utility --utility-sub-type=storage.mojom.StorageService --lang=en-US --service-sandbox-type=utility --string-an
+root      389876  0.0  0.0      0     0 ?        I    19:58   0:00 [kworker/18:0-rcu_par_gp]
+hui-lim   389939  0.2  1.2 1459977768 198440 ?   Sl   19:58   0:14 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   389977  0.0  1.1 1461693840 191612 ?   Sl   19:58   0:03 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   389987  0.1  2.6 1480557140 419024 ?   Sl   19:58   0:11 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   389997  0.0  0.9 1459980632 152648 ?   Sl   19:58   0:02 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   390047  0.0  1.4 1461687144 225404 ?   Sl   19:58   0:03 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   390209  0.6  2.2 1460044168 353260 ?   Sl   19:58   0:39 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   390227  0.1  1.4 1501052468 231160 ?   Sl   19:58   0:11 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   390254  0.0  1.0 1459962696 164316 ?   Sl   19:58   0:04 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   390314  0.0  0.6 1459879112 100916 ?   Sl   19:58   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   390323  0.0  0.7 1459893772 115188 ?   Sl   19:58   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   390556  0.0  1.1 1459965152 178480 ?   Sl   19:58   0:01 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   390567  0.0  0.9 1459963344 157652 ?   Sl   19:58   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   390665  0.0  1.2 1459971612 207268 ?   Sl   19:58   0:01 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   390680  0.1  1.2 1459978692 207768 ?   Sl   19:58   0:07 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   390701  0.0  0.2 67806840 41120 ?      Sl   19:58   0:00 /opt/google/chrome/chrome --type=utility --utility-sub-type=data_decoder.mojom.DataDecoderService --lang=en-US --service-sandbox-type=service --
+hui-lim   390717  0.0  1.0 1459965392 176464 ?   Sl   19:58   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   390763  0.0  0.2 67806840 40932 ?      Sl   19:58   0:00 /opt/google/chrome/chrome --type=utility --utility-sub-type=data_decoder.mojom.DataDecoderService --lang=en-US --service-sandbox-type=service --
+hui-lim   390875  0.0  0.0 163560  7404 ?        Ssl  19:59   0:00 /usr/libexec/gvfsd-metadata
+root      391316  0.1  0.0      0     0 ?        D<   20:03   0:05 [kworker/u41:0+i915_flip]
+hui-lim   391354  0.5  0.5 1192068 90560 ?       Sl   20:03   0:34 /usr/bin/nautilus --gapplication-service
+hui-lim   391357  0.0  0.0 388384  8416 ?        Sl   20:03   0:00 /usr/libexec/gvfsd-trash --spawner :1.18 /org/gtk/gvfs/exec_spaw/0
+hui-lim   391684  0.0  0.0   8088  6056 ?        S    20:06   0:00 /usr/bin/ssh-agent -D -a /run/user/102164/keyring/.ssh
+root      391893  0.0  0.0      0     0 ?        I    20:09   0:03 [kworker/u40:1-events_unbound]
+hui-lim   391935  0.0  0.0 236512  6616 ?        Ssl  20:09   0:00 /usr/libexec/flatpak-session-helper
+hui-lim   391939  0.0  0.0   4108   184 ?        Ss   20:09   0:00 server --sh -n /run/user/102164/.flatpak-helper/pkcs11-flatpak-391935 --provider p11-kit-trust.so pkcs11:model=p11-kit-trust?write-protected=yes
+hui-lim   391945  0.0  0.0   3648  1100 ?        S    20:09   0:00 bwrap --args 42 xdg-dbus-proxy --args=44
+hui-lim   391946  0.0  0.0 165700  9476 ?        Sl   20:09   0:02 xdg-dbus-proxy --args=44
+root      391947  0.0  0.0      0     0 ?        I    20:09   0:01 [kworker/0:2-events]
+hui-lim   391952  0.0  0.0   3744  1352 ?        S    20:09   0:00 bwrap --args 42 code --reuse-window
+hui-lim   391961  0.0  0.0 285376 13748 ?        Ssl  20:09   0:00 /usr/libexec/flatpak-portal
+hui-lim   391978  0.9  1.5 1214213940 248996 ?   Ssl  20:09   0:49 /app/extra/vscode/code --ms-enable-electron-run-as-node --extensions-dir=/home/hui-lim/.var/app/com.visualstudio.code/data/vscode/extensions --r
+hui-lim   391982  0.0  0.2 34047176 47356 ?      S    20:09   0:00 /app/extra/vscode/code --type=zygote --no-zygote-sandbox
+hui-lim   391984  0.0  0.0      0     0 ?        Z    20:09   0:00 [zypak-sandbox] <defunct>
+hui-lim   391986  0.0  0.0   5848  1092 ?        S    20:09   0:00 cat
+hui-lim   391987  0.0  0.0   5848  1060 ?        S    20:09   0:00 cat
+hui-lim   391988  0.0  0.0   3648  1172 ?        Ss   20:09   0:00 bwrap --args 40 /app/bin/zypak-helper child - /app/extra/vscode/code --type=zygote
+hui-lim   391996  0.0  0.0   3740  1364 ?        S    20:09   0:00 bwrap --args 40 /app/bin/zypak-helper child - /app/extra/vscode/code --type=zygote
+hui-lim   391997  0.0  0.3 34049880 49200 ?      S    20:09   0:00 /app/extra/vscode/code --type=zygote
+hui-lim   392018  0.0  0.0 33576860 3548 ?       Sl   20:09   0:00 /app/extra/vscode/chrome_crashpad_handler --monitor-self-annotation=ptype=crashpad-handler --no-rate-limit --database=/home/hui-lim/.var/app/com
+hui-lim   392032  1.9  0.8 34443768 138528 ?     Sl   20:09   1:49 /app/extra/vscode/code --type=gpu-process --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --us
+hui-lim   392038  0.0  0.4 33884904 68152 ?      Sl   20:09   0:01 /app/extra/vscode/code --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --crashpad-handle
+hui-lim   392058  2.5  2.0 1214354232 331944 ?   Sl   20:09   2:21 /app/extra/vscode/code --type=renderer --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-
+hui-lim   392123  0.0  0.0  11696 10104 ?        S    20:09   0:00 p11-kit-remote --provider p11-kit-trust.so pkcs11:model=p11-kit-trust?write-protected=yes
+hui-lim   392133  0.1  0.8 1213938328 136972 ?   Sl   20:09   0:06 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=
+hui-lim   399977  0.0  0.7 1459879636 114724 ?   Sl   20:21   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   400000  0.0  0.5 1459878856 91008 ?    Sl   20:22   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   400009  0.0  0.8 1459905972 142896 ?   Sl   20:22   0:01 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   400019  0.1  1.0 1461584020 165016 ?   Sl   20:22   0:07 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   400064  0.0  1.0 1459971236 174072 ?   Sl   20:22   0:01 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   400073  0.0  0.6 1459832460 110300 ?   Sl   20:22   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+root      400183  0.0  0.0      0     0 ?        I    20:23   0:00 [kworker/7:2-events]
+root      400184  0.0  0.0      0     0 ?        I    20:23   0:00 [kworker/3:1-xfs-reclaim/sda]
+hui-lim   400200  0.6  0.3 577244 59720 ?        Rsl  20:23   0:30 /usr/libexec/gnome-terminal-server
+hui-lim   400229  0.0  0.0  15352  6540 pts/0    Ss   20:23   0:00 zsh
+hui-lim   400352  0.0  1.7 1459963512 274224 ?   Sl   20:25   0:02 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   400443  0.0  0.6 1459879112 101000 ?   Sl   20:26   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   400449  0.0  0.6 1459879180 100272 ?   Sl   20:26   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   400457  0.0  0.8 1459928908 143520 ?   Sl   20:26   0:01 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   400477  3.4  1.7 1214342152 288164 ?   Sl   20:26   2:34 /app/extra/vscode/code --type=renderer --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-
+hui-lim   400552  0.0  0.5 1213955152 94060 ?    Sl   20:26   0:02 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=
+hui-lim   400564  0.6  1.3 1213940124 217092 ?   Sl   20:26   0:26 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --dns-result-order=ipv4
+hui-lim   400648  0.3  0.3 112656 48784 ?        Sl   20:26   0:16 /home/hui-lim/.var/app/com.visualstudio.code/data/vscode/extensions/ms-vscode.cpptools-1.23.6-linux-x64/bin/cpptools
+hui-lim   400683  0.0  0.1 4258592 21200 ?       Sl   20:26   0:04 /home/hui-lim/.var/app/com.visualstudio.code/data/vscode/extensions/ms-vscode.cpptools-1.23.6-linux-x64/bin/cpptools-srv 719 {85830B75-E311-4074
+hui-lim   401060  0.0  0.7 1461591384 123224 ?   Sl   20:30   0:01 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401069  0.1  1.1 1465109644 186372 ?   Sl   20:30   0:07 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401209  0.3  1.4 1459988024 225712 ?   Sl   20:31   0:12 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401250  0.0  0.2 67806840 40944 ?      Sl   20:31   0:00 /opt/google/chrome/chrome --type=utility --utility-sub-type=data_decoder.mojom.DataDecoderService --lang=en-US --service-sandbox-type=service --
+hui-lim   401267  0.0  0.6 1459887316 111264 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401300  0.0  0.7 1459887388 114280 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401317  0.0  0.7 1459879124 117096 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401351  0.0  0.6 1459879120 108360 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401360  0.0  0.6 1459887384 109348 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401368  0.0  0.6 1459887380 110268 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401375  0.0  0.7 1459887400 118448 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401387  0.0  0.7 1459879152 122824 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401393  0.0  0.9 1459963796 149452 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401402  0.0  0.7 1459887380 113852 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401411  0.0  0.8 1459887384 131268 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401420  0.0  0.7 1459895576 113404 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401429  0.0  0.6 1459879112 100984 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401454  0.0  0.6 1459870916 102312 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401472  0.0  0.6 1459887308 99896 ?    Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401481  0.0  0.6 1459887308 103088 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401499  0.0  0.6 1459887308 103788 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401508  0.0  0.6 1459887372 107296 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401514  0.0  0.6 1459879112 104160 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401536  0.0  0.6 1459879176 100832 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+root      401546  0.1  0.0      0     0 ?        I    20:31   0:07 [kworker/11:2-events]
+hui-lim   401547  0.0  0.6 1459879112 105952 ?   Sl   20:31   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401556  0.1  1.0 1459969724 164376 ?   Sl   20:31   0:05 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401670  0.0  0.6 1459879124 106940 ?   Sl   20:32   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401795  2.0  2.1 1460036688 346584 ?   Sl   20:32   1:23 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   401839  0.0  0.4 34199780 79112 ?      Sl   20:32   0:01 /opt/google/chrome/chrome --type=utility --utility-sub-type=audio.mojom.AudioService --lang=en-US --service-sandbox-type=none --string-annotatio
+hui-lim   402510  0.1  0.8 1459899320 142960 ?   Sl   20:37   0:04 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   402536  0.0  0.8 1459887388 128628 ?   Sl   20:37   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+root      402680  0.0  0.0      0     0 ?        I    20:39   0:00 [kworker/4:2-events]
+hui-lim   403386  0.0  0.1 4258052 21736 ?       Sl   20:47   0:00 /home/hui-lim/.var/app/com.visualstudio.code/data/vscode/extensions/ms-vscode.cpptools-1.23.6-linux-x64/bin/cpptools-srv 719 {22ECD013-62E9-4C7D
+root      403450  0.0  0.0      0     0 ?        I    20:47   0:01 [kworker/u40:4-iscsi_q_0]
+hui-lim   404396  0.1  0.3 691212 59420 ?        Sl   20:54   0:03 ftpkg
+hui-lim   404577  0.2  1.1 1459991324 184168 ?   Sl   20:56   0:07 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   404890  0.0  0.1 4257860 20188 ?       Sl   21:00   0:00 /home/hui-lim/.var/app/com.visualstudio.code/data/vscode/extensions/ms-vscode.cpptools-1.23.6-linux-x64/bin/cpptools-srv 719 {49C0C095-5C20-42FA
+hui-lim   405048  0.8  1.3 1459979408 211252 ?   Sl   21:01   0:20 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+root      405066  0.0  0.0      0     0 ?        I    21:01   0:00 [kworker/18:2-events]
+root      405067  0.0  0.0      0     0 ?        I    21:01   0:00 [kworker/16:1-events]
+root      405081  0.0  0.0      0     0 ?        I    21:01   0:00 [kworker/u40:2-writeback]
+root      405513  0.0  0.0   3212  1024 ?        S    21:03   0:00 sleep 3600
+root      405974  0.0  0.0      0     0 ?        I    21:05   0:00 [kworker/12:0-rcu_par_gp]
+root      406194  0.0  0.0      0     0 ?        I    21:08   0:00 [kworker/1:1-events]
+root      406221  0.0  0.0      0     0 ?        I    21:08   0:00 [kworker/14:0-mm_percpu_wq]
+root      406318  0.0  0.0      0     0 ?        I    21:09   0:00 [kworker/8:3-events]
+root      409030  0.0  0.0      0     0 ?        I    21:11   0:00 [kworker/0:1-mm_percpu_wq]
+root      409241  0.0  0.0      0     0 ?        I    21:13   0:00 [kworker/6:1-mm_percpu_wq]
+root      409303  0.0  0.0      0     0 ?        I    21:14   0:00 [kworker/17:0-cgroup_destroy]
+root      409473  0.0  0.0      0     0 ?        I    21:17   0:00 [kworker/16:0-cgroup_destroy]
+root      409660  0.0  0.0      0     0 ?        I    21:20   0:00 [kworker/7:0-mm_percpu_wq]
+hui-lim   409678  0.1  1.0 1459926344 165288 ?   Sl   21:20   0:02 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409687  2.9  1.6 1459989216 268624 ?   Sl   21:20   0:36 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409709  0.0  0.7 1459883840 121808 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409722  0.0  0.6 1459867244 104016 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409743  0.0  0.7 1459892236 125980 ?   Sl   21:20   0:01 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409772  0.5  1.0 1459951020 164640 ?   Sl   21:20   0:06 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409791  0.0  0.7 1459875872 119880 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409807  0.4  0.8 1459932896 129344 ?   Sl   21:20   0:05 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409816  0.0  0.6 1459875512 111900 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409825  0.0  0.7 1459867376 119116 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409843  0.0  0.7 1459875748 117252 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409853  0.0  0.6 1459883708 108920 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409858  0.0  0.6 1459867248 107212 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409873  0.0  0.6 1459875436 103716 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409883  0.0  0.6 1459867248 111484 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409892  0.0  0.6 1459867236 102416 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409904  0.0  0.6 1459867308 106292 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409921  0.0  0.6 1459867244 106212 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409927  0.0  0.6 1459867312 107820 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409943  0.0  0.6 1459867372 111524 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409948  0.0  0.6 1459867244 105272 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409964  0.0  0.6 1459875632 109820 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409987  0.0  0.6 1459867236 102648 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   409999  0.0  0.6 1459867236 99784 ?    Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   410014  0.0  0.6 1459859040 101376 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   410028  0.0  0.6 1459875672 111592 ?   Sl   21:20   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+root      410358  0.0  0.0      0     0 ?        I    21:22   0:00 [kworker/9:0-events]
+root      410439  0.0  0.0      0     0 ?        I    21:22   0:00 [kworker/2:3-mm_percpu_wq]
+root      410449  0.0  0.0      0     0 ?        I    21:22   0:00 [kworker/12:1-cgroup_destroy]
+hui-lim   410522  0.0  0.5 1213955152 93676 ?    Sl   21:23   0:00 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=
+hui-lim   410534  0.6  1.3 1213940124 218328 ?   Sl   21:23   0:06 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --dns-result-order=ipv4
+hui-lim   410649  0.8  0.7 185628 121076 ?       Sl   21:23   0:08 /home/hui-lim/.var/app/com.visualstudio.code/data/vscode/extensions/ms-vscode.cpptools-1.23.6-linux-x64/bin/cpptools
+hui-lim   410691  0.0  0.1 4260032 26528 ?       Sl   21:23   0:00 /home/hui-lim/.var/app/com.visualstudio.code/data/vscode/extensions/ms-vscode.cpptools-1.23.6-linux-x64/bin/cpptools-srv 1141 {C1694769-3914-4CA
+hui-lim   410756  0.0  0.5 1211966128 84460 ?    Sl   21:23   0:00 /app/extra/vscode/code /app/extra/vscode/resources/app/extensions/json-language-features/server/dist/node/jsonServerMain --node-ipc --clientProc
+hui-lim   410921  0.3  0.6 1213947012 100984 ?   Sl   21:24   0:03 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=
+hui-lim   410943  0.0  0.0   7992  4484 pts/1    Ss+  21:24   0:00 /bin/sh
+hui-lim   411072  0.0  0.1 4257524 19044 ?       Sl   21:25   0:00 /home/hui-lim/.var/app/com.visualstudio.code/data/vscode/extensions/ms-vscode.cpptools-1.23.6-linux-x64/bin/cpptools-srv 1141 {3B5E59E7-CB1F-4CB
+root      411171  0.0  0.0      0     0 ?        I    21:25   0:00 [kworker/8:1-events]
+root      411178  0.0  0.0      0     0 ?        I    21:25   0:00 [kworker/10:0-events]
+hui-lim   411479  0.0  0.1 4258936 21376 ?       Sl   21:27   0:00 /home/hui-lim/.var/app/com.visualstudio.code/data/vscode/extensions/ms-vscode.cpptools-1.23.6-linux-x64/bin/cpptools-srv 1141 {A6BA6E23-6DF4-435
+root      411759  0.0  0.0      0     0 ?        I<   21:28   0:00 [kworker/u41:2-xprtiod]
+root      411837  0.0  0.0      0     0 ?        I    21:29   0:00 [kworker/14:2-cgroup_destroy]
+root      411935  0.0  0.0      0     0 ?        I    21:29   0:00 [kworker/6:0-cgroup_destroy]
+root      412196  0.0  0.0      0     0 ?        I    21:33   0:00 [kworker/10:1-cgroup_destroy]
+root      412260  0.0  0.0      0     0 ?        I    21:33   0:00 [kworker/u40:0-events_unbound]
+root      412261  0.0  0.0      0     0 ?        I    21:33   0:00 [kworker/2:0]
+root      412262  0.0  0.0      0     0 ?        I    21:33   0:00 [kworker/4:1-events]
+root      412402  0.0  0.0      0     0 ?        I    21:36   0:00 [kworker/6:2-cgroup_destroy]
+hui-lim   412416  0.0  0.4 1459809476 65032 ?    Sl   21:37   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+hui-lim   412417  0.0  0.7 1459880456 126536 ?   Sl   21:37   0:00 /opt/google/chrome/chrome --type=renderer --string-annotations --crashpad-handler-pid=389595 --enable-crash-reporter=710acc53-1e41-4db4-9ffe-c8f
+root      412474  0.0  0.0      0     0 ?        I    21:37   0:00 [kworker/14:1-events]
+root      412529  0.0  0.0      0     0 ?        I    21:37   0:00 [kworker/8:0-rcu_par_gp]
+root      412560  0.0  0.0      0     0 ?        I    21:38   0:00 [kworker/18:1-mm_percpu_wq]
+root      412597  0.0  0.0      0     0 ?        I    21:39   0:00 [kworker/12:2-mm_percpu_wq]
+root      412659  0.0  0.0      0     0 ?        I    21:39   0:00 [kworker/16:2-cgroup_destroy]
+root      412718  0.0  0.0      0     0 ?        I    21:40   0:00 [kworker/10:2]
+hui-lim   412720  1.0  0.3  99628 51268 pts/0    S+   21:40   0:00 /usr/bin/valgrind.bin --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
+root      412727  0.0  0.0      0     0 ?        I    21:40   0:00 [kworker/7:1]
+hui-lim   412731  0.0  0.0   8280  1036 pts/0    S+   21:40   0:00 /usr/bin/cat
+hui-lim   412735  0.1  0.0  12460  5816 pts/2    Ss   21:40   0:00 zsh
+hui-lim   412744  0.0  0.0  12652  3500 pts/2    R+   21:40   0:00 ps -aux
+c1r2s5% ps -aux | grep minishell
+hui-lim   412720  0.9  0.3  99628 51268 pts/0    S+   21:40   0:00 /usr/bin/valgrind.bin --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
+hui-lim   412746  0.0  0.0   8848  2312 pts/2    S+   21:40   0:00 grep minishell
+c1r2s5% ps -aux | grep cat      
+hui-lim   389262  0.0  0.1 2931044 27748 ?       Sl   19:58   0:00 /usr/bin/gjs /usr/share/gnome-shell/org.gnome.Shell.Notifications
+hui-lim   389300  0.0  0.0 249844 11660 ?        Ssl  19:58   0:00 /usr/libexec/gsd-print-notifications
+hui-lim   389338  0.0  2.1 933844 350676 ?       Sl   19:58   0:04 /usr/bin/gnome-software --gapplication-service
+hui-lim   389591  0.0  0.0   8280  1012 ?        S    19:58   0:00 cat
+hui-lim   389592  0.0  0.0   8280  1060 ?        S    19:58   0:00 cat
+hui-lim   391354  0.5  0.5 1192068 90560 ?       Sl   20:03   0:34 /usr/bin/nautilus --gapplication-service
+hui-lim   391986  0.0  0.0   5848  1092 ?        S    20:09   0:00 cat
+hui-lim   391987  0.0  0.0   5848  1060 ?        S    20:09   0:00 cat
+hui-lim   392032  1.9  0.8 34443768 138528 ?     Sl   20:09   1:49 /app/extra/vscode/code --type=gpu-process --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --gpu-preferences=UAAAAAAAAAAgAAAEAAAAAAAAAAAAAAAAAABgAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAABAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAA --shared-files --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   392038  0.0  0.4 33884904 68152 ?      Sl   20:09   0:01 /app/extra/vscode/code --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   392058  2.5  2.0 1214354232 331944 ?   Sl   20:09   2:21 /app/extra/vscode/code --type=renderer --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --app-path=/app/extra/vscode/resources/app --enable-sandbox --enable-blink-features=HighlightAPI --disable-blink-features=FontMatchingCTMigration,StandardizedBrowserZoom, --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=4 --time-ticks-at-unix-epoch=-1740751405993243 --launch-time-ticks=165968992777 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version --vscode-window-config=vscode:da277229-3f3f-43e7-9fe2-25f60e01e2ca
+hui-lim   392133  0.1  0.8 1213938328 136972 ?   Sl   20:09   0:06 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   400477  3.4  1.7 1214342152 288164 ?   Sl   20:26   2:34 /app/extra/vscode/code --type=renderer --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --app-path=/app/extra/vscode/resources/app --enable-sandbox --enable-blink-features=HighlightAPI --disable-blink-features=FontMatchingCTMigration,StandardizedBrowserZoom, --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --time-ticks-at-unix-epoch=-1740751405993243 --launch-time-ticks=166967064091 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version --vscode-window-config=vscode:e2f0b7e5-bd9b-43e7-9406-78240227455c
+hui-lim   400552  0.0  0.5 1213955152 94064 ?    Sl   20:26   0:02 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   400564  0.5  1.3 1213940124 217092 ?   Sl   20:26   0:26 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --dns-result-order=ipv4first --inspect-port=0 --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410522  0.0  0.5 1213955152 93680 ?    Sl   21:23   0:00 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410534  0.6  1.3 1213940124 218328 ?   Sl   21:23   0:06 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --dns-result-order=ipv4first --inspect-port=0 --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410921  0.3  0.6 1213947012 100964 ?   Sl   21:24   0:03 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   412731  0.0  0.0   8280  1036 pts/0    S+   21:40   0:00 /usr/bin/cat
+hui-lim   412788  0.0  0.0   8848  2304 pts/2    S+   21:41   0:00 grep cat
+c1r2s5% kill --help       
+kill: unknown signal: SIG-HELP
+kill: type kill -l for a list of signals
+c1r2s5% kill -l    
+HUP INT QUIT ILL TRAP IOT BUS FPE KILL USR1 SEGV USR2 PIPE ALRM TERM STKFLT CHLD CONT STOP TSTP TTIN TTOU URG XCPU XFSZ VTALRM PROF WINCH POLL PWR SYS
+c1r2s5% kill -SEGV 412731
+c1r2s5% kill -USR1 412731
+kill: kill 412731 failed: no such process
+c1r2s5% ps -aux | grep cat
+hui-lim   389262  0.0  0.1 2931044 27748 ?       Sl   19:58   0:00 /usr/bin/gjs /usr/share/gnome-shell/org.gnome.Shell.Notifications
+hui-lim   389300  0.0  0.0 249844 11660 ?        Ssl  19:58   0:00 /usr/libexec/gsd-print-notifications
+hui-lim   389338  0.0  2.1 933844 350676 ?       Sl   19:58   0:04 /usr/bin/gnome-software --gapplication-service
+hui-lim   389591  0.0  0.0   8280  1012 ?        S    19:58   0:00 cat
+hui-lim   389592  0.0  0.0   8280  1060 ?        S    19:58   0:00 cat
+hui-lim   391354  0.5  0.5 1192068 90560 ?       Sl   20:03   0:34 /usr/bin/nautilus --gapplication-service
+hui-lim   391986  0.0  0.0   5848  1092 ?        S    20:09   0:00 cat
+hui-lim   391987  0.0  0.0   5848  1060 ?        S    20:09   0:00 cat
+hui-lim   392032  1.9  0.8 34443768 138528 ?     Sl   20:09   1:49 /app/extra/vscode/code --type=gpu-process --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --gpu-preferences=UAAAAAAAAAAgAAAEAAAAAAAAAAAAAAAAAABgAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAABAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAA --shared-files --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   392038  0.0  0.4 33884904 68144 ?      Sl   20:09   0:01 /app/extra/vscode/code --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   392058  2.5  2.0 1214354232 332344 ?   Sl   20:09   2:21 /app/extra/vscode/code --type=renderer --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --app-path=/app/extra/vscode/resources/app --enable-sandbox --enable-blink-features=HighlightAPI --disable-blink-features=FontMatchingCTMigration,StandardizedBrowserZoom, --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=4 --time-ticks-at-unix-epoch=-1740751405993243 --launch-time-ticks=165968992777 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version --vscode-window-config=vscode:da277229-3f3f-43e7-9fe2-25f60e01e2ca
+hui-lim   392133  0.1  0.8 1213938328 137140 ?   Sl   20:09   0:07 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   400477  3.3  1.7 1214342152 288592 ?   Sl   20:26   2:34 /app/extra/vscode/code --type=renderer --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --app-path=/app/extra/vscode/resources/app --enable-sandbox --enable-blink-features=HighlightAPI --disable-blink-features=FontMatchingCTMigration,StandardizedBrowserZoom, --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --time-ticks-at-unix-epoch=-1740751405993243 --launch-time-ticks=166967064091 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version --vscode-window-config=vscode:e2f0b7e5-bd9b-43e7-9406-78240227455c
+hui-lim   400552  0.0  0.5 1213955152 94068 ?    Sl   20:26   0:02 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   400564  0.5  1.3 1213940124 217100 ?   Sl   20:26   0:26 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --dns-result-order=ipv4first --inspect-port=0 --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410522  0.0  0.5 1213955152 93652 ?    Sl   21:23   0:00 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410534  0.6  1.3 1213940124 218200 ?   Sl   21:23   0:06 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --dns-result-order=ipv4first --inspect-port=0 --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410921  0.3  0.6 1213947012 101080 ?   Sl   21:24   0:03 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   412855  0.0  0.0   8280  1096 pts/0    S+   21:42   0:00 /usr/bin/cat
+hui-lim   412863  0.0  0.0   8848  2372 pts/2    S+   21:42   0:00 grep cat
+c1r2s5% kill -USR1 412855 
+c1r2s5% ps -aux | grep cat
+hui-lim   389262  0.0  0.1 2931044 27748 ?       Sl   19:58   0:00 /usr/bin/gjs /usr/share/gnome-shell/org.gnome.Shell.Notifications
+hui-lim   389300  0.0  0.0 249844 11660 ?        Ssl  19:58   0:00 /usr/libexec/gsd-print-notifications
+hui-lim   389338  0.0  2.1 933844 350676 ?       Sl   19:58   0:04 /usr/bin/gnome-software --gapplication-service
+hui-lim   389591  0.0  0.0   8280  1012 ?        S    19:58   0:00 cat
+hui-lim   389592  0.0  0.0   8280  1060 ?        S    19:58   0:00 cat
+hui-lim   391354  0.5  0.5 1192068 90560 ?       Sl   20:03   0:34 /usr/bin/nautilus --gapplication-service
+hui-lim   391986  0.0  0.0   5848  1092 ?        S    20:09   0:00 cat
+hui-lim   391987  0.0  0.0   5848  1060 ?        S    20:09   0:00 cat
+hui-lim   392032  1.9  0.8 34443768 138528 ?     Sl   20:09   1:49 /app/extra/vscode/code --type=gpu-process --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --gpu-preferences=UAAAAAAAAAAgAAAEAAAAAAAAAAAAAAAAAABgAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAABAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAA --shared-files --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   392038  0.0  0.4 33884904 68120 ?      Sl   20:09   0:01 /app/extra/vscode/code --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   392058  2.5  2.0 1214354232 332344 ?   Sl   20:09   2:21 /app/extra/vscode/code --type=renderer --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --app-path=/app/extra/vscode/resources/app --enable-sandbox --enable-blink-features=HighlightAPI --disable-blink-features=FontMatchingCTMigration,StandardizedBrowserZoom, --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=4 --time-ticks-at-unix-epoch=-1740751405993243 --launch-time-ticks=165968992777 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version --vscode-window-config=vscode:da277229-3f3f-43e7-9fe2-25f60e01e2ca
+hui-lim   392133  0.1  0.8 1213938328 137132 ?   Sl   20:09   0:07 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   400477  3.3  1.7 1214342152 288592 ?   Sl   20:26   2:34 /app/extra/vscode/code --type=renderer --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --app-path=/app/extra/vscode/resources/app --enable-sandbox --enable-blink-features=HighlightAPI --disable-blink-features=FontMatchingCTMigration,StandardizedBrowserZoom, --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --time-ticks-at-unix-epoch=-1740751405993243 --launch-time-ticks=166967064091 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version --vscode-window-config=vscode:e2f0b7e5-bd9b-43e7-9406-78240227455c
+hui-lim   400552  0.0  0.5 1213955152 94072 ?    Sl   20:26   0:02 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   400564  0.5  1.3 1213940124 217100 ?   Sl   20:26   0:26 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --dns-result-order=ipv4first --inspect-port=0 --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410522  0.0  0.5 1213955152 93656 ?    Sl   21:23   0:00 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410534  0.5  1.3 1213940124 218140 ?   Sl   21:23   0:06 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --dns-result-order=ipv4first --inspect-port=0 --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410921  0.3  0.6 1213947012 101292 ?   Sl   21:24   0:03 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   412876  0.0  0.0   8280  1020 pts/3    S+   21:43   0:00 cat
+hui-lim   412878  0.0  0.0   8848  2408 pts/2    S+   21:43   0:00 grep cat
+c1r2s5% kill -SEGV 412876 
+c1r2s5% ps -aux | grep cat
+hui-lim   389262  0.0  0.1 2931044 27748 ?       Sl   19:58   0:00 /usr/bin/gjs /usr/share/gnome-shell/org.gnome.Shell.Notifications
+hui-lim   389300  0.0  0.0 249844 11660 ?        Ssl  19:58   0:00 /usr/libexec/gsd-print-notifications
+hui-lim   389338  0.0  2.1 933844 350676 ?       Sl   19:58   0:04 /usr/bin/gnome-software --gapplication-service
+hui-lim   389591  0.0  0.0   8280  1012 ?        S    19:58   0:00 cat
+hui-lim   389592  0.0  0.0   8280  1060 ?        S    19:58   0:00 cat
+hui-lim   391354  0.5  0.5 1192068 90560 ?       Sl   20:03   0:34 /usr/bin/nautilus --gapplication-service
+hui-lim   391986  0.0  0.0   5848  1092 ?        S    20:09   0:00 cat
+hui-lim   391987  0.0  0.0   5848  1060 ?        S    20:09   0:00 cat
+hui-lim   392032  1.9  0.8 34443768 138528 ?     Sl   20:09   1:49 /app/extra/vscode/code --type=gpu-process --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --gpu-preferences=UAAAAAAAAAAgAAAEAAAAAAAAAAAAAAAAAABgAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAABAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAA --shared-files --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   392038  0.0  0.4 33884904 68148 ?      Sl   20:09   0:01 /app/extra/vscode/code --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   392058  2.5  2.0 1214354232 334396 ?   Sl   20:09   2:21 /app/extra/vscode/code --type=renderer --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --app-path=/app/extra/vscode/resources/app --enable-sandbox --enable-blink-features=HighlightAPI --disable-blink-features=FontMatchingCTMigration,StandardizedBrowserZoom, --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=4 --time-ticks-at-unix-epoch=-1740751405993243 --launch-time-ticks=165968992777 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version --vscode-window-config=vscode:da277229-3f3f-43e7-9fe2-25f60e01e2ca
+hui-lim   392133  0.1  0.8 1213938328 137228 ?   Sl   20:09   0:07 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   400477  3.3  1.7 1214342152 288464 ?   Sl   20:26   2:34 /app/extra/vscode/code --type=renderer --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --app-path=/app/extra/vscode/resources/app --enable-sandbox --enable-blink-features=HighlightAPI --disable-blink-features=FontMatchingCTMigration,StandardizedBrowserZoom, --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --time-ticks-at-unix-epoch=-1740751405993243 --launch-time-ticks=166967064091 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version --vscode-window-config=vscode:e2f0b7e5-bd9b-43e7-9406-78240227455c
+hui-lim   400552  0.0  0.5 1213955152 94076 ?    Sl   20:26   0:02 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   400564  0.5  1.3 1213940124 217100 ?   Sl   20:26   0:26 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --dns-result-order=ipv4first --inspect-port=0 --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410522  0.0  0.5 1213955152 93656 ?    Sl   21:23   0:00 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410534  0.5  1.3 1213940124 218276 ?   Sl   21:23   0:07 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --dns-result-order=ipv4first --inspect-port=0 --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410921  0.3  0.6 1213947012 101292 ?   Sl   21:24   0:03 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   412926  0.0  0.0   8280  1040 pts/0    S+   21:43   0:00 /usr/bin/cat
+hui-lim   412928  0.0  0.0   8848  2440 pts/2    S+   21:43   0:00 grep cat
+c1r2s5% kill -l 
+HUP INT QUIT ILL TRAP IOT BUS FPE KILL USR1 SEGV USR2 PIPE ALRM TERM STKFLT CHLD CONT STOP TSTP TTIN TTOU URG XCPU XFSZ VTALRM PROF WINCH POLL PWR SYS
+c1r2s5% kill -FPE 412926
+c1r2s5% ps -aux | grep cat
+hui-lim   389262  0.0  0.1 2931044 27748 ?       Sl   19:58   0:00 /usr/bin/gjs /usr/share/gnome-shell/org.gnome.Shell.Notifications
+hui-lim   389300  0.0  0.0 249844 11660 ?        Ssl  19:58   0:00 /usr/libexec/gsd-print-notifications
+hui-lim   389338  0.0  2.1 933844 350676 ?       Sl   19:58   0:04 /usr/bin/gnome-software --gapplication-service
+hui-lim   389591  0.0  0.0   8280  1012 ?        S    19:58   0:00 cat
+hui-lim   389592  0.0  0.0   8280  1060 ?        S    19:58   0:00 cat
+hui-lim   391354  0.5  0.5 1192068 90560 ?       Sl   20:03   0:34 /usr/bin/nautilus --gapplication-service
+hui-lim   391986  0.0  0.0   5848  1092 ?        S    20:09   0:00 cat
+hui-lim   391987  0.0  0.0   5848  1060 ?        S    20:09   0:00 cat
+hui-lim   392032  1.9  0.8 34444408 139356 ?     Sl   20:09   1:55 /app/extra/vscode/code --type=gpu-process --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --gpu-preferences=UAAAAAAAAAAgAAAEAAAAAAAAAAAAAAAAAABgAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAABAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAA --shared-files --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   392038  0.0  0.4 33884904 68144 ?      Sl   20:09   0:01 /app/extra/vscode/code --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   392058  2.6  2.1 1216254776 337900 ?   Sl   20:09   2:36 /app/extra/vscode/code --type=renderer --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --app-path=/app/extra/vscode/resources/app --enable-sandbox --enable-blink-features=HighlightAPI --disable-blink-features=FontMatchingCTMigration,StandardizedBrowserZoom, --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=4 --time-ticks-at-unix-epoch=-1740751405993243 --launch-time-ticks=165968992777 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version --vscode-window-config=vscode:da277229-3f3f-43e7-9fe2-25f60e01e2ca
+hui-lim   392133  0.1  0.8 1213938328 136392 ?   Sl   20:09   0:07 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   400477  3.2  1.8 1214342152 291012 ?   Sl   20:26   2:35 /app/extra/vscode/code --type=renderer --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --app-path=/app/extra/vscode/resources/app --enable-sandbox --enable-blink-features=HighlightAPI --disable-blink-features=FontMatchingCTMigration,StandardizedBrowserZoom, --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --time-ticks-at-unix-epoch=-1740751405993243 --launch-time-ticks=166967064091 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version --vscode-window-config=vscode:e2f0b7e5-bd9b-43e7-9406-78240227455c
+hui-lim   400552  0.0  0.5 1213955152 94088 ?    Sl   20:26   0:02 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   400564  0.5  1.3 1213940124 217104 ?   Sl   20:26   0:27 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --dns-result-order=ipv4first --inspect-port=0 --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410522  0.0  0.5 1213955152 93732 ?    Sl   21:23   0:01 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410534  0.6  1.3 1213940124 219412 ?   Sl   21:23   0:08 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --dns-result-order=ipv4first --inspect-port=0 --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410921  0.3  0.6 1213947012 101276 ?   Sl   21:24   0:04 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   413233  0.0  0.0   8848  2288 pts/2    S+   21:46   0:00 grep cat
+c1r2s5% ps -aux | grep cat
+hui-lim   389262  0.0  0.1 2931044 27748 ?       Sl   19:58   0:00 /usr/bin/gjs /usr/share/gnome-shell/org.gnome.Shell.Notifications
+hui-lim   389300  0.0  0.0 249844 11660 ?        Ssl  19:58   0:00 /usr/libexec/gsd-print-notifications
+hui-lim   389338  0.0  2.1 933844 350676 ?       Sl   19:58   0:04 /usr/bin/gnome-software --gapplication-service
+hui-lim   389591  0.0  0.0   8280  1012 ?        S    19:58   0:00 cat
+hui-lim   389592  0.0  0.0   8280  1060 ?        S    19:58   0:00 cat
+hui-lim   391354  0.5  0.5 1192068 90560 ?       Sl   20:03   0:34 /usr/bin/nautilus --gapplication-service
+hui-lim   391986  0.0  0.0   5848  1092 ?        S    20:09   0:00 cat
+hui-lim   391987  0.0  0.0   5848  1060 ?        S    20:09   0:00 cat
+hui-lim   392032  1.9  0.8 34444408 138972 ?     Sl   20:09   1:55 /app/extra/vscode/code --type=gpu-process --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --gpu-preferences=UAAAAAAAAAAgAAAEAAAAAAAAAAAAAAAAAABgAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAABAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAA --shared-files --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   392038  0.0  0.4 33884904 68144 ?      Sl   20:09   0:01 /app/extra/vscode/code --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   392058  2.6  2.1 1216254776 337900 ?   Sl   20:09   2:36 /app/extra/vscode/code --type=renderer --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --app-path=/app/extra/vscode/resources/app --enable-sandbox --enable-blink-features=HighlightAPI --disable-blink-features=FontMatchingCTMigration,StandardizedBrowserZoom, --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=4 --time-ticks-at-unix-epoch=-1740751405993243 --launch-time-ticks=165968992777 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version --vscode-window-config=vscode:da277229-3f3f-43e7-9fe2-25f60e01e2ca
+hui-lim   392133  0.1  0.8 1213938328 136624 ?   Sl   20:09   0:07 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   400477  3.2  1.8 1214342152 290048 ?   Sl   20:26   2:35 /app/extra/vscode/code --type=renderer --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --app-path=/app/extra/vscode/resources/app --enable-sandbox --enable-blink-features=HighlightAPI --disable-blink-features=FontMatchingCTMigration,StandardizedBrowserZoom, --lang=en-US --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=8 --time-ticks-at-unix-epoch=-1740751405993243 --launch-time-ticks=166967064091 --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version --vscode-window-config=vscode:e2f0b7e5-bd9b-43e7-9406-78240227455c
+hui-lim   400552  0.0  0.5 1213955152 94088 ?    Sl   20:26   0:02 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   400564  0.5  1.3 1213940124 217112 ?   Sl   20:26   0:27 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --dns-result-order=ipv4first --inspect-port=0 --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410522  0.0  0.5 1213955152 93732 ?    Sl   21:23   0:01 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410534  0.6  1.3 1213940124 219408 ?   Sl   21:23   0:08 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --dns-result-order=ipv4first --inspect-port=0 --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   410921  0.3  0.6 1213947012 101272 ?   Sl   21:24   0:04 /app/extra/vscode/code --type=utility --utility-sub-type=node.mojom.NodeService --lang=en-US --service-sandbox-type=none --crashpad-handler-pid=55 --enable-crash-reporter=aed8dc52-a1a0-45e4-9b56-67f40d263712,no_channel --user-data-dir=/home/hui-lim/.var/app/com.visualstudio.code/config/Code --standard-schemes=vscode-webview,vscode-file --enable-sandbox --secure-schemes=vscode-webview,vscode-file --cors-schemes=vscode-webview,vscode-file --fetch-schemes=vscode-webview,vscode-file --service-worker-schemes=vscode-webview --code-cache-schemes=vscode-webview,vscode-file --shared-files=v8_context_snapshot_data:100 --field-trial-handle=3,i,1410976226027460180,2746072632084727493,262144 --disable-features=CalculateNativeWinOcclusion,PlzDedicatedWorker,SpareRendererForSitePerProcess --variations-seed-version
+hui-lim   413234  0.0  0.0   8280  1016 pts/0    S+   21:46   0:00 /usr/bin/cat
+hui-lim   413236  0.0  0.0   8848  2284 pts/2    S+   21:46   0:00 grep cat
+c1r2s5% kill -FPE 413234  
+c1r2s5% bash
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ echo a>f1>f1>f1
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ cat f1
+a
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ echo a>>f1>>f1>>f1
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ cat f1
+a
+a
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ rm f1
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ echo a>>f1>>f1>>f1
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ cat f1
+a
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ rm f1
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ ls
+builtins  env  error  exec  expansion  f1  hd.txt  hello  inc  libft  main.c  Makefile	minishell  obj	parse  readline.supp  signal  token
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ cat Makefile>f1>f2>f3
+bash: f1: Permission denied
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ ls
+builtins  env  error  exec  expansion  f1  hd.txt  hello  inc  libft  main.c  Makefile	minishell  obj	parse  readline.supp  signal  token
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ cat|cat|ls
+builtins  env  error  exec  expansion  f1  hd.txt  hello  inc  libft  main.c  Makefile	minishell  obj	parse  readline.supp  signal  token
+
+
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ <<eof>f1<Makefile cat>f2|>f3>f4<Makefile<<eof2|cat>f5<<eof3<Makefile>f6
+> 1
+> 2
+> 3
+> eof
+> 4
+> 5
+> 6
+> eof2
+> 7
+> 8
+> 9
+> eof3
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ cat f2
+# Program name
+NAME = minishell
+
+# Compiler and flags
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+
+# Libraries and includes
+LIBFT = libft/libft.a
+LIBFT_DIR = libft
+INC_DIR = inc
+INC = -I$(INC_DIR) -I$(LIBFT_DIR)
+READLINE = -lreadline
+
+# Header files
+HEADERS = $(INC_DIR)/minishell.h \
+          $(INC_DIR)/token.h \
+          $(INC_DIR)/parser.h \
+          $(INC_DIR)/exec.h \
+          $(INC_DIR)/pipe.h \
+          $(INC_DIR)/redirect.h \
+          $(INC_DIR)/builtins.h \
+          $(INC_DIR)/heredoc.h \
+          $(INC_DIR)/error.h \
+		  $(INC_DIR)/expansion.h \
+		  $(INC_DIR)/env.h
+
+# Directories
+OBJ_DIR = obj
+SRC_DIRS = token parse exec pipe redirect builtins heredoc signal error expansion env
+
+# Source files (separate main.c)
+#SRCS = $(wildcard $(SRC_DIRS:=/*.c))
+#parse/parse_utils2.c parse/redir_utils2.c
+SRCS =	builtins/ft_cd_utils.c builtins/ft_cd.c builtins/ft_dot.c builtins/ft_dotdot.c builtins/ft_echo.c \
+		builtins/ft_env.c builtins/ft_exit.c builtins/ft_export.c builtins/ft_isbulitin.c builtins/ft_pwd.c \
+		builtins/ft_unset.c \
+		env/check_file_access.c env/check_file_type.c env/env_utils.c env/init_shell.c env/update_env.c \
+		error/error.c \
+		exec/exe_builtin_helper.c exec/exe_utils_2.c exec/exe_utils.c exec/execute.c exec/ft_heredoc_utils.c exec/ft_heredoc.c exec/exe_add_funcs.c exec/exe_commands.c exec/executechild.c \
+		expansion/expansion_utils.c expansion/expansion.c expansion/here_doc_expand_utils.c expansion/here_doc_expand.c \
+		parse/createtree.c parse/direxists.c parse/ft_handle_direct_path.c parse/ft_path.c parse/parse_error_utils.c parse/parse_helper.c parse/redir_helper.c\
+		parse/parse_utils.c parse/redir_utils.c parse/treehelper.c \
+		signal/signal_utils.c signal/signal.c \
+		token/add_quote.c token/llist_utils.c token/process_no_quote.c token/process_quote.c token/process_special_tok.c \
+		token/split_node_helper.c token/split_node.c token/token_helper.c token/token_syntax.c token/token_utils.c \
+		token/token_utils2.c token/tokenizer.c token/isvalidfile.c
+
+MAIN_SRC = main.c
+
+# Object files (separate main.o)
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+MAIN_OBJ = $(OBJ_DIR)/main.o
+
+# Add this near the top with other variable definitions
+DEPS = $(OBJS:.o=.d) $(MAIN_OBJ:.o=.d)
+
+# Create obj directories string for creation
+OBJ_DIRS = $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SRC_DIRS))
+
+# Rules
+all: $(NAME)
+
+# Create object directories
+$(OBJ_DIRS):
+	mkdir -p $(OBJ_DIRS)
+
+# Compile libft
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+# Special rule for main.c
+# $(MAIN_OBJ): $(MAIN_SRC)
+# 	mkdir -p $(OBJ_DIR)
+# 	$(CC) $(CFLAGS) $(INC) -g -c $< -o $@
+
+$(MAIN_OBJ): $(MAIN_SRC) $(HEADERS)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INC) -MMD -MP -g -c $< -o $@
+
+# Compile other object files
+# This line makes every .o file depend on ALL headers $(OBJ_DIR)/%.o: %.c  #$(HEADERS)
+# $(OBJ_DIR)/%.o: %.c
+# 	mkdir -p $(dir $@)
+# 	$(CC) $(CFLAGS) $(INC) -c -g $< -o $@
+
+$(OBJ_DIR)/%.o: %.c $(HEADERS)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INC) -MMD -MP -c -g $< -o $@
+
+## HEADERS = $(INC_DIR)/minishell.h  #replace with this line when minshell.h is set up
+
+# Link program
+# $(NAME): $(LIBFT) $(OBJ_DIRS) $(OBJS) $(MAIN_OBJ)
+# 	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) $(LIBFT) $(READLINE) -g -o $(NAME)
+
+$(NAME): $(LIBFT) $(OBJS) $(MAIN_OBJ)
+	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) $(LIBFT) $(READLINE) -g -o $(NAME)
+
+# Include generated dependency files
+-include $(DEPS)
+
+# Clean object files
+clean:
+	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -rf $(OBJ_DIR)
+
+# Clean everything
+fclean: clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(NAME)
+
+# Remake everything
+re: fclean all
+
+# Phony targets
+.PHONY: all clean fclean re
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ cat f4
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ cat f6
+# Program name
+NAME = minishell
+
+# Compiler and flags
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+
+# Libraries and includes
+LIBFT = libft/libft.a
+LIBFT_DIR = libft
+INC_DIR = inc
+INC = -I$(INC_DIR) -I$(LIBFT_DIR)
+READLINE = -lreadline
+
+# Header files
+HEADERS = $(INC_DIR)/minishell.h \
+          $(INC_DIR)/token.h \
+          $(INC_DIR)/parser.h \
+          $(INC_DIR)/exec.h \
+          $(INC_DIR)/pipe.h \
+          $(INC_DIR)/redirect.h \
+          $(INC_DIR)/builtins.h \
+          $(INC_DIR)/heredoc.h \
+          $(INC_DIR)/error.h \
+		  $(INC_DIR)/expansion.h \
+		  $(INC_DIR)/env.h
+
+# Directories
+OBJ_DIR = obj
+SRC_DIRS = token parse exec pipe redirect builtins heredoc signal error expansion env
+
+# Source files (separate main.c)
+#SRCS = $(wildcard $(SRC_DIRS:=/*.c))
+#parse/parse_utils2.c parse/redir_utils2.c
+SRCS =	builtins/ft_cd_utils.c builtins/ft_cd.c builtins/ft_dot.c builtins/ft_dotdot.c builtins/ft_echo.c \
+		builtins/ft_env.c builtins/ft_exit.c builtins/ft_export.c builtins/ft_isbulitin.c builtins/ft_pwd.c \
+		builtins/ft_unset.c \
+		env/check_file_access.c env/check_file_type.c env/env_utils.c env/init_shell.c env/update_env.c \
+		error/error.c \
+		exec/exe_builtin_helper.c exec/exe_utils_2.c exec/exe_utils.c exec/execute.c exec/ft_heredoc_utils.c exec/ft_heredoc.c exec/exe_add_funcs.c exec/exe_commands.c exec/executechild.c \
+		expansion/expansion_utils.c expansion/expansion.c expansion/here_doc_expand_utils.c expansion/here_doc_expand.c \
+		parse/createtree.c parse/direxists.c parse/ft_handle_direct_path.c parse/ft_path.c parse/parse_error_utils.c parse/parse_helper.c parse/redir_helper.c\
+		parse/parse_utils.c parse/redir_utils.c parse/treehelper.c \
+		signal/signal_utils.c signal/signal.c \
+		token/add_quote.c token/llist_utils.c token/process_no_quote.c token/process_quote.c token/process_special_tok.c \
+		token/split_node_helper.c token/split_node.c token/token_helper.c token/token_syntax.c token/token_utils.c \
+		token/token_utils2.c token/tokenizer.c token/isvalidfile.c
+
+MAIN_SRC = main.c
+
+# Object files (separate main.o)
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+MAIN_OBJ = $(OBJ_DIR)/main.o
+
+# Add this near the top with other variable definitions
+DEPS = $(OBJS:.o=.d) $(MAIN_OBJ:.o=.d)
+
+# Create obj directories string for creation
+OBJ_DIRS = $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SRC_DIRS))
+
+# Rules
+all: $(NAME)
+
+# Create object directories
+$(OBJ_DIRS):
+	mkdir -p $(OBJ_DIRS)
+
+# Compile libft
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+# Special rule for main.c
+# $(MAIN_OBJ): $(MAIN_SRC)
+# 	mkdir -p $(OBJ_DIR)
+# 	$(CC) $(CFLAGS) $(INC) -g -c $< -o $@
+
+$(MAIN_OBJ): $(MAIN_SRC) $(HEADERS)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INC) -MMD -MP -g -c $< -o $@
+
+# Compile other object files
+# This line makes every .o file depend on ALL headers $(OBJ_DIR)/%.o: %.c  #$(HEADERS)
+# $(OBJ_DIR)/%.o: %.c
+# 	mkdir -p $(dir $@)
+# 	$(CC) $(CFLAGS) $(INC) -c -g $< -o $@
+
+$(OBJ_DIR)/%.o: %.c $(HEADERS)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INC) -MMD -MP -c -g $< -o $@
+
+## HEADERS = $(INC_DIR)/minishell.h  #replace with this line when minshell.h is set up
+
+# Link program
+# $(NAME): $(LIBFT) $(OBJ_DIRS) $(OBJS) $(MAIN_OBJ)
+# 	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) $(LIBFT) $(READLINE) -g -o $(NAME)
+
+$(NAME): $(LIBFT) $(OBJS) $(MAIN_OBJ)
+	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) $(LIBFT) $(READLINE) -g -o $(NAME)
+
+# Include generated dependency files
+-include $(DEPS)
+
+# Clean object files
+clean:
+	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -rf $(OBJ_DIR)
+
+# Clean everything
+fclean: clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(NAME)
+
+# Remake everything
+re: fclean all
+
+# Phony targets
+.PHONY: all clean fclean re
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ a
+a: command not found
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ b
+b: command not found
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ c
+c: command not found
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ c^C
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ export a=ls b=" " c=-l
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ $a"$b"$c
+ls -l: command not found
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ export a=ls b=" " c=-l
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ $a"$b"$c
+ls -l: command not found
+hui-lim@c1r2s5:~/TEMP/minishell_eval1$ ls" "-l
+ls -l: command not found
+

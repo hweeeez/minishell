@@ -1,0 +1,1642 @@
+weneedtherapy% <Makefile cat <readline.supp
+{ 
+    leak readline
+    Memcheck:Leak
+    ...
+    fun:readline
+}
+{
+    leak add_history
+    Memcheck:Leak
+    ...
+    fun:add_history
+}
+weneedtherapy% >f1 cat >f2
+ashidiohasd
+asdiaiodsh
+weneedtherapy% cat f1
+weneedtherapy% cat f2
+ashidiohasd
+asdiaiodsh
+weneedtherapy% ls
+builtins  env  error  exec  expansion  f1  f2  hd.txt  hello  inc  libft  main.c  Makefile  minishell  obj  parse  readline.supp  signal  token
+weneedtherapy% ls -la
+total 232
+drwxr-xr-x 15 hui-lim 2024_singapore   4096 Mar  2 21:59 .
+drwxr-xr-x  3 hui-lim 2024_singapore     46 Mar  2 21:54 ..
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 builtins
+drwxr-xr-x  2 hui-lim 2024_singapore    117 Mar  2 21:02 env
+drwxr-xr-x  2 hui-lim 2024_singapore     21 Mar  2 21:02 error
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 exec
+drwxr-xr-x  2 hui-lim 2024_singapore    106 Mar  2 21:02 expansion
+-rw-r--r--  1 hui-lim 2024_singapore      0 Mar  2 21:59 f1
+-rw-r--r--  1 hui-lim 2024_singapore     23 Mar  2 21:59 f2
+drwxr-xr-x  8 hui-lim 2024_singapore    163 Mar  2 21:23 .git
+-rw-r--r--  1 hui-lim 2024_singapore      0 Mar  2 21:02 hd.txt
+-rw-r--r--  1 hui-lim 2024_singapore      0 Mar  2 21:15 hello
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 inc
+drwxr-xr-x  3 hui-lim 2024_singapore   4096 Mar  2 21:04 libft
+-rw-r--r--  1 hui-lim 2024_singapore   4424 Mar  2 21:02 main.c
+-rw-r--r--  1 hui-lim 2024_singapore   3754 Mar  2 21:02 Makefile
+-rwxr-xr-x  1 hui-lim 2024_singapore 188296 Mar  2 21:46 minishell
+drwxr-xr-x 10 hui-lim 2024_singapore    143 Mar  2 21:04 obj
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 parse
+-rw-r--r--  1 hui-lim 2024_singapore    137 Feb 22 17:38 readline.supp
+drwxr-xr-x  2 hui-lim 2024_singapore     44 Mar  2 21:02 signal
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 token
+drwxr-xr-x  2 hui-lim 2024_singapore     46 Mar  2 21:02 .vscode
+weneedtherapy% rm f1 f2
+weneedtherapy% echo a>>f1>>f1>>f1
+weneedtherapy% cat f1
+a
+weneedtherapy% echo a>>f1
+weneedtherapy% cat f1
+a
+weneedtherapy% echo a>>f1
+weneedtherapy% cat f1
+a
+a
+weneedtherapy% rm f1
+weneedtherapy% <<""
+> aspjdasd
+> asodaosdjaosd
+> 
+==414249== 
+==414249== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==414249== Open file descriptor 6: /dev/pts/0
+==414249==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414249==    by 0x403C4B: redir_builtin (execute.c:47)
+==414249==    by 0x403B02: onlybuiltin (execute.c:79)
+==414249==    by 0x403A0B: execute (execute.c:110)
+==414249==    by 0x408D2C: processtree (main.c:35)
+==414249==    by 0x408C41: minishell_loop (main.c:61)
+==414249==    by 0x408B5F: main (main.c:80)
+==414249== 
+==414249== Open file descriptor 5: /dev/pts/0
+==414249==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414249==    by 0x403C4B: redir_builtin (execute.c:47)
+==414249==    by 0x403B02: onlybuiltin (execute.c:79)
+==414249==    by 0x403A0B: execute (execute.c:110)
+==414249==    by 0x408D2C: processtree (main.c:35)
+==414249==    by 0x408C41: minishell_loop (main.c:61)
+==414249==    by 0x408B5F: main (main.c:80)
+==414249== 
+==414249== Open file descriptor 4: /dev/pts/0
+==414249==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414249==    by 0x403C4B: redir_builtin (execute.c:47)
+==414249==    by 0x403B02: onlybuiltin (execute.c:79)
+==414249==    by 0x403A0B: execute (execute.c:110)
+==414249==    by 0x408D2C: processtree (main.c:35)
+==414249==    by 0x408C41: minishell_loop (main.c:61)
+==414249==    by 0x408B5F: main (main.c:80)
+==414249== 
+==414249== 
+==414249== HEAP SUMMARY:
+==414249==     in use at exit: 208,618 bytes in 228 blocks
+==414249==   total heap usage: 1,879 allocs, 1,651 frees, 306,918 bytes allocated
+==414249== 
+==414249== LEAK SUMMARY:
+==414249==    definitely lost: 0 bytes in 0 blocks
+==414249==    indirectly lost: 0 bytes in 0 blocks
+==414249==      possibly lost: 0 bytes in 0 blocks
+==414249==    still reachable: 0 bytes in 0 blocks
+==414249==         suppressed: 208,618 bytes in 228 blocks
+==414249== 
+==414249== For lists of detected and suppressed errors, rerun with: -s
+==414249== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% 
+exit
+==414100== 
+==414100== FILE DESCRIPTORS: 6 open (3 std) at exit.
+==414100== Open file descriptor 6: /dev/pts/0
+==414100==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414100==    by 0x403C4B: redir_builtin (execute.c:47)
+==414100==    by 0x403B02: onlybuiltin (execute.c:79)
+==414100==    by 0x403A0B: execute (execute.c:110)
+==414100==    by 0x408D2C: processtree (main.c:35)
+==414100==    by 0x408C41: minishell_loop (main.c:61)
+==414100==    by 0x408B5F: main (main.c:80)
+==414100== 
+==414100== Open file descriptor 5: /dev/pts/0
+==414100==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414100==    by 0x403C4B: redir_builtin (execute.c:47)
+==414100==    by 0x403B02: onlybuiltin (execute.c:79)
+==414100==    by 0x403A0B: execute (execute.c:110)
+==414100==    by 0x408D2C: processtree (main.c:35)
+==414100==    by 0x408C41: minishell_loop (main.c:61)
+==414100==    by 0x408B5F: main (main.c:80)
+==414100== 
+==414100== Open file descriptor 4: /dev/pts/0
+==414100==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414100==    by 0x403C4B: redir_builtin (execute.c:47)
+==414100==    by 0x403B02: onlybuiltin (execute.c:79)
+==414100==    by 0x403A0B: execute (execute.c:110)
+==414100==    by 0x408D2C: processtree (main.c:35)
+==414100==    by 0x408C41: minishell_loop (main.c:61)
+==414100==    by 0x408B5F: main (main.c:80)
+==414100== 
+==414100== 
+==414100== HEAP SUMMARY:
+==414100==     in use at exit: 208,644 bytes in 228 blocks
+==414100==   total heap usage: 1,882 allocs, 1,654 frees, 306,958 bytes allocated
+==414100== 
+==414100== LEAK SUMMARY:
+==414100==    definitely lost: 0 bytes in 0 blocks
+==414100==    indirectly lost: 0 bytes in 0 blocks
+==414100==      possibly lost: 0 bytes in 0 blocks
+==414100==    still reachable: 0 bytes in 0 blocks
+==414100==         suppressed: 208,644 bytes in 228 blocks
+==414100== 
+==414100== For lists of detected and suppressed errors, rerun with: -s
+==414100== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+c1r2s5% valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
+==414297== Memcheck, a memory error detector
+==414297== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==414297== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==414297== Command: ./minishell
+==414297== 
+weneedtherapy% <<""
+> asdasdsad
+> asdsadsadas
+> 
+==414299== 
+==414299== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==414299== 
+==414299== HEAP SUMMARY:
+==414299==     in use at exit: 208,160 bytes in 222 blocks
+==414299==   total heap usage: 547 allocs, 325 frees, 233,131 bytes allocated
+==414299== 
+==414299== LEAK SUMMARY:
+==414299==    definitely lost: 0 bytes in 0 blocks
+==414299==    indirectly lost: 0 bytes in 0 blocks
+==414299==      possibly lost: 0 bytes in 0 blocks
+==414299==    still reachable: 0 bytes in 0 blocks
+==414299==         suppressed: 208,160 bytes in 222 blocks
+==414299== 
+==414299== For lists of detected and suppressed errors, rerun with: -s
+==414299== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% echo a>f1>f2
+weneedtherapy% <<""
+> asdasdsajsad
+> asdjiasiodjads
+> 
+==414343== 
+==414343== FILE DESCRIPTORS: 4 open (3 std) at exit.
+==414343== Open file descriptor 4: /dev/pts/0
+==414343==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414343==    by 0x403C4B: redir_builtin (execute.c:47)
+==414343==    by 0x403B02: onlybuiltin (execute.c:79)
+==414343==    by 0x403A0B: execute (execute.c:110)
+==414343==    by 0x408D2C: processtree (main.c:35)
+==414343==    by 0x408C41: minishell_loop (main.c:61)
+==414343==    by 0x408B5F: main (main.c:80)
+==414343== 
+==414343== 
+==414343== HEAP SUMMARY:
+==414343==     in use at exit: 208,160 bytes in 222 blocks
+==414343==   total heap usage: 682 allocs, 460 frees, 236,130 bytes allocated
+==414343== 
+==414343== LEAK SUMMARY:
+==414343==    definitely lost: 0 bytes in 0 blocks
+==414343==    indirectly lost: 0 bytes in 0 blocks
+==414343==      possibly lost: 0 bytes in 0 blocks
+==414343==    still reachable: 0 bytes in 0 blocks
+==414343==         suppressed: 208,160 bytes in 222 blocks
+==414343== 
+==414343== For lists of detected and suppressed errors, rerun with: -s
+==414343== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% 
+exit
+==414297== 
+==414297== FILE DESCRIPTORS: 4 open (3 std) at exit.
+==414297== Open file descriptor 4: /dev/pts/0
+==414297==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414297==    by 0x403C4B: redir_builtin (execute.c:47)
+==414297==    by 0x403B02: onlybuiltin (execute.c:79)
+==414297==    by 0x403A0B: execute (execute.c:110)
+==414297==    by 0x408D2C: processtree (main.c:35)
+==414297==    by 0x408C41: minishell_loop (main.c:61)
+==414297==    by 0x408B5F: main (main.c:80)
+==414297== 
+==414297== 
+==414297== HEAP SUMMARY:
+==414297==     in use at exit: 208,186 bytes in 222 blocks
+==414297==   total heap usage: 685 allocs, 463 frees, 236,170 bytes allocated
+==414297== 
+==414297== LEAK SUMMARY:
+==414297==    definitely lost: 0 bytes in 0 blocks
+==414297==    indirectly lost: 0 bytes in 0 blocks
+==414297==      possibly lost: 0 bytes in 0 blocks
+==414297==    still reachable: 0 bytes in 0 blocks
+==414297==         suppressed: 208,186 bytes in 222 blocks
+==414297== 
+==414297== For lists of detected and suppressed errors, rerun with: -s
+==414297== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+c1r2s5% valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
+==414349== Memcheck, a memory error detector
+==414349== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==414349== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==414349== Command: ./minishell
+==414349== 
+weneedtherapy% echo a>f1
+weneedtherapy% <<""
+> asdsadjiasd
+> asdasidiasdoj
+> 
+==414351== 
+==414351== FILE DESCRIPTORS: 4 open (3 std) at exit.
+==414351== Open file descriptor 4: /dev/pts/0
+==414351==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414351==    by 0x403C4B: redir_builtin (execute.c:47)
+==414351==    by 0x403B02: onlybuiltin (execute.c:79)
+==414351==    by 0x403A0B: execute (execute.c:110)
+==414351==    by 0x408D2C: processtree (main.c:35)
+==414351==    by 0x408C41: minishell_loop (main.c:61)
+==414351==    by 0x408B5F: main (main.c:80)
+==414351== 
+==414351== 
+==414351== HEAP SUMMARY:
+==414351==     in use at exit: 208,160 bytes in 222 blocks
+==414351==   total heap usage: 598 allocs, 376 frees, 233,832 bytes allocated
+==414351== 
+==414351== LEAK SUMMARY:
+==414351==    definitely lost: 0 bytes in 0 blocks
+==414351==    indirectly lost: 0 bytes in 0 blocks
+==414351==      possibly lost: 0 bytes in 0 blocks
+==414351==    still reachable: 0 bytes in 0 blocks
+==414351==         suppressed: 208,160 bytes in 222 blocks
+==414351== 
+==414351== For lists of detected and suppressed errors, rerun with: -s
+==414351== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% echo a>f1
+weneedtherapy% echo a>f1
+weneedtherapy% echo a>f1
+weneedtherapy% echo a>f1
+weneedtherapy% echo a>f1
+weneedtherapy% echo a>f1
+weneedtherapy% echo a>f1
+weneedtherapy% <<""
+> asdjaosijdas
+> asdoasdoasj
+> 
+==414404== 
+==414404== FILE DESCRIPTORS: 11 open (3 std) at exit.
+==414404== Open file descriptor 11: /dev/pts/0
+==414404==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414404==    by 0x403C4B: redir_builtin (execute.c:47)
+==414404==    by 0x403B02: onlybuiltin (execute.c:79)
+==414404==    by 0x403A0B: execute (execute.c:110)
+==414404==    by 0x408D2C: processtree (main.c:35)
+==414404==    by 0x408C41: minishell_loop (main.c:61)
+==414404==    by 0x408B5F: main (main.c:80)
+==414404== 
+==414404== Open file descriptor 10: /dev/pts/0
+==414404==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414404==    by 0x403C4B: redir_builtin (execute.c:47)
+==414404==    by 0x403B02: onlybuiltin (execute.c:79)
+==414404==    by 0x403A0B: execute (execute.c:110)
+==414404==    by 0x408D2C: processtree (main.c:35)
+==414404==    by 0x408C41: minishell_loop (main.c:61)
+==414404==    by 0x408B5F: main (main.c:80)
+==414404== 
+==414404== Open file descriptor 9: /dev/pts/0
+==414404==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414404==    by 0x403C4B: redir_builtin (execute.c:47)
+==414404==    by 0x403B02: onlybuiltin (execute.c:79)
+==414404==    by 0x403A0B: execute (execute.c:110)
+==414404==    by 0x408D2C: processtree (main.c:35)
+==414404==    by 0x408C41: minishell_loop (main.c:61)
+==414404==    by 0x408B5F: main (main.c:80)
+==414404== 
+==414404== Open file descriptor 8: /dev/pts/0
+==414404==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414404==    by 0x403C4B: redir_builtin (execute.c:47)
+==414404==    by 0x403B02: onlybuiltin (execute.c:79)
+==414404==    by 0x403A0B: execute (execute.c:110)
+==414404==    by 0x408D2C: processtree (main.c:35)
+==414404==    by 0x408C41: minishell_loop (main.c:61)
+==414404==    by 0x408B5F: main (main.c:80)
+==414404== 
+==414404== Open file descriptor 7: /dev/pts/0
+==414404==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414404==    by 0x403C4B: redir_builtin (execute.c:47)
+==414404==    by 0x403B02: onlybuiltin (execute.c:79)
+==414404==    by 0x403A0B: execute (execute.c:110)
+==414404==    by 0x408D2C: processtree (main.c:35)
+==414404==    by 0x408C41: minishell_loop (main.c:61)
+==414404==    by 0x408B5F: main (main.c:80)
+==414404== 
+==414404== Open file descriptor 6: /dev/pts/0
+==414404==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414404==    by 0x403C4B: redir_builtin (execute.c:47)
+==414404==    by 0x403B02: onlybuiltin (execute.c:79)
+==414404==    by 0x403A0B: execute (execute.c:110)
+==414404==    by 0x408D2C: processtree (main.c:35)
+==414404==    by 0x408C41: minishell_loop (main.c:61)
+==414404==    by 0x408B5F: main (main.c:80)
+==414404== 
+==414404== Open file descriptor 5: /dev/pts/0
+==414404==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414404==    by 0x403C4B: redir_builtin (execute.c:47)
+==414404==    by 0x403B02: onlybuiltin (execute.c:79)
+==414404==    by 0x403A0B: execute (execute.c:110)
+==414404==    by 0x408D2C: processtree (main.c:35)
+==414404==    by 0x408C41: minishell_loop (main.c:61)
+==414404==    by 0x408B5F: main (main.c:80)
+==414404== 
+==414404== Open file descriptor 4: /dev/pts/0
+==414404==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414404==    by 0x403C4B: redir_builtin (execute.c:47)
+==414404==    by 0x403B02: onlybuiltin (execute.c:79)
+==414404==    by 0x403A0B: execute (execute.c:110)
+==414404==    by 0x408D2C: processtree (main.c:35)
+==414404==    by 0x408C41: minishell_loop (main.c:61)
+==414404==    by 0x408B5F: main (main.c:80)
+==414404== 
+==414404== 
+==414404== HEAP SUMMARY:
+==414404==     in use at exit: 208,417 bytes in 225 blocks
+==414404==   total heap usage: 1,004 allocs, 779 frees, 240,574 bytes allocated
+==414404== 
+==414404== LEAK SUMMARY:
+==414404==    definitely lost: 0 bytes in 0 blocks
+==414404==    indirectly lost: 0 bytes in 0 blocks
+==414404==      possibly lost: 0 bytes in 0 blocks
+==414404==    still reachable: 0 bytes in 0 blocks
+==414404==         suppressed: 208,417 bytes in 225 blocks
+==414404== 
+==414404== For lists of detected and suppressed errors, rerun with: -s
+==414404== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% ls
+builtins  env  error  exec  expansion  f1  f2  hd.txt  hello  inc  libft  main.c  Makefile  minishell  obj  parse  readline.supp  signal  token
+weneedtherapy% 
+exit
+==414349== 
+==414349== FILE DESCRIPTORS: 11 open (3 std) at exit.
+==414349== Open file descriptor 11: /dev/pts/0
+==414349==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414349==    by 0x403C4B: redir_builtin (execute.c:47)
+==414349==    by 0x403B02: onlybuiltin (execute.c:79)
+==414349==    by 0x403A0B: execute (execute.c:110)
+==414349==    by 0x408D2C: processtree (main.c:35)
+==414349==    by 0x408C41: minishell_loop (main.c:61)
+==414349==    by 0x408B5F: main (main.c:80)
+==414349== 
+==414349== Open file descriptor 10: /dev/pts/0
+==414349==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414349==    by 0x403C4B: redir_builtin (execute.c:47)
+==414349==    by 0x403B02: onlybuiltin (execute.c:79)
+==414349==    by 0x403A0B: execute (execute.c:110)
+==414349==    by 0x408D2C: processtree (main.c:35)
+==414349==    by 0x408C41: minishell_loop (main.c:61)
+==414349==    by 0x408B5F: main (main.c:80)
+==414349== 
+==414349== Open file descriptor 9: /dev/pts/0
+==414349==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414349==    by 0x403C4B: redir_builtin (execute.c:47)
+==414349==    by 0x403B02: onlybuiltin (execute.c:79)
+==414349==    by 0x403A0B: execute (execute.c:110)
+==414349==    by 0x408D2C: processtree (main.c:35)
+==414349==    by 0x408C41: minishell_loop (main.c:61)
+==414349==    by 0x408B5F: main (main.c:80)
+==414349== 
+==414349== Open file descriptor 8: /dev/pts/0
+==414349==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414349==    by 0x403C4B: redir_builtin (execute.c:47)
+==414349==    by 0x403B02: onlybuiltin (execute.c:79)
+==414349==    by 0x403A0B: execute (execute.c:110)
+==414349==    by 0x408D2C: processtree (main.c:35)
+==414349==    by 0x408C41: minishell_loop (main.c:61)
+==414349==    by 0x408B5F: main (main.c:80)
+==414349== 
+==414349== Open file descriptor 7: /dev/pts/0
+==414349==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414349==    by 0x403C4B: redir_builtin (execute.c:47)
+==414349==    by 0x403B02: onlybuiltin (execute.c:79)
+==414349==    by 0x403A0B: execute (execute.c:110)
+==414349==    by 0x408D2C: processtree (main.c:35)
+==414349==    by 0x408C41: minishell_loop (main.c:61)
+==414349==    by 0x408B5F: main (main.c:80)
+==414349== 
+==414349== Open file descriptor 6: /dev/pts/0
+==414349==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414349==    by 0x403C4B: redir_builtin (execute.c:47)
+==414349==    by 0x403B02: onlybuiltin (execute.c:79)
+==414349==    by 0x403A0B: execute (execute.c:110)
+==414349==    by 0x408D2C: processtree (main.c:35)
+==414349==    by 0x408C41: minishell_loop (main.c:61)
+==414349==    by 0x408B5F: main (main.c:80)
+==414349== 
+==414349== Open file descriptor 5: /dev/pts/0
+==414349==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414349==    by 0x403C4B: redir_builtin (execute.c:47)
+==414349==    by 0x403B02: onlybuiltin (execute.c:79)
+==414349==    by 0x403A0B: execute (execute.c:110)
+==414349==    by 0x408D2C: processtree (main.c:35)
+==414349==    by 0x408C41: minishell_loop (main.c:61)
+==414349==    by 0x408B5F: main (main.c:80)
+==414349== 
+==414349== Open file descriptor 4: /dev/pts/0
+==414349==    at 0x49D8FEB: dup (syscall-template.S:120)
+==414349==    by 0x403C4B: redir_builtin (execute.c:47)
+==414349==    by 0x403B02: onlybuiltin (execute.c:79)
+==414349==    by 0x403A0B: execute (execute.c:110)
+==414349==    by 0x408D2C: processtree (main.c:35)
+==414349==    by 0x408C41: minishell_loop (main.c:61)
+==414349==    by 0x408B5F: main (main.c:80)
+==414349== 
+==414349== 
+==414349== HEAP SUMMARY:
+==414349==     in use at exit: 208,443 bytes in 225 blocks
+==414349==   total heap usage: 1,056 allocs, 831 frees, 242,761 bytes allocated
+==414349== 
+==414349== LEAK SUMMARY:
+==414349==    definitely lost: 0 bytes in 0 blocks
+==414349==    indirectly lost: 0 bytes in 0 blocks
+==414349==      possibly lost: 0 bytes in 0 blocks
+==414349==    still reachable: 0 bytes in 0 blocks
+==414349==         suppressed: 208,443 bytes in 225 blocks
+==414349== 
+==414349== For lists of detected and suppressed errors, rerun with: -s
+==414349== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+c1r2s5% valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
+==414412== Memcheck, a memory error detector
+==414412== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==414412== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==414412== Command: ./minishell
+==414412== 
+weneedtherapy% cat<<eof|cat<<eof2|cat<<eof3
+> 1
+> 2
+> 3
+> eof
+> /usr/bin/cat: write error: Broken pipe
+4
+> 5
+> 6
+> eof2
+> /usr/bin/cat: write error: Broken pipe
+7
+> 8
+> 9
+> eof3
+7
+8
+9
+weneedtherapy% 
+exit
+==414412== 
+==414412== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==414412== 
+==414412== HEAP SUMMARY:
+==414412==     in use at exit: 208,443 bytes in 225 blocks
+==414412==   total heap usage: 785 allocs, 560 frees, 241,253 bytes allocated
+==414412== 
+==414412== LEAK SUMMARY:
+==414412==    definitely lost: 0 bytes in 0 blocks
+==414412==    indirectly lost: 0 bytes in 0 blocks
+==414412==      possibly lost: 0 bytes in 0 blocks
+==414412==    still reachable: 0 bytes in 0 blocks
+==414412==         suppressed: 208,443 bytes in 225 blocks
+==414412== 
+==414412== For lists of detected and suppressed errors, rerun with: -s
+==414412== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+c1r2s5% valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
+==414466== Memcheck, a memory error detector
+==414466== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==414466== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==414466== Command: ./minishell
+==414466== 
+weneedtherapy% cat<<eof<readline.supp
+> asdjasdijas
+> asdoasdoaij
+> eof
+{ 
+    leak readline
+    Memcheck:Leak
+    ...
+    fun:readline
+}
+{
+    leak add_history
+    Memcheck:Leak
+    ...
+    fun:add_history
+}
+weneedtherapy% asd
+asd: command not found
+==414536== 
+==414536== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==414536== 
+==414536== HEAP SUMMARY:
+==414536==     in use at exit: 208,186 bytes in 222 blocks
+==414536==   total heap usage: 726 allocs, 504 frees, 237,157 bytes allocated
+==414536== 
+==414536== LEAK SUMMARY:
+==414536==    definitely lost: 0 bytes in 0 blocks
+==414536==    indirectly lost: 0 bytes in 0 blocks
+==414536==      possibly lost: 0 bytes in 0 blocks
+==414536==    still reachable: 0 bytes in 0 blocks
+==414536==         suppressed: 208,186 bytes in 222 blocks
+==414536== 
+==414536== For lists of detected and suppressed errors, rerun with: -s
+==414536== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% cat<<eof<readline.supp<<eof2<Makefile
+> sadoasjdojad
+> asidasdioh
+> eof
+> asodjaosdja
+> asdoajdopasj
+> eof2
+# Program name
+NAME = minishell
+
+# Compiler and flags
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+
+# Libraries and includes
+LIBFT = libft/libft.a
+LIBFT_DIR = libft
+INC_DIR = inc
+INC = -I$(INC_DIR) -I$(LIBFT_DIR)
+READLINE = -lreadline
+
+# Header files
+HEADERS = $(INC_DIR)/minishell.h \
+          $(INC_DIR)/token.h \
+          $(INC_DIR)/parser.h \
+          $(INC_DIR)/exec.h \
+          $(INC_DIR)/pipe.h \
+          $(INC_DIR)/redirect.h \
+          $(INC_DIR)/builtins.h \
+          $(INC_DIR)/heredoc.h \
+          $(INC_DIR)/error.h \
+		  $(INC_DIR)/expansion.h \
+		  $(INC_DIR)/env.h
+
+# Directories
+OBJ_DIR = obj
+SRC_DIRS = token parse exec pipe redirect builtins heredoc signal error expansion env
+
+# Source files (separate main.c)
+#SRCS = $(wildcard $(SRC_DIRS:=/*.c))
+#parse/parse_utils2.c parse/redir_utils2.c
+SRCS =	builtins/ft_cd_utils.c builtins/ft_cd.c builtins/ft_dot.c builtins/ft_dotdot.c builtins/ft_echo.c \
+		builtins/ft_env.c builtins/ft_exit.c builtins/ft_export.c builtins/ft_isbulitin.c builtins/ft_pwd.c \
+		builtins/ft_unset.c \
+		env/check_file_access.c env/check_file_type.c env/env_utils.c env/init_shell.c env/update_env.c \
+		error/error.c \
+		exec/exe_builtin_helper.c exec/exe_utils_2.c exec/exe_utils.c exec/execute.c exec/ft_heredoc_utils.c exec/ft_heredoc.c exec/exe_add_funcs.c exec/exe_commands.c exec/executechild.c \
+		expansion/expansion_utils.c expansion/expansion.c expansion/here_doc_expand_utils.c expansion/here_doc_expand.c \
+		parse/createtree.c parse/direxists.c parse/ft_handle_direct_path.c parse/ft_path.c parse/parse_error_utils.c parse/parse_helper.c parse/redir_helper.c\
+		parse/parse_utils.c parse/redir_utils.c parse/treehelper.c \
+		signal/signal_utils.c signal/signal.c \
+		token/add_quote.c token/llist_utils.c token/process_no_quote.c token/process_quote.c token/process_special_tok.c \
+		token/split_node_helper.c token/split_node.c token/token_helper.c token/token_syntax.c token/token_utils.c \
+		token/token_utils2.c token/tokenizer.c token/isvalidfile.c
+
+MAIN_SRC = main.c
+
+# Object files (separate main.o)
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+MAIN_OBJ = $(OBJ_DIR)/main.o
+
+# Add this near the top with other variable definitions
+DEPS = $(OBJS:.o=.d) $(MAIN_OBJ:.o=.d)
+
+# Create obj directories string for creation
+OBJ_DIRS = $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SRC_DIRS))
+
+# Rules
+all: $(NAME)
+
+# Create object directories
+$(OBJ_DIRS):
+	mkdir -p $(OBJ_DIRS)
+
+# Compile libft
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+# Special rule for main.c
+# $(MAIN_OBJ): $(MAIN_SRC)
+# 	mkdir -p $(OBJ_DIR)
+# 	$(CC) $(CFLAGS) $(INC) -g -c $< -o $@
+
+$(MAIN_OBJ): $(MAIN_SRC) $(HEADERS)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INC) -MMD -MP -g -c $< -o $@
+
+# Compile other object files
+# This line makes every .o file depend on ALL headers $(OBJ_DIR)/%.o: %.c  #$(HEADERS)
+# $(OBJ_DIR)/%.o: %.c
+# 	mkdir -p $(dir $@)
+# 	$(CC) $(CFLAGS) $(INC) -c -g $< -o $@
+
+$(OBJ_DIR)/%.o: %.c $(HEADERS)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INC) -MMD -MP -c -g $< -o $@
+
+## HEADERS = $(INC_DIR)/minishell.h  #replace with this line when minshell.h is set up
+
+# Link program
+# $(NAME): $(LIBFT) $(OBJ_DIRS) $(OBJS) $(MAIN_OBJ)
+# 	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) $(LIBFT) $(READLINE) -g -o $(NAME)
+
+$(NAME): $(LIBFT) $(OBJS) $(MAIN_OBJ)
+	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) $(LIBFT) $(READLINE) -g -o $(NAME)
+
+# Include generated dependency files
+-include $(DEPS)
+
+# Clean object files
+clean:
+	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -rf $(OBJ_DIR)
+
+# Clean everything
+fclean: clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(NAME)
+
+# Remake everything
+re: fclean all
+
+# Phony targets
+.PHONY: all clean fclean re
+weneedtherapy% 
+exit
+==414466== 
+==414466== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==414466== 
+==414466== HEAP SUMMARY:
+==414466==     in use at exit: 208,186 bytes in 222 blocks
+==414466==   total heap usage: 948 allocs, 726 frees, 240,785 bytes allocated
+==414466== 
+==414466== LEAK SUMMARY:
+==414466==    definitely lost: 0 bytes in 0 blocks
+==414466==    indirectly lost: 0 bytes in 0 blocks
+==414466==      possibly lost: 0 bytes in 0 blocks
+==414466==    still reachable: 0 bytes in 0 blocks
+==414466==         suppressed: 208,186 bytes in 222 blocks
+==414466== 
+==414466== For lists of detected and suppressed errors, rerun with: -s
+==414466== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+c1r2s5% valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
+==414541== Memcheck, a memory error detector
+==414541== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==414541== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==414541== Command: ./minishell
+==414541== 
+weneedtherapy% cat<<$USER
+> $HOME
+> asasdad
+> $USER
+/home/hui-lim
+asasdad
+weneedtherapy% cat<<$USER
+> 
+warning: heredoc delimited by end-of-file
+weneedtherapy% cat<<""$USER
+> $HOME
+> $USER
+$HOME
+weneedtherapy% touch f1
+weneedtherapy% chmod -w f1
+weneedtherapy% cat Makefile>f1
+f1: Permission denied
+weneedtherapy% echo $?
+1
+weneedtherapy% cat Makefile>f1>f2>f3
+f1: Permission denied
+weneedtherapy% ls
+builtins  env  error  exec  expansion  f1  f2  hd.txt  hello  inc  libft  main.c  Makefile  minishell  obj  parse  readline.supp  signal  token
+weneedtherapy% rm f2
+weneedtherapy% cat Makefile>f1>f2>f3
+f1: Permission denied
+weneedtherapy% ls
+builtins  env  error  exec  expansion  f1  hd.txt  hello  inc  libft  main.c  Makefile	minishell  obj	parse  readline.supp  signal  token
+weneedtherapy% chmod -r f1
+weneedtherapy% cat Makefile<f1<f2<f3
+f1: Permission denied
+weneedtherapy% echo $?
+1
+weneedtherapy% cat|cat|ls
+builtins  env  error  exec  expansion  f1  hd.txt  hello  inc  libft  main.c  Makefile	minishell  obj	parse  readline.supp  signal  token
+
+/usr/bin/cat: write error: Broken pipe
+
+/usr/bin/cat: write error: Broken pipe
+weneedtherapy% <<eof>f1<Makefile<cat>f2|>f3>f4<Makefile<<eof2|cat>f5<<eof3<Makefile>f6
+> 1
+> 2
+> 3
+> eof
+f1: Permission denied
+> 
+warning: heredoc delimited by end-of-file
+> ==415198== 
+==415198== FILE DESCRIPTORS: 5 open (3 std) at exit.
+==415198== Open file descriptor 6:
+==415198==    at 0x49D907D: pipe (pipe.c:29)
+==415198==    by 0x4046A7: init_exe_commands (exe_commands.c:60)
+==415198==    by 0x4044F9: exe_commands (exe_commands.c:72)
+==415198==    by 0x4037E7: exe_rightnode (exe_utils.c:68)
+==415198==    by 0x4048F1: handle_parent (exe_commands.c:44)
+==415198==    by 0x4045BC: exe_commands (exe_commands.c:85)
+==415198==    by 0x403BFE: init_exe (execute.c:36)
+==415198==    by 0x403A35: execute (execute.c:112)
+==415198==    by 0x408D2C: processtree (main.c:35)
+==415198==    by 0x408C41: minishell_loop (main.c:61)
+==415198==    by 0x408B5F: main (main.c:80)
+==415198== 
+==415198== Open file descriptor 5:
+==415198==    at 0x49D907D: pipe (pipe.c:29)
+==415198==    by 0x4046A7: init_exe_commands (exe_commands.c:60)
+==415198==    by 0x4044F9: exe_commands (exe_commands.c:72)
+==415198==    by 0x4037E7: exe_rightnode (exe_utils.c:68)
+==415198==    by 0x4048F1: handle_parent (exe_commands.c:44)
+==415198==    by 0x4045BC: exe_commands (exe_commands.c:85)
+==415198==    by 0x403BFE: init_exe (execute.c:36)
+==415198==    by 0x403A35: execute (execute.c:112)
+==415198==    by 0x408D2C: processtree (main.c:35)
+==415198==    by 0x408C41: minishell_loop (main.c:61)
+==415198==    by 0x408B5F: main (main.c:80)
+==415198== 
+==415198== 
+==415198== HEAP SUMMARY:
+==415198==     in use at exit: 208,417 bytes in 225 blocks
+==415198==   total heap usage: 2,156 allocs, 1,931 frees, 280,885 bytes allocated
+==415198== 
+==415198== LEAK SUMMARY:
+==415198==    definitely lost: 0 bytes in 0 blocks
+==415198==    indirectly lost: 0 bytes in 0 blocks
+==415198==      possibly lost: 0 bytes in 0 blocks
+==415198==    still reachable: 0 bytes in 0 blocks
+==415198==         suppressed: 208,417 bytes in 225 blocks
+==415198== 
+==415198== For lists of detected and suppressed errors, rerun with: -s
+==415198== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+warning: heredoc delimited by end-of-file
+weneedtherapy% ls
+builtins  env  error  exec  expansion  f1  f3  f4  f5  f6  hd.txt  hello  inc  libft  main.c  Makefile	minishell  obj	parse  readline.supp  signal  token
+weneedtherapy% chmod +rw f1
+weneedtherapy% <<eof>f1<Makefile<cat>f2|>f3>f4<Makefile<<eof2|cat>f5<<eof3<Makefile>f6
+> 1
+> 2
+> 3
+> eof
+cat: No such file or directory
+> 
+warning: heredoc delimited by end-of-file
+> ==415207== 
+==415207== FILE DESCRIPTORS: 5 open (3 std) at exit.
+==415207== Open file descriptor 5:
+==415207==    at 0x49D907D: pipe (pipe.c:29)
+==415207==    by 0x4046A7: init_exe_commands (exe_commands.c:60)
+==415207==    by 0x4044F9: exe_commands (exe_commands.c:72)
+==415207==    by 0x4037E7: exe_rightnode (exe_utils.c:68)
+==415207==    by 0x4048F1: handle_parent (exe_commands.c:44)
+==415207==    by 0x4045BC: exe_commands (exe_commands.c:85)
+==415207==    by 0x403BFE: init_exe (execute.c:36)
+==415207==    by 0x403A35: execute (execute.c:112)
+==415207==    by 0x408D2C: processtree (main.c:35)
+==415207==    by 0x408C41: minishell_loop (main.c:61)
+==415207==    by 0x408B5F: main (main.c:80)
+==415207== 
+==415207== Open file descriptor 4:
+==415207==    at 0x49D907D: pipe (pipe.c:29)
+==415207==    by 0x4046A7: init_exe_commands (exe_commands.c:60)
+==415207==    by 0x4044F9: exe_commands (exe_commands.c:72)
+==415207==    by 0x4037E7: exe_rightnode (exe_utils.c:68)
+==415207==    by 0x4048F1: handle_parent (exe_commands.c:44)
+==415207==    by 0x4045BC: exe_commands (exe_commands.c:85)
+==415207==    by 0x403BFE: init_exe (execute.c:36)
+==415207==    by 0x403A35: execute (execute.c:112)
+==415207==    by 0x408D2C: processtree (main.c:35)
+==415207==    by 0x408C41: minishell_loop (main.c:61)
+==415207==    by 0x408B5F: main (main.c:80)
+==415207== 
+==415207== 
+==415207== HEAP SUMMARY:
+==415207==     in use at exit: 208,417 bytes in 225 blocks
+==415207==   total heap usage: 2,579 allocs, 2,354 frees, 294,364 bytes allocated
+==415207== 
+==415207== LEAK SUMMARY:
+==415207==    definitely lost: 0 bytes in 0 blocks
+==415207==    indirectly lost: 0 bytes in 0 blocks
+==415207==      possibly lost: 0 bytes in 0 blocks
+==415207==    still reachable: 0 bytes in 0 blocks
+==415207==         suppressed: 208,417 bytes in 225 blocks
+==415207== 
+==415207== For lists of detected and suppressed errors, rerun with: -s
+==415207== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+warning: heredoc delimited by end-of-file
+weneedtherapy% <<eof>f1<Makefile cat>f2|>f3>f4<Makefile<<eof2|cat>f5<<eof3<Makefile>f6
+> 1
+> 2
+> 3
+> eof
+> 4
+> 5
+> 6
+> eof
+> 7
+> 8
+> eof2
+> ==415217== 
+==415217== FILE DESCRIPTORS: 5 open (3 std) at exit.
+==415217== Open file descriptor 6:
+==415217==    at 0x49D907D: pipe (pipe.c:29)
+==415217==    by 0x4046A7: init_exe_commands (exe_commands.c:60)
+==415217==    by 0x4044F9: exe_commands (exe_commands.c:72)
+==415217==    by 0x4037E7: exe_rightnode (exe_utils.c:68)
+==415217==    by 0x4048F1: handle_parent (exe_commands.c:44)
+==415217==    by 0x4045BC: exe_commands (exe_commands.c:85)
+==415217==    by 0x403BFE: init_exe (execute.c:36)
+==415217==    by 0x403A35: execute (execute.c:112)
+==415217==    by 0x408D2C: processtree (main.c:35)
+==415217==    by 0x408C41: minishell_loop (main.c:61)
+==415217==    by 0x408B5F: main (main.c:80)
+==415217== 
+==415217== Open file descriptor 5:
+==415217==    at 0x49D907D: pipe (pipe.c:29)
+==415217==    by 0x4046A7: init_exe_commands (exe_commands.c:60)
+==415217==    by 0x4044F9: exe_commands (exe_commands.c:72)
+==415217==    by 0x4037E7: exe_rightnode (exe_utils.c:68)
+==415217==    by 0x4048F1: handle_parent (exe_commands.c:44)
+==415217==    by 0x4045BC: exe_commands (exe_commands.c:85)
+==415217==    by 0x403BFE: init_exe (execute.c:36)
+==415217==    by 0x403A35: execute (execute.c:112)
+==415217==    by 0x408D2C: processtree (main.c:35)
+==415217==    by 0x408C41: minishell_loop (main.c:61)
+==415217==    by 0x408B5F: main (main.c:80)
+==415217== 
+==415217== 
+==415217== HEAP SUMMARY:
+==415217==     in use at exit: 208,417 bytes in 225 blocks
+==415217==   total heap usage: 2,947 allocs, 2,722 frees, 304,282 bytes allocated
+==415217== 
+==415217== LEAK SUMMARY:
+==415217==    definitely lost: 0 bytes in 0 blocks
+==415217==    indirectly lost: 0 bytes in 0 blocks
+==415217==      possibly lost: 0 bytes in 0 blocks
+==415217==    still reachable: 0 bytes in 0 blocks
+==415217==         suppressed: 208,417 bytes in 225 blocks
+==415217== 
+==415217== For lists of detected and suppressed errors, rerun with: -s
+==415217== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+7
+> 8
+> 9
+> eof3
+weneedtherapy% cat f2
+# Program name
+NAME = minishell
+
+# Compiler and flags
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+
+# Libraries and includes
+LIBFT = libft/libft.a
+LIBFT_DIR = libft
+INC_DIR = inc
+INC = -I$(INC_DIR) -I$(LIBFT_DIR)
+READLINE = -lreadline
+
+# Header files
+HEADERS = $(INC_DIR)/minishell.h \
+          $(INC_DIR)/token.h \
+          $(INC_DIR)/parser.h \
+          $(INC_DIR)/exec.h \
+          $(INC_DIR)/pipe.h \
+          $(INC_DIR)/redirect.h \
+          $(INC_DIR)/builtins.h \
+          $(INC_DIR)/heredoc.h \
+          $(INC_DIR)/error.h \
+		  $(INC_DIR)/expansion.h \
+		  $(INC_DIR)/env.h
+
+# Directories
+OBJ_DIR = obj
+SRC_DIRS = token parse exec pipe redirect builtins heredoc signal error expansion env
+
+# Source files (separate main.c)
+#SRCS = $(wildcard $(SRC_DIRS:=/*.c))
+#parse/parse_utils2.c parse/redir_utils2.c
+SRCS =	builtins/ft_cd_utils.c builtins/ft_cd.c builtins/ft_dot.c builtins/ft_dotdot.c builtins/ft_echo.c \
+		builtins/ft_env.c builtins/ft_exit.c builtins/ft_export.c builtins/ft_isbulitin.c builtins/ft_pwd.c \
+		builtins/ft_unset.c \
+		env/check_file_access.c env/check_file_type.c env/env_utils.c env/init_shell.c env/update_env.c \
+		error/error.c \
+		exec/exe_builtin_helper.c exec/exe_utils_2.c exec/exe_utils.c exec/execute.c exec/ft_heredoc_utils.c exec/ft_heredoc.c exec/exe_add_funcs.c exec/exe_commands.c exec/executechild.c \
+		expansion/expansion_utils.c expansion/expansion.c expansion/here_doc_expand_utils.c expansion/here_doc_expand.c \
+		parse/createtree.c parse/direxists.c parse/ft_handle_direct_path.c parse/ft_path.c parse/parse_error_utils.c parse/parse_helper.c parse/redir_helper.c\
+		parse/parse_utils.c parse/redir_utils.c parse/treehelper.c \
+		signal/signal_utils.c signal/signal.c \
+		token/add_quote.c token/llist_utils.c token/process_no_quote.c token/process_quote.c token/process_special_tok.c \
+		token/split_node_helper.c token/split_node.c token/token_helper.c token/token_syntax.c token/token_utils.c \
+		token/token_utils2.c token/tokenizer.c token/isvalidfile.c
+
+MAIN_SRC = main.c
+
+# Object files (separate main.o)
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+MAIN_OBJ = $(OBJ_DIR)/main.o
+
+# Add this near the top with other variable definitions
+DEPS = $(OBJS:.o=.d) $(MAIN_OBJ:.o=.d)
+
+# Create obj directories string for creation
+OBJ_DIRS = $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SRC_DIRS))
+
+# Rules
+all: $(NAME)
+
+# Create object directories
+$(OBJ_DIRS):
+	mkdir -p $(OBJ_DIRS)
+
+# Compile libft
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+# Special rule for main.c
+# $(MAIN_OBJ): $(MAIN_SRC)
+# 	mkdir -p $(OBJ_DIR)
+# 	$(CC) $(CFLAGS) $(INC) -g -c $< -o $@
+
+$(MAIN_OBJ): $(MAIN_SRC) $(HEADERS)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INC) -MMD -MP -g -c $< -o $@
+
+# Compile other object files
+# This line makes every .o file depend on ALL headers $(OBJ_DIR)/%.o: %.c  #$(HEADERS)
+# $(OBJ_DIR)/%.o: %.c
+# 	mkdir -p $(dir $@)
+# 	$(CC) $(CFLAGS) $(INC) -c -g $< -o $@
+
+$(OBJ_DIR)/%.o: %.c $(HEADERS)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INC) -MMD -MP -c -g $< -o $@
+
+## HEADERS = $(INC_DIR)/minishell.h  #replace with this line when minshell.h is set up
+
+# Link program
+# $(NAME): $(LIBFT) $(OBJ_DIRS) $(OBJS) $(MAIN_OBJ)
+# 	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) $(LIBFT) $(READLINE) -g -o $(NAME)
+
+$(NAME): $(LIBFT) $(OBJS) $(MAIN_OBJ)
+	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) $(LIBFT) $(READLINE) -g -o $(NAME)
+
+# Include generated dependency files
+-include $(DEPS)
+
+# Clean object files
+clean:
+	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -rf $(OBJ_DIR)
+
+# Clean everything
+fclean: clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(NAME)
+
+# Remake everything
+re: fclean all
+
+# Phony targets
+.PHONY: all clean fclean re
+weneedtherapy% cat f4
+weneedtherapy% cat f5
+weneedtherapy% cat f6
+# Program name
+NAME = minishell
+
+# Compiler and flags
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+
+# Libraries and includes
+LIBFT = libft/libft.a
+LIBFT_DIR = libft
+INC_DIR = inc
+INC = -I$(INC_DIR) -I$(LIBFT_DIR)
+READLINE = -lreadline
+
+# Header files
+HEADERS = $(INC_DIR)/minishell.h \
+          $(INC_DIR)/token.h \
+          $(INC_DIR)/parser.h \
+          $(INC_DIR)/exec.h \
+          $(INC_DIR)/pipe.h \
+          $(INC_DIR)/redirect.h \
+          $(INC_DIR)/builtins.h \
+          $(INC_DIR)/heredoc.h \
+          $(INC_DIR)/error.h \
+		  $(INC_DIR)/expansion.h \
+		  $(INC_DIR)/env.h
+
+# Directories
+OBJ_DIR = obj
+SRC_DIRS = token parse exec pipe redirect builtins heredoc signal error expansion env
+
+# Source files (separate main.c)
+#SRCS = $(wildcard $(SRC_DIRS:=/*.c))
+#parse/parse_utils2.c parse/redir_utils2.c
+SRCS =	builtins/ft_cd_utils.c builtins/ft_cd.c builtins/ft_dot.c builtins/ft_dotdot.c builtins/ft_echo.c \
+		builtins/ft_env.c builtins/ft_exit.c builtins/ft_export.c builtins/ft_isbulitin.c builtins/ft_pwd.c \
+		builtins/ft_unset.c \
+		env/check_file_access.c env/check_file_type.c env/env_utils.c env/init_shell.c env/update_env.c \
+		error/error.c \
+		exec/exe_builtin_helper.c exec/exe_utils_2.c exec/exe_utils.c exec/execute.c exec/ft_heredoc_utils.c exec/ft_heredoc.c exec/exe_add_funcs.c exec/exe_commands.c exec/executechild.c \
+		expansion/expansion_utils.c expansion/expansion.c expansion/here_doc_expand_utils.c expansion/here_doc_expand.c \
+		parse/createtree.c parse/direxists.c parse/ft_handle_direct_path.c parse/ft_path.c parse/parse_error_utils.c parse/parse_helper.c parse/redir_helper.c\
+		parse/parse_utils.c parse/redir_utils.c parse/treehelper.c \
+		signal/signal_utils.c signal/signal.c \
+		token/add_quote.c token/llist_utils.c token/process_no_quote.c token/process_quote.c token/process_special_tok.c \
+		token/split_node_helper.c token/split_node.c token/token_helper.c token/token_syntax.c token/token_utils.c \
+		token/token_utils2.c token/tokenizer.c token/isvalidfile.c
+
+MAIN_SRC = main.c
+
+# Object files (separate main.o)
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+MAIN_OBJ = $(OBJ_DIR)/main.o
+
+# Add this near the top with other variable definitions
+DEPS = $(OBJS:.o=.d) $(MAIN_OBJ:.o=.d)
+
+# Create obj directories string for creation
+OBJ_DIRS = $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(SRC_DIRS))
+
+# Rules
+all: $(NAME)
+
+# Create object directories
+$(OBJ_DIRS):
+	mkdir -p $(OBJ_DIRS)
+
+# Compile libft
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+
+# Special rule for main.c
+# $(MAIN_OBJ): $(MAIN_SRC)
+# 	mkdir -p $(OBJ_DIR)
+# 	$(CC) $(CFLAGS) $(INC) -g -c $< -o $@
+
+$(MAIN_OBJ): $(MAIN_SRC) $(HEADERS)
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INC) -MMD -MP -g -c $< -o $@
+
+# Compile other object files
+# This line makes every .o file depend on ALL headers $(OBJ_DIR)/%.o: %.c  #$(HEADERS)
+# $(OBJ_DIR)/%.o: %.c
+# 	mkdir -p $(dir $@)
+# 	$(CC) $(CFLAGS) $(INC) -c -g $< -o $@
+
+$(OBJ_DIR)/%.o: %.c $(HEADERS)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INC) -MMD -MP -c -g $< -o $@
+
+## HEADERS = $(INC_DIR)/minishell.h  #replace with this line when minshell.h is set up
+
+# Link program
+# $(NAME): $(LIBFT) $(OBJ_DIRS) $(OBJS) $(MAIN_OBJ)
+# 	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) $(LIBFT) $(READLINE) -g -o $(NAME)
+
+$(NAME): $(LIBFT) $(OBJS) $(MAIN_OBJ)
+	$(CC) $(CFLAGS) $(OBJS) $(MAIN_OBJ) $(LIBFT) $(READLINE) -g -o $(NAME)
+
+# Include generated dependency files
+-include $(DEPS)
+
+# Clean object files
+clean:
+	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -rf $(OBJ_DIR)
+
+# Clean everything
+fclean: clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(NAME)
+
+# Remake everything
+re: fclean all
+
+# Phony targets
+.PHONY: all clean fclean re
+weneedtherapy% ls
+builtins  env  error  exec  expansion  f1  f2  f3  f4  f5  f6  hd.txt  hello  inc  libft  main.c  Makefile  minishell  obj  parse  readline.supp  signal  token
+weneedtherapy% rm f1 f2 f3 f4 f5 f6
+weneedtherapy% 
+exit
+==414541== 
+==414541== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==414541== 
+==414541== HEAP SUMMARY:
+==414541==     in use at exit: 208,443 bytes in 225 blocks
+==414541==   total heap usage: 3,400 allocs, 3,175 frees, 321,209 bytes allocated
+==414541== 
+==414541== LEAK SUMMARY:
+==414541==    definitely lost: 0 bytes in 0 blocks
+==414541==    indirectly lost: 0 bytes in 0 blocks
+==414541==      possibly lost: 0 bytes in 0 blocks
+==414541==    still reachable: 0 bytes in 0 blocks
+==414541==         suppressed: 208,443 bytes in 225 blocks
+==414541== 
+==414541== For lists of detected and suppressed errors, rerun with: -s
+==414541== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+c1r2s5% valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
+==415416== Memcheck, a memory error detector
+==415416== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==415416== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==415416== Command: ./minishell
+==415416== 
+weneedtherapy% a
+a: command not found
+==415418== 
+==415418== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==415418== 
+==415418== HEAP SUMMARY:
+==415418==     in use at exit: 208,186 bytes in 222 blocks
+==415418==   total heap usage: 574 allocs, 352 frees, 233,996 bytes allocated
+==415418== 
+==415418== LEAK SUMMARY:
+==415418==    definitely lost: 0 bytes in 0 blocks
+==415418==    indirectly lost: 0 bytes in 0 blocks
+==415418==      possibly lost: 0 bytes in 0 blocks
+==415418==    still reachable: 0 bytes in 0 blocks
+==415418==         suppressed: 208,186 bytes in 222 blocks
+==415418== 
+==415418== For lists of detected and suppressed errors, rerun with: -s
+==415418== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% b
+b: command not found
+==415419== 
+==415419== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==415419== 
+==415419== HEAP SUMMARY:
+==415419==     in use at exit: 208,186 bytes in 222 blocks
+==415419==   total heap usage: 631 allocs, 409 frees, 236,234 bytes allocated
+==415419== 
+==415419== LEAK SUMMARY:
+==415419==    definitely lost: 0 bytes in 0 blocks
+==415419==    indirectly lost: 0 bytes in 0 blocks
+==415419==      possibly lost: 0 bytes in 0 blocks
+==415419==    still reachable: 0 bytes in 0 blocks
+==415419==         suppressed: 208,186 bytes in 222 blocks
+==415419== 
+==415419== For lists of detected and suppressed errors, rerun with: -s
+==415419== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% c
+c: command not found
+==415420== 
+==415420== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==415420== 
+==415420== HEAP SUMMARY:
+==415420==     in use at exit: 208,186 bytes in 222 blocks
+==415420==   total heap usage: 688 allocs, 466 frees, 238,472 bytes allocated
+==415420== 
+==415420== LEAK SUMMARY:
+==415420==    definitely lost: 0 bytes in 0 blocks
+==415420==    indirectly lost: 0 bytes in 0 blocks
+==415420==      possibly lost: 0 bytes in 0 blocks
+==415420==    still reachable: 0 bytes in 0 blocks
+==415420==         suppressed: 208,186 bytes in 222 blocks
+==415420== 
+==415420== For lists of detected and suppressed errors, rerun with: -s
+==415420== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% c^C
+weneedtherapy% b^C
+weneedtherapy% a^C
+weneedtherapy% a
+a: command not found
+==415480== 
+==415480== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==415480== 
+==415480== HEAP SUMMARY:
+==415480==     in use at exit: 208,186 bytes in 222 blocks
+==415480==   total heap usage: 747 allocs, 525 frees, 240,735 bytes allocated
+==415480== 
+==415480== LEAK SUMMARY:
+==415480==    definitely lost: 0 bytes in 0 blocks
+==415480==    indirectly lost: 0 bytes in 0 blocks
+==415480==      possibly lost: 0 bytes in 0 blocks
+==415480==    still reachable: 0 bytes in 0 blocks
+==415480==         suppressed: 208,186 bytes in 222 blocks
+==415480== 
+==415480== For lists of detected and suppressed errors, rerun with: -s
+==415480== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% b
+b: command not found
+==415481== 
+==415481== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==415481== 
+==415481== HEAP SUMMARY:
+==415481==     in use at exit: 208,186 bytes in 222 blocks
+==415481==   total heap usage: 804 allocs, 582 frees, 242,973 bytes allocated
+==415481== 
+==415481== LEAK SUMMARY:
+==415481==    definitely lost: 0 bytes in 0 blocks
+==415481==    indirectly lost: 0 bytes in 0 blocks
+==415481==      possibly lost: 0 bytes in 0 blocks
+==415481==    still reachable: 0 bytes in 0 blocks
+==415481==         suppressed: 208,186 bytes in 222 blocks
+==415481== 
+==415481== For lists of detected and suppressed errors, rerun with: -s
+==415481== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% c
+c: command not found
+==415482== 
+==415482== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==415482== 
+==415482== HEAP SUMMARY:
+==415482==     in use at exit: 208,186 bytes in 222 blocks
+==415482==   total heap usage: 861 allocs, 639 frees, 245,211 bytes allocated
+==415482== 
+==415482== LEAK SUMMARY:
+==415482==    definitely lost: 0 bytes in 0 blocks
+==415482==    indirectly lost: 0 bytes in 0 blocks
+==415482==      possibly lost: 0 bytes in 0 blocks
+==415482==    still reachable: 0 bytes in 0 blocks
+==415482==         suppressed: 208,186 bytes in 222 blocks
+==415482== 
+==415482== For lists of detected and suppressed errors, rerun with: -s
+==415482== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% c^C
+weneedtherapy% export a="ls -l"
+weneedtherapy% $a
+total 228
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 builtins
+drwxr-xr-x  2 hui-lim 2024_singapore    117 Mar  2 21:02 env
+drwxr-xr-x  2 hui-lim 2024_singapore     21 Mar  2 21:02 error
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 exec
+drwxr-xr-x  2 hui-lim 2024_singapore    106 Mar  2 21:02 expansion
+-rw-r--r--  1 hui-lim 2024_singapore      6 Mar  2 22:13 hd.txt
+-rw-r--r--  1 hui-lim 2024_singapore      0 Mar  2 21:15 hello
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 inc
+drwxr-xr-x  3 hui-lim 2024_singapore   4096 Mar  2 21:04 libft
+-rw-r--r--  1 hui-lim 2024_singapore   4424 Mar  2 21:02 main.c
+-rw-r--r--  1 hui-lim 2024_singapore   3754 Mar  2 21:02 Makefile
+-rwxr-xr-x  1 hui-lim 2024_singapore 188296 Mar  2 21:46 minishell
+drwxr-xr-x 10 hui-lim 2024_singapore    143 Mar  2 21:04 obj
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 parse
+-rw-r--r--  1 hui-lim 2024_singapore    137 Feb 22 17:38 readline.supp
+drwxr-xr-x  2 hui-lim 2024_singapore     44 Mar  2 21:02 signal
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 token
+weneedtherapy% "$a"
+ls -l: command not found
+==415655== 
+==415655== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==415655== 
+==415655== HEAP SUMMARY:
+==415655==     in use at exit: 208,186 bytes in 222 blocks
+==415655==   total heap usage: 1,097 allocs, 875 frees, 253,262 bytes allocated
+==415655== 
+==415655== LEAK SUMMARY:
+==415655==    definitely lost: 0 bytes in 0 blocks
+==415655==    indirectly lost: 0 bytes in 0 blocks
+==415655==      possibly lost: 0 bytes in 0 blocks
+==415655==    still reachable: 0 bytes in 0 blocks
+==415655==         suppressed: 208,186 bytes in 222 blocks
+==415655== 
+==415655== For lists of detected and suppressed errors, rerun with: -s
+==415655== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% export a=ls b=" " c=-l
+weneedtherapy% $a$b$c
+total 228
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 builtins
+drwxr-xr-x  2 hui-lim 2024_singapore    117 Mar  2 21:02 env
+drwxr-xr-x  2 hui-lim 2024_singapore     21 Mar  2 21:02 error
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 exec
+drwxr-xr-x  2 hui-lim 2024_singapore    106 Mar  2 21:02 expansion
+-rw-r--r--  1 hui-lim 2024_singapore      6 Mar  2 22:13 hd.txt
+-rw-r--r--  1 hui-lim 2024_singapore      0 Mar  2 21:15 hello
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 inc
+drwxr-xr-x  3 hui-lim 2024_singapore   4096 Mar  2 21:04 libft
+-rw-r--r--  1 hui-lim 2024_singapore   4424 Mar  2 21:02 main.c
+-rw-r--r--  1 hui-lim 2024_singapore   3754 Mar  2 21:02 Makefile
+-rwxr-xr-x  1 hui-lim 2024_singapore 188296 Mar  2 21:46 minishell
+drwxr-xr-x 10 hui-lim 2024_singapore    143 Mar  2 21:04 obj
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 parse
+-rw-r--r--  1 hui-lim 2024_singapore    137 Feb 22 17:38 readline.supp
+drwxr-xr-x  2 hui-lim 2024_singapore     44 Mar  2 21:02 signal
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 token
+weneedtherapy% $a"$b"$c
+total 228
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 builtins
+drwxr-xr-x  2 hui-lim 2024_singapore    117 Mar  2 21:02 env
+drwxr-xr-x  2 hui-lim 2024_singapore     21 Mar  2 21:02 error
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 exec
+drwxr-xr-x  2 hui-lim 2024_singapore    106 Mar  2 21:02 expansion
+-rw-r--r--  1 hui-lim 2024_singapore      6 Mar  2 22:13 hd.txt
+-rw-r--r--  1 hui-lim 2024_singapore      0 Mar  2 21:15 hello
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 inc
+drwxr-xr-x  3 hui-lim 2024_singapore   4096 Mar  2 21:04 libft
+-rw-r--r--  1 hui-lim 2024_singapore   4424 Mar  2 21:02 main.c
+-rw-r--r--  1 hui-lim 2024_singapore   3754 Mar  2 21:02 Makefile
+-rwxr-xr-x  1 hui-lim 2024_singapore 188296 Mar  2 21:46 minishell
+drwxr-xr-x 10 hui-lim 2024_singapore    143 Mar  2 21:04 obj
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 parse
+-rw-r--r--  1 hui-lim 2024_singapore    137 Feb 22 17:38 readline.supp
+drwxr-xr-x  2 hui-lim 2024_singapore     44 Mar  2 21:02 signal
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 token
+weneedtherapy% env
+LANGUAGE=en
+USER=hui-lim
+XDG_SESSION_TYPE=x11
+MAIN=hui-lim@student.42singapore.sg
+SHLVL=1
+LD_LIBRARY_PATH=/usr/lib/debug
+HOME=/home/hui-lim
+OLDPWD=/home/hui-lim/TEMP
+DESKTOP_SESSION=ubuntu
+GTK_MODULES=gail:atk-bridge
+XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+SYSTEMD_EXEC_PID=389093
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/102164/bus,guid=965dd7e712a2e769e6ed4d8267c447c8
+DBUS_STARTER_BUS_TYPE=session
+LIBVIRT_DEFAULT_URI=qemu:///system
+COLORTERM=truecolor
+DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+IM_CONFIG_PHASE=1
+GTK_IM_MODULE=ibus
+LOGNAME=hui-lim
+_=/usr/bin/valgrind
+XDG_SESSION_CLASS=user
+TERM=xterm-256color
+FT_HOOK_PATHNAME=login-user.d
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+PATH=/home/hui-lim/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+SESSION_MANAGER=local/c1r2s5.42singapore.sg:@/tmp/.ICE-unix/389093,unix/c1r2s5.42singapore.sg:/tmp/.ICE-unix/389093
+GDM_LANG=en
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/8f4db187_5b21_4200_9bcd_ccfc50fc863f
+XDG_MENU_PREFIX=gnome-
+XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session1
+XDG_RUNTIME_DIR=/run/user/102164
+GLIBCPP_FORCE_NEW=1
+DISPLAY=:0
+LANG=en_US.UTF-8
+XDG_CURRENT_DESKTOP=ubuntu:GNOME
+XDG_SESSION_DESKTOP=ubuntu
+GNOME_TERMINAL_SERVICE=:1.172
+XMODIFIERS=@im=ibus
+XAUTHORITY=/home/hui-lim/.Xauthority
+SSH_AUTH_SOCK=/run/user/102164/keyring/ssh
+XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/hui-lim
+SSH_AGENT_LAUNCHER=gnome-keyring
+KRB5CCNAME=FILE:/tmp/krb5cc_102164_7acBtU
+SHELL=/bin/zsh
+QT_ACCESSIBILITY=1
+GDMSESSION=ubuntu
+FT_HOOK_NAME=login-user
+DOCKER_HOST=unix:///run/user/102164/docker.sock
+GPG_AGENT_INFO=/run/user/102164/gnupg/S.gpg-agent:0:1
+QT_IM_MODULE=ibus
+PWD=/home/hui-lim/TEMP/minishell_eval1
+XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+XDG_DATA_DIRS=/usr/share/ubuntu:/usr/share/gnome:/home/hui-lim/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop
+DBUS_STARTER_ADDRESS=unix:path=/run/user/102164/bus,guid=965dd7e712a2e769e6ed4d8267c447c8
+VTE_VERSION=6800
+GLIBCXX_FORCE_NEW=1
+LD_PRELOAD=/usr/libexec/valgrind/vgpreload_core-amd64-linux.so:/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+a=ls
+b= 
+c=-l
+weneedtherapy% echo "$b"|cat -A
+ $
+==415708== 
+==415708== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==415708== 
+==415708== HEAP SUMMARY:
+==415708==     in use at exit: 208,443 bytes in 225 blocks
+==415708==   total heap usage: 1,566 allocs, 1,341 frees, 267,714 bytes allocated
+==415708== 
+==415708== LEAK SUMMARY:
+==415708==    definitely lost: 0 bytes in 0 blocks
+==415708==    indirectly lost: 0 bytes in 0 blocks
+==415708==      possibly lost: 0 bytes in 0 blocks
+==415708==    still reachable: 0 bytes in 0 blocks
+==415708==         suppressed: 208,443 bytes in 225 blocks
+==415708== 
+==415708== For lists of detected and suppressed errors, rerun with: -s
+==415708== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% "$b"
+ : command not found
+==415715== 
+==415715== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==415715== 
+==415715== HEAP SUMMARY:
+==415715==     in use at exit: 208,443 bytes in 225 blocks
+==415715==   total heap usage: 1,661 allocs, 1,436 frees, 272,450 bytes allocated
+==415715== 
+==415715== LEAK SUMMARY:
+==415715==    definitely lost: 0 bytes in 0 blocks
+==415715==    indirectly lost: 0 bytes in 0 blocks
+==415715==      possibly lost: 0 bytes in 0 blocks
+==415715==    still reachable: 0 bytes in 0 blocks
+==415715==         suppressed: 208,443 bytes in 225 blocks
+==415715== 
+==415715== For lists of detected and suppressed errors, rerun with: -s
+==415715== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% env
+LANGUAGE=en
+USER=hui-lim
+XDG_SESSION_TYPE=x11
+MAIN=hui-lim@student.42singapore.sg
+SHLVL=1
+LD_LIBRARY_PATH=/usr/lib/debug
+HOME=/home/hui-lim
+OLDPWD=/home/hui-lim/TEMP
+DESKTOP_SESSION=ubuntu
+GTK_MODULES=gail:atk-bridge
+XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+SYSTEMD_EXEC_PID=389093
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/102164/bus,guid=965dd7e712a2e769e6ed4d8267c447c8
+DBUS_STARTER_BUS_TYPE=session
+LIBVIRT_DEFAULT_URI=qemu:///system
+COLORTERM=truecolor
+DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+IM_CONFIG_PHASE=1
+GTK_IM_MODULE=ibus
+LOGNAME=hui-lim
+_=/usr/bin/valgrind
+XDG_SESSION_CLASS=user
+TERM=xterm-256color
+FT_HOOK_PATHNAME=login-user.d
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+PATH=/home/hui-lim/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+SESSION_MANAGER=local/c1r2s5.42singapore.sg:@/tmp/.ICE-unix/389093,unix/c1r2s5.42singapore.sg:/tmp/.ICE-unix/389093
+GDM_LANG=en
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/8f4db187_5b21_4200_9bcd_ccfc50fc863f
+XDG_MENU_PREFIX=gnome-
+XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session1
+XDG_RUNTIME_DIR=/run/user/102164
+GLIBCPP_FORCE_NEW=1
+DISPLAY=:0
+LANG=en_US.UTF-8
+XDG_CURRENT_DESKTOP=ubuntu:GNOME
+XDG_SESSION_DESKTOP=ubuntu
+GNOME_TERMINAL_SERVICE=:1.172
+XMODIFIERS=@im=ibus
+XAUTHORITY=/home/hui-lim/.Xauthority
+SSH_AUTH_SOCK=/run/user/102164/keyring/ssh
+XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/hui-lim
+SSH_AGENT_LAUNCHER=gnome-keyring
+KRB5CCNAME=FILE:/tmp/krb5cc_102164_7acBtU
+SHELL=/bin/zsh
+QT_ACCESSIBILITY=1
+GDMSESSION=ubuntu
+FT_HOOK_NAME=login-user
+DOCKER_HOST=unix:///run/user/102164/docker.sock
+GPG_AGENT_INFO=/run/user/102164/gnupg/S.gpg-agent:0:1
+QT_IM_MODULE=ibus
+PWD=/home/hui-lim/TEMP/minishell_eval1
+XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+XDG_DATA_DIRS=/usr/share/ubuntu:/usr/share/gnome:/home/hui-lim/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop
+DBUS_STARTER_ADDRESS=unix:path=/run/user/102164/bus,guid=965dd7e712a2e769e6ed4d8267c447c8
+VTE_VERSION=6800
+GLIBCXX_FORCE_NEW=1
+LD_PRELOAD=/usr/libexec/valgrind/vgpreload_core-amd64-linux.so:/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+a=ls
+b= 
+c=-l
+weneedtherapy% $a"$b"$c
+total 228
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 builtins
+drwxr-xr-x  2 hui-lim 2024_singapore    117 Mar  2 21:02 env
+drwxr-xr-x  2 hui-lim 2024_singapore     21 Mar  2 21:02 error
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 exec
+drwxr-xr-x  2 hui-lim 2024_singapore    106 Mar  2 21:02 expansion
+-rw-r--r--  1 hui-lim 2024_singapore      6 Mar  2 22:13 hd.txt
+-rw-r--r--  1 hui-lim 2024_singapore      0 Mar  2 21:15 hello
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 inc
+drwxr-xr-x  3 hui-lim 2024_singapore   4096 Mar  2 21:04 libft
+-rw-r--r--  1 hui-lim 2024_singapore   4424 Mar  2 21:02 main.c
+-rw-r--r--  1 hui-lim 2024_singapore   3754 Mar  2 21:02 Makefile
+-rwxr-xr-x  1 hui-lim 2024_singapore 188296 Mar  2 21:46 minishell
+drwxr-xr-x 10 hui-lim 2024_singapore    143 Mar  2 21:04 obj
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 parse
+-rw-r--r--  1 hui-lim 2024_singapore    137 Feb 22 17:38 readline.supp
+drwxr-xr-x  2 hui-lim 2024_singapore     44 Mar  2 21:02 signal
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 token
+weneedtherapy% echo $a"$b"$c|cat -A
+ls -l$
+==415793== 
+==415793== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==415793== 
+==415793== HEAP SUMMARY:
+==415793==     in use at exit: 208,443 bytes in 225 blocks
+==415793==   total heap usage: 1,819 allocs, 1,594 frees, 277,410 bytes allocated
+==415793== 
+==415793== LEAK SUMMARY:
+==415793==    definitely lost: 0 bytes in 0 blocks
+==415793==    indirectly lost: 0 bytes in 0 blocks
+==415793==      possibly lost: 0 bytes in 0 blocks
+==415793==    still reachable: 0 bytes in 0 blocks
+==415793==         suppressed: 208,443 bytes in 225 blocks
+==415793== 
+==415793== For lists of detected and suppressed errors, rerun with: -s
+==415793== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+weneedtherapy% export a=ls b=" " c=-l
+weneedtherapy% $a$b$c
+total 228
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 builtins
+drwxr-xr-x  2 hui-lim 2024_singapore    117 Mar  2 21:02 env
+drwxr-xr-x  2 hui-lim 2024_singapore     21 Mar  2 21:02 error
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 exec
+drwxr-xr-x  2 hui-lim 2024_singapore    106 Mar  2 21:02 expansion
+-rw-r--r--  1 hui-lim 2024_singapore      6 Mar  2 22:13 hd.txt
+-rw-r--r--  1 hui-lim 2024_singapore      0 Mar  2 21:15 hello
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 inc
+drwxr-xr-x  3 hui-lim 2024_singapore   4096 Mar  2 21:04 libft
+-rw-r--r--  1 hui-lim 2024_singapore   4424 Mar  2 21:02 main.c
+-rw-r--r--  1 hui-lim 2024_singapore   3754 Mar  2 21:02 Makefile
+-rwxr-xr-x  1 hui-lim 2024_singapore 188296 Mar  2 21:46 minishell
+drwxr-xr-x 10 hui-lim 2024_singapore    143 Mar  2 21:04 obj
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 parse
+-rw-r--r--  1 hui-lim 2024_singapore    137 Feb 22 17:38 readline.supp
+drwxr-xr-x  2 hui-lim 2024_singapore     44 Mar  2 21:02 signal
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 token
+weneedtherapy% $a"$b"$c
+total 228
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 builtins
+drwxr-xr-x  2 hui-lim 2024_singapore    117 Mar  2 21:02 env
+drwxr-xr-x  2 hui-lim 2024_singapore     21 Mar  2 21:02 error
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 exec
+drwxr-xr-x  2 hui-lim 2024_singapore    106 Mar  2 21:02 expansion
+-rw-r--r--  1 hui-lim 2024_singapore      6 Mar  2 22:13 hd.txt
+-rw-r--r--  1 hui-lim 2024_singapore      0 Mar  2 21:15 hello
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 inc
+drwxr-xr-x  3 hui-lim 2024_singapore   4096 Mar  2 21:04 libft
+-rw-r--r--  1 hui-lim 2024_singapore   4424 Mar  2 21:02 main.c
+-rw-r--r--  1 hui-lim 2024_singapore   3754 Mar  2 21:02 Makefile
+-rwxr-xr-x  1 hui-lim 2024_singapore 188296 Mar  2 21:46 minishell
+drwxr-xr-x 10 hui-lim 2024_singapore    143 Mar  2 21:04 obj
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 parse
+-rw-r--r--  1 hui-lim 2024_singapore    137 Feb 22 17:38 readline.supp
+drwxr-xr-x  2 hui-lim 2024_singapore     44 Mar  2 21:02 signal
+drwxr-xr-x  2 hui-lim 2024_singapore   4096 Mar  2 21:02 token
+weneedtherapy% ls" "-l
+ls -l: command not found
+==416008== 
+==416008== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==416008== 
+==416008== HEAP SUMMARY:
+==416008==     in use at exit: 208,812 bytes in 237 blocks
+==416008==   total heap usage: 2,150 allocs, 1,913 frees, 288,169 bytes allocated
+==416008== 
+==416008== LEAK SUMMARY:
+==416008==    definitely lost: 0 bytes in 0 blocks
+==416008==    indirectly lost: 0 bytes in 0 blocks
+==416008==      possibly lost: 0 bytes in 0 blocks
+==416008==    still reachable: 0 bytes in 0 blocks
+==416008==         suppressed: 208,812 bytes in 237 blocks
+==416008== 
+==416008== For lists of detected and suppressed errors, rerun with: -s
+==416008== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+weneedtherapy% echo '$?'
+$?
+weneedtherapy% echo '$$'
+$$
+weneedtherapy% echo $
+$
+weneedtherapy% echo $$
+$$
+weneedtherapy% echo $$$$$
+$$$$$
+weneedtherapy% echo $_$
+/usr/bin/valgrind$
+weneedtherapy% echo $1$
+$1$
+weneedtherapy% echo "$_$"
+/usr/bin/valgrind$
+weneedtherapy% echo '$_$'
+$_$
+weneedtherapy% export a="hello world"
+weneedtherapy% >$a
+world: command not found
+==416279== 
+==416279== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==416279== 
+==416279== HEAP SUMMARY:
+==416279==     in use at exit: 208,812 bytes in 237 blocks
+==416279==   total heap usage: 2,744 allocs, 2,507 frees, 297,855 bytes allocated
+==416279== 
+==416279== LEAK SUMMARY:
+==416279==    definitely lost: 0 bytes in 0 blocks
+==416279==    indirectly lost: 0 bytes in 0 blocks
+==416279==      possibly lost: 0 bytes in 0 blocks
+==416279==    still reachable: 0 bytes in 0 blocks
+==416279==         suppressed: 208,812 bytes in 237 blocks
+==416279== 
+==416279== For lists of detected and suppressed errors, rerun with: -s
+==416279== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+weneedtherapy% 
+
