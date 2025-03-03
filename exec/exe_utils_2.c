@@ -16,14 +16,14 @@ void	ft_coredump_msg(int status, t_shell **shell, t_exebox **con)
 {
 	if (WIFSIGNALED(status))
 	{
-		if (WCOREDUMP(status))
+		if (WIFSIGNALED(status))
 		{
 			if ((*con)->hasprinted == 0)
 			{
 				write(1, "Quit (core dumped)", 18);
 				(*con)->hasprinted = 1;
 			}
-			(*shell)->exit_status = ENOTRECOVERABLE;
+			(*shell)->exit_status = 128 + WTERMSIG(status);
 		}
 		if ((*con)->skipnl == 0)
 			write (1, "\n", 1);
