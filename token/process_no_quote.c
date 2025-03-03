@@ -53,8 +53,10 @@ static void	handle_expansion(t_tokenizer *tok, t_shell *shell,
 	expanded = expand(tok, shell);
 	if (expanded)
 	{
-		// if (ft_isnowhitespace((const char *) expanded))
-		// 	printf("to split or not to split\n");
+		if (tok->quote == '0' && !ft_isnowhitespace((const char *) expanded))
+		{
+			tok->word_split = 1;
+		}
 		*current_word = ft_strjoin_free(*current_word, expanded);
 	}
 }
@@ -100,7 +102,6 @@ t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 		return (handle_special(tok, current_word));
 	if (c == '$' && !pre_is_heredoc(shell->token))
 	{
-		tok->word_split = 1;
 		handle_expansion(tok, shell, current_word);
 		return (NULL);
 	}
