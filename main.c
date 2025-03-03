@@ -37,6 +37,36 @@ static void	processtree(t_token	*token, t_shell	**shell, struct sigaction *sigs)
 	freetree(&(*shell)->root);
 }
 
+/*static void	print_tokens(t_token *token_list)
+{
+	t_token	*current;
+	int		i;
+
+	i = 1;
+	current = token_list;
+	printf("%10s\n", "Token(s)");
+	while (current)
+	{
+		printf("%-2d[%s] | Type: ", i++, current->value);
+		if (current->type == TOKEN_WORD)
+			printf("WORD\n");
+		else if (current->type == TOKEN_PIPE)
+			printf("PIPE\n");
+		else if (current->type == TOKEN_REDIR_IN)
+			printf("REDIR_IN\n");
+		else if (current->type == TOKEN_REDIR_OUT)
+			printf("REDIR_OUT\n");
+		else if (current->type == TOKEN_HEREDOC)
+			printf("HEREDOC\n");
+		else if (current->type == TOKEN_APPEND)
+			printf("APPEND\n");
+		else
+			printf("UNEXPECTED\n");
+		current = current->next;
+	}
+	printf("%10s\n", "--End of List--");
+}*/
+
 static int	minishell_loop(char *input, t_token **tok, \
 				t_shell **shell, struct sigaction *sigs)
 {
@@ -80,36 +110,6 @@ int	main(int argc, char **argv, char **env)
 	return (minishell_loop(input, &(shell->token), &shell, &sigint));
 }
 
-/*
-static void	print_tokens(t_token *token_list)
-{
-	t_token	*current;
-	int		i;
-
-	i = 1;
-	current = token_list;
-	printf("%10s\n", "Token(s)");
-	while (current)
-	{
-		printf("%-2d[%s] | Type: ", i++, current->value);
-		if (current->type == TOKEN_WORD)
-			printf("WORD\n");
-		else if (current->type == TOKEN_PIPE)
-			printf("PIPE\n");
-		else if (current->type == TOKEN_REDIR_IN)
-			printf("REDIR_IN\n");
-		else if (current->type == TOKEN_REDIR_OUT)
-			printf("REDIR_OUT\n");
-		else if (current->type == TOKEN_HEREDOC)
-			printf("HEREDOC\n");
-		else if (current->type == TOKEN_APPEND)
-			printf("APPEND\n");
-		else
-			printf("UNEXPECTED\n");
-		current = current->next;
-	}
-	printf("%10s\n", "--End of List--");
-}*/
 /*
 static int	handle_exit_command(char *input)
 {

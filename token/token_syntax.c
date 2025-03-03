@@ -29,6 +29,13 @@ static int	check_redirection_error(t_token *current)
 		if (current->next->value == NULL)
 			return (0);
 	}
+	if ((current->type == TOKEN_REDIR_OUT || current->type == TOKEN_REDIR_IN || \
+		current->type == TOKEN_APPEND) && \
+		current->next->type == TOKEN_WORD && current->next->next != NULL)
+	{
+		if (current->next->next->type == TOKEN_WORD)
+			return (print_error("minishell: ambiguous redirect\n"));
+	}
 	else if (is_redirection_token(current->type))
 	{
 		if (current->next->type == TOKEN_PIPE)

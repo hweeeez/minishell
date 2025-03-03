@@ -26,7 +26,9 @@ t_token	*process_double_quote(t_tokenizer *tok, t_shell *shell,
 	{
 		expanded = expand(tok, shell);
 		if (expanded)
+		{
 			*current_word = ft_strjoin_free(*current_word, expanded);
+		}
 	}
 	else
 	{

@@ -39,10 +39,8 @@ int	parseword(t_node **new, t_shell **shell, t_node **tree, char *tok)
 {
 	char		*word;
 	static int	no;
-	int			handleword;
 
 	word = NULL;
-	handleword = 0;
 	if ((*new) == NULL || (*new)->type == 0)
 		init_newnode(new, tree, &no);
 	if ((*new)->args == NULL)

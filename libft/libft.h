@@ -20,7 +20,7 @@
 # include <stddef.h>
 
 /*=======================================
-		IS functions - 12
+		IS functions - 14
 ========================================*/
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
@@ -34,6 +34,8 @@ int					ft_iseven(int n);
 int					ft_iswithin(long long n, long long l, long long h);
 int					ft_isvalid_integer_str(const char *str, int base);
 int					ft_isvalid_long_str(const char *str, int base);
+int					ft_isallwhitespace(const char *str);
+int					ft_isnowhitespace(const char *str);
 /*------------------------------------
 		Helpers
 -------------------------------------*/
