@@ -53,9 +53,14 @@ static void	handle_expansion(t_tokenizer *tok, t_shell *shell,
 	expanded = expand(tok, shell);
 	if (expanded)
 	{
-		if (tok->quote == '0' && !ft_isnowhitespace((const char *) expanded))
+		if (tok->quote == '0')
 		{
-			tok->word_split = 1;
+			if (!ft_isnowhitespace((const char *) expanded))
+			{
+				tok->word_split = 1;
+				if (pre_is_redir(shell->token))
+					tok->ambiguous = 1;
+			}
 		}
 		*current_word = ft_strjoin_free(*current_word, expanded);
 	}

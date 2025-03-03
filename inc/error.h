@@ -14,6 +14,7 @@
 # define ERROR_H
 
 int		print_error(const char *format);
+int		print_error2(const char *format);
 void	memerr_exit(int i);
 
 #endif

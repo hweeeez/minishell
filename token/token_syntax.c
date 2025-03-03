@@ -21,19 +21,9 @@ static int	is_redirection_token(t_token_type type)
 static int	check_heredoc_error(t_token *current)
 {
 	if (current->next->type != TOKEN_WORD)
-		return (print_error("syntax error: unexpected token after '<<'\n"));
+		return (print_error2("syntax error: unexpected token after '<<'\n"));
 	if (current->next->value == NULL)
 		return (0);
-	return (0);
-}
-
-static int	check_ambiguous_redirect(t_token *current)
-{
-	if (current->next->type == TOKEN_WORD && current->next->next != NULL)
-	{
-		if (current->next->next->type == TOKEN_WORD)
-			return (print_error("minishell: ambiguous redirect\n"));
-	}
 	return (0);
 }
 
@@ -43,22 +33,16 @@ static int	check_redirection_syntax(t_token *current)
 		return (print_error("syntax error: unexpected token near 'newline'\n"));
 	if (current->type == TOKEN_HEREDOC)
 		return (check_heredoc_error(current));
-	if (current->type == TOKEN_REDIR_OUT || current->type == TOKEN_REDIR_IN || \
-		current->type == TOKEN_APPEND)
-	{
-		if (check_ambiguous_redirect(current))
-			return (1);
-	}
 	if (is_redirection_token(current->type))
 	{
 		if (current->next->type == TOKEN_PIPE)
-			return (print_error("syntax error: unexpected token near '|'\n"));
+			return (print_error2("syntax error: unexpected token near '|'\n"));
 		if (is_redirection_token(current->next->type))
-			return (print_error("syntax error: unexpected token near '>'\n"));
+			return (print_error2("syntax error: unexpected token near '>'\n"));
 		if (current->next->type != TOKEN_WORD)
-			return (print_error("syntax error: unexpected token\n"));
+			return (print_error2("syntax error: unexpected token\n"));
 		if (!is_valid_filename(current->next->value))
-			return (print_error("syntax error: invalid filename\n"));
+			return (print_error2("syntax error: invalid filename\n"));
 	}
 	return (0);
 }
@@ -71,18 +55,18 @@ int	validate_token_syntax(t_token *head)
 	if (!head)
 		return (0);
 	if (head->type == TOKEN_PIPE)
-		return (print_error("syntax error : unexpected token near `|'\n"));
+		return (print_error2("syntax error : unexpected token near `|'\n"));
 	prev = NULL;
 	current = head;
 	while (current)
 	{
 		if (current->type == TOKEN_PIPE && \
 			(!prev || !current->next || current->next->type == TOKEN_PIPE))
-			return (print_error("syntax error : unexpected token near `|'\n"));
+			return (print_error2("syntax error : unexpected token near `|'\n"));
 		if (is_redirection_token(current->type))
 		{
 			if (check_redirection_syntax(current))
-				return (1);
+				return (2);
 		}
 		prev = current;
 		current = current->next;

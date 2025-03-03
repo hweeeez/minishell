@@ -62,18 +62,17 @@ int	tokenize(const char *input, t_token **head, t_shell *shell)
 	{
 		if (tok.error)
 		{
-			ft_putstr_fd("Syntax Error : unclosed quotes or"
-				" other errors\n", STDERR_FILENO);
 			free_token_list(head);
-			return (1);
+			return (print_error2("syntax error : unclosed quotes or"
+					" other errors\n"));
 		}
 	}
+	if (tok.ambiguous == 1)
+		return (print_error("minishell: ambiguous redirect\n"));
 	add_quotes_to_heredoc_tokens(*head);
 	while (node_split_id(*head) > -1)
 		split_node(head);
-	if (validate_token_syntax(*head))
-		return (1);
-	return (0);
+	return (validate_token_syntax(*head));
 }
 // static t_token	*process_next_token(t_tokenizer *tok)
 // {

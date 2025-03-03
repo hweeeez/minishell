@@ -21,6 +21,7 @@ void	init_tokenizer(t_tokenizer *tok, const char *input, t_shell *shell)
 	tok->shell = shell;
 	tok->word_split = 0;
 	tok->hd_quote = 0;
+	tok->ambiguous = 0;
 }
 
 int	ms_is_special(char c)

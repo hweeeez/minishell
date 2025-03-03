@@ -29,3 +29,15 @@ int	pre_is_heredoc(t_token *head)
 		head = head->next;
 	return (head->type == TOKEN_HEREDOC);
 }
+
+int	pre_is_redir(t_token *head)
+{
+	if (!head)
+		return (0);
+	while (head->next)
+		head = head->next;
+	if (head->type == TOKEN_REDIR_IN || head->type == TOKEN_REDIR_OUT || \
+		head->type == TOKEN_APPEND)
+		return (1);
+	return (0);
+}

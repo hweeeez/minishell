@@ -67,27 +67,40 @@ static void	processtree(t_token	*token, t_shell	**shell, struct sigaction *sigs)
 	printf("%10s\n", "--End of List--");
 }*/
 
-static int	minishell_loop(char *input, t_token **tok, \
-				t_shell **shell, struct sigaction *sigs)
+static int	handle_input(char **input, t_shell **shell, t_token **tok)
 {
+	int	result;
+
+	*input = readline(PROMPT);
+	if (handle_empty_input(*input))
+		ft_exit(shell, NULL, NULL);
+	if ((*input)[0] != '\0')
+		add_history(*input);
+	if (g_received_sigint == 1)
+	{
+		(*shell)->exit_status = 130;
+		g_received_sigint = 0;
+	}
+	result = tokenize(*input, tok, *shell);
+	free(*input);
+	return (result);
+}
+
+static int	minishell_loop(t_token **tok, t_shell **shell,
+			struct sigaction *sigs)
+{
+	char	*input;
+	int		result;
+
 	while (1)
 	{
-		input = readline(PROMPT);
-		if (handle_empty_input(input))
-			ft_exit(shell, NULL, NULL);
-		if (input[0] != '\0')
-			add_history(input);
-		if (g_received_sigint == 1)
+		result = handle_input(&input, shell, tok);
+		if (result)
 		{
-			(*shell)->exit_status = 130;
-			g_received_sigint = 0;
-		}
-		if (tokenize(input, tok, *shell))
-		{
-			free(input);
+			(*shell)->exit_status = result;
+			free_token_list(tok);
 			continue ;
 		}
-		free(input);
 		processtree(*tok, shell, sigs);
 	}
 	return (0);
@@ -95,19 +108,17 @@ static int	minishell_loop(char *input, t_token **tok, \
 
 int	main(int argc, char **argv, char **env)
 {
-	char				*input;
 	t_shell				*shell;
 	struct sigaction	sigint;
 
 	(void)argc;
 	(void)argv;
-	input = NULL;
 	shell = init_shell(env);
 	if (!shell)
 		exit(1);
 	if (setup_signals(&sigint) == 1)
 		return (ft_exit(&shell, NULL, NULL));
-	return (minishell_loop(input, &(shell->token), &shell, &sigint));
+	return (minishell_loop(&(shell->token), &shell, &sigint));
 }
 
 /*
