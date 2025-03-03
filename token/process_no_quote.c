@@ -53,8 +53,8 @@ static void	handle_expansion(t_tokenizer *tok, t_shell *shell,
 	expanded = expand(tok, shell);
 	if (expanded)
 	{
-		if (ft_isnowhitespace((const char *) expanded))
-			printf("to split or not to split\n");
+		// if (ft_isnowhitespace((const char *) expanded))
+		// 	printf("to split or not to split\n");
 		*current_word = ft_strjoin_free(*current_word, expanded);
 	}
 }

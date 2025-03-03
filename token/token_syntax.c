@@ -18,25 +18,38 @@ static int	is_redirection_token(t_token_type type)
 			type == TOKEN_APPEND || type == TOKEN_HEREDOC);
 }
 
-static int	check_redirection_error(t_token *current)
+static int	check_heredoc_error(t_token *current)
 {
-	if (!current->next)
-		return (print_error("syntax error: unexpected token near 'newline'\n"));
-	if (current->type == TOKEN_HEREDOC)
-	{
-		if (current->next->type != TOKEN_WORD)
-			return (print_error("syntax error: unexpected token after '<<'\n"));
-		if (current->next->value == NULL)
-			return (0);
-	}
-	if ((current->type == TOKEN_REDIR_OUT || current->type == TOKEN_REDIR_IN || \
-		current->type == TOKEN_APPEND) && \
-		current->next->type == TOKEN_WORD && current->next->next != NULL)
+	if (current->next->type != TOKEN_WORD)
+		return (print_error("syntax error: unexpected token after '<<'\n"));
+	if (current->next->value == NULL)
+		return (0);
+	return (0);
+}
+
+static int	check_ambiguous_redirect(t_token *current)
+{
+	if (current->next->type == TOKEN_WORD && current->next->next != NULL)
 	{
 		if (current->next->next->type == TOKEN_WORD)
 			return (print_error("minishell: ambiguous redirect\n"));
 	}
-	else if (is_redirection_token(current->type))
+	return (0);
+}
+
+static int	check_redirection_syntax(t_token *current)
+{
+	if (!current->next)
+		return (print_error("syntax error: unexpected token near 'newline'\n"));
+	if (current->type == TOKEN_HEREDOC)
+		return (check_heredoc_error(current));
+	if (current->type == TOKEN_REDIR_OUT || current->type == TOKEN_REDIR_IN || \
+		current->type == TOKEN_APPEND)
+	{
+		if (check_ambiguous_redirect(current))
+			return (1);
+	}
+	if (is_redirection_token(current->type))
 	{
 		if (current->next->type == TOKEN_PIPE)
 			return (print_error("syntax error: unexpected token near '|'\n"));
@@ -68,7 +81,7 @@ int	validate_token_syntax(t_token *head)
 			return (print_error("syntax error : unexpected token near `|'\n"));
 		if (is_redirection_token(current->type))
 		{
-			if (check_redirection_error(current))
+			if (check_redirection_syntax(current))
 				return (1);
 		}
 		prev = current;
