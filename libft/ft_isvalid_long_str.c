@@ -22,7 +22,7 @@ int	ft_isvalid_long_str(const char *str, int base)
 		result = ft_strtoll(str, &endptr, base);
 		if (endptr == NULL || *endptr != '\0' || str == endptr)
 			return (0);
-		if (result > LONG_MAX || result < LONG_MIN)
+		if (result > (long long) LONG_MAX || result < (long long) LONG_MIN)
 			return (0);
 		return (1);
 	}
