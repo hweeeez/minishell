@@ -12,6 +12,20 @@
 
 #include "minishell.h"
 
+static void	cleanup_redirs(t_exe *exe)
+{
+	if (exe->puts[0] != STDIN_FILENO && exe->puts[0] > 0)
+	{
+		close(exe->puts[0]);
+		exe->puts[0] = STDIN_FILENO;
+	}
+	if (exe->puts[1] != STDOUT_FILENO && exe->puts[1] > 0)
+	{
+		close(exe->puts[1]);
+		exe->puts[1] = STDOUT_FILENO;
+	}
+}
+
 int	has_redir(t_exebox **con, t_node *node, t_shell **shell)
 {
 	int		valid;
@@ -23,6 +37,10 @@ int	has_redir(t_exebox **con, t_node *node, t_shell **shell)
 	{
 		valid = get_redir(node->left->rootredir, &exe, shell, con);
 		(*con)->redir_status = valid;
+		if (valid)
+		{
+			cleanup_redirs(*(*con)->exes); //fd cleanup (above) when redir fails
+		}
 		return (valid);
 	}
 	(*con)->redir_status = -1;

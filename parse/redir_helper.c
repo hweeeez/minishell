@@ -54,6 +54,11 @@ int	handle_redirout(t_redir *re, t_exe **x, t_shell **s)
 	if (access(re->file, F_OK) == 0 && access(re->file, W_OK) == -1)
 		return (permissiondeniederr(re->file, s), 1);
 	(*x)->puts[1] = open(re->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if ((*x)->puts[1] == -1) // Check open success
+	{
+		permissiondeniederr(re->file, s);
+		return (1);
+	}
 	return (0);
 }
 
