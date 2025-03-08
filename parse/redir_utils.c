@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static int	handle_redirin(t_redir *re, t_exe **x, t_shell **s, t_exebox **box)
+static int	handle_redirin(t_redir *re, t_exe **x, t_shell **s)
 {
 	closeput((*x)->puts[0], -1);
 	if (access(re->file, F_OK) == -1)
@@ -25,7 +25,7 @@ static int	handle_redirin(t_redir *re, t_exe **x, t_shell **s, t_exebox **box)
 	return (0);
 }
 
-static int	handle_redirapp(t_redir *re, t_exe **x, t_shell **s, t_exebox **b)
+static int	handle_redirapp(t_redir *re, t_exe **x, t_shell **s)
 {
 	closeput(-1, (*x)->puts[1]);
 	if (check_dir_exists(re->file) == 0)
@@ -34,7 +34,7 @@ static int	handle_redirapp(t_redir *re, t_exe **x, t_shell **s, t_exebox **b)
 		return ((*x)->puts[1] = STDOUT_FILENO, permdenied(re->file, s), 1);
 	(*x)->puts[1] = open(re->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if ((*x)->puts[1] == -1)
-		return (permissiondeniederr(re->file, s), 1);
+		return (filenotexisterr(re->file, s), 1);
 	return (0);
 }
 
@@ -70,11 +70,11 @@ int	get_redir(t_redir *re, t_exe **x, t_shell **shell, t_exebox **con)
 	if (re == NULL)
 		return (0);
 	if (re->type == TOKEN_REDIR_OUT)
-		ret = handle_redirout(re, x, shell, con);
+		ret = handle_redirout(re, x, shell);
 	else if (re->type == TOKEN_APPEND)
-		ret = handle_redirapp(re, x, shell, con);
+		ret = handle_redirapp(re, x, shell);
 	else if (re->type == TOKEN_REDIR_IN)
-		ret = handle_redirin(re, x, shell, con);
+		ret = handle_redirin(re, x, shell);
 	else if (re->type == TOKEN_HEREDOC)
 		ret = handle_hd(re, x, shell, con);
 	else

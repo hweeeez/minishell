@@ -58,10 +58,10 @@ static int	redir_builtin(t_exe **exe, t_shell **s, t_exebox **b, t_node *left)
 	{
 		if ((*exe)->puts[0] != STDIN_FILENO && !left->args[0])
 			write(1, "\n", 1);
-		dup_fd(*exe, s, b, 0);
+		dup_fd(*exe, 0);
 	}
 	checkif_builtin(s, left->args, b);
-	restore_fd(b, og_stdout, og_stdin, s);
+	restore_fd(b, og_stdout, og_stdin);
 	closeput((*exe)->puts[0], (*exe)->puts[1]);
 	if (valid == 1)
 		(*s)->exit_status = valid;

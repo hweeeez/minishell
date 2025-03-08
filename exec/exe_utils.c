@@ -12,33 +12,37 @@
 
 #include "minishell.h"
 
-void	dup_fd(t_exe *exe, t_shell **shell, t_exebox **box, int i)
+void	dup_fd(t_exe *exe, int i)
 {
 	if ((exe)->puts[0] != STDIN_FILENO && (i == 0 || i == 1))
 	{
-		dup2((exe)->puts[0], STDIN_FILENO);
+		if (dup2((exe)->puts[0], STDIN_FILENO) == -1)
+			perror("Error");
 		close((exe)->puts[0]);
 	}
 	if ((exe)->puts[1] != STDOUT_FILENO && (i == 0 || i == 2))
 	{
-		dup2((exe)->puts[1], STDOUT_FILENO);
+		if (dup2((exe)->puts[1], STDOUT_FILENO) == -1)
+			perror("Error");
 		close((exe)->puts[1]);
 	}
 }
 
-void	restore_fd(t_exebox **b, int ogout, int ogin, t_shell **shell)
+void	restore_fd(t_exebox **b, int ogout, int ogin)
 {
 	t_exe	*exe;
 
 	exe = (*b)->exes[(*b)->numpid - 1];
 	if (exe->puts[0] != STDIN_FILENO)
 	{
-		dup2(ogin, STDIN_FILENO);
+		if (dup2(ogin, STDIN_FILENO) == -1)
+			perror("Error");
 		close(ogin);
 	}
 	if (exe->puts[1] != STDOUT_FILENO)
 	{
-		dup2(ogout, STDOUT_FILENO);
+		if (dup2(ogout, STDOUT_FILENO) == -1)
+			perror("Error");
 		close(ogout);
 	}
 }

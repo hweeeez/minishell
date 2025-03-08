@@ -14,9 +14,9 @@
 
 int	dup_og(int *og_stdout, int *og_stdin)
 {
-	og_stdout = dup(STDOUT_FILENO);
-	og_stdin = dup(STDIN_FILENO);
-	if (og_stdin == -1 || og_stdout == -1)
+	*og_stdout = dup(STDOUT_FILENO);
+	*og_stdin = dup(STDIN_FILENO);
+	if (*og_stdin == -1 || *og_stdout == -1)
 		return (-1);
 	return (0);
 }
@@ -39,12 +39,12 @@ void	executechild(t_node *node, t_exebox **con, t_shell **shell)
 	exe = (*con)->exes[(*con)->numpid - 1];
 	if ((exe)->puts[0] != STDIN_FILENO)
 	{
-		dup_fd(exe, shell, con, 1);
+		dup_fd(exe, 1);
 		close_pipefds(exe, node);
 	}
 	if ((exe)->puts[1] != STDOUT_FILENO)
 	{
-		dup_fd(exe, shell, con, 2);
+		dup_fd(exe, 2);
 		close_pipefds(exe, node);
 	}
 	else if (node->right != NULL)
