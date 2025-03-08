@@ -29,9 +29,15 @@ static int	handle_parent(t_node *node, t_exebox **con, t_shell **shell)
 	if (node->right == NULL)
 	{
 		if ((*con)->exes[(*con)->numpid - 1]->pipefd[0] > -1)
-			close((*con)->exes[(*con)->numpid - 1]->pipefd[0]);
+		{
+			if (close((*con)->exes[(*con)->numpid - 1]->pipefd[0]) == -1)
+				return (ft_exit(shell, NULL, con), -1);
+		}
 		if ((*con)->exes[(*con)->numpid - 1]->pipefd[1] > -1)
-			close((*con)->exes[(*con)->numpid - 1]->pipefd[1]);
+		{
+			if (close((*con)->exes[(*con)->numpid - 1]->pipefd[1]) == -1)
+				return (ft_exit(shell, NULL, con), -1);
+		}
 	}
 	closeputs(&(*con)->exes[(*con)->numpid - 1]);
 	if (node->right != NULL)

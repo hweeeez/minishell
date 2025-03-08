@@ -40,15 +40,12 @@
 /*			Project headers			*/
 /************************************/
 # include "builtins.h"
-# include "heredoc.h"
 # include "error.h"
 # include "env.h"
 # include "expansion.h"
 # include "token.h"
 # include "parser.h"
 # include "exec.h"
-# include "pipe.h"
-# include "redirect.h"
 # include "sig_control.h"
 
 /************************************/

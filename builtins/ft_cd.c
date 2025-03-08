@@ -14,7 +14,7 @@
 
 static int	check_cd_args(char **cmd)
 {
-	if (cmd[1 + 1] != NULL)
+	if (cmd[1] && cmd[2] != NULL)
 	{
 		ft_putstr_fd("cd: too many arguments\n", STDERR_FILENO);
 		return (1);
@@ -46,24 +46,74 @@ static int	update_pwd_vars(t_shell *shell, char *old_pwd)
 	return (0);
 }
 
+static char	*resolve_new_path(t_shell *shell, char **cmd)
+{
+	char	*new_path;
+
+	if (cmd[1] == NULL || ft_strncmp(cmd[1], "", 1) == 0)
+	{
+		new_path = get_env_value(shell, "HOME");
+		if (!new_path)
+		{
+			ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
+			return (NULL);
+		}
+	}
+	else
+		new_path = get_new_cd_path(shell, cmd[1]);
+	return (new_path);
+}
+
 int	ft_cd(t_shell *shell, char **cmd)
 {
 	char	*new_path;
 	char	*old_pwd;
 
+	if (cmd == NULL || cmd[0] == NULL)
+		return (1);
 	if (check_cd_args(cmd))
-	{
 		return (1);
-	}
-	new_path = get_new_cd_path(shell, cmd[1]);
-	if (!new_path && cmd[1] && ft_strncmp(cmd[1], ".", 2) != 0)
+	new_path = resolve_new_path(shell, cmd);
+	if (!new_path)
 		return (1);
-	if (ft_strncmp(cmd[1], ".", 2) == 0)
-		return (0);
 	old_pwd = getcwd(NULL, 0);
 	if (!old_pwd)
 		return (1);
 	if (chdir(new_path) != 0)
-		return (handle_cd_error(old_pwd, cmd[1]));
+		return (handle_cd_error(old_pwd, new_path));
 	return (update_pwd_vars(shell, old_pwd));
 }
+
+// int	ft_cd(t_shell *shell, char **cmd)
+// {
+// 	char	*new_path;
+// 	char	*old_pwd;
+
+// 	if (cmd == NULL || cmd[0] == NULL)
+// 		return (1);
+// 	if (check_cd_args(cmd))
+// 		return (1);
+// 	if (cmd[1] == NULL || ft_strncmp(cmd[1], "", 1) == 0)
+// 	{
+// 		new_path = get_env_value(shell, "HOME");
+// 		if (!new_path)
+// 		{
+// 			ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
+// 			return (1);
+// 		}
+// 	}
+// 	else
+// 		new_path = get_new_cd_path(shell, cmd[1]);
+// 	if (!new_path)
+// 		return (1);
+// 	if (!new_path && cmd[1] && ft_strncmp(cmd[1], ".", 2) != 0)
+// 		return (1);
+// 	if (ft_strncmp(cmd[1], ".", 2) == 0)
+// 		return (0);
+// 	old_pwd = getcwd(NULL, 0);
+// 	if (!old_pwd)
+// 		return (1);
+// 	if (chdir(new_path) != 0)
+// 		return (handle_cd_error(old_pwd, cmd[1]));
+// 	return (update_pwd_vars(shell, old_pwd));
+// }

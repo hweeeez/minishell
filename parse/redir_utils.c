@@ -12,36 +12,27 @@
 
 #include "minishell.h"
 
-static int	handle_redirin(t_redir *re, t_exe **x, t_shell **shell)
+static int	handle_redirin(t_redir *re, t_exe **x, t_shell **s, t_exebox **box)
 {
 	closeput((*x)->puts[0], -1);
 	if (access(re->file, F_OK) == -1)
-	{
-		return (filenotexisterr(re->file, shell), 1);
-	}
+		return (filenotexisterr(re->file, s), 1);
 	else if (access(re->file, F_OK | R_OK) == -1)
-	{
-		return (permissiondeniederr(re->file, shell), 1);
-	}
+		return ((*x)->puts[0] = STDIN_FILENO, permdenied(re->file, s), 1);
 	(*x)->puts[0] = open(re->file, O_RDONLY, 0644);
-	if ((*x)->puts[0] == -1) // Check open success
-	{
-		filenotexisterr(re->file, shell);
-		return (1);
-	}
+	if ((*x)->puts[0] == -1)
+		return (ft_exit(s, NULL, box), 1);
 	return (0);
 }
 
-static int	handle_redirappend(t_redir *re, t_exe **x, t_shell **shell)
+static int	handle_redirapp(t_redir *re, t_exe **x, t_shell **s, t_exebox **b)
 {
 	closeput(-1, (*x)->puts[1]);
-	if (check_dir_exists(re->file) == 0) // check file exist
-		return (filenotexisterr(re->file, shell), 1);
 	if (access(re->file, F_OK) == 0 && access(re->file, W_OK) == -1)
-		return (permissiondeniederr(re->file, shell), 1);
+		return ((*x)->puts[1] = STDOUT_FILENO, permdenied(re->file, s), 1);
 	(*x)->puts[1] = open(re->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if ((*x)->puts[1] == -1)
-		return (permissiondeniederr(re->file, shell), 1);
+		return (ft_exit(s, NULL, b), 1);
 	return (0);
 }
 
@@ -61,12 +52,13 @@ static int	handle_hd(t_redir *re, t_exe **x, t_shell **shell, t_exebox **con)
 	closeput((*x)->puts[0], -1);
 	hd = ft_heredoc(re, shell);
 	if (hd == -1 || hd == 130)
-		return (unlink(HEREDOC_FILE), 130); //need to unlink
-	(*x)->puts[0] = open(HEREDOC_FILE, O_RDONLY, 0644);
-	if ((*x)->puts[0] == -1) //heredoc file open failed 
 		return (unlink(HEREDOC_FILE), 130);
-	(*con)->skipnl = 1;
-	return (0); //change from 1 to 0 for success, for cleanup
+	(*x)->puts[0] = open(HEREDOC_FILE, O_RDONLY, 0644);
+	if ((*x)->puts[0] == -1)
+		return (ft_exit(shell, NULL, con), 1);
+	if (con != NULL && *con != NULL)
+		(*con)->skipnl = 1;
+	return (0);
 }
 
 int	get_redir(t_redir *re, t_exe **x, t_shell **shell, t_exebox **con)
@@ -76,16 +68,16 @@ int	get_redir(t_redir *re, t_exe **x, t_shell **shell, t_exebox **con)
 	if (re == NULL)
 		return (0);
 	if (re->type == TOKEN_REDIR_OUT)
-		ret = handle_redirout(re, x, shell);
+		ret = handle_redirout(re, x, shell, con);
 	else if (re->type == TOKEN_APPEND)
-		ret = handle_redirappend(re, x, shell);
+		ret = handle_redirapp(re, x, shell, con);
 	else if (re->type == TOKEN_REDIR_IN)
-		ret = handle_redirin(re, x, shell);
+		ret = handle_redirin(re, x, shell, con);
 	else if (re->type == TOKEN_HEREDOC)
 		ret = handle_hd(re, x, shell, con);
 	else
 		ret = 0;
-	if (ret != 0) //If current redirection failed, stop and return error
+	if (ret != 0)
 		return (ret);
-	return (get_redir(re->next, x, shell, con));//Process next redir
+	return (get_redir(re->next, x, shell, con));
 }

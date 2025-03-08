@@ -46,19 +46,16 @@ void	makeredir(t_node **newnode, t_token **token)
 	(*token) = (*token)->next;
 }
 
-int	handle_redirout(t_redir *re, t_exe **x, t_shell **s)
+int	handle_redirout(t_redir *re, t_exe **x, t_shell **s, t_exebox **box)
 {
 	closeput(-1, (*x)->puts[1]);
 	if (check_dir_exists(re->file) == 0)
 		return (filenotexisterr(re->file, s), 1);
 	if (access(re->file, F_OK) == 0 && access(re->file, W_OK) == -1)
-		return (permissiondeniederr(re->file, s), 1);
+		return ((*x)->puts[1] = STDOUT_FILENO, permdenied(re->file, s), 1);
 	(*x)->puts[1] = open(re->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if ((*x)->puts[1] == -1) // Check open success
-	{
-		permissiondeniederr(re->file, s);
-		return (1);
-	}
+	if ((*x)->puts[1] == -1)
+		return (ft_exit(s, NULL, box), 1);
 	return (0);
 }
 
@@ -69,7 +66,7 @@ void	filenotexisterr(char *file, t_shell **shell)
 	(*shell)->exit_status = 1;
 }
 
-void	permissiondeniederr(char *file, t_shell **shell)
+void	permdenied(char *file, t_shell **shell)
 {
 	ft_putstr_fd(file, 2);
 	ft_putstr_fd(": Permission denied\n", 2);

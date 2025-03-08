@@ -68,6 +68,6 @@ int		handle_path(char *t, t_shell **s);
 int		ispath(char *tok);
 void	closeput(int input, int output);
 void	filenotexisterr(char *file, t_shell **shell);
-void	permissiondeniederr(char *file, t_shell **shell);
+void	permdenied(char *file, t_shell **shell);
 
 #endif

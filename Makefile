@@ -17,13 +17,11 @@ HEADERS = $(INC_DIR)/minishell.h \
           $(INC_DIR)/token.h \
           $(INC_DIR)/parser.h \
           $(INC_DIR)/exec.h \
-          $(INC_DIR)/pipe.h \
-          $(INC_DIR)/redirect.h \
           $(INC_DIR)/builtins.h \
-          $(INC_DIR)/heredoc.h \
           $(INC_DIR)/error.h \
 		  $(INC_DIR)/expansion.h \
-		  $(INC_DIR)/env.h
+		  $(INC_DIR)/env.h \
+		  $(INC_DIR)/sig_control.h\
 
 # Directories
 OBJ_DIR = obj
