@@ -55,7 +55,7 @@ int	handle_redirout(t_redir *re, t_exe **x, t_shell **s, t_exebox **box)
 		return ((*x)->puts[1] = STDOUT_FILENO, permdenied(re->file, s), 1);
 	(*x)->puts[1] = open(re->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if ((*x)->puts[1] == -1)
-		return (ft_exit(s, NULL, box), 1);
+		return (permissiondeniederr(re->file, s), 1);
 	return (0);
 }
 
