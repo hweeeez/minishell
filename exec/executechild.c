@@ -21,15 +21,12 @@ int	dup_og(int *og_stdout, int *og_stdin)
 	return (0);
 }
 
-static void	close_pipefds(t_exe *exe, t_node *node)
+void	close_pipefds(t_exe *exe)
 {
-	if (node->right == NULL)
-	{
-		if ((exe)->pipefd[0] > -1)
-			close((exe)->pipefd[0]);
-		if ((exe)->pipefd[1] > -1)
-			close((exe)->pipefd[1]);
-	}
+	if ((exe)->pipefd[0] > -1)
+		close((exe)->pipefd[0]);
+	if ((exe)->pipefd[1] > -1)
+		close((exe)->pipefd[1]);
 }
 
 void	executechild(t_node *node, t_exebox **con, t_shell **shell)
@@ -40,12 +37,14 @@ void	executechild(t_node *node, t_exebox **con, t_shell **shell)
 	if ((exe)->puts[0] != STDIN_FILENO)
 	{
 		dup_fd(exe, 1);
-		close_pipefds(exe, node);
+		if (node->right == NULL)
+			close_pipefds(exe);
 	}
 	if ((exe)->puts[1] != STDOUT_FILENO)
 	{
 		dup_fd(exe, 2);
-		close_pipefds(exe, node);
+		if (node->right == NULL)
+			close_pipefds(exe);
 	}
 	else if (node->right != NULL)
 	{

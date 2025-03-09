@@ -71,5 +71,6 @@ void	dup_fd(t_exe *exe, int i);
 void	restore_fd(t_exebox **b, int ogout, int ogin);
 void	cleanup_redirs(t_exe *exe);
 int		dup_og(int *og_stdout, int *og_stdin);
+void	close_pipefds(t_exe *exe);
 
 #endif

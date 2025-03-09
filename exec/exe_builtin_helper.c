@@ -68,14 +68,8 @@ int	do_execution(t_shell **shell, char **cmd, t_exebox **exe)
 		}
 	}
 	if ((*exe)->redir_status == 0)
-	{
-		if ((*exe)->exes[(*exe)->numpid - 1]->pipefd[0] > -1)
-			close((*exe)->exes[(*exe)->numpid - 1]->pipefd[0]);
-		if ((*exe)->exes[(*exe)->numpid - 1]->pipefd[1] > -1)
-			close((*exe)->exes[(*exe)->numpid - 1]->pipefd[1]);
-	}
-	exitchild(shell, 0, exe);
-	return (1);
+		close_pipefds((*exe)->exes[(*exe)->numpid - 1]);
+	return (exitchild(shell, 0, exe), 1);
 }
 
 int	checkif_builtin(t_shell **shell, char **cmd, t_exebox **exe)
