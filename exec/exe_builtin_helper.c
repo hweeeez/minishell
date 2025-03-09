@@ -51,6 +51,7 @@ int	do_execution(t_shell **shell, char **cmd, t_exebox **exe)
 	int		builtinvalue;
 	char	*command;
 
+	signal(SIGPIPE, SIG_IGN);
 	if (cmd == NULL)
 		exitchild(shell, 0, exe);
 	builtinvalue = checkif_builtin(shell, cmd, exe);
