@@ -31,12 +31,12 @@ static int	handle_parent(t_node *node, t_exebox **con, t_shell **shell)
 		if ((*con)->exes[(*con)->numpid - 1]->pipefd[0] > -1)
 		{
 			if (close((*con)->exes[(*con)->numpid - 1]->pipefd[0]) == -1)
-				return (ft_exit(shell, NULL, con), -1);
+				return (perror("Error"), -1);
 		}
 		if ((*con)->exes[(*con)->numpid - 1]->pipefd[1] > -1)
 		{
 			if (close((*con)->exes[(*con)->numpid - 1]->pipefd[1]) == -1)
-				return (ft_exit(shell, NULL, con), -1);
+				return (perror("Error"), -1);
 		}
 	}
 	closeputs(&(*con)->exes[(*con)->numpid - 1]);
@@ -55,10 +55,11 @@ static void	handle_child(t_node *node, t_exebox **con, t_shell **shell)
 static void	init_exe_commands(t_node *node, t_exebox **c, t_shell **s, int *ok)
 {
 	*ok = has_redir(c, node, s);
-	if (node->right != NULL || (node->left->redirs != NULL && *ok == 0))
+	if ((node->right != NULL || (node->left->redirs != NULL && *ok == 0)) \
+		&& node->left->args != NULL)
 	{
 		if (pipe((*c)->exes[(*c)->numpid - 1]->pipefd) == -1)
-			ft_exit(s, NULL, c);
+			perror("Error");
 	}
 }
 

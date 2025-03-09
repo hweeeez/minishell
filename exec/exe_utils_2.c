@@ -14,12 +14,12 @@
 
 void	cleanup_redirs(t_exe *exe)
 {
-	if (exe->puts[0] != STDIN_FILENO && exe->puts[0] > 0)
+	if (exe->puts[0] != STDIN_FILENO && exe->puts[0] > -1)
 	{
 		close(exe->puts[0]);
 		exe->puts[0] = STDIN_FILENO;
 	}
-	if (exe->puts[1] != STDOUT_FILENO && exe->puts[1] > 0)
+	if (exe->puts[1] != STDOUT_FILENO && exe->puts[1] > -1)
 	{
 		close(exe->puts[1]);
 		exe->puts[1] = STDOUT_FILENO;
@@ -39,7 +39,7 @@ void	ft_coredump_msg(int status, t_shell **shell, t_exebox **con)
 			}
 		}
 		(*shell)->exit_status = 128 + WTERMSIG(status);
-		if ((*con)->skipnl == 0)
+		if ((*con)->skipnl == 0 && WTERMSIG(status) != SIGPIPE)
 		{
 			write (1, "\n", 1);
 			(*con)->skipnl = 1;

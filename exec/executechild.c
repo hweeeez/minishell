@@ -49,9 +49,11 @@ void	executechild(t_node *node, t_exebox **con, t_shell **shell)
 	}
 	else if (node->right != NULL)
 	{
-		close((exe)->pipefd[0]);
+		if ((exe)->pipefd[0] > -1)
+			close((exe)->pipefd[0]);
 		dup2(exe->pipefd[1], STDOUT_FILENO);
-		close(exe->pipefd[1]);
+		if ((exe)->pipefd[1] > -1)
+			close(exe->pipefd[1]);
 	}
 	do_execution(shell, node->left->args, con);
 }

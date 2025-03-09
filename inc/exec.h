@@ -20,7 +20,6 @@ typedef struct s_sigs
 	struct sigaction	ignore;
 	struct sigaction	quit;
 	struct sigaction	sigint;
-	struct sigaction	sigpipe;
 }				t_sigs;
 
 typedef struct s_exe

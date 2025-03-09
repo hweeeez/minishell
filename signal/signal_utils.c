@@ -23,8 +23,6 @@ void	init_exesigs(t_sigs **sigs)
 	(*sigs) = (t_sigs *)malloc(sizeof(t_sigs));
 	if (!(*sigs))
 		memerr_exit(1);
-	ft_memset(&(*sigs)->sigpipe, 0, sizeof((*sigs)->sigpipe));
-	(*sigs)->sigpipe.sa_handler = SIG_IGN;
 	ft_memset(&(*sigs)->ignore, 0, sizeof((*sigs)->ignore));
 	(*sigs)->ignore.sa_handler = SIG_IGN;
 	ft_memset(&(*sigs)->sigint, 0, sizeof((*sigs)->sigint));
@@ -35,10 +33,14 @@ void	init_exesigs(t_sigs **sigs)
 
 void	do_sigaction(int sig1, int sig2, t_sigs *sigs)
 {
-	if (sigaction(SIGPIPE, &(sigs->sigpipe), NULL) == -1)
-		return ;
 	if (sig1 == SIGQUIT)
-		sigaction(SIGQUIT, &(sigs->quit), NULL);
+	{
+		if (sigaction(SIGQUIT, &(sigs->quit), NULL) == -1)
+			perror("Error");
+	}
 	if (sig2 == SIGINT)
-		sigaction(SIGINT, &(sigs->sigint), NULL);
+	{
+		if (sigaction(SIGINT, &(sigs->sigint), NULL) == -1)
+			perror("Error");
+	}
 }
