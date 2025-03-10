@@ -3,7 +3,8 @@
 #valgrind --suppressions=readline.supp --leak-check=full --track-fds=yes --show-leak-kinds=all ./minishell
 
 #valgrind --track-origins=yes --suppressions=../readline.supp --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
-#export a=1 b=2 c=3 f="file1 file2" s=" " n="" ls="  ls -l  " e="echo '$0'"
+
+#export a=1 b=2 f="file1 file2" s=" " n="" ls="  ls -l  " e="echo '$0'" e=e c=c h=h o=o PWD="PIKACHU"
 
 #sigint(ctrl c) and sigquit(ctrl \) - ignore sigquit, sigint use readline function
 #read, tokenize, ast nodes, parse, expansion, execute
