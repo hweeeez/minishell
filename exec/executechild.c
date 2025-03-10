@@ -12,6 +12,32 @@
 
 #include "minishell.h"
 
+int	checkif_builtin(t_shell **shell, char **cmd, t_exebox **exe)
+{
+	if (ft_strcmp(cmd[0], "echo") == 1)
+		return ((*exe)->isbuiltin = 1, (*shell)->exit_status = ft_echo(cmd));
+	if (ft_strcmp(cmd[0], "cd") == 1)
+		return ((*exe)->isbuiltin = 1, \
+		(*shell)->exit_status = ft_cd(*shell, cmd));
+	if (ft_strcmp(cmd[0], "pwd") == 1)
+		return ((*exe)->isbuiltin = 1, (*shell)->exit_status = ft_pwd());
+	if (ft_strcmp(cmd[0], "export") == 1)
+		return ((*exe)->isbuiltin = 1, \
+		(*shell)->exit_status = ft_export(*shell, cmd));
+	if (ft_strcmp(cmd[0], "unset") == 1)
+		return ((*exe)->isbuiltin = 1, \
+		(*shell)->exit_status = ft_unset(*shell, cmd));
+	if (ft_strcmp(cmd[0], "env") == 1)
+		return ((*exe)->isbuiltin = 1, (*shell)->exit_status = ft_env(*shell));
+	if (ft_strcmp(cmd[0], "exit") == 1)
+		return ((*exe)->isbuiltin = 1, ft_exit(shell, cmd, exe));
+	if (ft_strcmp(cmd[0], ".") == 1)
+		return ((*exe)->isbuiltin = 1, (*shell)->exit_status = ft_dot(cmd));
+	if (ft_strcmp(cmd[0], "..") == 1)
+		return ((*exe)->isbuiltin = 1, (*shell)->exit_status = ft_dotdot());
+	return (-1);
+}
+
 int	dup_og(int *og_stdout, int *og_stdin)
 {
 	*og_stdout = dup(STDOUT_FILENO);

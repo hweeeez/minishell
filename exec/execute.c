@@ -24,10 +24,7 @@ int	has_redir(t_exebox **con, t_node *node, t_shell **shell)
 		valid = get_redir(node->left->rootredir, &exe, shell, con);
 		(*con)->redir_status = valid;
 		if (valid)
-		{
 			cleanup_redirs(exe);
-			close_pipefds(exe);
-		}	
 		return (valid);
 	}
 	(*con)->redir_status = -1;

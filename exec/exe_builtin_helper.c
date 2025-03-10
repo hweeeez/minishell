@@ -12,6 +12,11 @@
 
 #include "minishell.h"
 
+static void handle_sigpipe(int signo) 
+{
+    (void)signo;
+}
+
 void	free_exe(t_exebox **exe)
 {
 	int	i;
@@ -51,8 +56,7 @@ int	do_execution(t_shell **shell, char **cmd, t_exebox **exe)
 	int		builtinvalue;
 	char	*command;
 
-	if (errno == SIGPIPE)
-		exitchild(shell, 0, exe);
+	signal(SIGPIPE, handle_sigpipe);
 	if (cmd == NULL)
 		exitchild(shell, 0, exe);
 	builtinvalue = checkif_builtin(shell, cmd, exe);
@@ -71,32 +75,6 @@ int	do_execution(t_shell **shell, char **cmd, t_exebox **exe)
 	if ((*exe)->redir_status == 0)
 		close_pipefds((*exe)->exes[(*exe)->numpid - 1]);
 	return (exitchild(shell, 0, exe), 1);
-}
-
-int	checkif_builtin(t_shell **shell, char **cmd, t_exebox **exe)
-{
-	if (ft_strcmp(cmd[0], "echo") == 1)
-		return ((*exe)->isbuiltin = 1, (*shell)->exit_status = ft_echo(cmd));
-	if (ft_strcmp(cmd[0], "cd") == 1)
-		return ((*exe)->isbuiltin = 1, \
-		(*shell)->exit_status = ft_cd(*shell, cmd));
-	if (ft_strcmp(cmd[0], "pwd") == 1)
-		return ((*exe)->isbuiltin = 1, (*shell)->exit_status = ft_pwd());
-	if (ft_strcmp(cmd[0], "export") == 1)
-		return ((*exe)->isbuiltin = 1, \
-		(*shell)->exit_status = ft_export(*shell, cmd));
-	if (ft_strcmp(cmd[0], "unset") == 1)
-		return ((*exe)->isbuiltin = 1, \
-		(*shell)->exit_status = ft_unset(*shell, cmd));
-	if (ft_strcmp(cmd[0], "env") == 1)
-		return ((*exe)->isbuiltin = 1, (*shell)->exit_status = ft_env(*shell));
-	if (ft_strcmp(cmd[0], "exit") == 1)
-		return ((*exe)->isbuiltin = 1, ft_exit(shell, cmd, exe));
-	if (ft_strcmp(cmd[0], ".") == 1)
-		return ((*exe)->isbuiltin = 1, (*shell)->exit_status = ft_dot(cmd));
-	if (ft_strcmp(cmd[0], "..") == 1)
-		return ((*exe)->isbuiltin = 1, (*shell)->exit_status = ft_dotdot());
-	return (-1);
 }
 
 void	initexecontainer(t_exebox **con)
