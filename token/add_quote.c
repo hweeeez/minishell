@@ -17,15 +17,27 @@ static void	add_quotes_to_value(t_token *token)
 	size_t	old_len;
 	char	*new_value;
 
-	old_len = ft_strlen(token->value);
-	new_value = malloc(old_len + 3);
-	if (!new_value)
-		memerr_exit(1);
-	new_value[0] = '\'';
-	ft_memcpy(new_value + 1, token->value, old_len);
-	new_value[old_len + 1] = '\'';
-	new_value[old_len + 2] = '\0';
-	free(token->value);
+	if (!token->value)
+	{
+		new_value = malloc(3);
+		if (!new_value)
+			memerr_exit(1);
+		new_value[0] = '\'';
+		new_value[1] = '\'';
+		new_value[2] = '\0';
+	}
+	else
+	{
+		old_len = ft_strlen(token->value);
+		new_value = malloc(old_len + 3);
+		if (!new_value)
+			memerr_exit(1);
+		new_value[0] = '\'';
+		ft_memcpy(new_value + 1, token->value, old_len);
+		new_value[old_len + 1] = '\'';
+		new_value[old_len + 2] = '\0';
+		free(token->value);
+	}
 	token->value = new_value;
 }
 

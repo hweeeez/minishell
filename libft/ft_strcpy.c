@@ -18,7 +18,7 @@ char	*ft_strcpy(char *src, int size)
 	int		i;
 
 	i = 0;
-	dest = (char *)malloc(sizeof(size + 1));
+	dest = (char *)malloc((size + 1) * sizeof(char));
 	while (i < size)
 	{
 		dest[i] = src[i];

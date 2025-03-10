@@ -74,15 +74,16 @@ int	tokenize(const char *input, t_token **head, t_shell *shell)
 		split_node(head);
 	return (validate_token_syntax(*head));
 }
-// static t_token	*process_next_token(t_tokenizer *tok)
-// {
-// 	skip_whitespace(tok);
-// 	if (!tok->input[tok->position])
-// 		return (new_token(NULL, TOKEN_EOF));
-// 	if (tok->input[tok->position] == '\'' || 
-// 		tok->input[tok->position] == '\"')
-// 		return (new_token(handle_quote(tok), TOKEN_WORD));
-// 	if (ms_is_special(tok->input[tok->position]))
-// 		return (handle_special_token(tok));
-// 	return (handle_word_token(tok));
-// }
+
+/*static t_token	*process_next_token(t_tokenizer *tok)
+{
+	skip_whitespace(tok);
+	if (!tok->input[tok->position])
+		return (new_token(NULL, TOKEN_EOF));
+	if (tok->input[tok->position] == '\'' || 
+		tok->input[tok->position] == '\"')
+		return (new_token(handle_quote(tok), TOKEN_WORD));
+	if (ms_is_special(tok->input[tok->position]))
+		return (handle_special_token(tok));
+	return (handle_word_token(tok));
+}*/

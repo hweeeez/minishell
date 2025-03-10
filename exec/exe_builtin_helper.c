@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-static void handle_sigpipe(int signo) 
+static void	handle_sigpipe(int signo)
 {
-    (void)signo;
+	(void)signo;
 }
 
 void	free_exe(t_exebox **exe)

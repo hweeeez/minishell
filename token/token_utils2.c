@@ -41,3 +41,8 @@ int	pre_is_redir(t_token *head)
 		return (1);
 	return (0);
 }
+
+int	is_delimiter(char c)
+{
+	return (ft_isspace(c) || c == '>' || c == '<' || c == '|' || c == '\0');
+}

@@ -66,23 +66,23 @@ static void	handle_expansion(t_tokenizer *tok, t_shell *shell,
 	}
 }
 
-static t_token	*process_empty_quote(t_tokenizer *tok, \
-	char quote, char **current_word)
+static t_token	*process_empty_quote(t_tokenizer *tok,
+		char quote, char **current_word)
 {
-	t_token			*token;
-	t_token_type	prev_type;
-	int				prev_is_heredoc;
+	t_token	*token;
+	int		is_empty_quotes;
+	int		current_word_empty;
+	int		followed_by_delimiter;
 
-	prev_type = last_token_type(tok->shell->token);
-	prev_is_heredoc = (prev_type == TOKEN_HEREDOC);
-	if (tok->input[tok->position + 1] == quote && \
-		!ft_strlen(*current_word) && \
-		((!tok->input[tok->position + 2] || \
-		ft_isspace(tok->input[tok->position + 2])) || \
-		prev_is_heredoc))
+	is_empty_quotes = (tok->input[tok->position + 1] == quote);
+	current_word_empty = !ft_strlen(*current_word);
+	followed_by_delimiter = is_delimiter(tok->input[tok->position + 2]);
+	if (is_empty_quotes && current_word_empty && followed_by_delimiter)
 	{
+		if (last_token_type(tok->shell->token) == TOKEN_HEREDOC)
+			tok->hd_quote = 1;
 		token = new_token(*current_word, TOKEN_WORD, \
-			tok->word_split, tok->hd_quote);
+				tok->word_split, tok->hd_quote);
 		tok->word_split = 0;
 		tok->hd_quote = 0;
 		tok->position += 2;
@@ -120,27 +120,56 @@ t_token	*process_no_quote(t_tokenizer *tok, t_shell *shell, char c, \
 	return (NULL);
 }
 
-// static void	handle_quotes(t_tokenizer *tok, char quote_type)
-// {
-// 	tok->quote = quote_type;
-// 	tok->position++;
-// }
+/*
+static int	next_is_special(char c)
+{
+	return (c == '>' || c == '<' || c == '|');
+}
 
-// t_token	*handle_word_token(t_tokenizer *tok)
-// {
-// 	char	*value;
-// 	size_t	start;
-// 	size_t	len;
+static t_token	*process_empty_quote(t_tokenizer *tok, \
+	char quote, char **current_word)
+{
+	t_token			*token;
+	t_token_type	prev_type;
 
-// 	start = tok->position;
-// 	while (tok->input[tok->position] && 
-// 		!is_space_tab(tok->input[tok->position]) && 
-// 		!ms_is_special(tok->input[tok->position]) && 
-// 		tok->input[tok->position] != '\'' && tok->input[tok->position] != '\"')
-// 		tok->position++;
-// 	len = tok->position - start;
-// 	value = expand_tok(tok, start, len);
-// 	if (!value)
-// 		return (NULL);
-// 	return (new_token(value, TOKEN_WORD));
-// }
+	prev_type = last_token_type(tok->shell->token);
+	if (tok->input[tok->position + 1] == quote && !ft_strlen(*current_word) && \
+		((!tok->input[tok->position + 2] || 
+		ft_isspace(tok->input[tok->position + 2]))) || 
+		(prev_type == TOKEN_HEREDOC && 
+		next_is_special(tok->input[tok->position + 2])))
+	{
+		token = new_token(*current_word, TOKEN_WORD, \
+			tok->word_split, tok->hd_quote);
+		tok->word_split = 0;
+		tok->hd_quote = 0;
+		tok->position += 2;
+		return (token);
+	}
+	return (NULL);
+}
+
+static void	handle_quotes(t_tokenizer *tok, char quote_type)
+{
+	tok->quote = quote_type;
+	tok->position++;
+}
+
+t_token	*handle_word_token(t_tokenizer *tok)
+{
+	char	*value;
+	size_t	start;
+	size_t	len;
+
+	start = tok->position;
+	while (tok->input[tok->position] && 
+		!is_space_tab(tok->input[tok->position]) && 
+		!ms_is_special(tok->input[tok->position]) && 
+		tok->input[tok->position] != '\'' && tok->input[tok->position] != '\"')
+		tok->position++;
+	len = tok->position - start;
+	value = expand_tok(tok, start, len);
+	if (!value)
+		return (NULL);
+	return (new_token(value, TOKEN_WORD));
+}*/

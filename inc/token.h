@@ -82,6 +82,7 @@ t_token_type	last_token_type(t_token *head);
 int				pre_is_heredoc(t_token *head);
 int				pre_is_redir(t_token *head);
 int				is_valid_filename(char *filename);
+int				is_delimiter(char c);
 
 #endif
 //int				is_space_tab(char c);

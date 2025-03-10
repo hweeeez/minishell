@@ -40,6 +40,8 @@ static void	processtree(t_token	*token, t_shell	**shell, struct sigaction *sigs)
 static int	minishell_loop(char *input, t_token **tok, \
 				t_shell **shell, struct sigaction *sigs)
 {
+	int	status;
+
 	while (1)
 	{
 		input = readline(PROMPT);
@@ -52,12 +54,14 @@ static int	minishell_loop(char *input, t_token **tok, \
 			(*shell)->exit_status = 130;
 			g_received_sigint = 0;
 		}
-		if (tokenize(input, tok, *shell))
+		status = 0;
+		status = tokenize(input, tok, *shell);
+		free(input);
+		if (status)
 		{
-			free(input);
+			(*shell)->exit_status = status;
 			continue ;
 		}
-		free(input);
 		processtree(*tok, shell, sigs);
 	}
 	return (0);
