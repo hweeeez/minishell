@@ -67,17 +67,22 @@ static void	handle_expansion(t_tokenizer *tok, t_shell *shell,
 }
 
 static t_token	*process_empty_quote(t_tokenizer *tok, \
-				char quote, char **current_word)
+	char quote, char **current_word)
 {
-	t_token	*token;
+	t_token			*token;
+	t_token_type	prev_type;
+	int				prev_is_heredoc;
 
+	prev_type = last_token_type(tok->shell->token);
+	prev_is_heredoc = (prev_type == TOKEN_HEREDOC);
 	if (tok->input[tok->position + 1] == quote && \
 		!ft_strlen(*current_word) && \
-		(!tok->input[tok->position + 2] || \
-		ft_isspace(tok->input[tok->position + 2])))
+		((!tok->input[tok->position + 2] || \
+		ft_isspace(tok->input[tok->position + 2])) || \
+		prev_is_heredoc))
 	{
 		token = new_token(*current_word, TOKEN_WORD, \
-				tok->word_split, tok->hd_quote);
+			tok->word_split, tok->hd_quote);
 		tok->word_split = 0;
 		tok->hd_quote = 0;
 		tok->position += 2;
