@@ -100,7 +100,7 @@ int	check_dir_exists(char *path)
 		free(name);
 		return (result);
 	}
-	return (result);//? what is return default value?
+	return (result);
 }
 
 // int	check_dir_exists(char *path)
