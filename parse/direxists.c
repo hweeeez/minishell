@@ -85,13 +85,14 @@ int	check_dir_exists(char *path)
 	int		result;
 
 	name = splitdir(path);
+	result = 1;
 	if (name != NULL)
 	{
 		if (check_path_type(name) == TYPE_DIR)
 		{
 			result = 1;
 		}
-		else if (ENOENT == errno)
+		else if (errno == ENOENT)
 		{
 			perror("Error");
 			result = 0;
@@ -99,7 +100,7 @@ int	check_dir_exists(char *path)
 		free(name);
 		return (result);
 	}
-	return (1);
+	return (result);//? what is return default value?
 }
 
 // int	check_dir_exists(char *path)

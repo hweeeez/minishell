@@ -74,6 +74,8 @@ static t_token	*process_empty_quote(t_tokenizer *tok,
 	int		current_word_empty;
 	int		followed_by_delimiter;
 
+	if (!tok->input[tok->position + 1])
+		return (NULL);
 	is_empty_quotes = (tok->input[tok->position + 1] == quote);
 	current_word_empty = !ft_strlen(*current_word);
 	followed_by_delimiter = is_delimiter(tok->input[tok->position + 2]);
