@@ -50,7 +50,7 @@ static char	*resolve_new_path(t_shell *shell, char **cmd)
 {
 	char	*new_path;
 
-	if (cmd[1] == NULL || ft_strncmp(cmd[1], "", 1) == 0)
+	if (cmd[1] == NULL)
 	{
 		new_path = get_env_value(shell, "HOME");
 		if (!new_path)
