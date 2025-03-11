@@ -42,7 +42,7 @@ SRCS =	builtins/ft_cd_utils.c builtins/ft_cd.c builtins/ft_dot.c builtins/ft_dot
 		signal/signal_utils.c signal/signal.c \
 		token/add_quote.c token/llist_utils.c token/process_no_quote.c token/process_quote.c token/process_special_tok.c \
 		token/split_node_helper.c token/split_node.c token/token_helper.c token/token_syntax.c token/token_utils.c \
-		token/token_utils2.c token/tokenizer.c token/isvalidfile.c
+		token/token_utils2.c token/tokenizer.c token/isvalidfile.c token/merge_token.c 
 
 MAIN_SRC = main.c
 

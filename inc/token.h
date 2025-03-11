@@ -50,6 +50,7 @@ typedef struct s_tokenizer
 	int				word_split;
 	int				hd_quote;
 	int				ambiguous;
+	int				expand_happ;
 }	t_tokenizer;
 
 void			init_tokenizer(t_tokenizer *tok, const char *input, \
@@ -83,6 +84,7 @@ int				pre_is_heredoc(t_token *head);
 int				pre_is_redir(t_token *head);
 int				is_valid_filename(char *filename);
 int				is_delimiter(char c);
+void			merge_empty_word_tokens(t_token **head);
 
 #endif
 //int				is_space_tab(char c);

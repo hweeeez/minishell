@@ -16,12 +16,13 @@ static t_token	*handle_space(t_tokenizer *tok, char **current_word)
 {
 	t_token	*token;
 
-	if (ft_strlen(*current_word))
+	if (ft_strlen(*current_word) || tok->expand_happ)
 	{
 		token = new_token(*current_word, TOKEN_WORD, \
 				tok->word_split, tok->hd_quote);
 		tok->word_split = 0;
 		tok->hd_quote = 0;
+		tok->expand_happ = 0;
 		tok->position++;
 		return (token);
 	}
@@ -33,12 +34,13 @@ static t_token	*handle_special(t_tokenizer *tok, char **current_word)
 {
 	t_token	*token;
 
-	if (ft_strlen(*current_word))
+	if (ft_strlen(*current_word) || tok->expand_happ)
 	{
 		token = new_token(*current_word, TOKEN_WORD, \
 				tok->word_split, tok->hd_quote);
 		tok->word_split = 0;
 		tok->hd_quote = 0;
+		tok->expand_happ = 0;
 		return (token);
 	}
 	free(*current_word);
@@ -50,6 +52,7 @@ static void	handle_expansion(t_tokenizer *tok, t_shell *shell,
 {
 	char	*expanded;
 
+	tok->expand_happ = 1;
 	expanded = expand(tok, shell);
 	if (expanded)
 	{
