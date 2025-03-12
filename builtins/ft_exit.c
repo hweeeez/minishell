@@ -31,11 +31,6 @@ static int	check_exit_arguments(t_shell **shell, char **args)
 {
 	if (!args || !args[0] || !args[1])
 		cleanup_and_exit(shell, (*shell)->exit_status);
-	if (args[2])
-	{
-		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-		return (1);
-	}
 	if (ft_strlen(args[1]) == ft_strlen(EXIT_MIN) && \
 	ft_strncmp(args[1], EXIT_MIN, ft_strlen(EXIT_MIN)) == 0)
 	{
@@ -45,6 +40,11 @@ static int	check_exit_arguments(t_shell **shell, char **args)
 	{
 		ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
 		cleanup_and_exit(shell, 2);
+	}
+	if (args[2])
+	{
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		return (1);
 	}
 	return (0);
 }
