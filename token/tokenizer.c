@@ -67,7 +67,6 @@ int	tokenize(const char *input, t_token **head, t_shell *shell)
 					" other errors\n"));
 		}
 	}
-	merge_empty_word_tokens(head);
 	if (tok.ambiguous == 1)
 		return (print_error("minishell: ambiguous redirect\n"));
 	add_quotes_to_heredoc_tokens(*head);

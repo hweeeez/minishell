@@ -58,16 +58,22 @@ static int	handle_arg(t_shell *shell, char *arg)
 	if (!is_valid_name(arg))
 		return (print_identifier_error(arg), 1);
 	equals = ft_strchr(arg, '=');
-	if (!equals)
-		return (0);
-	key = ft_strndup(arg, equals - arg);
-	value = ft_strdup(equals + 1);
+	if (equals)
+	{
+		key = ft_strndup(arg, equals - arg);
+		value = ft_strdup(equals + 1);
+	}
+	else
+	{
+		key = ft_strdup(arg);
+		value = ft_strdup("");
+	}
 	if (!key || !value)
 		return (free(key), free(value), 1);
+	if (!equals && find_env(shell, key))
+		return (free(key), 0);
 	result = update_env(shell, key, value);
-	free(key);
-	free(value);
-	return (result);
+	return (free(key), free(value), result);
 }
 
 int	ft_export(t_shell *shell, char **args)

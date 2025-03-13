@@ -48,3 +48,19 @@ char	*get_env_value(t_shell *shell, const char *key)
 	}
 	return (NULL);
 }
+
+int	find_env(t_shell *shell, const char *key)
+{
+	int		i;
+
+	i = 0;
+	while (shell->env[i])
+	{
+		if (ft_strncmp(shell->env[i], key, ft_strlen(key)) == 0)
+		{
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}

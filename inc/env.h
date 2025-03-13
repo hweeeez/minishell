@@ -43,5 +43,6 @@ int			update_env(t_shell *shell, const char *key, const char *value);
 t_file_type	check_path_type(const char *path);
 int			is_executable(const char *path);
 int			has_permission(const char *path, int mode);
+int			find_env(t_shell *shell, const char *key);
 
 #endif
